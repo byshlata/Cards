@@ -3,6 +3,7 @@ export enum Path {
   Login = '/login',
   Forgot = '/forgot',
   Register = '/registration',
+  NewPassword = '/new-password',
   Profile = '/profile',
   Packs = '/packs',
   Page404 = 'page404',

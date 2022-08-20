@@ -1,1 +1,7 @@
-export { authAPI } from './authAPI'
+export { loginAPI } from './loginAPI'
+
+export { profileAPI } from './profileAPI'
+
+export { registrationAPI } from './registrationAPI'
+
+export { forgotAPI } from './forgotAPI'

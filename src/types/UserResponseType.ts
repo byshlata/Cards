@@ -1,13 +1,7 @@
-export type UserResponseType = {
-  _id: string
-  email: string
-  name: string
+import { UserInformationType } from './UserInformationType'
+
+export type UserResponseType = UserInformationType & {
+  token: string
+  tokenDeathTime: Date
   avatar?: string
-  publicCardPacksCount: number
-  created: Date
-  updated: Date
-  isAdmin: boolean
-  verified: boolean
-  rememberMe: boolean
-  error?: string
 }

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { setInitialized } from 'store'
-import { authAPI } from 'api'
+import { loginAPI } from 'api'
 import axios from 'axios'
 
 export const getAuthUser = createAsyncThunk(
@@ -8,7 +8,7 @@ export const getAuthUser = createAsyncThunk(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setInitialized(true))
-      const res = await authAPI.getAuthUser()
+      const res = await loginAPI.getAuthUser()
 
       if (res.error) {
         return rejectWithValue(res.error)
