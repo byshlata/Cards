@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { setInitialized } from 'store'
-import { loginAPI } from 'api'
+import { profileAPI } from 'api'
 import axios from 'axios'
 
 export const getAuthUser = createAsyncThunk(
@@ -8,12 +8,12 @@ export const getAuthUser = createAsyncThunk(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setInitialized(true))
-      const res = await loginAPI.getAuthUser()
-
-      if (res.error) {
+      const res = await profileAPI.getAuthUser()
+      if ('error' in res) {
         return rejectWithValue(res.error)
+      } else {
+        //dispatch();
       }
-      //dispatch();
     } catch (err) {
       if (axios.isAxiosError(err)) {
         return rejectWithValue(err.message)

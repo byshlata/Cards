@@ -1,6 +1,6 @@
 import React from 'react'
-import s from './App.module.sass'
+import { Header } from 'components'
 
 export const App = () => {
-  return <div className={s.container}></div>
+  return <Header />
 }
