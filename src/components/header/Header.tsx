@@ -1,8 +1,8 @@
 import React from 'react'
 
-import s from './Header.module.sass'
-
 import style from '../../styles/container.module.sass'
+
+import s from './Header.module.sass'
 
 export const Header = () => {
   return (

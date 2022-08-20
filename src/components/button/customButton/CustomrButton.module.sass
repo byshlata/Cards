@@ -1,0 +1,79 @@
+$colorPrimary: rgba(1, 54, 61, 1)
+$colorSecondary: rgba(144, 201, 32, 1)
+$colorDanger: rgba(255, 5, 0, 1)
+$colorDisabled: rgba(134, 131, 131, 0.2)
+$colorBackground: rgba(203, 199, 199, 1)
+$colorActiveLink: rgb(96, 190, 248)
+
+
+@mixin buttonOption($color)
+  border: 1px solid $color
+  box-shadow: 0 0 3px $color
+  color: $color
+
+@mixin activeHover($color)
+  box-shadow: 0 0 1px $color, 0 0 3px $color, 0 0 6px $color
+  transform: scale(0.95)
+
+@mixin hover($color)
+  box-shadow: 0 0 1px $color, 0 0 2px $color, 0 0 4px $color
+
+
+.primaryButton, .secondaryButton, .dangerButton, .disabledButton, .linkButton
+  letter-spacing: 1px
+  display: flex
+  justify-content: center
+  align-items: center
+  text-transform: uppercase
+  font-size: 1rem
+  padding: 8px
+  overflow: hidden
+  box-sizing: border-box
+  background-color: $colorBackground
+  border-radius: 5px
+  cursor: pointer
+  +buttonOption($colorPrimary)
+
+.primaryButton
+  &:active:hover
+    +activeHover($colorPrimary)
+  &:hover
+    +hover($colorPrimary)
+
+.secondaryButton
+  +buttonOption($colorSecondary)
+  &:active:hover
+    +activeHover($colorSecondary)
+  &:hover
+    +hover($colorSecondary)
+
+
+.dangerButton
+  +buttonOption($colorDanger)
+  &:active:hover
+    +activeHover($colorDanger)
+  &:hover
+    +hover($colorDanger)
+
+
+.disabledButton
+  +buttonOption($colorDisabled)
+  background-color: $colorDisabled
+
+  &:hover
+    box-shadow: 0 0 3px $colorDisabled
+    cursor: not-allowed
+
+.linkButton
+  background-color: inherit
+  border: none
+  box-shadow: none
+  &:active:hover
+    transform: scale(0.95)
+    color: $colorActiveLink
+  &:hover
+    color: $colorActiveLink
+
+
+
+

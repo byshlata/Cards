@@ -1,0 +1,77 @@
+$colorPrimary: rgba(1, 54, 61, 1)
+$colorSecondary: rgba(144, 201, 32, 1)
+$colorDanger: rgba(255, 5, 0, 1)
+$colorDisabled: rgba(134, 131, 131, 0.2)
+$colorBackground: rgba(203, 199, 199, 1)
+$colorWhite: rgba(255, 255, 255, 1)
+$width: 350px
+
+.centered
+  width: $width
+  height: $width/5
+  margin: auto
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+.group
+  width: 100%
+  height: $width/5
+  overflow: hidden
+  position: relative
+  box-sizing: border-box
+
+.superLabel
+  position: absolute
+  top: $width/15
+  color: rgba($colorBackground, 1)
+  font-size: $width/20
+  cursor: text
+  transition: .25s ease
+
+.superInput
+  display: block
+  width: 100%
+  box-sizing: border-box
+  padding-top: $width/15
+  padding-right: $width/10
+  border: none
+  border-radius: 0
+  background: white
+  font-size: $width/15
+  transition: .3s ease
+  &:valid
+    ~.superLabel
+      top: 0
+      font-size: $width/25
+      color: $colorBackground
+  &:focus
+    outline: none
+    ~.superLabel
+      top: 0
+      font-size: $width/25
+      color: $colorBackground
+  ~.bar:before
+      transform: translateX(0)
+  &:-webkit-autofill
+    -webkit-box-shadow: 0 0 0 1000px $colorPrimary inset
+    -webkit-text-fill-color: white !important
+
+.bar
+  background: rgba(white, .5)
+  content: ''
+  width: 100%
+  height: $width/150
+  transition: .3s ease
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    width: 100%
+    height: 150%
+    background: $colorPrimary
+    transform: translateX(-100%)
+::selection
+  background: rgba($colorBackground, 1)
