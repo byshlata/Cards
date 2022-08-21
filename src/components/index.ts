@@ -9,3 +9,5 @@ export { Modal } from './modal/Modal'
 export { LinerProgress } from './linerProgress/LinerProgress'
 
 export { FormBody } from './formBody/FormBody'
+
+export { LetterSendIcon } from './letterSendIcon/LetterSendIcon'
