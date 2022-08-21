@@ -1,16 +1,16 @@
 import React from 'react'
 
-import s from './CustomInput.module.sass'
+import style from './CustomInput.module.sass'
 
 export const CustomInput = () => {
   return (
-    <div className={s.centered}>
-      <div className={s.group}>
-        <input type="text" className={s.superInput} id="domId" required />
-        <label htmlFor="domId" className={s.superLabel}>
+    <div className={style.centered}>
+      <div className={style.group}>
+        <input type="text" className={style.superInput} id="domId" required />
+        <label htmlFor="domId" className={style.superLabel}>
           Name
         </label>
-        <div className={s.bar} />
+        <div className={style.bar} />
       </div>
     </div>
   )

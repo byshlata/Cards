@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react'
 
-import s from './CustomrButton.module.sass'
-import { CustomButtonType } from './type/CustomButtonType'
+import style from './CustomrButton.module.sass'
+import { CustomButtonType } from './types/CustomButtonType'
 
 export const CustomButton: FC<CustomButtonType> = (props): ReactElement => {
   const { disabled, onClick, type, children } = props
@@ -9,23 +9,23 @@ export const CustomButton: FC<CustomButtonType> = (props): ReactElement => {
   let buttonClassName
 
   if (type === 'primary') {
-    buttonClassName = s.primaryButton
+    buttonClassName = style.primaryButton
   }
 
   if (type === 'secondary') {
-    buttonClassName = s.secondaryButton
+    buttonClassName = style.secondaryButton
   }
 
   if (type === 'danger') {
-    buttonClassName = s.dangerButton
+    buttonClassName = style.dangerButton
   }
 
   if (type === 'disabled') {
-    buttonClassName = s.disabledButton
+    buttonClassName = style.disabledButton
   }
 
   if (type === 'link') {
-    buttonClassName = s.linkButton
+    buttonClassName = style.linkButton
   }
 
   return (

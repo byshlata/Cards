@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react'
 
-import s from 'components/letterSendIcon/LetterSendIcon.module.sass'
+import style from 'components/letterSendIcon/LetterSendIcon.module.sass'
 
-import { LetterSendIconType } from './type/LetterSendIconType'
+import { LetterSendIconType } from './types/LetterSendIconType'
 
 export const LetterSendIcon = ({ width }: LetterSendIconType): ReactElement => (
   <svg
     style={{ width: `${width}px` }}
-    className={s.letterSendWrapper}
+    className={style.letterSendWrapper}
     viewBox="0 0 108 108"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ export const LetterSendIcon = ({ width }: LetterSendIconType): ReactElement => (
     />
 
     <path
-      className={s.lineLarge}
+      className={style.lineLarge}
       d="M87.6248 61.2611C87.4337 61.2586 87.2512 61.1816 87.1161 61.0465C86.981 60.9114 86.904 60.7289 86.9015
       60.5379V50.1429C86.9015 49.951 86.9777 49.7671 87.1134 49.6315C87.249 49.4958 87.4329 49.4196 87.6248
       49.4196C87.8166 49.4196 88.0005 49.4958 88.1362 49.6315C88.2718 49.7671 88.348 49.951 88.348 50.1429V60.5475C88.3454
@@ -29,7 +29,7 @@ export const LetterSendIcon = ({ width }: LetterSendIconType): ReactElement => (
       fill="#366EFF"
     />
     <path
-      className={s.lineSmall}
+      className={style.lineSmall}
       d="M87.6248 46.9993C87.4329 46.9993 87.249 46.9231 87.1134 46.7875C86.9777 46.6519 86.9015 46.4679 86.9015
       46.2761V44.145C86.9015 43.9532 86.9777 43.7693 87.1134 43.6336C87.249 43.498 87.4329 43.4218 87.6248
       43.4218C87.8166 43.4218 88.0005 43.498 88.1362 43.6336C88.2718 43.7693 88.348 43.9532 88.348 44.145V46.2857C88.348
@@ -37,7 +37,7 @@ export const LetterSendIcon = ({ width }: LetterSendIconType): ReactElement => (
       46.9125 87.9008 46.9478C87.8131 46.9831 87.7193 47.0006 87.6248 46.9993Z"
       fill="#366EFF"
     />
-    <g className={s.crossLeft}>
+    <g className={style.crossLeft}>
       <path
         d="M29.0095 36.5656H25.0057C24.5913 36.5656 24.255 36.2293 24.255 35.8149C24.255 35.4005 24.5913 35.0642 25.0057
       35.0642H29.0095C29.4239 35.0642 29.7602 35.4005 29.7602 35.8149C29.7602 36.2293 29.4239 36.5656 29.0095 36.5656Z"
@@ -51,25 +51,25 @@ export const LetterSendIcon = ({ width }: LetterSendIconType): ReactElement => (
       />
     </g>
     <path
-      className={s.pointOne}
+      className={style.pointOne}
       d="M29.8929 82.9286C30.4251 82.9286 30.8571 83.3606 30.8571 83.8929C30.8571 84.4251 30.4251 84.8571
       29.8929 84.8571C29.3606 84.8571 28.9286 84.4251 28.9286 83.8929C28.9286 83.3606 29.3606 82.9286 29.8929 82.9286Z"
       fill="#366EFF"
     />
     <path
-      className={s.pointTwo}
+      className={style.pointTwo}
       d="M35.6786 82.9286C36.2109 82.9286 36.6429 83.3606 36.6429 83.8929C36.6429 84.4251 36.2109 84.8571
       35.6786 84.8571C35.1463 84.8571 34.7143 84.4251 34.7143 83.8929C34.7143 83.3606 35.1463 82.9286 35.6786 82.9286Z"
       fill="#366EFF"
     />
     <path
-      className={s.pointThree}
+      className={style.pointThree}
       d="M41.4643 82.9286C41.9966 82.9286 42.4286 83.3606 42.4286 83.8929C42.4286 84.4251 41.9966 84.8571 41.4643
       84.8571C40.932 84.8571 40.5 84.4251 40.5 83.8929C40.5 83.3606 40.932 82.9286 41.4643 82.9286Z"
       fill="#366EFF"
     />
 
-    <g className={s.cross}>
+    <g className={style.cross}>
       <path
         d="M52.1524 84.7799H48.1486C47.7342 84.7799 47.3978 84.4436 47.3978 84.0292C47.3978 83.6148 47.7342 83.2785 
       48.1486 83.2785H52.1524C52.5668 83.2785 52.9031 83.6148 52.9031 84.0292C52.9031 84.4436 52.5668 84.7799 52.1524 
@@ -102,7 +102,7 @@ export const LetterSendIcon = ({ width }: LetterSendIconType): ReactElement => (
     />
     <path d="M62.3361 45.9597L49.1554 56.794V78.2856H73.1392V45.9597H62.3361Z" fill="white" />
     <path d="M62.3361 45.9597L49.1554 56.794V78.2856H73.1392V45.9597H62.3361Z" fill="white" />
-    <g className={s.letterPage}>
+    <g className={style.letterPage}>
       <path d="M73.1392 32.4036H34.5566V78.2856H73.1392V32.4036Z" fill="white" />
       <path
         d="M73.1912 79.0675H34.6086C34.4021 79.0648 34.2047 78.9816 34.0586 78.8355C33.9125 78.6894 33.8293
