@@ -1,6 +1,6 @@
 import React from 'react'
 
-import s from './Input.module.sass'
+import s from './CustomInput.module.sass'
 
 export const CustomInput = () => {
   return (
