@@ -1,20 +1,21 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import { InputType } from '../types/CustomInputType';
+import { InputType } from '../types/CustomInputType'
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const UsePasswordInput = (type: InputType) => {
-  const [isWatchPassword, setIsWatchPassword] = useState<boolean>(false);
+export const usePasswordInput = (type: InputType, error = '', name = '') => {
+  const [isWatchPassword, setIsWatchPassword] = useState<boolean>(false)
 
-  const typeInputValue = isWatchPassword ? 'password' : 'text';
+  const typeInputValue = isWatchPassword ? 'password' : 'text'
 
   const onWatchPassword = (): void => {
-    setIsWatchPassword(!isWatchPassword);
-  };
+    setIsWatchPassword(!isWatchPassword)
+  }
 
-  const isEyeIcon = type === 'password';
-  const isSearchIcon = type === 'search';
-  const isEyeOpenIcon = type === 'password' && isWatchPassword;
+  const labelName = error ? error : name
 
-  return { typeInputValue, onWatchPassword, isEyeIcon, isEyeOpenIcon, isSearchIcon };
-};
+  const isEyeIcon = type === 'password'
+  const isSearchIcon = type === 'search'
+  const isEyeOpenIcon = type === 'password' && isWatchPassword
+
+  return { typeInputValue, onWatchPassword, isEyeIcon, isEyeOpenIcon, isSearchIcon, labelName }
+}

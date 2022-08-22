@@ -1,10 +1,8 @@
 export type CustomInputType = {
   name?: string
   type: InputType
-  error?: boolean
+  error?: string
   disabled?: boolean
-  value: string
-  onChange: (value: string) => void
   onClick?: () => void
 }
 

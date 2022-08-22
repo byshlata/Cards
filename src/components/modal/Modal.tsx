@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode } from 'react'
 
 import { CustomButton } from 'components/button'
 
-import s from './Modal.module.sass'
+import style from './Modal.module.sass'
 
 type ModalType = {
   isClose: () => void
@@ -17,15 +17,15 @@ export const Modal: React.FC<ModalType> = (props): ReactElement | null => {
     isClose()
   }
 
-  const classModal = isOpen ? s.modalOpen : s.modalClose
-  const classContent = isOpen ? s.contentOpen : s.contentClose
+  const classModal = isOpen ? style.modalOpen : style.modalClose
+  const classContent = isOpen ? style.contentOpen : style.contentClose
 
   return (
     <div className={classModal}>
       <div className={classContent}>
-        <div className={s.buttonClose}>
-          <CustomButton type="link" disabled={false} onClick={onClose}>
-            <div className={s.close} />
+        <div className={style.buttonClose}>
+          <CustomButton color="link" disabled={false} onClick={onClose}>
+            <div className={style.close} />
           </CustomButton>
         </div>
         {children}
