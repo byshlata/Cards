@@ -6,7 +6,7 @@ export type UserInformationType = {
   name: string
   verified: boolean
   publicCardPacksCount: number
-  created: Date
-  updated: Date
+  created: string
+  updated: string
   __v: number
 }

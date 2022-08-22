@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import { RootStoreType } from 'store'
 import { Nullable } from 'types'
 
@@ -11,4 +12,6 @@ export const selectorEmail = (state: RootStoreType): Nullable<string> => state.f
 
 export const selectorIsPasswordSend = (state: RootStoreType): boolean => state.forgot.isPasswordSend
 
-export const selectorIsAuth = (state: RootStoreType) => state.app.isAuth
+export const selectorIsAuth = (state: RootStoreType): boolean => state.app.isAuth
+
+export const userName = (state: RootStoreType): Nullable<string> => state.profile.name

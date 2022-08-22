@@ -5,6 +5,7 @@ import { isSpinAppLoading } from 'store'
 
 import { LoginType } from '../../types'
 import { setAuth } from '../slice/appSlice'
+import { setUserData } from '../slice/profileSlice'
 
 export const authThunk = createAsyncThunk(
   'loginSlice/signInOnEmail',
@@ -13,6 +14,7 @@ export const authThunk = createAsyncThunk(
       dispatch(isSpinAppLoading(true))
       const res = await loginAPI.loginIn({ password, rememberMe, email })
       dispatch(setAuth(true))
+      dispatch(setUserData(res))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {

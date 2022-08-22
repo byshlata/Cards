@@ -2,16 +2,56 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { profileAPI } from 'api'
 import axios from 'axios'
 
-export const initialState: InitialStateType = {
-  userName: '',
-  userAvatar: '',
+import { UserResponseType } from '../../types'
+
+export const initialState: UserResponseType = {
+  _id: '',
+  email: '',
+  rememberMe: false,
+  isAdmin: false,
+  name: '',
+  verified: false,
+  token: '',
+  publicCardPacksCount: 0,
+  created: '',
+  updated: '',
+  __v: 0,
+  tokenDeathTime: '',
+  avatar: '',
 }
 
+export const profileSlice = createSlice({
+  name: 'profileSlice',
+  initialState,
+  reducers: {
+    setUserData: (state, action) => {
+      // eslint-disable-next-line no-debugger
+      state.name = action.payload.name
+      state.email = action.payload.email
+      state._id = action.payload._id
+    },
+    setUserName: (state, action) => {
+      state.name = action.payload
+    },
+    setUserAvatar: (state, action) => {
+      state.name = action.payload
+    },
+  },
+  // extraReducers: {
+  //   // @ts-ignore
+  //   [changeProfileName.pending]: () => console.log('pending'),
+  //   // @ts-ignore
+  //   [changeProfileName.fulfilled]: () => console.log('fulfilled'),
+  //   // @ts-ignore
+  //   [changeProfileName.rejected]: () => console.log('rejected'),
+  // },
+})
 export const fetchProlePage = createAsyncThunk(
   'profileSlice/fetchProlePage',
   async (_, { dispatch }) => {
     const res = await profileAPI.getAuthUser()
-    console.log(res)
+    console.log({ res: res })
+    dispatch(setUserData(res))
   }
 )
 
@@ -43,32 +83,6 @@ export const changeProfileName = createAsyncThunk(
 //   }
 // )
 
-export const profileSlice = createSlice({
-  name: 'profileSlice',
-  initialState,
-  reducers: {
-    setUserName: (state, action) => {
-      state.userName = action.payload
-    },
-    setUserAvatar: (state, action) => {
-      state.userAvatar = action.payload
-    },
-  },
-  // extraReducers: {
-  //   // @ts-ignore
-  //   [changeProfileName.pending]: () => console.log('pending'),
-  //   // @ts-ignore
-  //   [changeProfileName.fulfilled]: () => console.log('fulfilled'),
-  //   // @ts-ignore
-  //   [changeProfileName.rejected]: () => console.log('rejected'),
-  // },
-})
-
-export const { setUserName, setUserAvatar } = profileSlice.actions
+export const { setUserData, setUserName, setUserAvatar } = profileSlice.actions
 
 export default profileSlice.reducer
-
-type InitialStateType = {
-  userName: string
-  userAvatar: string
-}

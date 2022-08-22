@@ -52,7 +52,6 @@ export const Registration = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      console.log(values)
       dispatch(RegistrationThunk(values))
       formik.resetForm({
         values: { email: '', password: '', confirmPassword: '' },

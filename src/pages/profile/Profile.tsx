@@ -6,7 +6,8 @@ import { Navigate } from 'react-router-dom'
 
 //import { userName } from '../../store/selectors/selectors'
 import { useAppDispatch } from '../../hooks'
-import { RootStoreType, selectorsIsInitialized } from '../../store'
+import { RootStoreType, selectorIsLoading, selectorsIsInitialized } from '../../store'
+import { userName } from '../../store/selectors/selectors'
 import { changeProfileName } from '../../store/slice/profileSlice'
 import { fetchProlePage } from '../../store/slice/profileSlice'
 
@@ -16,13 +17,16 @@ import { itIncubatorLogo, avatar, exitArrow, camera, pencil, logout } from './in
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-  const userName = useSelector<RootStoreType, string>((state) => state.profile.userName)
+  const userName = useSelector<RootStoreType, string>((state) => state.profile.name)
+  const userEmail = useSelector<RootStoreType, string>((state) => state.profile.email)
+
   useEffect(() => {
     dispatch(fetchProlePage())
   }, [])
   const [mode, setMode] = useState<boolean>(false)
 
   const [value, setValue] = useState<string>(userName)
+  console.log({ value: value })
   const NameChanger = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
   }
@@ -76,13 +80,14 @@ export const Profile = () => {
                 alt={'change name'}
                 onClick={() => {
                   setMode(true)
+                  dispatch(changeProfileName(value))
                 }}
               />
             </>
           )}
         </div>
         <div className={style.profileEmail}>
-          <h4>yoyoyo@gmail.com</h4>
+          <h4>{userEmail}</h4>
         </div>
         <div className={style.buttonLogout}>
           <NavLink to={'/login'}>

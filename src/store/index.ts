@@ -1,7 +1,7 @@
 //slice
 
 export { appSlice } from './slice/appSlice'
-
+export { profileSlice } from './slice/profileSlice'
 export { forgotSlice } from './slice/forgotSlice'
 export { registrationSlice } from './slice/registrationSlice'
 
@@ -29,5 +29,5 @@ export type { AppDispatchType, RootStoreType } from './store'
 //action
 
 export { setInitialized, setErrorMessage, isSpinAppLoading } from './slice/appSlice'
-
 export { removeEmail, sendLetter, isPasswordSend } from './slice/forgotSlice'
+export { setUserData, setUserName } from './slice/profileSlice'
