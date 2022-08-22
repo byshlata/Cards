@@ -13,8 +13,6 @@ export const forgotSlice = createSlice({
       state.email = action.payload
     },
     removeEmail: () => {
-      // eslint-disable-next-line no-debugger
-      debugger
       return initialState
     },
   },

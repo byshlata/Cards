@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
 
 export type CustomButtonType = {
-  type: 'primary' | 'secondary' | 'link' | 'danger' | 'disabled'
+  type?: 'submit' | 'button' | 'reset'
+  color: 'primary' | 'secondary' | 'link' | 'danger' | 'disabled' | 'submit'
   disabled?: boolean
-  onClick: () => void
+  onClick?: () => void
   children?: ReactNode
 }

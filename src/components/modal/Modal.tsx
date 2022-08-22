@@ -24,7 +24,7 @@ export const Modal: React.FC<ModalType> = (props): ReactElement | null => {
     <div className={classModal}>
       <div className={classContent}>
         <div className={style.buttonClose}>
-          <CustomButton type="link" disabled={false} onClick={onClose}>
+          <CustomButton color="link" disabled={false} onClick={onClose}>
             <div className={style.close} />
           </CustomButton>
         </div>

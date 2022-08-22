@@ -4,33 +4,33 @@ import style from './CustomrButton.module.sass'
 import { CustomButtonType } from './types/CustomButtonType'
 
 export const CustomButton: FC<CustomButtonType> = (props): ReactElement => {
-  const { disabled, onClick, type, children } = props
+  const { disabled, onClick, color, type, children } = props
 
   let buttonClassName
 
-  if (type === 'primary') {
+  if (color === 'primary') {
     buttonClassName = style.primaryButton
   }
 
-  if (type === 'secondary') {
+  if (color === 'secondary') {
     buttonClassName = style.secondaryButton
   }
 
-  if (type === 'danger') {
+  if (color === 'danger') {
     buttonClassName = style.dangerButton
   }
 
-  if (type === 'disabled') {
+  if (color === 'disabled') {
     buttonClassName = style.disabledButton
   }
 
-  if (type === 'link') {
+  if (color === 'link') {
     buttonClassName = style.linkButton
   }
 
   return (
     <button
-      type="button"
+      type={type}
       disabled={disabled}
       aria-label="open"
       className={buttonClassName}

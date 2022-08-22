@@ -1,6 +1,6 @@
 import style from '../CustomInput.module.sass'
 
-export const useClassInputElement = (error = false, disable = false) => {
+export const useClassInputElement = (error = '', disable = false) => {
   const classInput =
     (disable && error) || disable
       ? style.customInputDisable

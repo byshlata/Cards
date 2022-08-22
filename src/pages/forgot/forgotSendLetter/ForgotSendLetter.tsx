@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 import { CustomButton, FormBody, LetterSendIcon, Title } from 'components'
+import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { removeEmail, selectorEmail, selectorsIsLoading } from 'store'
 
 import style from './ForgotSendLetter.module.sass'
@@ -12,8 +14,11 @@ const CONST_DELAY = 1000
 
 export const ForgotSendLetter = () => {
   const dispatch = useAppDispatch()
+
   const isLoading = useSelector(selectorsIsLoading)
   const email = useSelector(selectorEmail)
+
+  const navigate = useNavigate()
 
   const [counterDown, setCounterDown] = useState<number>(COUNT_VAlUE)
   const onNavigateToLoginPage = () => {}
@@ -26,6 +31,7 @@ export const ForgotSendLetter = () => {
 
   if (counterDown === -1) {
     dispatch(removeEmail())
+    navigate(`${Path.Login}`)
   }
 
   return (
@@ -41,7 +47,7 @@ export const ForgotSendLetter = () => {
         `Going to the sing in page via... {counterDown}`
       </p>
       <div className={style.buttonWrapper}>
-        <CustomButton type="primary" disabled={isLoading} onClick={onNavigateToLoginPage}>
+        <CustomButton color="primary" disabled={isLoading} onClick={onNavigateToLoginPage}>
           Back to login
         </CustomButton>
       </div>
