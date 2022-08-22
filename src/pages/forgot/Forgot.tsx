@@ -1,13 +1,11 @@
 import React from 'react'
 
-import { FormBody } from 'components'
-import { Title } from 'components/title/Title'
+import { ForgotEmail, ForgotSendLetter } from 'pages/forgot'
+import { useSelector } from 'react-redux'
+import { selectorEmail } from 'store'
 
 export const Forgot = () => {
-  return (
-    <FormBody width={410} height={460}>
-      <Title text="Forgot your password?" />
-      <input />
-    </FormBody>
-  )
+  const email = useSelector(selectorEmail)
+
+  return email ? <ForgotSendLetter /> : <ForgotEmail />
 }

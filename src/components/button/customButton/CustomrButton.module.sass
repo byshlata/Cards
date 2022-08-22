@@ -1,23 +1,22 @@
-$colorPrimary: rgba(1, 54, 61, 1)
+$colorPrimary: rgba(21, 43, 100, 1)
 $colorSecondary: rgba(144, 201, 32, 1)
 $colorDanger: rgba(255, 5, 0, 1)
 $colorDisabled: rgba(134, 131, 131, 0.2)
 $colorBackground: rgba(203, 199, 199, 1)
-$colorActiveLink: rgb(96, 190, 248)
-
+$colorActiveLink: rgba(96, 190, 248, 1)
+$colorText: rgba(255, 255, 255, 1)
 
 @mixin buttonOption($color)
+  width: 100%
+  background-color: $color
   border: 1px solid $color
-  box-shadow: 0 0 3px $color
-  color: $color
+  color: $colorText
 
 @mixin activeHover($color)
-  box-shadow: 0 0 1px $color, 0 0 3px $color, 0 0 6px $color
-  transform: scale(0.95)
+  transform: scale(0.99)
 
 @mixin hover($color)
-  box-shadow: 0 0 1px $color, 0 0 2px $color, 0 0 4px $color
-
+  box-shadow: 0 0 1px $color, 0 0 2px $color, 0 0 3px $color
 
 .primaryButton, .secondaryButton, .dangerButton, .disabledButton, .linkButton
   letter-spacing: 1px
@@ -29,9 +28,9 @@ $colorActiveLink: rgb(96, 190, 248)
   padding: 8px
   overflow: hidden
   box-sizing: border-box
-  background-color: $colorBackground
-  border-radius: 5px
+  border-radius: 30px
   cursor: pointer
+  box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3)
   +buttonOption($colorPrimary)
 
 .primaryButton
@@ -46,7 +45,6 @@ $colorActiveLink: rgb(96, 190, 248)
     +activeHover($colorSecondary)
   &:hover
     +hover($colorSecondary)
-
 
 .dangerButton
   +buttonOption($colorDanger)
@@ -68,10 +66,14 @@ $colorActiveLink: rgb(96, 190, 248)
   background-color: inherit
   border: none
   box-shadow: none
+  color: $colorPrimary
+  text-decoration: underline
   &:active:hover
     transform: scale(0.95)
     color: $colorActiveLink
+    border: none
   &:hover
+    border: none
     color: $colorActiveLink
 
 

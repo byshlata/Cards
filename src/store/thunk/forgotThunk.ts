@@ -1,18 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { profileAPI } from 'api'
+import { forgotAPI } from 'api'
 import axios from 'axios'
-import { setInitialized } from 'store'
+import { sendLetter, setInitialized } from 'store'
 
-export const getAuthUser = createAsyncThunk(
-  'authUserSlice/getAuthUser',
-  async (_, { rejectWithValue, dispatch }) => {
+export const sendLetterOnEmail = createAsyncThunk(
+  'forgotSlice/sendLetterOnEmail',
+  async (email: string, { rejectWithValue, dispatch }) => {
+    // eslint-disable-next-line no-debugger
+    debugger
     try {
       dispatch(setInitialized(true))
-      const res = await profileAPI.getAuthUser()
+      const res = await forgotAPI.sendLetter(email)
       if ('error' in res) {
         return rejectWithValue(res.error)
       } else {
-        //dispatch();
+        dispatch(sendLetter(email))
       }
     } catch (err) {
       if (axios.isAxiosError(err)) {

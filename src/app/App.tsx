@@ -13,7 +13,6 @@ export const App = () => {
   return (
     <>
       <Header />
-      <CustomInput />
       <div className={style.linerProgressWrapper}>
         <LinerProgress isLoading={isLoading} />
       </div>

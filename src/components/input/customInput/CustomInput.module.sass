@@ -1,20 +1,26 @@
-$colorPrimary: rgba(1, 54, 61, 1)
+$colorPrimary: rgba(21, 43, 100, 1)
 $colorSecondary: rgba(144, 201, 32, 1)
 $colorDanger: rgba(255, 5, 0, 1)
-$colorDisabled: rgba(134, 131, 131, 0.2)
-$colorBackground: rgba(203, 199, 199, 1)
+$colorDisabled: rgba(134, 131, 131, 0.4)
+$colorLabel: rgba(203, 199, 199, 1)
 $colorWhite: rgba(255, 255, 255, 1)
 $width: 350px
+
+@mixin inputLabelOption ($color)
+  &:valid
+    ~.customLabelError
+      color: $color
+  &:focus
+    ~.customLabelError
+      color: $color
+  &:-webkit-autofill
+    -webkit-box-shadow: 0 0 0 1000px $color inset
+
 
 .centered
   width: 100%
   height: $width/5
-  margin: auto
-  position: absolute
-  top: 0
-  bottom: 0
-  left: 0
-  right: 0
+  margin: 0 auto
 
 .group
   width: 100%
@@ -23,15 +29,17 @@ $width: 350px
   position: relative
   box-sizing: border-box
 
-.superLabel
+.customLabel, .customLabelError, .customLabelDisable
   position: absolute
   top: $width/15
-  color: rgba($colorBackground, 1)
+  color: rgba($colorPrimary, 1)
   font-size: $width/20
   cursor: text
   transition: .25s ease
+  font-family: Montserrat, serif
+  pointer-events: none
 
-.superInput
+.customInput, .customInputError, .customInputDisable
   display: block
   width: 100%
   box-sizing: border-box
@@ -43,25 +51,35 @@ $width: 350px
   font-size: $width/15
   transition: .3s ease
   &:valid
-    ~.superLabel
+    ~.customLabel, ~.customLabelError, ~.customLabelDisable
       top: 0
       font-size: $width/25
-      color: $colorBackground
+      color: $colorLabel
   &:focus
     outline: none
-    ~.superLabel
+    ~.customLabel, ~.customLabelError, ~.customLabelDisable
       top: 0
       font-size: $width/25
-      color: $colorBackground
-  ~.bar:before
+      color: $colorLabel
+  ~.bar:before, ~.barError:before, ~.barDisable:before
       transform: translateX(0)
   &:-webkit-autofill
     -webkit-box-shadow: 0 0 0 1000px $colorPrimary inset
     -webkit-text-fill-color: white !important
 
-.bar
-  background: rgba(white, .5)
-  content: ''
+.customInputError
+  +inputLabelOption($colorDanger)
+
+.customInputDisable
+  cursor: no-drop
+  +inputLabelOption($colorDisabled)
+
+.customLabelDisable
+  cursor: no-drop
+  color: $colorDisabled
+
+.bar, .barError, .barDisable
+  background: $colorPrimary
   width: 100%
   height: $width/150
   transition: .3s ease
@@ -73,5 +91,36 @@ $width: 350px
     height: 150%
     background: $colorPrimary
     transform: translateX(-100%)
+
+.barError
+  background: $colorDanger
+  &:before
+    content: ''
+    background: $colorDanger
+
+.barDisable
+  background: $colorDisabled
+  &:before
+    background: $colorDisabled
+
 ::selection
-  background: rgba($colorBackground, 1)
+  background: $colorLabel
+
+.iconButton, .iconButtonSearch, .iconButtonDisable
+  position: absolute
+  right: 0
+  bottom: 35%
+  border: none
+  background: none
+  cursor: pointer
+  padding: 4px
+  height: 40%
+
+.iconButtonSearch, .iconButtonDisable
+  pointer-events: none
+  cursor: no-drop
+  opacity: 0.4
+
+.iconButtonSearch
+  cursor: no-drop
+  border-left: 2px solid $colorLabel
