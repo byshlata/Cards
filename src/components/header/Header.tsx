@@ -8,7 +8,9 @@ export const Header = () => {
   return (
     <>
       <header className={s.header}>
-        <div className={style.container}></div>
+        <div className={style.container}>
+          <div className={style.logo}></div>
+        </div>
       </header>
     </>
   )

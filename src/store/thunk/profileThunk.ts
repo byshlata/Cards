@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { setInitialized } from 'store'
 import { profileAPI } from 'api'
 import axios from 'axios'
+import { setInitialized } from 'store'
 
 export const getAuthUser = createAsyncThunk(
   'authUserSlice/getAuthUser',

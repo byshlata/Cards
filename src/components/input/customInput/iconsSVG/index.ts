@@ -1,5 +1,5 @@
-export { EyeIconCloseSvg } from './EyeIconCloseSVG';
+export { EyeIconCloseSvg } from './EyeIconCloseSVG'
 
-export { EyeIconOpenSVG } from './EyeIconOpenSVG';
+export { EyeIconOpenSVG } from './EyeIconOpenSVG'
 
-export { SearchIconSvg } from './SearchIconSVG';
+export { SearchIconSvg } from './SearchIconSVG'
