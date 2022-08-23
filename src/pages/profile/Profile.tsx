@@ -1,16 +1,38 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+
+//import { userName } from '../../store/selectors/selectors'
+import { useAppDispatch } from '../../hooks'
+import { RootStoreType, selectorsIsInitialized } from '../../store'
+import { changeProfileName } from '../../store/slice/profileSlice'
+import { fetchProlePage } from '../../store/slice/profileSlice'
 
 import style from './Profile.module.sass'
 
 import { itIncubatorLogo, avatar, exitArrow, camera, pencil, logout } from './index'
 
 export const Profile = () => {
+  const dispatch = useAppDispatch()
+  const userName = useSelector<RootStoreType, string>((state) => state.profile.userName)
+  useEffect(() => {
+    dispatch(fetchProlePage())
+  }, [])
   const [mode, setMode] = useState<boolean>(false)
-  const [value, setValue] = useState<string>('Name')
+
+  const [value, setValue] = useState<string>(userName)
   const NameChanger = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
+  }
+  const asyncChangeName = () => {
+    dispatch(changeProfileName(value))
+    setMode(false)
+  }
+
+  if (!selectorsIsInitialized) {
+    return <Navigate to={'/login'} />
   }
 
   return (
@@ -44,14 +66,7 @@ export const Profile = () => {
         </div>
         <div className={style.changeProfileNameWrapper}>
           {mode ? (
-            <input
-              value={value}
-              onChange={NameChanger}
-              autoFocus
-              onBlur={() => {
-                setMode(false)
-              }}
-            />
+            <input value={value} onChange={NameChanger} autoFocus onBlur={asyncChangeName} />
           ) : (
             <>
               <h3 className={style.profileName}>{value}</h3>

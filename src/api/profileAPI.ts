@@ -1,13 +1,12 @@
+import { API_CONFIG } from './config'
 import { AxiosResponse } from 'axios'
-import { PathAPI } from 'enums'
 import {
   ChangeInformationUserType,
   ErrorShortResponseType,
   UpdateUserResponseType,
   UserResponseType,
-} from 'types'
-
-import { API_CONFIG } from './config'
+} from '../types'
+import { PathAPI } from '../enums'
 
 export const profileAPI = {
   getAuthUser: async () => {
