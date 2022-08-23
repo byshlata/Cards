@@ -41,11 +41,9 @@ export const ForgotSendLetter = () => {
         <LetterSendIcon width={110} />
       </div>
       <p className={style.textInformationWrapper}>
-        `We’ve sent an Email with instructions to {email}`
+        We’ve sent an Email with instructions to {email}
       </p>
-      <p className={style.textInformationWrapper}>
-        `Going to the sing in page via... {counterDown}`
-      </p>
+      <p className={style.textInformationWrapper}>Going to the sing in page via... {counterDown}</p>
       <div className={style.buttonWrapper}>
         <CustomButton color="primary" disabled={isLoading} onClick={onNavigateToLoginPage}>
           Back to login

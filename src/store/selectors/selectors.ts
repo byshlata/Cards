@@ -8,3 +8,5 @@ export const selectorsIsLoading = (state: RootStoreType): boolean => state.app.i
 export const selectorError = (state: RootStoreType): Nullable<string> => state.app.error
 
 export const selectorEmail = (state: RootStoreType): Nullable<string> => state.forgot.email
+
+export const selectorIsPasswordSend = (state: RootStoreType): boolean => state.forgot.isPasswordSend

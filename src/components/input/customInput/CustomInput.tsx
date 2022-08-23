@@ -1,17 +1,12 @@
-import React, { ChangeEvent, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 
 import { FieldProps } from 'formik'
-import { FormikHandlers } from 'formik/dist/types'
 
 import style from './CustomInput.module.sass'
 import { useClassInputElement } from './hooks/useClassInputElement'
 import { usePasswordInput } from './hooks/usePasswordInput'
 import { EyeIconCloseSvg, EyeIconOpenSVG, SearchIconSvg } from './iconsSVG'
 import { CustomInputType } from './types/CustomInputType'
-
-interface CustomInputComponent {
-  type?: string
-}
 
 export const CustomInput: React.FC<CustomInputType & FieldProps> = ({
   type,
@@ -20,7 +15,6 @@ export const CustomInput: React.FC<CustomInputType & FieldProps> = ({
   disabled,
   onClick,
   field,
-  form,
 }): ReactElement => {
   const { onWatchPassword, typeInputValue, isEyeOpenIcon, isEyeIcon, isSearchIcon, labelName } =
     usePasswordInput(type, error, name)
@@ -32,11 +26,11 @@ export const CustomInput: React.FC<CustomInputType & FieldProps> = ({
 
   const iconEye: ReactElement = isEyeOpenIcon ? (
     <button onClick={onWatchPassword} className={classIcon} type="button">
-      <EyeIconOpenSVG />
+      <EyeIconCloseSvg />
     </button>
   ) : (
     <button onClick={onWatchPassword} className={classIcon} type="button">
-      <EyeIconCloseSvg />
+      <EyeIconOpenSVG />
     </button>
   )
 

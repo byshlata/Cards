@@ -3,6 +3,7 @@ import { Nullable } from 'types'
 
 export const initialState: InitialStateType = {
   email: null,
+  isPasswordSend: false,
 }
 
 export const forgotSlice = createSlice({
@@ -12,14 +13,18 @@ export const forgotSlice = createSlice({
     sendLetter: (state, action: PayloadAction<string>) => {
       state.email = action.payload
     },
+    isPasswordSend: (state) => {
+      state.isPasswordSend = true
+    },
     removeEmail: () => {
       return initialState
     },
   },
 })
 
-export const { sendLetter, removeEmail } = forgotSlice.actions
+export const { sendLetter, removeEmail, isPasswordSend } = forgotSlice.actions
 
 type InitialStateType = {
   email: Nullable<string>
+  isPasswordSend: boolean
 }

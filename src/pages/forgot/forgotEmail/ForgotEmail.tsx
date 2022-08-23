@@ -8,7 +8,7 @@ import { selectorsIsLoading, sendLetterOnEmail } from 'store'
 
 import style from './ForgotEmail.module.sass'
 
-export type FormikErrorType = {
+type FormikErrorType = {
   email?: string
 }
 
@@ -16,6 +16,7 @@ export const ForgotEmail = () => {
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorsIsLoading)
+  const name = 'Aliaksandr'
 
   const formik = useFormik({
     initialValues: {
@@ -23,7 +24,6 @@ export const ForgotEmail = () => {
     },
     validate: (values) => {
       const errors: FormikErrorType = {}
-      console.log(formik.handleBlur('email'))
       if (!values.email) {
         errors.email = ''
       } else if (
@@ -32,10 +32,11 @@ export const ForgotEmail = () => {
       ) {
         errors.email = 'Invalid email address'
       }
+      console.log(errors.email)
       return errors
     },
     onSubmit: (values) => {
-      dispatch(sendLetterOnEmail(values.email))
+      dispatch(sendLetterOnEmail({ email: values.email, name }))
       formik.resetForm({
         values: { email: '' },
       })

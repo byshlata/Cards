@@ -15,6 +15,7 @@ export {
   selectorsIsLoading,
   selectorError,
   selectorEmail,
+  selectorIsPasswordSend,
 } from './selectors/selectors'
 
 //other
@@ -25,4 +26,4 @@ export type { AppDispatchType, RootStoreType } from './store'
 
 export { setInitialized, setErrorMessage, isSpinAppLoading } from './slice/appSlice'
 
-export { removeEmail, sendLetter } from './slice/forgotSlice'
+export { removeEmail, sendLetter, isPasswordSend } from './slice/forgotSlice'
