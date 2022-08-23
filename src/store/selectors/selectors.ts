@@ -7,4 +7,4 @@ export const selectorsIsLoading = (state: RootStoreType): boolean => state.app.i
 
 export const selectorError = (state: RootStoreType): Nullable<string> => state.app.error
 
-//export const userName = (state: RootStoreType): string => state.profile.userName
+//export const selectorUserName = useAppSelector
