@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { profileAPI } from 'api'
 import axios from 'axios'
 
 export const initialState: InitialStateType = {
@@ -9,8 +10,8 @@ export const initialState: InitialStateType = {
 export const fetchProlePage = createAsyncThunk(
   'profileSlice/fetchProlePage',
   async (_, { dispatch }) => {
-    const res = await axios.post('http://localhost:7542/2.0/auth/me', {})
-    dispatch(res.data)
+    const res = await profileAPI.getAuthUser()
+    console.log(res)
   }
 )
 

@@ -3,7 +3,7 @@ export enum PathAPI {
   Auth = '/auth',
   Login = '/login',
   Register = '/register',
-  Me = 'me',
+  Me = '/me',
   Forgot = '/forgot',
   NewPassword = '/set-new-password',
 }

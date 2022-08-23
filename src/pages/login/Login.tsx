@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
 import { useSelector } from 'react-redux'
@@ -8,7 +8,6 @@ import { CustomButton, CustomInput, FormBody, Title } from '../../components'
 import { useAppDispatch } from '../../hooks'
 import { RootStoreType, selectorIsLoading } from '../../store'
 import { signInOnEmail } from '../../store/thunk/loginThunk'
-import { Nullable } from '../../types'
 
 import style from './Login.module.sass'
 
@@ -32,7 +31,6 @@ export const Login = () => {
     },
     validate: (values) => {
       const errors: FormikErrorType = {}
-      console.log(formik.handleBlur('email'))
       if (!values.email) {
         errors.email = ''
       } else if (

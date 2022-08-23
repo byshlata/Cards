@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Header, LinerProgress } from 'components'
+import { CustomAlert } from 'components/customAlert/CustomAlert'
 import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
 import { selectorIsLoading } from 'store'
@@ -12,6 +13,7 @@ export const App = () => {
   const isLoading = useSelector(selectorIsLoading)
   return (
     <>
+      <CustomAlert />
       <Header />
       <div className={style.linerProgressWrapper}>
         <LinerProgress isLoading={isLoading} />
