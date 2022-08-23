@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { ForgotEmail, ForgotSendLetter } from 'pages/forgot'
 import { useSelector } from 'react-redux'
 import { selectorEmail } from 'store'
+
+import { ForgotEmail } from './forgotEmail/ForgotEmail'
+import { ForgotSendLetter } from './forgotSendLetter/ForgotSendLetter'
 
 export const Forgot = () => {
   const email = useSelector(selectorEmail)
