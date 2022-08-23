@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { CustomButton, FormBody, Title } from 'components'
+import { CustomInput } from 'components/input'
 import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorsIsLoading, sendLetterOnEmail } from 'store'
+import { selectorsIsLoading } from 'store'
+import { sendLetterOnEmail } from 'store/thunk/forgotThunk'
 
 import style from './ForgotEmail.module.sass'
 

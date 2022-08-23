@@ -4,8 +4,10 @@ import { CustomButton, FormBody, LetterSendIcon, Title } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { removeEmail, selectorEmail, selectorsIsLoading } from 'store'
+import { useNavigate } from 'react-router-dom'
+import { selectorsIsLoading } from 'store'
+import { selectorEmail } from 'store/selectors/selectors'
+import { removeEmail } from 'store/slice/forgotSlice'
 
 import style from './ForgotSendLetter.module.sass'
 

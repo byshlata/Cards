@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CustomInput, Header, LinerProgress } from 'components'
+import { Header, LinerProgress } from 'components'
 import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
 import { selectorsIsLoading } from 'store'
