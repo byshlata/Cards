@@ -2,13 +2,17 @@ import React from 'react'
 
 import { CustomButton, FormBody, Title } from 'components'
 import { CustomInput } from 'components/input'
+import { Path } from 'enums'
 import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorsIsLoading } from 'store'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { selectorIsLoading } from 'store'
 import { sendLetterOnEmail } from 'store/thunk/forgotThunk'
 
 import style from './ForgotEmail.module.sass'
+
+const name = 'Aliaksandr'
 
 type FormikErrorType = {
   email?: string
@@ -17,8 +21,9 @@ type FormikErrorType = {
 export const ForgotEmail = () => {
   const dispatch = useAppDispatch()
 
-  const isLoading = useSelector(selectorsIsLoading)
-  const name = 'Aliaksandr'
+  const isLoading = useSelector(selectorIsLoading)
+
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -45,7 +50,9 @@ export const ForgotEmail = () => {
     },
   })
 
-  const onNavigateToLoginPage = () => {}
+  const onNavigateToLoginPage = () => {
+    navigate(`${Path.Login}`)
+  }
 
   return (
     <FormBody width={410} height={460}>

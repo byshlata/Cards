@@ -26,11 +26,11 @@ export const CustomInput: React.FC<CustomInputType & FieldProps> = ({
 
   const iconEye: ReactElement = isEyeOpenIcon ? (
     <button onClick={onWatchPassword} className={classIcon} type="button">
-      <EyeIconCloseSvg />
+      <EyeIconOpenSVG />
     </button>
   ) : (
     <button onClick={onWatchPassword} className={classIcon} type="button">
-      <EyeIconOpenSVG />
+      <EyeIconCloseSvg />
     </button>
   )
 

@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { InputType } from '../types/CustomInputType'
 
 export const usePasswordInput = (type: InputType, error = '', name = '') => {
-  const [isWatchPassword, setIsWatchPassword] = useState<boolean>(true)
+  const [isWatchPassword, setIsWatchPassword] = useState<boolean>(false)
 
-  const typeInputValue = isWatchPassword ? 'password' : 'text'
+  const typeInputValue = type !== 'password' ? 'text' : isWatchPassword ? 'text' : 'password'
 
   const onWatchPassword = (): void => {
     setIsWatchPassword(!isWatchPassword)

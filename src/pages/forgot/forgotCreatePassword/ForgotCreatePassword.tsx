@@ -7,7 +7,7 @@ import { useAppDispatch } from 'hooks'
 import style from 'pages/forgot/forgotEmail/ForgotEmail.module.sass'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { removeEmail, selectorIsPasswordSend, selectorsIsLoading } from 'store'
+import { removeEmail, selectorIsPasswordSend, selectorIsLoading } from 'store'
 import { sendNewPassword } from 'store/thunk/forgotThunk'
 
 const MIN_ACCEPTABLE_LENGTH_PASSWORD = 8
@@ -20,7 +20,7 @@ export const ForgotCreatePassword = () => {
   const dispatch = useAppDispatch()
 
   const isPasswordSend = useSelector(selectorIsPasswordSend)
-  const isLoading = useSelector(selectorsIsLoading)
+  const isLoading = useSelector(selectorIsLoading)
 
   const navigate = useNavigate()
 

@@ -5,19 +5,19 @@ import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectorsIsLoading } from 'store'
+import { selectorIsLoading } from 'store'
 import { selectorEmail } from 'store/selectors/selectors'
 import { removeEmail } from 'store/slice/forgotSlice'
 
 import style from './ForgotSendLetter.module.sass'
 
-const COUNT_VAlUE = 10
+const COUNT_VAlUE = 5
 const CONST_DELAY = 1000
 
 export const ForgotSendLetter = () => {
   const dispatch = useAppDispatch()
 
-  const isLoading = useSelector(selectorsIsLoading)
+  const isLoading = useSelector(selectorIsLoading)
   const email = useSelector(selectorEmail)
 
   const navigate = useNavigate()

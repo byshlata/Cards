@@ -13,7 +13,7 @@ export { sendLetterOnEmail } from './thunk/forgotThunk'
 
 export {
   selectorsIsInitialized,
-  selectorsIsLoading,
+  selectorIsLoading,
   selectorError,
   selectorEmail,
   selectorIsPasswordSend,

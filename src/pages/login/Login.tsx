@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom'
 
 import { CustomButton, CustomInput, FormBody, Title } from '../../components'
 import { useAppDispatch } from '../../hooks'
-import { RootStoreType, selectorsIsLoading } from '../../store'
+import { RootStoreType, selectorIsLoading } from '../../store'
 import { signInOnEmail } from '../../store/thunk/loginThunk'
 import { Nullable } from '../../types'
 
@@ -21,7 +21,7 @@ type FormikErrorType = {
 export const Login = () => {
   const dispatch = useAppDispatch()
 
-  const isLoading = useSelector(selectorsIsLoading)
+  const isLoading = useSelector(selectorIsLoading)
   const isLoginIn = useSelector((state: RootStoreType) => state.login.isLoginIn)
 
   const formik = useFormik({
