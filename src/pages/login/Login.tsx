@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { CustomInput } from 'components/input/customInput/CustomInput'
-import { useFormik } from 'formik'
-import { useDispatch } from 'react-redux'
+import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
-import { Title } from '../../components'
+import { CustomButton, CustomInput, FormBody, Title } from '../../components'
+import { useAppDispatch } from '../../hooks'
+import { RootStoreType, selectorsIsLoading } from '../../store'
+import { signInOnEmail } from '../../store/thunk/loginThunk'
+import { Nullable } from '../../types'
 
-import style from './login.module.sass'
+import style from './Login.module.sass'
 
 type FormikErrorType = {
   email?: string
@@ -15,7 +19,10 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
+
+  const isLoading = useSelector(selectorsIsLoading)
+  const isLoginIn = useSelector((state: RootStoreType) => state.login.isLoginIn)
 
   const formik = useFormik({
     initialValues: {
@@ -23,12 +30,15 @@ export const Login = () => {
       password: '',
       rememberMe: false,
     },
-
     validate: (values) => {
       const errors: FormikErrorType = {}
+      console.log(formik.handleBlur('email'))
       if (!values.email) {
-        errors.email = 'Required'
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = ''
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email) &&
+        formik.handleBlur('email')
+      ) {
         errors.email = 'Invalid email address'
       }
       if (!values.password) {
@@ -40,35 +50,76 @@ export const Login = () => {
       return errors
     },
     onSubmit: (values) => {
-      // dispatch(loginTC(values))
-      formik.resetForm()
+      dispatch(signInOnEmail(values))
+      formik.resetForm({
+        values: { email: '', password: '', rememberMe: false },
+      })
     },
   })
 
-  const emailChangeHandler = (value: string) => {
-    console.log(value)
-  }
-  const passwordlChangeHandler = (value: string) => {
-    console.log(value)
+  const onNavigateToLogOutPage = () => {}
+  const onClickCheckBoxHandler = () => {}
+
+  if (isLoginIn) {
+    return <Navigate to={'/profile'} />
   }
 
   return (
-    <div className={style.container}>
-      <form onSubmit={formik.handleSubmit}>
-        <Title text="Sign In" />
-        <CustomInput
-          type={'search'}
-          value={'formik.initialValues.email'}
-          onChange={emailChangeHandler}
-        />
-        {formik.touched.email && formik.errors.email && <div>{formik.errors.email}</div>}
-        <CustomInput
-          type={'password'}
-          value={'formik.initialValues.password'}
-          onChange={passwordlChangeHandler}
-        />
-        {formik.touched.password && formik.errors.password && <div>{formik.errors.password}</div>}
-      </form>
-    </div>
+    <FormBody width={413} height={552}>
+      <Title text="Sign in" />
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          <div className={style.inputWrapper}>
+            <Field name="email">
+              {({ form, meta, field }: FieldProps) => (
+                <CustomInput
+                  field={field}
+                  form={form}
+                  meta={meta}
+                  type="simple"
+                  name="email"
+                  error={formik.errors.email}
+                />
+              )}
+            </Field>
+          </div>
+          <div className={style.inputWrapper}>
+            <Field name="password">
+              {({ form, meta, field }: FieldProps) => (
+                <CustomInput
+                  field={field}
+                  form={form}
+                  meta={meta}
+                  type="password"
+                  name="password"
+                  error={formik.errors.password}
+                />
+              )}
+            </Field>
+          </div>
+          <div className={style.checkboxWrapper}>
+            <input type="checkbox" checked={formik.values.rememberMe} />
+            <div onClick={onClickCheckBoxHandler}>Remember me</div>
+          </div>
+          <div className={style.forgotPassword}>Forgot Password?</div>
+          <div className={style.buttonWrapper}>
+            <CustomButton type="submit" color="primary" disabled={isLoading}>
+              Sign In
+            </CustomButton>
+          </div>
+        </form>
+      </FormikProvider>
+      <div>
+        <p className={style.textBlockQuestion}>Already have an account?</p>
+        <CustomButton
+          type="button"
+          color="link"
+          onClick={onNavigateToLogOutPage}
+          disabled={isLoading}
+        >
+          Sign Up
+        </CustomButton>
+      </div>
+    </FormBody>
   )
 }

@@ -23,7 +23,6 @@ $colorText: rgba(255, 255, 255, 1)
   display: flex
   justify-content: center
   align-items: center
-  text-transform: uppercase
   font-size: 1rem
   padding: 8px
   overflow: hidden
@@ -34,6 +33,11 @@ $colorText: rgba(255, 255, 255, 1)
   +buttonOption($colorPrimary)
 
 .primaryButton
+  height: 36px
+  width: 347px
+  border-radius: 30px
+  font-size: 16px
+  font-weight: 500
   &:active:hover
     +activeHover($colorPrimary)
   &:hover
