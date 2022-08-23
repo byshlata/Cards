@@ -1,24 +1,24 @@
 import React from 'react'
 
-import { Header, LinerProgress } from 'components'
+import { CustomInput, Header, LinerProgress } from 'components'
+import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
 import { selectorsIsLoading } from 'store'
+import styleMain from 'styles/container.module.sass'
 
-import { Routers } from '../pages/Routes'
-
-import s from './App.module.sass'
+import style from './App.module.sass'
 
 export const App = () => {
   const isLoading = useSelector(selectorsIsLoading)
-  const as = 100
-
   return (
     <>
       <Header />
-      <div className={s.linerProgressWrapper}>
+      <div className={style.linerProgressWrapper}>
         <LinerProgress isLoading={isLoading} />
       </div>
-      <Routers />
+      <div className={styleMain.container}>
+        <Routers />
+      </div>
     </>
   )
 }

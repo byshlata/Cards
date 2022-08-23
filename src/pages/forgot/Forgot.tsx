@@ -1,11 +1,13 @@
 import React from 'react'
 
-import { Title } from 'components/title/Title'
+import { useSelector } from 'react-redux'
+import { selectorEmail } from 'store'
+
+import { ForgotEmail } from './forgotEmail/ForgotEmail'
+import { ForgotSendLetter } from './forgotSendLetter/ForgotSendLetter'
 
 export const Forgot = () => {
-  return (
-    <>
-      <Title text="Forgot your password?" />
-    </>
-  )
+  const email = useSelector(selectorEmail)
+
+  return email ? <ForgotSendLetter /> : <ForgotEmail />
 }

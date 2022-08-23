@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-type UseCustomInputReturnType = {
-  value: string;
-  setValue: (value: any) => void;
-};
+type useCustomInputReturnType = {
+  value: string
+  setValue: (value: any) => void
+}
 
-export const UseCustomInput = (initialValue: string): UseCustomInputReturnType => {
-  const [value, setValue] = useState(initialValue);
+export const useCustomInput = (initialValue: string): useCustomInputReturnType => {
+  const [value, setValue] = useState(initialValue)
 
-  return { value, setValue };
-};
+  return { value, setValue }
+}

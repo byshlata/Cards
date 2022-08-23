@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios'
 import { PathAPI } from 'enums'
+import { ErrorResponseType, RegistrationType, RegistrationUserResponseType } from 'types'
+
 import { API_CONFIG } from './config'
-import { ErrorResponseType, RegistrationType, RegistrationUserResponseType } from '../types'
 
 export const registrationAPI = {
   registerUser: async ({ email, password }: RegistrationType) => {

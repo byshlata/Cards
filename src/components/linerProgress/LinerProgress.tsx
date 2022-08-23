@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react'
 
-import s from './LinerProgress.module.sass'
-import { LinerProgressType } from './LinerProgressType'
+import { LinerProgressType } from 'components/linerProgress/types/LinerProgressType'
+
+import style from './LinerProgress.module.sass'
 
 export const LinerProgress = ({ isLoading }: LinerProgressType): ReactElement =>
   isLoading ? (
-    <div className={s.linear}>
-      <div className={s.indeterminate} />
+    <div className={style.linear}>
+      <div className={style.indeterminate} />
     </div>
   ) : (
     <div />
