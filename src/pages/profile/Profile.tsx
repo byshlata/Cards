@@ -1,16 +1,25 @@
 import React, { ChangeEvent, useState } from 'react'
 
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+
+//import { userName } from '../../store/selectors/selectors'
+import { RootStoreType } from '../../store'
+import { changeProfileName } from '../../store/slice/profileSlice'
 
 import style from './Profile.module.sass'
 
 import { itIncubatorLogo, avatar, exitArrow, camera, pencil, logout } from './index'
 
 export const Profile = () => {
+  const dispatch = useDispatch()
+  const userName = useSelector<RootStoreType, string>((state) => state.profile.userName)
   const [mode, setMode] = useState<boolean>(false)
-  const [value, setValue] = useState<string>('Name')
+
+  const [value, setValue] = useState<string>(userName)
   const NameChanger = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value)
+    // @ts-ignore
+    dispatch(changeProfileName(e.currentTarget.value))
   }
 
   return (
