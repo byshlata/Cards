@@ -10,4 +10,4 @@ export type CustomInputType = {
   onClick?: () => void
 }
 
-export type InputType = 'search' | 'password' | 'simple'
+export type InputType = 'search' | 'password' | 'simple' | 'checkbox'

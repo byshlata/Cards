@@ -4,8 +4,7 @@ import { Nullable } from 'types'
 export const initialState: InitialStateType = {
   email: null,
   password: null,
-  rememberMe: false,
-  isLoginIn: false,
+  isLogIn: false,
 }
 
 export const loginSlice = createSlice({
@@ -13,7 +12,7 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {
     loginIn: (state, action: PayloadAction<boolean>) => {
-      state.isLoginIn = action.payload
+      state.isLogIn = action.payload
     },
     removeEmail: () => {
       return initialState
@@ -26,6 +25,5 @@ export const { loginIn } = loginSlice.actions
 type InitialStateType = {
   email: Nullable<string>
   password: Nullable<string>
-  rememberMe: boolean
-  isLoginIn: boolean
+  isLogIn: boolean
 }
