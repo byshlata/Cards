@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
 import { useSelector } from 'react-redux'
@@ -8,7 +8,6 @@ import { CustomButton, CustomInput, FormBody, Title } from '../../components'
 import { useAppDispatch } from '../../hooks'
 import { RootStoreType, selectorsIsLoading } from '../../store'
 import { signInOnEmail } from '../../store/thunk/loginThunk'
-import { Nullable } from '../../types'
 
 import style from './Login.module.sass'
 
@@ -30,7 +29,6 @@ export const Login = () => {
       rememberMe: false,
     },
     validate: (values) => {
-      console.log(values)
       const errors: FormikErrorType = {}
       if (!values.email) {
         errors.email = ''
@@ -56,9 +54,6 @@ export const Login = () => {
       })
     },
   })
-
-  const onNavigateToLogOutPage = () => {}
-  const onClickCheckBoxHandler = () => {}
 
   if (isLogIn) {
     return <Navigate to={'/profile'} />
@@ -115,12 +110,7 @@ export const Login = () => {
       </FormikProvider>
       <div>
         <p className={style.textBlockQuestion}>Already have an account?</p>
-        <CustomButton
-          type="button"
-          color="link"
-          onClick={onNavigateToLogOutPage}
-          disabled={isLoading}
-        >
+        <CustomButton type="button" color="link" disabled={isLoading}>
           Sign Up
         </CustomButton>
       </div>
