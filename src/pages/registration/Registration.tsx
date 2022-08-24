@@ -7,28 +7,33 @@ import { Navigate } from 'react-router-dom'
 import { CustomButton, CustomInput, FormBody, Title } from '../../components'
 import { useAppDispatch } from '../../hooks'
 import { RootStoreType, selectorsIsLoading } from '../../store'
-import { signInOnEmail } from '../../store/thunk/loginThunk'
+import { RegistrationThunk } from '../../store/thunk/registrationThunk'
 
-import style from './Login.module.sass'
+import style from './Registration.module.sass'
 
 type FormikErrorType = {
   email?: string
   password?: string
-  rememberMe?: boolean
+  confirmPassword?: string
 }
 
-export const Login = () => {
+export const Registration = () => {
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorsIsLoading)
-  const isLogIn = useSelector((state: RootStoreType) => state.login.isLogIn)
+  const isRegistration = useSelector<RootStoreType, boolean>(
+    (state) => state.registration.isRegistration
+  )
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
-      rememberMe: false,
+      confirmPassword: '',
     },
     validate: (values) => {
+      console.log({ values: values })
+
       const errors: FormikErrorType = {}
       if (!values.email) {
         errors.email = ''
@@ -44,24 +49,33 @@ export const Login = () => {
       } else if (values.password.length < 3) {
         errors.password = 'Поле обязательно для заполнения'
       }
+      if (!values.confirmPassword) {
+        errors.confirmPassword = 'Required'
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+      } else if (values.password.length < 3) {
+        errors.confirmPassword = 'Поле обязательно для заполнения'
+      }
+      if (values.password !== values.confirmPassword) {
+        errors.password = 'Введите одинаковы пароль'
+        errors.confirmPassword = 'Поле обязательно для заполнения'
+      }
       return errors
     },
-
     onSubmit: (values) => {
-      dispatch(signInOnEmail(values))
+      dispatch(RegistrationThunk(values))
       formik.resetForm({
-        values: { email: '', password: '', rememberMe: false },
+        values: { email: '', password: '', confirmPassword: '' },
       })
     },
   })
 
-  if (isLogIn) {
+  if (isRegistration) {
     return <Navigate to={'/profile'} />
   }
 
   return (
     <FormBody width={413} height={552}>
-      <Title text="Sign in" />
+      <Title text="Sign Up" />
       <FormikProvider value={formik}>
         <form onSubmit={formik.handleSubmit}>
           <div className={style.inputWrapper}>
@@ -92,18 +106,23 @@ export const Login = () => {
               )}
             </Field>
           </div>
-          <div>
-            <label>
-              <Field type="checkbox" name="rememberMe" />
-              Remember Me
-            </label>
-          </div>
-          <div className={style.forgotPassword}>
-            <a href={'/forgot'}> Forgot Password?</a>
+          <div className={style.inputWrapper}>
+            <Field name="confirmPassword">
+              {({ form, meta, field }: FieldProps) => (
+                <CustomInput
+                  field={field}
+                  form={form}
+                  meta={meta}
+                  type="password"
+                  name="confirm password"
+                  error={formik.errors.password}
+                />
+              )}
+            </Field>
           </div>
           <div className={style.buttonWrapper}>
             <CustomButton type="submit" color="primary" disabled={isLoading}>
-              Sign In
+              Sign Up
             </CustomButton>
           </div>
         </form>
@@ -111,7 +130,7 @@ export const Login = () => {
       <div>
         <p className={style.textBlockQuestion}>Already have an account?</p>
         <CustomButton type="button" color="link" disabled={isLoading}>
-          <a href="/registration"> Sign Up</a>
+          <a href="/login"> Sign In</a>
         </CustomButton>
       </div>
     </FormBody>
