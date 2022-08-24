@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Path } from 'enums'
+import { Forgot, Profile, Login, Registration } from 'pages'
 import { Forgot, Profile, ForgotCreatePassword } from 'pages'
 import { Login } from 'pages/login/Login'
 import { useSelector } from 'react-redux'
@@ -19,3 +20,11 @@ export const Routers = () => {
     </Routes>
   )
 }
+export const Routers = () => (
+  <Routes>
+    <Route path={`${Path.Forgot}`} element={<Forgot />} />
+    <Route path={`${Path.Profile}`} element={<Profile />} />
+    <Route path={`${Path.Login}`} element={<Login />} />
+    <Route path={`${Path.Register}`} element={<Registration />} />
+  </Routes>
+)
