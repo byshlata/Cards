@@ -22,8 +22,7 @@ export const Login = () => {
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorsIsLoading)
-  const isLoginIn = useSelector((state: RootStoreType) => state.login.isLoginIn)
-
+  const isLogIn = useSelector((state: RootStoreType) => state.login.isLogIn)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -31,8 +30,8 @@ export const Login = () => {
       rememberMe: false,
     },
     validate: (values) => {
+      console.log(values)
       const errors: FormikErrorType = {}
-      console.log(formik.handleBlur('email'))
       if (!values.email) {
         errors.email = ''
       } else if (
@@ -49,6 +48,7 @@ export const Login = () => {
       }
       return errors
     },
+
     onSubmit: (values) => {
       dispatch(signInOnEmail(values))
       formik.resetForm({
@@ -60,7 +60,7 @@ export const Login = () => {
   const onNavigateToLogOutPage = () => {}
   const onClickCheckBoxHandler = () => {}
 
-  if (isLoginIn) {
+  if (isLogIn) {
     return <Navigate to={'/profile'} />
   }
 
@@ -97,11 +97,15 @@ export const Login = () => {
               )}
             </Field>
           </div>
-          <div className={style.checkboxWrapper}>
-            <input type="checkbox" checked={formik.values.rememberMe} />
-            <div onClick={onClickCheckBoxHandler}>Remember me</div>
+          <div>
+            <label>
+              <Field type="checkbox" name="rememberMe" />
+              Remember Me
+            </label>
           </div>
-          <div className={style.forgotPassword}>Forgot Password?</div>
+          <div className={style.forgotPassword}>
+            <a href={'/forgot'}> Forgot Password?</a>
+          </div>
           <div className={style.buttonWrapper}>
             <CustomButton type="submit" color="primary" disabled={isLoading}>
               Sign In
