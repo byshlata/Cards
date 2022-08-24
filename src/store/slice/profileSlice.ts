@@ -1,46 +1,55 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
+import { API_CONFIG } from '../../api/config'
+
 export const initialState: InitialStateType = {
   userName: '',
   userAvatar: '',
+  userEmail: '',
 }
 
 export const fetchProlePage = createAsyncThunk(
   'profileSlice/fetchProlePage',
-  async (_, { dispatch }) => {
-    const res = await axios.post('http://localhost:7542/2.0/auth/me', {})
-    dispatch(res.data)
+  async (_, { rejectWithValue, dispatch }) => {
+    const res = await API_CONFIG.post('auth/me', {})
+    dispatch(setUserName(res.data.name))
+    dispatch(setUserEmail(res.data.email))
   }
 )
-
-// export const changeProfileName = createAsyncThunk(
-//   'profileSlice/changeProfileName',
-//   async ((userName, userAvatar), {dispatch}) => {
-//     const res = await axios.put('http://localhost:7542/2.0/auth/me', {
-//       name: userName,
-//       avatar: userAvatar,
-//     })
-//   }
-// )
 
 export const changeProfileName = createAsyncThunk(
   'profileSlice/changeProfileName',
-  async (userName: string, { rejectWithValue, dispatch }) => {
-    const res = await axios.put('http://localhost:7542/2.0/auth/me', { name: userName })
+  async ({ userName, userAvatar }: InitialStateType, { rejectWithValue, dispatch }) => {
+    const res = await API_CONFIG.put('auth/me', {
+      name: userName,
+      avatar: userAvatar,
+    })
     dispatch(setUserName(res.data.updatedUser.name))
+    dispatch(setUserAvatar(res.data.updatedUser.avatar))
   }
 )
+export const authData = {
+  email: 'nya-admin@nya.nya',
+  password: '1qazxcvBG',
+  remember: true,
+}
+export type authDataType = {
+  email: string
+  password: string
+  remember: boolean
+}
 
-// export const changeProfileName2 = createAsyncThunk(
-//   'profileSlice/changeProfileName',
-//   async ({userName: string, userAvatar: string}, {}) =>{
-//     const res = await axios.put('http://localhost:7542/2.0/auth/me', {
-//       name: userName,
-//       avatar: userAvatar,
-//     })
-//   }
-// )
+export const testLogin = createAsyncThunk(
+  'profileSlice/testLogin',
+  async (authData: authDataType, { rejectWithValue, dispatch }) => {
+    const res = await API_CONFIG.post('auth/login', {
+      email: authData.email,
+      password: authData.password,
+      remember: authData.remember,
+    })
+  }
+)
 
 export const profileSlice = createSlice({
   name: 'profileSlice',
@@ -52,22 +61,18 @@ export const profileSlice = createSlice({
     setUserAvatar: (state, action) => {
       state.userAvatar = action.payload
     },
+    setUserEmail: (state, action) => {
+      state.userEmail = action.payload
+    },
   },
-  // extraReducers: {
-  //   // @ts-ignore
-  //   [changeProfileName.pending]: () => console.log('pending'),
-  //   // @ts-ignore
-  //   [changeProfileName.fulfilled]: () => console.log('fulfilled'),
-  //   // @ts-ignore
-  //   [changeProfileName.rejected]: () => console.log('rejected'),
-  // },
 })
 
-export const { setUserName, setUserAvatar } = profileSlice.actions
+export const { setUserName, setUserAvatar, setUserEmail } = profileSlice.actions
 
 export default profileSlice.reducer
 
 type InitialStateType = {
   userName: string
   userAvatar: string
+  userEmail?: string
 }

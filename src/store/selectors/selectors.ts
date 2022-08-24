@@ -6,5 +6,3 @@ export const selectorsIsInitialized = (state: RootStoreType): boolean => state.a
 export const selectorsIsLoading = (state: RootStoreType): boolean => state.app.isLoading
 
 export const selectorError = (state: RootStoreType): Nullable<string> => state.app.error
-
-//export const selectorUserName = useAppSelector

@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
 
-//import { userName } from '../../store/selectors/selectors'
 import { useAppDispatch } from '../../hooks'
 import { RootStoreType, selectorsIsInitialized } from '../../store'
-import { changeProfileName } from '../../store/slice/profileSlice'
+import { authData, changeProfileName, testLogin } from '../../store/slice/profileSlice'
 import { fetchProlePage } from '../../store/slice/profileSlice'
 
 import style from './Profile.module.sass'
@@ -17,20 +16,28 @@ import { itIncubatorLogo, avatar, exitArrow, camera, pencil, logout } from './in
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const userName = useSelector<RootStoreType, string>((state) => state.profile.userName)
+  const userAvatar = useSelector<RootStoreType, string>((state) => state.profile.userAvatar)
+
   useEffect(() => {
     dispatch(fetchProlePage())
   }, [])
+  useEffect(() => {
+    setValue(userName)
+  }, [userName])
   const [mode, setMode] = useState<boolean>(false)
 
   const [value, setValue] = useState<string>(userName)
+
   const NameChanger = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
   }
   const asyncChangeName = () => {
-    dispatch(changeProfileName(value))
+    dispatch(changeProfileName({ userName: value, userAvatar: '' }))
     setMode(false)
   }
-
+  const TestLogin = () => {
+    dispatch(testLogin(authData))
+  }
   if (!selectorsIsInitialized) {
     return <Navigate to={'/login'} />
   }
@@ -91,6 +98,7 @@ export const Profile = () => {
           </NavLink>
         </div>
       </div>
+      <div onClick={TestLogin}>Auth</div>
     </div>
   )
 }
