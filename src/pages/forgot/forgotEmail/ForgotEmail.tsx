@@ -1,12 +1,11 @@
 import React from 'react'
 
-import { CustomButton, FormBody, Title } from 'components'
-import { CustomInput } from 'components/input'
+import { CustomButton, CustomInput, FormBody, Title } from 'components'
 import { Path } from 'enums'
-import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { selectorIsLoading } from 'store'
 import { sendLetterOnEmail } from 'store/thunk/forgotThunk'
 
@@ -39,7 +38,6 @@ export const ForgotEmail = () => {
       ) {
         errors.email = 'Invalid email address'
       }
-      console.log(errors.email)
       return errors
     },
     onSubmit: (values) => {
@@ -57,32 +55,26 @@ export const ForgotEmail = () => {
   return (
     <FormBody width={410} height={460}>
       <Title text="Forgot your password?" />
-      <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
-          <div className={style.inputWrapper}>
-            <Field name="email">
-              {({ form, meta, field }: FieldProps) => (
-                <CustomInput
-                  field={field}
-                  form={form}
-                  meta={meta}
-                  type="simple"
-                  name="email"
-                  error={formik.errors.email}
-                />
-              )}
-            </Field>
-          </div>
-          <p className={style.textInformationWrapper}>
-            Enter your email address and we will send you further instructions
-          </p>
-          <div className={style.buttonWrapper}>
-            <CustomButton type="submit" color="primary" disabled={isLoading}>
-              Send Instructions
-            </CustomButton>
-          </div>
-        </form>
-      </FormikProvider>
+      <form onSubmit={formik.handleSubmit}>
+        <div className={style.inputWrapper}>
+          <CustomInput
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            name="email"
+            type="simple"
+            error={formik.errors.email}
+          />
+        </div>
+        <p className={style.textInformationWrapper}>
+          Enter your email address and we will send you further instructions
+        </p>
+        <div className={style.buttonWrapper}>
+          <CustomButton type="submit" color="primary" disabled={isLoading}>
+            Send Instructions
+          </CustomButton>
+        </div>
+      </form>
+
       <div>
         <p className={style.textBlockQuestion}>Did you remember your password?</p>
         <CustomButton

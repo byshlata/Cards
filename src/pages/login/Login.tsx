@@ -1,13 +1,12 @@
 import React from 'react'
 
-import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
+import { CustomInput, CustomButton, FormBody, Title } from 'components'
+import { useFormik } from 'formik'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-
-import { CustomButton, CustomInput, FormBody, Title } from '../../components'
-import { useAppDispatch } from '../../hooks'
-import { RootStoreType, selectorIsLoading } from '../../store'
-import { signInOnEmail } from '../../store/thunk/loginThunk'
+import { RootStoreType, selectorIsLoading } from 'store'
+import { signInOnEmail } from 'store/thunk/loginThunk'
 
 import style from './Login.module.sass'
 
@@ -55,8 +54,12 @@ export const Login = () => {
     },
   })
 
-  const onNavigateToLogOutPage = () => {}
-  const onClickCheckBoxHandler = () => {}
+  const onNavigateToLogOutPage = () => {
+    console.log('Q')
+  }
+  const onClickCheckBoxHandler = () => {
+    console.log('Q')
+  }
 
   if (isLoginIn) {
     return <Navigate to={'/profile'} />
@@ -65,48 +68,36 @@ export const Login = () => {
   return (
     <FormBody width={413} height={552}>
       <Title text="Sign in" />
-      <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
-          <div className={style.inputWrapper}>
-            <Field name="email">
-              {({ form, meta, field }: FieldProps) => (
-                <CustomInput
-                  field={field}
-                  form={form}
-                  meta={meta}
-                  type="simple"
-                  name="email"
-                  error={formik.errors.email}
-                />
-              )}
-            </Field>
-          </div>
-          <div className={style.inputWrapper}>
-            <Field name="password">
-              {({ form, meta, field }: FieldProps) => (
-                <CustomInput
-                  field={field}
-                  form={form}
-                  meta={meta}
-                  type="password"
-                  name="password"
-                  error={formik.errors.password}
-                />
-              )}
-            </Field>
-          </div>
-          <div className={style.checkboxWrapper}>
-            <input type="checkbox" checked={formik.values.rememberMe} />
-            <div onClick={onClickCheckBoxHandler}>Remember me</div>
-          </div>
-          <div className={style.forgotPassword}>Forgot Password?</div>
-          <div className={style.buttonWrapper}>
-            <CustomButton type="submit" color="primary" disabled={isLoading}>
-              Sign In
-            </CustomButton>
-          </div>
-        </form>
-      </FormikProvider>
+      <form onSubmit={formik.handleSubmit}>
+        <div className={style.inputWrapper}>
+          <CustomInput
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            type="simple"
+            name="email"
+            error={formik.errors.email}
+          />
+        </div>
+        <div className={style.inputWrapper}>
+          <CustomInput
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            type="password"
+            name="password"
+            error={formik.errors.password}
+          />
+        </div>
+        <div className={style.checkboxWrapper}>
+          <input type="checkbox" checked={formik.values.rememberMe} />
+          <div onClick={onClickCheckBoxHandler}>Remember me</div>
+        </div>
+        <div className={style.forgotPassword}>Forgot Password?</div>
+        <div className={style.buttonWrapper}>
+          <CustomButton type="submit" color="primary" disabled={isLoading}>
+            Sign In
+          </CustomButton>
+        </div>
+      </form>
       <div>
         <p className={style.textBlockQuestion}>Already have an account?</p>
         <CustomButton

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 
 import { CustomButton, FormBody, LetterSendIcon, Title } from 'components'
 import { Path } from 'enums'
@@ -25,9 +25,12 @@ export const ForgotSendLetter = () => {
   const [counterDown, setCounterDown] = useState<number>(COUNT_VAlUE)
   const onNavigateToLoginPage = () => {}
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTimeout(() => {
       setCounterDown(counterDown - 1)
+      return () => {
+        setCounterDown
+      }
     }, CONST_DELAY)
   }, [counterDown])
 

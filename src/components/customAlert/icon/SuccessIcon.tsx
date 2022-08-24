@@ -1,10 +1,19 @@
 import React from 'react'
 
+import { IconType } from '../types/IconType'
+
 import style from './IconAlert.module.sass'
 
-export const SuccessIcon = () => {
+const DEFAULT_SIZE = 25
+
+export const SuccessIcon = ({ width = DEFAULT_SIZE, height = DEFAULT_SIZE }: IconType) => {
   return (
-    <svg className={style.iconSuccess} viewBox="0 0 24 24" data-testid="SuccessOutlinedIcon">
+    <svg
+      style={{ width: `${width}px`, height: `${height}px` }}
+      className={style.iconSuccess}
+      viewBox="0 0 24 24"
+      data-testid="SuccessOutlinedIcon"
+    >
       <path
         d="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2,
       4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,
@@ -13,5 +22,3 @@ export const SuccessIcon = () => {
     </svg>
   )
 }
-
-export default SuccessIcon

@@ -1,23 +1,21 @@
-import React from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 
-import { CustomButton } from 'components/button'
-import SuccessIcon from 'components/customAlert/icon/SuccessIcon'
+import { CustomAlertChild } from 'components/customAlert/CustomAlertChild'
 
-import style from './CustomAlert.module.sass'
+import { CustomAlertChildType } from './types'
 
-export const CustomAlert = () => {
-  const onCloseAlert = () => {}
+let START_NUMBER_ALERT = 0
+let ArrayAlert: ReactElement[] = []
 
-  return (
-    <div className={style.customAlert}>
-      <SuccessIcon />
-      <div>
-        <h6 className={style.title}>Success</h6>
-        dkdljfhsldkhfkjsdghfkj
-      </div>
-      <CustomButton color="link" disabled={false} onClick={onCloseAlert}>
-        <div className={style.close} />
-      </CustomButton>
-    </div>
-  )
-}
+export const CustomAlert = React.memo(({ textMessage, severity }: CustomAlertChildType) => {
+  const [numberAlert, setNumberAlert] = useState<number>(START_NUMBER_ALERT)
+
+  useEffect(() => {
+    START_NUMBER_ALERT++
+    ArrayAlert.push(<CustomAlertChild textMessage={textMessage} severity={severity} />)
+  }, [textMessage])
+
+  console.log(START_NUMBER_ALERT)
+
+  return <> {ArrayAlert.map((element) => element)}</>
+})

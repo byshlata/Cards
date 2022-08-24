@@ -8,13 +8,14 @@ import { usePasswordInput } from './hooks/usePasswordInput'
 import { EyeIconCloseSvg, EyeIconOpenSVG, SearchIconSvg } from './iconsSVG'
 import { CustomInputType } from './types/CustomInputType'
 
-export const CustomInput: React.FC<CustomInputType & FieldProps> = ({
+export const CustomInput: React.FC<CustomInputType> = ({
   type,
   name,
   error,
   disabled,
   onClick,
-  field,
+  value,
+  onChange,
 }): ReactElement => {
   const { onWatchPassword, typeInputValue, isEyeOpenIcon, isEyeIcon, isSearchIcon, labelName } =
     usePasswordInput(type, error, name)
@@ -44,11 +45,13 @@ export const CustomInput: React.FC<CustomInputType & FieldProps> = ({
     <div className={style.centered}>
       <div className={style.group}>
         <input
+          name={name}
           type={typeInputValue}
           className={classInput}
           required
           disabled={disabled}
-          {...field}
+          value={value}
+          onChange={onChange}
         />
         <label className={classLabel}>{labelName}</label>
         <div className={classBar} />

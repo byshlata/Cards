@@ -1,4 +1,7 @@
-.customAlert
+$colorCross: rgba(255, 255, 255, 1)
+@import "./styleMain/styleMain"
+
+.customAlertSuccess, .customAlertError
   position: fixed
   z-index: 99999999
   bottom: 5%
@@ -11,13 +14,15 @@
   font-family: Roboto, Helvetica, Arial, sans-serif
   font-weight: 400
   font-size: 0.875rem
-  line-height: 1.43
-  letter-spacing: 0.01071em
-  background-color: rgb(22, 11, 11)
+  background-color: $colorBodySuccess
   display: flex
   align-items: start
   padding: 6px 16px
-  color: rgb(244, 199, 199)
+  color: $colorTextSuccess
+
+.customAlertError
+  background-color: $colorBodyError
+  color: $colorTextError
 
 .title
   margin: 0
@@ -35,8 +40,29 @@
   letter-spacing: 0.00938em
   font-weight: 500
 
-.close
+.closeSuccess, .closeError
   position: relative
   width: 1rem
   height: 1rem
-  opacity: 0.3
+  opacity: 0.5
+
+.closeSuccess:hover, .closeError:hover
+  opacity: 1
+
+.closeSuccess:before, .closeSuccess:after, .closeError:before, .closeError:after
+  position: absolute
+  content: ''
+  height: 1rem
+  width: 2px
+
+.closeError:before, .closeSuccess:before
+  transform: rotate(45deg)
+
+.closeError:before,  .closeError:after
+  background-color: $colorTextError
+
+.closeSuccess:before,  .closeSuccess:after
+  background-color: $colorTextSuccess
+
+.closeError:after, .closeSuccess:after
+  transform: rotate(-45deg)
