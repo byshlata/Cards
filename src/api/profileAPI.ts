@@ -25,5 +25,6 @@ export const profileAPI = {
       AxiosResponse<UpdateUserResponseType>,
       ChangeInformationUserType
     >(`${PathAPI.Auth}${PathAPI.Me}`, payload)
+    return response.data
   },
 }

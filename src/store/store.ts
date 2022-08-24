@@ -9,6 +9,7 @@ export const store = configureStore({
     forgot: forgotSlice.reducer,
     login: loginSlice.reducer,
     registration: registrationSlice.reducer,
+    profile: profileSlice.reducer,
   },
 })
 

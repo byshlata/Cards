@@ -1,17 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { loginAPI } from 'api'
-import axios from 'axios'
+import axios, {AxiosError} from 'axios'
 import { isSpinAppLoading } from 'store'
 import { loginIn } from 'store/slice/loginSlice'
 
-import { LoginType } from '../../types'
+import {ErrorResponseType, LoginType} from '../../types'
 
 export const signInOnEmail = createAsyncThunk(
   'loginSlice/signInOnEmail',
   async ({ password, rememberMe, email }: LoginType, { rejectWithValue, dispatch }) => {
     try {
       dispatch(isSpinAppLoading(true))
+
       const res = await loginAPI.loginIn({ password, rememberMe, email })
+
       if ('error' in res) {
         return rejectWithValue(res.error)
       } else {

@@ -4,6 +4,7 @@ import { Nullable } from 'types'
 export const initialState: InitialStateType = {
   isLoading: false,
   isInitialized: false,
+  isAuth: false,
   error: null,
 }
 
@@ -36,5 +37,6 @@ export const { isSpinAppLoading, setErrorMessage, setInitialized } = appSlice.ac
 type InitialStateType = {
   isLoading: boolean
   isInitialized: boolean
+  isAuth: boolean
   error: Nullable<string>
 }

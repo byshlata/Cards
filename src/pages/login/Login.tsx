@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
+import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { OptionValue } from 'enums'
+import { useFormik } from 'formik'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-
-import { CustomButton, CustomInput, FormBody, Title } from '../../components'
-import { useAppDispatch } from '../../hooks'
-import { RootStoreType, selectorsIsLoading } from '../../store'
-import { signInOnEmail } from '../../store/thunk/loginThunk'
+import { selectorIsLoading, selectorIsLoginIn } from 'store'
+import { signInOnEmail } from 'store/thunk/loginThunk'
 
 import style from './Login.module.sass'
 
@@ -19,9 +19,8 @@ type FormikErrorType = {
 
 export const Login = () => {
   const dispatch = useAppDispatch()
-
-  const isLoading = useSelector(selectorsIsLoading)
-  const isLogIn = useSelector((state: RootStoreType) => state.login.isLogIn)
+  const isLoading = useSelector(selectorIsLoading)
+  const isLogIn = useSelector(selectorIsLoginIn)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -30,20 +29,18 @@ export const Login = () => {
     },
     validate: (values) => {
       const errors: FormikErrorType = {}
-      console.log(formik.handleBlur('email'))
-      if (!values.email) {
-        errors.email = ''
+      if (!values.email && formik.handleBlur('email')) {
+        errors.email = 'Required'
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email) &&
         formik.handleBlur('email')
       ) {
         errors.email = 'Invalid email address'
       }
-      if (!values.password) {
+      if (!values.password && formik.handleBlur('password')) {
         errors.password = 'Required'
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-      } else if (values.password.length < 3) {
-        errors.password = 'Поле обязательно для заполнения'
+      } else if (values.password.length < OptionValue.MinLengthPassword) {
+        errors.password = 'The field is required to fill in'
       }
       return errors
     },
@@ -61,54 +58,42 @@ export const Login = () => {
   }
 
   return (
-    <FormBody width={413} height={552}>
+    <FormBody width={415} height={550}>
       <Title text="Sign in" />
-      <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
-          <div className={style.inputWrapper}>
-            <Field name="email">
-              {({ form, meta, field }: FieldProps) => (
-                <CustomInput
-                  field={field}
-                  form={form}
-                  meta={meta}
-                  type="simple"
-                  name="email"
-                  error={formik.errors.email}
-                />
-              )}
-            </Field>
-          </div>
-          <div className={style.inputWrapper}>
-            <Field name="password">
-              {({ form, meta, field }: FieldProps) => (
-                <CustomInput
-                  field={field}
-                  form={form}
-                  meta={meta}
-                  type="password"
-                  name="password"
-                  error={formik.errors.password}
-                />
-              )}
-            </Field>
-          </div>
-          <div>
-            <label>
-              <Field type="checkbox" name="rememberMe" />
-              Remember Me
-            </label>
-          </div>
-          <div className={style.forgotPassword}>
-            <a href={'/forgot'}> Forgot Password?</a>
-          </div>
-          <div className={style.buttonWrapper}>
-            <CustomButton type="submit" color="primary" disabled={isLoading}>
-              Sign In
-            </CustomButton>
-          </div>
-        </form>
-      </FormikProvider>
+      <form onSubmit={formik.handleSubmit}>
+        <div className={style.inputWrapper}>
+          <CustomInput
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            type="simple"
+            name="email"
+            error={formik.errors.email}
+          />
+        </div>
+        <div className={style.inputWrapper}>
+          <CustomInput
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            type="password"
+            name="password"
+            error={formik.errors.password}
+          />
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="rememberMe" />
+            Remember Me
+          </label>
+        </div>
+        <div className={style.forgotPassword}>
+          <a href={'/forgot'}> Forgot Password?</a>
+        </div>
+        <div className={style.buttonWrapper}>
+          <CustomButton type="submit" color="primary" disabled={isLoading}>
+            Sign In
+          </CustomButton>
+        </div>
+      </form>
       <div>
         <p className={style.textBlockQuestion}>Already have an account?</p>
         <CustomButton type="button" color="link" disabled={isLoading}>

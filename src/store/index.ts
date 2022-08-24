@@ -19,6 +19,8 @@ export {
   selectorError,
   selectorEmail,
   selectorIsPasswordSend,
+  selectorIsLoginIn,
+  selectorIsAuth,
 } from './selectors/selectors'
 
 //other

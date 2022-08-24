@@ -1,13 +1,13 @@
 import React from 'react'
 
+import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { OptionValue } from 'enums'
 import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-
-import { CustomButton, CustomInput, FormBody, Title } from '../../components'
-import { useAppDispatch } from '../../hooks'
-import { RootStoreType, selectorsIsLoading } from '../../store'
-import { RegistrationThunk } from '../../store/thunk/registrationThunk'
+import { RootStoreType, selectorIsLoading } from 'store'
+import { RegistrationThunk } from 'store/thunk/registrationThunk'
 
 import style from './Registration.module.sass'
 
@@ -20,7 +20,7 @@ type FormikErrorType = {
 export const Registration = () => {
   const dispatch = useAppDispatch()
 
-  const isLoading = useSelector(selectorsIsLoading)
+  const isLoading = useSelector(selectorIsLoading)
   const isRegistration = useSelector<RootStoreType, boolean>(
     (state) => state.registration.isRegistration
   )
@@ -32,11 +32,9 @@ export const Registration = () => {
       confirmPassword: '',
     },
     validate: (values) => {
-      console.log({ values: values })
-
       const errors: FormikErrorType = {}
-      if (!values.email) {
-        errors.email = ''
+      if (!values.email && formik.handleBlur('email')) {
+        errors.email = 'Required'
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email) &&
         formik.handleBlur('email')
@@ -46,7 +44,7 @@ export const Registration = () => {
       if (!values.password) {
         errors.password = 'Required'
         // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-      } else if (values.password.length < 3) {
+      } else if (values.password.length < OptionValue.MinLengthPassword) {
         errors.password = 'Поле обязательно для заполнения'
       }
       if (!values.confirmPassword) {
@@ -74,63 +72,46 @@ export const Registration = () => {
   }
 
   return (
-    <FormBody width={413} height={552}>
+    <FormBody width={415} height={550}>
       <Title text="Sign Up" />
-      <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
-          <div className={style.inputWrapper}>
-            <Field name="email">
-              {({ form, meta, field }: FieldProps) => (
-                <CustomInput
-                  field={field}
-                  form={form}
-                  meta={meta}
-                  type="simple"
-                  name="email"
-                  error={formik.errors.email}
-                />
-              )}
-            </Field>
-          </div>
-          <div className={style.inputWrapper}>
-            <Field name="password">
-              {({ form, meta, field }: FieldProps) => (
-                <CustomInput
-                  field={field}
-                  form={form}
-                  meta={meta}
-                  type="password"
-                  name="password"
-                  error={formik.errors.password}
-                />
-              )}
-            </Field>
-          </div>
-          <div className={style.inputWrapper}>
-            <Field name="confirmPassword">
-              {({ form, meta, field }: FieldProps) => (
-                <CustomInput
-                  field={field}
-                  form={form}
-                  meta={meta}
-                  type="password"
-                  name="confirm password"
-                  error={formik.errors.password}
-                />
-              )}
-            </Field>
-          </div>
-          <div className={style.buttonWrapper}>
-            <CustomButton type="submit" color="primary" disabled={isLoading}>
-              Sign Up
-            </CustomButton>
-          </div>
-        </form>
-      </FormikProvider>
+      <form onSubmit={formik.handleSubmit}>
+        <div className={style.inputWrapper}>
+          <CustomInput
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            type="simple"
+            name="email"
+            error={formik.errors.email}
+          />
+        </div>
+        <div className={style.inputWrapper}>
+          <CustomInput
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            type="password"
+            name="password"
+            error={formik.errors.password}
+          />
+        </div>
+        <div className={style.inputWrapper}>
+          <CustomInput
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            type="password"
+            name="confirm password"
+            error={formik.errors.password}
+          />
+        </div>
+        <div className={style.buttonWrapper}>
+          <CustomButton type="submit" color="primary" disabled={isLoading}>
+            Sign Up
+          </CustomButton>
+        </div>
+      </form>
       <div>
         <p className={style.textBlockQuestion}>Already have an account?</p>
         <CustomButton type="button" color="link" disabled={isLoading}>
-          <a href="/login"> Sign In</a>
+          <a href="/login">Sign In</a>
         </CustomButton>
       </div>
     </FormBody>

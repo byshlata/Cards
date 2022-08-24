@@ -6,6 +6,6 @@ type TitleType = {
   text: string
 }
 
-export const Title = ({ text }: TitleType) => {
+export const Title = React.memo(({ text }: TitleType) => {
   return <h2 className={style.title}>{text}</h2>
-}
+})

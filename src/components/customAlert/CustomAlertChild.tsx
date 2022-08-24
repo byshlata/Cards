@@ -15,7 +15,7 @@ const ICON: IconAlertType = {
 
 export const CustomAlertChild = ({ textMessage, severity }: CustomAlertChildType) => {
   const { iconElement, classAlert, classCross } = useAlertStyle(severity, ICON)
-
+  console.log(textMessage)
   const onCloseAlert = () => {}
 
   return (

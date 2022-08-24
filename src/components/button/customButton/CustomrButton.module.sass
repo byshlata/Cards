@@ -18,7 +18,7 @@ $colorText: rgba(255, 255, 255, 1)
 @mixin hover($color)
   box-shadow: 0 0 1px $color, 0 0 2px $color, 0 0 3px $color
 
-.primaryButton, .secondaryButton, .dangerButton, .disabledButton, .linkButton
+.primaryButton, .secondaryButton, .dangerButton, .disabledButton, .linkButton, .disabledButtonLink
   letter-spacing: 1px
   display: flex
   justify-content: center
@@ -34,8 +34,6 @@ $colorText: rgba(255, 255, 255, 1)
   +buttonOption($colorPrimary)
 
 .primaryButton
-  height: 36px
-  width: 347px
   border-radius: 30px
   font-size: 16px
   font-weight: 500
@@ -62,9 +60,7 @@ $colorText: rgba(255, 255, 255, 1)
 .disabledButton
   +buttonOption($colorDisabled)
   background-color: $colorDisabled
-
   &:hover
-    box-shadow: 0 0 3px $colorDisabled
     cursor: not-allowed
 
 .linkButton
@@ -80,6 +76,17 @@ $colorText: rgba(255, 255, 255, 1)
   &:hover
     border: none
     color: $colorActiveLink
+
+.disabledButtonLink
+  margin: 0 auto
+  background-color: inherit
+  border: none
+  box-shadow: none
+  color: $colorDisabled
+  text-decoration: underline
+  &:hover
+    cursor: not-allowed
+
 
 
 

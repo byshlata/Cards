@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { Path } from 'enums'
+import { OptionValue, Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import style from 'pages/forgot/forgotEmail/ForgotEmail.module.sass'
@@ -9,12 +9,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { removeEmail, selectorIsLoading, selectorIsPasswordSend } from 'store'
 import { sendNewPassword } from 'store/thunk/forgotThunk'
-
-const MIN_ACCEPTABLE_LENGTH_PASSWORD = 8
-
-type FormikErrorType = {
-  password?: string
-}
+import * as yup from 'yup'
 
 export const ForgotCreatePassword = () => {
   const dispatch = useAppDispatch()
@@ -31,21 +26,18 @@ export const ForgotCreatePassword = () => {
 
   const param = useParams<'token'>()
 
+  const schema = yup.object().shape({
+    password: yup
+      .string()
+      .min(OptionValue.MinLengthPassword, 'Password must contain at least 4 characters')
+      .required('Password is required please !'),
+  })
+
   const formik = useFormik({
     initialValues: {
       password: '',
     },
-    validate: (values) => {
-      const errors: FormikErrorType = {}
-
-      if (
-        values.password.trim().length < MIN_ACCEPTABLE_LENGTH_PASSWORD &&
-        formik.handleBlur('password')
-      ) {
-        errors.password = 'The password must be longer than 8 characters'
-      }
-      return errors
-    },
+    validationSchema: schema,
     onSubmit: (values) => {
       if (param.token) {
         dispatch(sendNewPassword({ password: values.password, resetPasswordToken: param.token }))
@@ -59,7 +51,6 @@ export const ForgotCreatePassword = () => {
   return (
     <FormBody width={410} height={370}>
       <Title text="Create new password" />
-
       <form onSubmit={formik.handleSubmit}>
         <div className={style.inputWrapper}>
           <CustomInput

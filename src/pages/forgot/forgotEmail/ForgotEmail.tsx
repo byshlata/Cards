@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
 import { Path } from 'enums'
@@ -8,16 +8,20 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { selectorIsLoading } from 'store'
 import { sendLetterOnEmail } from 'store/thunk/forgotThunk'
+import * as yup from 'yup'
 
 import style from './ForgotEmail.module.sass'
 
 const name = 'Aliaksandr'
 
-type FormikErrorType = {
-  email?: string
-}
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please enter a valid email format !')
+    .required('Email is required please !'),
+})
 
-export const ForgotEmail = () => {
+export const ForgotEmail = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorIsLoading)
@@ -28,18 +32,7 @@ export const ForgotEmail = () => {
     initialValues: {
       email: '',
     },
-    validate: (values) => {
-      const errors: FormikErrorType = {}
-      if (!values.email) {
-        errors.email = ''
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email) &&
-        formik.handleBlur('email')
-      ) {
-        errors.email = 'Invalid email address'
-      }
-      return errors
-    },
+    validationSchema: schema,
     onSubmit: (values) => {
       dispatch(sendLetterOnEmail({ email: values.email, name }))
       formik.resetForm({
@@ -48,9 +41,9 @@ export const ForgotEmail = () => {
     },
   })
 
-  const onNavigateToLoginPage = () => {
+  const onNavigateToLoginPage = useCallback(() => {
     navigate(`${Path.Login}`)
-  }
+  }, [])
 
   return (
     <FormBody width={410} height={460}>
@@ -63,13 +56,14 @@ export const ForgotEmail = () => {
             name="email"
             type="simple"
             error={formik.errors.email}
+            disabled={isLoading}
           />
         </div>
         <p className={style.textInformationWrapper}>
           Enter your email address and we will send you further instructions
         </p>
         <div className={style.buttonWrapper}>
-          <CustomButton type="submit" color="primary" disabled={isLoading}>
+          <CustomButton type="submit" color="primary" disabled={isLoading || !formik.isValid}>
             Send Instructions
           </CustomButton>
         </div>
@@ -88,4 +82,4 @@ export const ForgotEmail = () => {
       </div>
     </FormBody>
   )
-}
+})

@@ -1,30 +1,24 @@
 import React from 'react'
 
 import { Path } from 'enums'
-import { Forgot, Profile, Login, Registration } from 'pages'
-import { Forgot, Profile, ForgotCreatePassword } from 'pages'
-import { Login } from 'pages/login/Login'
+import { Forgot, ForgotCreatePassword, Login, Profile, Registration } from 'pages'
 import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
+import { selectorIsAuth } from 'store'
 
 export const Routers = () => {
+  const isAuth = useSelector(selectorIsAuth)
+
   return (
     <Routes>
-      <Route path={`${Path.Forgot}`} element={<Forgot />} />
+      <Route path={`${Path.Forgot}`} element={!isAuth ? <Forgot /> : <Profile />} />
       <Route
         path={`${Path.NewPassword}${Path.Root}${Path.Token}`}
-        element={<ForgotCreatePassword />}
+        element={!isAuth ? <ForgotCreatePassword /> : <Profile />}
       />
       <Route path={`${Path.Profile}`} element={<Profile />} />
       <Route path={`${Path.Login}`} element={<Login />} />
+      <Route path={`${Path.Register}`} element={<Registration />} />
     </Routes>
   )
 }
-export const Routers = () => (
-  <Routes>
-    <Route path={`${Path.Forgot}`} element={<Forgot />} />
-    <Route path={`${Path.Profile}`} element={<Profile />} />
-    <Route path={`${Path.Login}`} element={<Login />} />
-    <Route path={`${Path.Register}`} element={<Registration />} />
-  </Routes>
-)
