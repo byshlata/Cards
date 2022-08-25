@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Header, LinerProgress } from 'components'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
-import { Routers } from 'pages'
+import { Profile, Routers } from 'pages'
 import { useSelector } from 'react-redux'
 import { selectorError, selectorIsLoading } from 'store'
 import styleMain from 'styles/container.module.sass'
@@ -25,6 +25,7 @@ export const App = () => {
       </div>
       <div className={styleMain.container}>
         <Routers />
+        <Profile />
       </div>
     </>
   )

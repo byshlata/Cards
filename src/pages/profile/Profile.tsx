@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
 
+import { FormBody } from '../../components'
+import { Path } from '../../enums'
 import { useAppDispatch } from '../../hooks'
 import { RootStoreType, selectorsIsInitialized } from '../../store'
 
 import style from './Profile.module.sass'
 
-import { authData, testLogin } from './index'
+import { authData, logoutUser, testLogin } from './index'
 import { changeProfileName, fetchProfilePage } from './index'
 import { avatar, exitArrow, camera, pencil, logout } from './index'
 
@@ -51,46 +53,46 @@ export const Profile = () => {
           <p>Back to Packs List</p>
         </NavLink>
       </div>
-      {/*<FormBody width={415} height={550}>*/}
-      <div className={style.profileContainer}>
-        <h3 className={style.profileInformation}>Personal Information</h3>
-        <div className={style.profileImage}>
-          <img src={avatar} alt={'avatar picture'} />
-          <NavLink to={'/'}>
-            <div className={style.changeProfileImage}>
-              <img src={camera} alt={'change avatar picture'} />
-            </div>
-          </NavLink>
-        </div>
-        <div className={style.changeProfileNameWrapper}>
-          {mode ? (
-            <input value={value} onChange={NameChanger} autoFocus onBlur={asyncChangeName} />
-          ) : (
-            <>
-              <h3 className={style.profileName}>{value}</h3>
+      <FormBody width={415} height={550}>
+        <div className={style.profileContainer}>
+          <h3 className={style.profileInformation}>Personal Information</h3>
+          <div className={style.profileImage}>
+            <img src={avatar} alt={'avatar picture'} />
+            <NavLink to={'/'}>
+              <div className={style.changeProfileImage}>
+                <img src={camera} alt={'change avatar picture'} />
+              </div>
+            </NavLink>
+          </div>
+          <div className={style.changeProfileNameWrapper}>
+            {mode ? (
+              <input value={value} onChange={NameChanger} autoFocus onBlur={asyncChangeName} />
+            ) : (
+              <>
+                <h3 className={style.profileName}>{value}</h3>
 
-              <img
-                src={pencil}
-                alt={'change name'}
-                onClick={() => {
-                  setMode(true)
-                }}
-              />
-            </>
-          )}
+                <img
+                  src={pencil}
+                  alt={'change name'}
+                  onClick={() => {
+                    setMode(true)
+                  }}
+                />
+              </>
+            )}
+          </div>
+          <div className={style.profileEmail}>
+            <h4>yoyoyo@gmail.com</h4>
+          </div>
+          <div className={style.buttonLogout} onClick={dispatch(logoutUser())}>
+            <NavLink to={`${Path.Login}`}>
+              <img src={logout} alt={'log out'} />
+              Log Out
+            </NavLink>
+          </div>
         </div>
-        <div className={style.profileEmail}>
-          <h4>yoyoyo@gmail.com</h4>
-        </div>
-        <div className={style.buttonLogout}>
-          <NavLink to={'/'}>
-            <img src={logout} alt={'log out'} />
-            Log Out
-          </NavLink>
-        </div>
-      </div>
-      <div onClick={TestLogin}>Auth</div>
-      {/*</FormBody>*/}
+        <div onClick={TestLogin}>Auth</div>
+      </FormBody>
     </div>
   )
 }

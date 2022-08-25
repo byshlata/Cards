@@ -1,5 +1,6 @@
 import { authData, testLogin } from '../../store/slice/profileSlice'
 import { changeProfileName, fetchProfilePage } from '../../store/thunk/profileThunk'
+import { logoutUser } from '../../store/thunk/profileThunk'
 
 import avatar from './../../assets/image/avatar.png'
 import camera from './../../assets/image/camera.png'
@@ -10,3 +11,4 @@ import pencil from './../../assets/image/pencil.png'
 export { itIncubatorLogo, avatar, exitArrow, camera, pencil, logout }
 export { changeProfileName, fetchProfilePage }
 export { authData, testLogin }
+export { logoutUser }

@@ -7,25 +7,6 @@ export const initialState: InitialStateType = {
   userAvatar: '',
 }
 
-// export const fetchProlePage = createAsyncThunk(
-//   'profileSlice/fetchProlePage',
-//   async (_, { rejectWithValue, dispatch }) => {
-//     const res = await API_CONFIG.post('auth/me', {})
-//     dispatch(setUserName(res.data.name))
-//   }
-// )
-
-// export const changeProfileName = createAsyncThunk(
-//   'profileSlice/changeProfileName',
-//   async ({ userName, userAvatar }: InitialStateType, { rejectWithValue, dispatch }) => {
-//     const res = await API_CONFIG.put('auth/me', {
-//       name: userName,
-//       avatar: userAvatar,
-//     })
-//     dispatch(setUserName(res.data.updatedUser.name))
-//     dispatch(setUserAvatar(res.data.updatedUser.avatar))
-//   }
-// )
 export const authData = {
   email: 'nya-admin@nya.nya',
   password: '1qazxcvBG',
@@ -60,14 +41,6 @@ export const profileSlice = createSlice({
       state.userAvatar = action.payload
     },
   },
-  // extraReducers: {
-  //   // @ts-ignore
-  //   [changeProfileName.pending]: () => console.log('pending'),
-  //   // @ts-ignore
-  //   [changeProfileName.fulfilled]: () => console.log('fulfilled'),
-  //   // @ts-ignore
-  //   [changeProfileName.rejected]: () => console.log('rejected'),
-  // },
 })
 
 export const { setUserName, setUserAvatar } = profileSlice.actions
