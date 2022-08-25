@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 import { API_CONFIG } from '../../api/config'
@@ -6,29 +6,27 @@ import { API_CONFIG } from '../../api/config'
 export const initialState: InitialStateType = {
   userName: '',
   userAvatar: '',
-  userEmail: '',
 }
 
-export const fetchProlePage = createAsyncThunk(
-  'profileSlice/fetchProlePage',
-  async (_, { rejectWithValue, dispatch }) => {
-    const res = await API_CONFIG.post('auth/me', {})
-    dispatch(setUserName(res.data.name))
-    dispatch(setUserEmail(res.data.email))
-  }
-)
+// export const fetchProlePage = createAsyncThunk(
+//   'profileSlice/fetchProlePage',
+//   async (_, { rejectWithValue, dispatch }) => {
+//     const res = await API_CONFIG.post('auth/me', {})
+//     dispatch(setUserName(res.data.name))
+//   }
+// )
 
-export const changeProfileName = createAsyncThunk(
-  'profileSlice/changeProfileName',
-  async ({ userName, userAvatar }: InitialStateType, { rejectWithValue, dispatch }) => {
-    const res = await API_CONFIG.put('auth/me', {
-      name: userName,
-      avatar: userAvatar,
-    })
-    dispatch(setUserName(res.data.updatedUser.name))
-    dispatch(setUserAvatar(res.data.updatedUser.avatar))
-  }
-)
+// export const changeProfileName = createAsyncThunk(
+//   'profileSlice/changeProfileName',
+//   async ({ userName, userAvatar }: InitialStateType, { rejectWithValue, dispatch }) => {
+//     const res = await API_CONFIG.put('auth/me', {
+//       name: userName,
+//       avatar: userAvatar,
+//     })
+//     dispatch(setUserName(res.data.updatedUser.name))
+//     dispatch(setUserAvatar(res.data.updatedUser.avatar))
+//   }
+// )
 export const authData = {
   email: 'nya-admin@nya.nya',
   password: '1qazxcvBG',
@@ -55,24 +53,18 @@ export const profileSlice = createSlice({
   name: 'profileSlice',
   initialState,
   reducers: {
-    setUserName: (state, action) => {
+    setUserName: (state, action: PayloadAction<string>) => {
       state.userName = action.payload
     },
-    setUserAvatar: (state, action) => {
+    setUserAvatar: (state, action: PayloadAction<string>) => {
       state.userAvatar = action.payload
-    },
-    setUserEmail: (state, action) => {
-      state.userEmail = action.payload
     },
   },
 })
 
-export const { setUserName, setUserAvatar, setUserEmail } = profileSlice.actions
+export const { setUserName, setUserAvatar } = profileSlice.actions
 
-export default profileSlice.reducer
-
-type InitialStateType = {
+export type InitialStateType = {
   userName: string
   userAvatar: string
-  userEmail?: string
 }
