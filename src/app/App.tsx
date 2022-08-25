@@ -17,7 +17,8 @@ export const App = () => {
 
   return (
     <>
-      {errorMessage !== '' ? <CustomAlert severity="error" message={errorMessage} /> : null}=
+      {errorMessage !== '' ? <CustomAlert severity="error" message={errorMessage} /> : null}
+
       <Header />
       <div className={style.linerProgressWrapper}>
         <LinerProgress isLoading={isLoading} />

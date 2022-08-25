@@ -1,32 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { setInitialized } from 'store'
 import { profileAPI } from 'api'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { setInitialized } from 'store'
 
-import { API_CONFIG } from '../../api/config'
-import { InitialStateType, setUserAvatar, setUserName } from '../slice/profileSlice'
-
-export const getAuthUser = createAsyncThunk(
-  'authUserSlice/getAuthUser',
-  async (_, { rejectWithValue, dispatch }) => {
-    try {
-      dispatch(setInitialized(true))
-      const res = await profileAPI.getAuthUser()
-      if ('error' in res) {
-        return rejectWithValue(res.error)
-      } else {
-        //dispatch();
-      }
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        return rejectWithValue(err.message)
-      }
-    } finally {
-      dispatch(setInitialized(false))
-    }
-  }
-)
+import { InitialStateType, setUserName } from '../slice/profileSlice'
 
 export const fetchProfilePage = createAsyncThunk(
   'profileSlice/fetchProlePage',
@@ -34,14 +11,15 @@ export const fetchProfilePage = createAsyncThunk(
     try {
       dispatch(setInitialized(true))
       const res = await profileAPI.getAuthUser()
-      if ('error' in res) {
-        return rejectWithValue(res.error)
-      } else {
-        dispatch(setUserName(res.name))
-      }
-    } catch (err) {
+
+      dispatch(setUserName(res.name))
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
-        return rejectWithValue(err.message)
+        const error = err.response?.data ? err.response.data.error : err.message
+        rejectWithValue(error)
+      } else {
+        rejectWithValue(err.message)
       }
     } finally {
       dispatch(setInitialized(false))
@@ -54,19 +32,18 @@ export const changeProfileName = createAsyncThunk(
   async ({ userName, userAvatar }: InitialStateType, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setInitialized(true))
-      const res = await API_CONFIG.put('', {
+      const res = await profileAPI.changeInformationUser({
         name: userName,
         avatar: userAvatar,
       })
-      if ('error' in res) {
-        return rejectWithValue(res.error)
-      } else {
-        dispatch(setUserName(res.data.updatedUser.name))
-        //dispatch(setUserAvatar(res.data.updatedUser.avatar))
-      }
-    } catch (err) {
+      dispatch(setUserName(res.updatedUser.name))
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
-        return rejectWithValue(err.message)
+        const error = err.response?.data ? err.response.data.error : err.message
+        rejectWithValue(error)
+      } else {
+        rejectWithValue(err.message)
       }
     } finally {
       dispatch(setInitialized(false))

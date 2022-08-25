@@ -1,6 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { profileAPI } from 'api'
-import axios from 'axios'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { API_CONFIG } from '../../api/config'
 
@@ -33,6 +31,7 @@ export const authData = {
   password: '1qazxcvBG',
   remember: true,
 }
+
 export type authDataType = {
   email: string
   password: string
