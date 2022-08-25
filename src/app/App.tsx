@@ -12,10 +12,12 @@ import style from './App.module.sass'
 export const App = () => {
   const isLoading = useSelector(selectorIsLoading)
   const errorMessage = useSelector(selectorError)
+  console.log('app')
+  console.log('app', errorMessage)
 
   return (
     <>
-      {/*<CustomAlert severity="error" textMessage={errorMessage} />*/}
+      {errorMessage !== '' ? <CustomAlert severity="error" message={errorMessage} /> : null}=
       <Header />
       <div className={style.linerProgressWrapper}>
         <LinerProgress isLoading={isLoading} />

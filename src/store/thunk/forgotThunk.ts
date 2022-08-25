@@ -21,9 +21,10 @@ export const sendLetterOnEmail = createAsyncThunk(
       const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
         const error = err.response?.data ? err.response.data.error : err.message
-        rejectWithValue(error)
+
+        return rejectWithValue(error)
       } else {
-        rejectWithValue(err.message)
+        return rejectWithValue(err.message)
       }
     } finally {
       dispatch(isSpinAppLoading(false))

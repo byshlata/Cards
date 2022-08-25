@@ -5,7 +5,7 @@ export const selectorsIsInitialized = (state: RootStoreType): boolean => state.a
 
 export const selectorIsLoading = (state: RootStoreType): boolean => state.app.isLoading
 
-export const selectorError = (state: RootStoreType): Nullable<string> => state.app.error
+export const selectorError = (state: RootStoreType): string => state.app.error
 
 export const selectorEmail = (state: RootStoreType): Nullable<string> => state.forgot.email
 

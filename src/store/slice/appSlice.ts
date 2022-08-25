@@ -5,7 +5,7 @@ export const initialState: InitialStateType = {
   isLoading: false,
   isInitialized: false,
   isAuth: false,
-  error: null,
+  error: '',
 }
 
 export const appSlice = createSlice({
@@ -15,8 +15,8 @@ export const appSlice = createSlice({
     isSpinAppLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
     },
-    setErrorMessage: (state, action: PayloadAction<Nullable<string>>) => {
-      state.error = action.payload
+    removeErrorMessage: (state) => {
+      state.error = ''
     },
     setInitialized: (state, action: PayloadAction<boolean>) => {
       state.isInitialized = action.payload
@@ -32,11 +32,11 @@ export const appSlice = createSlice({
   },
 })
 
-export const { isSpinAppLoading, setErrorMessage, setInitialized } = appSlice.actions
+export const { isSpinAppLoading, removeErrorMessage, setInitialized } = appSlice.actions
 
 type InitialStateType = {
   isLoading: boolean
   isInitialized: boolean
   isAuth: boolean
-  error: Nullable<string>
+  error: string
 }

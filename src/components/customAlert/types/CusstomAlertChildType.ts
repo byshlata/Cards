@@ -1,8 +1,8 @@
-import { Nullable } from 'types'
-
-import { SeverityType } from './SeverityType'
+import { SeverityType } from 'components/customAlert/types/SeverityType'
 
 export type CustomAlertChildType = {
-  textMessage: Nullable<string>
+  message: string
+  id: string
   severity: SeverityType
+  onClose: (id: string) => void
 }

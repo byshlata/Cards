@@ -38,6 +38,7 @@ export const CustomInput: React.FC<CustomInputType> = React.memo(
       <div className={style.centered}>
         <div className={style.group}>
           <input
+            autoComplete="on | off"
             name={name}
             type={typeInputValue}
             className={classInput}

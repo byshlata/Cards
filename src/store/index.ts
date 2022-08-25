@@ -29,6 +29,6 @@ export type { AppDispatchType, RootStoreType } from './store'
 
 //action
 
-export { setInitialized, setErrorMessage, isSpinAppLoading } from './slice/appSlice'
+export { setInitialized, isSpinAppLoading, removeErrorMessage } from './slice/appSlice'
 
 export { removeEmail, sendLetter, isPasswordSend } from './slice/forgotSlice'

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { CustomButton } from 'components/button'
+import { CustomButton } from 'components'
+import { useAppDispatch } from 'hooks'
+import { removeErrorMessage } from 'store'
 
 import style from './CustomAlertChild.module.sass'
 import { useAlertStyle } from './hooks/useClassAlertElement'
@@ -13,21 +15,38 @@ const ICON: IconAlertType = {
   error: <ErrorIcon />,
 }
 
-export const CustomAlertChild = ({ textMessage, severity }: CustomAlertChildType) => {
+const DALEY_ALERT = 3000
+
+export const CustomAlertChild = ({ message, severity, onClose, id }: CustomAlertChildType) => {
+  const dispatch = useAppDispatch()
   const { iconElement, classAlert, classCross } = useAlertStyle(severity, ICON)
-  console.log(textMessage)
-  const onCloseAlert = () => {}
+
+  const onCloseAlert = () => {
+    onClose(id)
+  }
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      onClose(id)
+      dispatch(removeErrorMessage())
+    }, DALEY_ALERT)
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [message])
 
   return (
     <div className={classAlert}>
       <div>{iconElement}</div>
       <div>
         <h6 className={style.title}>Success</h6>
-        {textMessage}
+        {message}
       </div>
-      <CustomButton color="link" disabled={false} onClick={onCloseAlert}>
-        <div className={classCross} />
-      </CustomButton>
+      <div style={{ width: '16px' }}>
+        <CustomButton color="link" disabled={false} onClick={onCloseAlert}>
+          <div className={classCross} />
+        </CustomButton>
+      </div>
     </div>
   )
 }

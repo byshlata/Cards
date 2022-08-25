@@ -1,21 +1,37 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { CustomAlertChild } from 'components/customAlert/CustomAlertChild'
+import { AlertElementType } from 'components/customAlert/types/alertElementType'
+import { CustomAlertType } from 'components/customAlert/types/CusstomAlertType'
+import { addAlertElement } from 'components/customAlert/utils/addAlertElement'
+import { createAlertObj } from 'components/customAlert/utils/createAlertObj'
+import { removeAlertElement } from 'components/customAlert/utils/removeAlertElement'
+import { Nullable } from 'types'
 
-import { CustomAlertChildType } from './types'
-
-let START_NUMBER_ALERT = 0
-let ArrayAlert: ReactElement[] = []
-
-export const CustomAlert = React.memo(({ textMessage, severity }: CustomAlertChildType) => {
-  const [numberAlert, setNumberAlert] = useState<number>(START_NUMBER_ALERT)
+export const CustomAlert = React.memo(({ message, severity }: CustomAlertType) => {
+  const [alerts, setAlerts] = useState<Nullable<AlertElementType[]>>(null)
+  const onCloseAlert = (id: string) => {
+    const newAlerts = removeAlertElement(alerts, id)
+    setAlerts(newAlerts)
+  }
 
   useEffect(() => {
-    START_NUMBER_ALERT++
-    ArrayAlert.push(<CustomAlertChild textMessage={textMessage} severity={severity} />)
-  }, [textMessage])
+    const newAlert = createAlertObj(message)
+    const alertsArray = addAlertElement(alerts, newAlert)
+    setAlerts(alertsArray)
+  }, [message])
 
-  console.log(START_NUMBER_ALERT)
-
-  return <> {ArrayAlert.map((element) => element)}</>
+  return (
+    <>
+      {alerts?.map((element) => (
+        <CustomAlertChild
+          key={element.id}
+          message={element.message}
+          onClose={onCloseAlert}
+          severity={severity}
+          id={element.id}
+        />
+      ))}
+    </>
+  )
 })
