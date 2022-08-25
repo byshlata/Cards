@@ -85,7 +85,7 @@ export const Profile = () => {
           <h4>yoyoyo@gmail.com</h4>
         </div>
         <div className={style.buttonLogout}>
-          <NavLink to={'/'}>
+          <NavLink to={'/login'}>
             <img src={logout} alt={'log out'} />
             Log Out
           </NavLink>
