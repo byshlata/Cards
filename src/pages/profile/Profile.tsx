@@ -3,11 +3,11 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
+import { selectorsIsInitialized, selectorUserName } from 'store'
 
 import { FormBody } from '../../components'
 import { Path } from '../../enums'
 import { useAppDispatch } from '../../hooks'
-import { RootStoreType, selectorsIsInitialized } from '../../store'
 
 import style from './Profile.module.sass'
 
@@ -17,8 +17,8 @@ import { avatar, exitArrow, camera, pencil, logout } from './index'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-  const userName = useSelector<RootStoreType, string>((state) => state.profile.userName)
-  const userAvatar = useSelector<RootStoreType, string>((state) => state.profile.userAvatar)
+  const userName = useSelector(selectorUserName)
+  //const userAvatar = useSelector<RootStoreType, string>((state) => state.profile.userAvatar)
 
   useEffect(() => {
     dispatch(fetchProfilePage())
@@ -33,6 +33,10 @@ export const Profile = () => {
 
   const NameChanger = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
+  }
+
+  const logoutHandle = () => {
+    dispatch(logoutUser())
   }
   const asyncChangeName = () => {
     dispatch(changeProfileName({ userName: value, userAvatar: '' }))
@@ -84,7 +88,7 @@ export const Profile = () => {
           <div className={style.profileEmail}>
             <h4>yoyoyo@gmail.com</h4>
           </div>
-          <div className={style.buttonLogout} onClick={dispatch(logoutUser())}>
+          <div className={style.buttonLogout} onClick={logoutHandle}>
             <NavLink to={`${Path.Login}`}>
               <img src={logout} alt={'log out'} />
               Log Out

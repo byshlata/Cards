@@ -21,6 +21,7 @@ export {
   selectorIsPasswordSend,
   selectorIsLoginIn,
   selectorIsAuth,
+  selectorUserName,
 } from './selectors/selectors'
 
 //other

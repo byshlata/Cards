@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Header, LinerProgress } from 'components'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
@@ -7,6 +7,9 @@ import { useSelector } from 'react-redux'
 import { selectorError, selectorIsLoading } from 'store'
 import styleMain from 'styles/container.module.sass'
 
+import { useAppDispatch } from '../hooks'
+import { fetchProfilePage } from '../store/thunk/profileThunk'
+
 import style from './App.module.sass'
 
 export const App = () => {
@@ -14,7 +17,10 @@ export const App = () => {
   const errorMessage = useSelector(selectorError)
   console.log('app')
   console.log('app', errorMessage)
-
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchProfilePage())
+  }, [])
   return (
     <>
       {errorMessage !== '' ? <CustomAlert severity="error" message={errorMessage} /> : null}

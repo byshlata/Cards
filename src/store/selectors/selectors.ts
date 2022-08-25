@@ -14,3 +14,5 @@ export const selectorIsPasswordSend = (state: RootStoreType): boolean => state.f
 export const selectorIsLoginIn = (state: RootStoreType) => state.login.isLogIn
 
 export const selectorIsAuth = (state: RootStoreType) => state.app.isAuth
+
+export const selectorUserName = (state: RootStoreType) => state.profile.userName

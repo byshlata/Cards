@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { loginAPI, profileAPI } from 'api'
 import axios, { AxiosError } from 'axios'
-import { setInitialized } from 'store'
+import { isSpinAppLoading, setInitialized } from 'store'
 
+import { setAuth } from '../slice/appSlice'
 import { loginIn } from '../slice/loginSlice'
 import { InitialStateType, setUserName } from '../slice/profileSlice'
 
@@ -12,15 +13,15 @@ export const fetchProfilePage = createAsyncThunk(
     try {
       dispatch(setInitialized(true))
       const res = await profileAPI.getAuthUser()
-
       dispatch(setUserName(res.name))
+      dispatch(setAuth(true))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
         const error = err.response?.data ? err.response.data.error : err.message
-        rejectWithValue(error)
+        return rejectWithValue(error)
       } else {
-        rejectWithValue(err.message)
+        return rejectWithValue(err.message)
       }
     } finally {
       dispatch(setInitialized(false))
@@ -56,10 +57,10 @@ export const logoutUser = createAsyncThunk(
   'profileSlice/logoutUser',
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      dispatch(setInitialized(true))
+      dispatch(isSpinAppLoading(true))
       const res = await loginAPI.loginOut()
+      dispatch(logoutUser())
       dispatch(loginIn(false))
-      dispatch(setUserName(''))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
@@ -69,7 +70,7 @@ export const logoutUser = createAsyncThunk(
         rejectWithValue(err.message)
       }
     } finally {
-      dispatch(setInitialized(false))
+      dispatch(isSpinAppLoading(false))
     }
   }
 )

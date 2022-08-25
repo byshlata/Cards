@@ -21,6 +21,9 @@ export const appSlice = createSlice({
     setInitialized: (state, action: PayloadAction<boolean>) => {
       state.isInitialized = action.payload
     },
+    setAuth: (state, action: PayloadAction<boolean>) => {
+      state.isAuth = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -32,7 +35,7 @@ export const appSlice = createSlice({
   },
 })
 
-export const { isSpinAppLoading, removeErrorMessage, setInitialized } = appSlice.actions
+export const { isSpinAppLoading, removeErrorMessage, setInitialized, setAuth } = appSlice.actions
 
 type InitialStateType = {
   isLoading: boolean
