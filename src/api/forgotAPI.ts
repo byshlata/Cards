@@ -36,7 +36,7 @@ export const forgotAPI = {
 
     const response = await API_CONFIG.post<
       any,
-      AxiosResponse<PasswordResponseType | ErrorResponseType>,
+      AxiosResponse<PasswordResponseType>,
       MessageNewPasswordType
     >(`${PathAPI.Auth}${PathAPI.Forgot}`, { email, message, from })
     return response.data
@@ -45,7 +45,7 @@ export const forgotAPI = {
   setNewPassword: async ({ password, resetPasswordToken }: RecoveryPasswordType) => {
     const response = await API_CONFIG.post<
       any,
-      AxiosResponse<{ info: string } | ErrorRecoveryPasswordType>,
+      AxiosResponse<{ info: string }>,
       RecoveryPasswordType
     >(`${PathAPI.Auth}${PathAPI.NewPassword}`, { password, resetPasswordToken })
 

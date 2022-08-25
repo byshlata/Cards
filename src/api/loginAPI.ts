@@ -15,17 +15,16 @@ export const loginAPI = {
   loginIn: async ({ password, rememberMe, email }: LoginType) => {
     const response = await API_CONFIG.post<
       any,
-      AxiosResponse<UserResponseType | ErrorResponseType, LoginType>,
+      AxiosResponse<UserResponseType, LoginType>,
       LoginType
     >(`${PathAPI.Auth}${PathAPI.Login}`, { password, rememberMe, email })
     return response.data
   },
 
   loginOut: async () => {
-    const response = await API_CONFIG.delete<
-      any,
-      AxiosResponse<LoginOutResponseType | ErrorShortResponseType>
-    >(`${PathAPI.Auth}${PathAPI.Me}`)
+    const response = await API_CONFIG.delete<any, AxiosResponse<LoginOutResponseType>>(
+      `${PathAPI.Auth}${PathAPI.Me}`
+    )
     return response.data
   },
 }

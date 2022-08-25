@@ -12,10 +12,9 @@ import { API_CONFIG } from './config'
 
 export const profileAPI = {
   getAuthUser: async () => {
-    const response = await API_CONFIG.post<
-      any,
-      AxiosResponse<UserResponseType | ErrorShortResponseType>
-    >(`${PathAPI.Auth}${PathAPI.Me}`)
+    const response = await API_CONFIG.post<any, AxiosResponse<UserResponseType>>(
+      `${PathAPI.Auth}${PathAPI.Me}`
+    )
     return response.data
   },
 

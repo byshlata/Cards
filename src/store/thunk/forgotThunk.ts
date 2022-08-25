@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { forgotAPI } from 'api'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { isPasswordSend, isSpinAppLoading, sendLetter } from 'store'
 import { RecoveryPasswordType } from 'types'
 
@@ -15,15 +15,15 @@ export const sendLetterOnEmail = createAsyncThunk(
   ) => {
     try {
       dispatch(isSpinAppLoading(true))
-      const res = await forgotAPI.sendLetter(payload.email, payload.name)
-      if ('error' in res) {
-        return rejectWithValue(res.error)
-      } else {
-        dispatch(sendLetter(payload.email))
-      }
-    } catch (err) {
+      await forgotAPI.sendLetter(payload.email, payload.name)
+      dispatch(sendLetter(payload.email))
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
-        return rejectWithValue(err.message)
+        const error = err.response?.data ? err.response.data.error : err.message
+        rejectWithValue(error)
+      } else {
+        rejectWithValue(err.message)
       }
     } finally {
       dispatch(isSpinAppLoading(false))
@@ -36,16 +36,15 @@ export const sendNewPassword = createAsyncThunk(
   async (payload: RecoveryPasswordType, { rejectWithValue, dispatch }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      const res = await forgotAPI.setNewPassword(payload)
-      if ('error' in res) {
-        return rejectWithValue(res.error)
-      } else {
-        dispatch(isPasswordSend())
-        console.log(res)
-      }
-    } catch (err) {
+      await forgotAPI.setNewPassword(payload)
+      dispatch(isPasswordSend())
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
-        return rejectWithValue(err.message)
+        const error = err.response?.data ? err.response.data.error : err.message
+        rejectWithValue(error)
+      } else {
+        rejectWithValue(err.message)
       }
     } finally {
       dispatch(isSpinAppLoading(false))

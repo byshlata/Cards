@@ -8,7 +8,7 @@ export const registrationAPI = {
   registerUser: async ({ email, password }: RegistrationType) => {
     const response = await API_CONFIG.post<
       any,
-      AxiosResponse<RegistrationUserResponseType | ErrorResponseType>,
+      AxiosResponse<RegistrationUserResponseType>,
       RegistrationType
     >(`${PathAPI.Auth}${PathAPI.Register}`, { email, password })
     return response.data
