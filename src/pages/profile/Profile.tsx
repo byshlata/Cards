@@ -4,56 +4,54 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
 
-//import { userName } from '../../store/selectors/selectors'
 import { useAppDispatch } from '../../hooks'
 import { RootStoreType, selectorsIsInitialized } from '../../store'
-import { changeProfileName } from '../../store/slice/profileSlice'
-import { fetchProlePage } from '../../store/slice/profileSlice'
 
 import style from './Profile.module.sass'
 
-import { itIncubatorLogo, avatar, exitArrow, camera, pencil, logout } from './index'
+import { authData, testLogin } from './index'
+import { changeProfileName, fetchProfilePage } from './index'
+import { avatar, exitArrow, camera, pencil, logout } from './index'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const userName = useSelector<RootStoreType, string>((state) => state.profile.userName)
+  const userAvatar = useSelector<RootStoreType, string>((state) => state.profile.userAvatar)
+
   useEffect(() => {
-    dispatch(fetchProlePage())
+    dispatch(fetchProfilePage())
   }, [])
+  useEffect(() => {
+    setValue(userName)
+  }, [userName])
+
   const [mode, setMode] = useState<boolean>(false)
 
   const [value, setValue] = useState<string>(userName)
+
   const NameChanger = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
   }
   const asyncChangeName = () => {
-    dispatch(changeProfileName(value))
+    dispatch(changeProfileName({ userName: value, userAvatar: '' }))
     setMode(false)
   }
-
+  const TestLogin = () => {
+    dispatch(testLogin(authData))
+  }
   if (!selectorsIsInitialized) {
     return <Navigate to={'/login'} />
   }
 
   return (
     <div className={style.pageWrapper}>
-      <div className={style.pageHeader}>
-        <div className={style.logo}>
-          <img src={itIncubatorLogo} alt={'logo'} />
-        </div>
-        <div className={style.info}>
-          <div className={style.infoName}>{value}</div>
-          <div className={style.infoAvatar}>
-            <img src={avatar} alt={'avatar miniature picture'} />
-          </div>
-        </div>
-      </div>
       <div className={style.exitArrow}>
         <NavLink to={'/'}>
           <img src={exitArrow} alt={'arrow to exit'} />
           <p>Back to Packs List</p>
         </NavLink>
       </div>
+      {/*<FormBody width={415} height={550}>*/}
       <div className={style.profileContainer}>
         <h3 className={style.profileInformation}>Personal Information</h3>
         <div className={style.profileImage}>
@@ -91,6 +89,8 @@ export const Profile = () => {
           </NavLink>
         </div>
       </div>
+      <div onClick={TestLogin}>Auth</div>
+      {/*</FormBody>*/}
     </div>
   )
 }
