@@ -11,19 +11,13 @@ export const Routers = () => {
   const isAuth = useSelector(selectorIsAuth)
   const userId = useSelector(selectorUserId)
 
+  const PROFILE_PAGE = <Navigate to={`${Path.Profile}${Path.Root}${userId}`} />
+  const LOGIN_PAGE = <Navigate to={`${Path.Login}`} />
+
   return (
     <Routes>
       <Route path={`${Path.Other}`} element={<Page404 />} />
-      <Route
-        path={`${Path.Root}`}
-        element={
-          isAuth ? (
-            <Navigate to={`${Path.Profile}${Path.Root}${userId}`} />
-          ) : (
-            <Navigate to={`${Path.Login}`} />
-          )
-        }
-      />
+      <Route path={`${Path.Root}`} element={isAuth ? PROFILE_PAGE : LOGIN_PAGE} />
       <Route path={`${Path.Forgot}`} element={!isAuth ? <Forgot /> : <Profile />} />
       <Route
         path={`${Path.NewPassword}${Path.Root}${Path.Token}`}
@@ -31,13 +25,10 @@ export const Routers = () => {
       />
       <Route
         path={`${Path.Profile}${Path.Root}${Path.Id}`}
-        element={isAuth ? <Profile /> : <Navigate to={`${Path.Login}`} />}
+        element={isAuth ? <Profile /> : LOGIN_PAGE}
       />
       <Route path={`${Path.Register}`} element={<Registration />} />
-      <Route
-        path={`${Path.Login}`}
-        element={isAuth ? <Navigate to={`${Path.Profile}${Path.Root}${userId}`} /> : <Login />}
-      />
+      <Route path={`${Path.Login}`} element={isAuth ? PROFILE_PAGE : <Login />} />
     </Routes>
   )
 }

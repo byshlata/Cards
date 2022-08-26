@@ -1,9 +1,19 @@
 import React, { ReactElement } from 'react'
 
+import { CustomButton } from 'components/button'
+import { Path } from 'enums'
+import { useNavigate } from 'react-router-dom'
+
 import style from './Page404.module.sass'
 
 export const Page404 = (): ReactElement => {
   const text = "Oops. The page you're looking for doesn't exist."
+
+  const navigate = useNavigate()
+
+  const onLoginPage = () => {
+    navigate(`${Path.Login}`)
+  }
 
   return (
     <div className={style.center}>
@@ -28,6 +38,11 @@ export const Page404 = (): ReactElement => {
         <div className={style.number}>4</div>
       </div>
       <div className={style.text}>{text}</div>
+      <div className={style.buttonWrapper}>
+        <CustomButton color="primary" onClick={onLoginPage}>
+          Go to back
+        </CustomButton>
+      </div>
     </div>
   )
 }

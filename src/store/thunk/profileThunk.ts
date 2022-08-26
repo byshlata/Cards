@@ -4,7 +4,7 @@ import axios, { AxiosError } from 'axios'
 import { isSpinAppLoading, setInitialized } from 'store'
 
 import { setAuth } from '../slice/appSlice'
-import { setUserData, setUserName } from '../slice/profileSlice'
+import { removeUserData, setUserData, setUserName } from '../slice/profileSlice'
 
 export const fetchProfilePage = createAsyncThunk(
   'profileSlice/fetchProlePage',
@@ -56,8 +56,8 @@ export const logoutUser = createAsyncThunk(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      const res = await loginAPI.loginOut()
-      dispatch(logoutUser())
+      await loginAPI.loginOut()
+      dispatch(removeUserData())
       dispatch(setAuth(false))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>

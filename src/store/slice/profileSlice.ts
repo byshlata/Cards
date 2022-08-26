@@ -28,8 +28,8 @@ export const profileSlice = createSlice({
     setUserAvatar: (state, action: PayloadAction<string>) => {
       state.avatar = action.payload
     },
-    logoutUser: () => initialState,
+    removeUserData: () => initialState,
   },
 })
 
-export const { setUserName, logoutUser, setUserData } = profileSlice.actions
+export const { setUserName, removeUserData, setUserData } = profileSlice.actions

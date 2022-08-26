@@ -61,7 +61,7 @@ export const Profile = () => {
           <p>Back to Packs List</p>
         </NavLink>
       </div>
-      <FormBody width={415} height={550}>
+      <FormBody width={415} height={410}>
         <div className={style.profileContainer}>
           <h3 className={style.profileInformation}>Personal Information</h3>
           <div className={style.profileImage}>
