@@ -19,7 +19,6 @@ export const Routers = () => {
       <Route path={`${Path.Other}`} element={<Page404 />} />
       <Route path={`${Path.Root}`} element={isAuth ? PROFILE_PAGE : LOGIN_PAGE} />
       <Route path={`${Path.Forgot}`} element={!isAuth ? <Forgot /> : <Profile />} />
-      <Route path={``} element={!isAuth ? <Login /> : <Profile />} />
       <Route
         path={`${Path.NewPassword}${Path.Root}${Path.Token}`}
         element={!isAuth ? <ForgotCreatePassword /> : <Profile />}
