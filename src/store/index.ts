@@ -10,7 +10,7 @@ export { registrationSlice } from './slice/registrationSlice'
 
 export { sendLetterOnEmail } from './thunk/forgotThunk'
 export { RegistrationThunk } from './thunk/registrationThunk'
-export { fetchProfilePage } from './thunk/profileThunk'
+export { fetchProfilePage, changeProfileName, logoutUser } from './thunk/profileThunk'
 
 //selector
 

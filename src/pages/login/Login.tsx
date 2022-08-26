@@ -5,7 +5,7 @@ import { OptionValue, Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { selectorIsAuth, selectorIsLoading, selectorUserId } from 'store'
 import { signInOnEmail } from 'store/thunk/loginThunk'
 
@@ -18,11 +18,14 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
-  console.log('login')
   const dispatch = useAppDispatch()
+
   const isLoading = useSelector(selectorIsLoading)
   const isAuth = useSelector(selectorIsAuth)
   const userId = useSelector(selectorUserId)
+
+  const navigate = useNavigate()
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -56,7 +59,7 @@ export const Login = () => {
   })
 
   if (isAuth) {
-    return <Navigate to={`${Path.Profile}`} />
+    navigate(`${Path.Profile}${Path.Root}${userId}`)
   }
 
   return (
@@ -87,9 +90,9 @@ export const Login = () => {
             Remember Me
           </label>
         </div>
-        <div className={style.forgotPassword}>
-          <a href={'/forgot'}> Forgot Password?</a>
-        </div>
+        <NavLink to={`${Path.Forgot}`}>
+          <div className={style.forgotPassword}>Forgot Password?</div>
+        </NavLink>
         <div className={style.buttonWrapper}>
           <CustomButton type="submit" color="primary" disabled={isLoading}>
             Sign In
@@ -99,7 +102,7 @@ export const Login = () => {
       <div>
         <p className={style.textBlockQuestion}>Already have an account?</p>
         <CustomButton type="button" color="link" disabled={isLoading}>
-          <a href="/registration"> Sign Up</a>
+          <NavLink to={`${Path.Register}`}>Sign Up</NavLink>
         </CustomButton>
       </div>
     </FormBody>

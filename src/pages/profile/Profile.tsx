@@ -1,33 +1,41 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
+import { FormBody } from 'components'
+import { Path } from 'enums'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { selectorUserEmail, selectorUserName } from 'store'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
+import {
+  selectorUserEmail,
+  selectorUserName,
+  changeProfileName,
+  logoutUser,
+  selectorUserId,
+} from 'store'
 
-import { FormBody } from '../../components'
-import { useAppDispatch } from '../../hooks'
+import avatar from '../../assets/image/avatar.png'
+import camera from '../../assets/image/camera.png'
+import exitArrow from '../../assets/image/exitArrow.png'
+import logout from '../../assets/image/logout.png'
+import pencil from '../../assets/image/pencil.png'
 
 import style from './Profile.module.sass'
-
-import {
-  authData,
-  avatar,
-  camera,
-  changeProfileName,
-  exitArrow,
-  logout,
-  logoutUser,
-  pencil,
-  testLogin,
-} from './index'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const userName = useSelector(selectorUserName)
   const userEmail = useSelector(selectorUserEmail)
-  // const userId = useSelector(selectorUserId)
+  const realUserId = useSelector(selectorUserId)
 
-  console.log('profile')
+  const navigate = useNavigate()
+
+  const params = useParams<'id'>()
+
+  useEffect(() => {
+    if (params.id !== realUserId) {
+      navigate(`${Path.Other}`)
+    }
+  }, [])
 
   const [mode, setMode] = useState<boolean>(false)
 
@@ -44,14 +52,11 @@ export const Profile = () => {
     dispatch(changeProfileName(value))
     setMode(false)
   }
-  const TestLogin = () => {
-    dispatch(testLogin(authData))
-  }
 
   return (
     <div className={style.pageWrapper}>
       <div className={style.exitArrow}>
-        <NavLink to={'/'}>
+        <NavLink to={`${Path.Root}`}>
           <img src={exitArrow} alt={'arrow to exit'} />
           <p>Back to Packs List</p>
         </NavLink>
@@ -61,7 +66,7 @@ export const Profile = () => {
           <h3 className={style.profileInformation}>Personal Information</h3>
           <div className={style.profileImage}>
             <img src={avatar} alt={'avatar picture'} />
-            <NavLink to={'/'}>
+            <NavLink to={`${Path.Root}`}>
               <div className={style.changeProfileImage}>
                 <img src={camera} alt={'change avatar picture'} />
               </div>
@@ -92,7 +97,6 @@ export const Profile = () => {
             Log Out
           </div>
         </div>
-        <div onClick={TestLogin}>Auth</div>
       </FormBody>
     </div>
   )

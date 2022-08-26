@@ -36,9 +36,7 @@ export const ForgotSendLetter = () => {
     }, CONST_DELAY)
 
     return () => {
-      console.log('returnUE', counterDown)
       if (counterDown === 0) {
-        console.log('countUE', counterDown)
         dispatch(removeEmail())
         clearTimeout(timer)
       }

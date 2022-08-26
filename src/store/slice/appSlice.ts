@@ -3,7 +3,7 @@ import { ErrorMessageType } from 'types'
 
 export const initialState: InitialStateType = {
   isLoading: false,
-  isInitialized: false,
+  isInitialized: true,
   isAuth: false,
   error: { message: '' },
 }

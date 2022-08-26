@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 
 import { Header, LinerProgress } from 'components'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
+import { Loader } from 'components/loader/Loader'
+import { Path } from 'enums'
+import { useAppDispatch } from 'hooks'
 import { Login, Profile, Routers } from 'pages'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -15,28 +18,22 @@ import {
 } from 'store'
 import styleMain from 'styles/container.module.sass'
 
-import { Path } from '../enums'
-import { useAppDispatch } from '../hooks'
-
 import style from './App.module.sass'
 
 export const App = () => {
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
   const isLoading = useSelector(selectorIsLoading)
   const errorMessage = useSelector(selectorError)
-  const isAuth = useSelector(selectorIsAuth)
-  const userId = useSelector(selectorUserId)
+  const isInitialized = useSelector(selectorsIsInitialized)
 
-  const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchProfilePage())
   }, [])
 
-  useEffect(() => {
-    if (isAuth) {
-      navigate(`${Path.Profile}`)
-    }
-  }, [isAuth])
+  if (isInitialized) {
+    return <Loader />
+  }
 
   return (
     <>
