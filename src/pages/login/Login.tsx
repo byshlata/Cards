@@ -20,9 +20,7 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .required('No password provided.')
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    .min(8, 'Password is too short - 8 chars minimum.')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+    .min(OptionValue.MinLengthPassword, 'Password is too short - 8 chars minimum.'),
 })
 
 export const Login = () => {

@@ -32,7 +32,7 @@ export const changeProfileName = createAsyncThunk(
   'profileSlice/changeProfileName',
   async (name: string, { rejectWithValue, dispatch }) => {
     try {
-      dispatch(setInitialized(true))
+      dispatch(isSpinAppLoading(true))
       const res = await profileAPI.changeInformationUser({
         name,
       })
@@ -46,7 +46,7 @@ export const changeProfileName = createAsyncThunk(
         rejectWithValue(err.message)
       }
     } finally {
-      dispatch(setInitialized(false))
+      dispatch(isSpinAppLoading(false))
     }
   }
 )
