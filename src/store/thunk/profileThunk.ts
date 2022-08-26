@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { loginAPI, profileAPI } from 'api'
 import axios, { AxiosError } from 'axios'
 import { isSpinAppLoading, setInitialized } from 'store'
+import { removeUserData, setUserData, setUserName } from 'store/slice/profileSlice'
 
 import { setAuth } from '../slice/appSlice'
-import { removeUserData, setUserData, setUserName } from '../slice/profileSlice'
 
 export const fetchProfilePage = createAsyncThunk(
   'profileSlice/fetchProlePage',
