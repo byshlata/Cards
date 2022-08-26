@@ -1,12 +1,23 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { API_CONFIG } from '../../api/config'
+import { UserResponseType } from '../../types'
 
-export const initialState: InitialStateType = {
-  userName: '',
-  userAvatar: '',
+export const initialState: UserResponseType = {
+  _id: '',
+  email: '',
+  rememberMe: false,
+  isAdmin: false,
+  name: '',
+  verified: false,
+  token: '',
+  publicCardPacksCount: 0,
+  created: '',
+  updated: '',
+  __v: 0,
+  tokenDeathTime: '',
+  avatar: '',
 }
-
 export const authData = {
   email: 'nya-admin@nya.nya',
   password: '1qazxcvBG',
@@ -34,11 +45,12 @@ export const profileSlice = createSlice({
   name: 'profileSlice',
   initialState,
   reducers: {
+    setUserData: (state, action: PayloadAction<UserResponseType>) => action.payload,
     setUserName: (state, action: PayloadAction<string>) => {
-      state.userName = action.payload
+      state.name = action.payload
     },
     setUserAvatar: (state, action: PayloadAction<string>) => {
-      state.userAvatar = action.payload
+      state.avatar = action.payload
     },
     logoutUser: () => {
       return initialState
@@ -46,9 +58,4 @@ export const profileSlice = createSlice({
   },
 })
 
-export const { setUserName, logoutUser } = profileSlice.actions
-
-export type InitialStateType = {
-  userName: string
-  userAvatar: string
-}
+export const { setUserName, logoutUser, setUserData } = profileSlice.actions

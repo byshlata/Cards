@@ -5,7 +5,7 @@ import { isSpinAppLoading, setInitialized } from 'store'
 
 import { setAuth } from '../slice/appSlice'
 import { loginIn } from '../slice/loginSlice'
-import { InitialStateType, setUserName } from '../slice/profileSlice'
+import { setUserName } from '../slice/profileSlice'
 
 export const fetchProfilePage = createAsyncThunk(
   'profileSlice/fetchProlePage',
@@ -31,12 +31,11 @@ export const fetchProfilePage = createAsyncThunk(
 
 export const changeProfileName = createAsyncThunk(
   'profileSlice/changeProfileName',
-  async ({ userName, userAvatar }: InitialStateType, { rejectWithValue, dispatch }) => {
+  async (name: string, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setInitialized(true))
       const res = await profileAPI.changeInformationUser({
-        name: userName,
-        avatar: userAvatar,
+        name,
       })
       dispatch(setUserName(res.updatedUser.name))
     } catch (e) {

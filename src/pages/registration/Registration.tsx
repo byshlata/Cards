@@ -68,8 +68,6 @@ export const Registration = () => {
   })
 
   if (isRegistration) {
-    // eslint-disable-next-line no-debugger
-    debugger
     return <Navigate to={'/profile'} />
   }
 

@@ -11,8 +11,10 @@ export const selectorEmail = (state: RootStoreType): Nullable<string> => state.f
 
 export const selectorIsPasswordSend = (state: RootStoreType): boolean => state.forgot.isPasswordSend
 
-export const selectorIsLoginIn = (state: RootStoreType) => state.login.isLogIn
-
 export const selectorIsAuth = (state: RootStoreType) => state.app.isAuth
 
-export const selectorUserName = (state: RootStoreType) => state.profile.userName
+export const selectorUserName = (state: RootStoreType) => state.profile.name
+
+export const selectorUserEmail = (state: RootStoreType) => state.profile.email
+
+export const selectorUserId = (state: RootStoreType) => state.profile._id

@@ -2,6 +2,6 @@ import { UserInformationType } from './UserInformationType'
 
 export type UserResponseType = UserInformationType & {
   token: string
-  tokenDeathTime: Date
+  tokenDeathTime: string
   avatar?: string
 }

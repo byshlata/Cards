@@ -10,6 +10,7 @@ export { registrationSlice } from './slice/registrationSlice'
 
 export { sendLetterOnEmail } from './thunk/forgotThunk'
 export { RegistrationThunk } from './thunk/registrationThunk'
+export { fetchProfilePage } from './thunk/profileThunk'
 
 //selector
 
@@ -19,9 +20,10 @@ export {
   selectorError,
   selectorEmail,
   selectorIsPasswordSend,
-  selectorIsLoginIn,
   selectorIsAuth,
   selectorUserName,
+  selectorUserEmail,
+  selectorUserId,
 } from './selectors/selectors'
 
 //other

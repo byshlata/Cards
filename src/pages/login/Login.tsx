@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { OptionValue } from 'enums'
+import { OptionValue, Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { selectorIsLoading, selectorIsLoginIn } from 'store'
+import { selectorIsAuth, selectorIsLoading, selectorUserId } from 'store'
 import { signInOnEmail } from 'store/thunk/loginThunk'
 
 import style from './Login.module.sass'
@@ -21,7 +21,8 @@ export const Login = () => {
   console.log('login')
   const dispatch = useAppDispatch()
   const isLoading = useSelector(selectorIsLoading)
-  const isLogIn = useSelector(selectorIsLoginIn)
+  const isAuth = useSelector(selectorIsAuth)
+  const userId = useSelector(selectorUserId)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -54,8 +55,8 @@ export const Login = () => {
     },
   })
 
-  if (isLogIn) {
-    return <Navigate to={'/profile'} />
+  if (isAuth) {
+    return <Navigate to={`${Path.Profile}`} />
   }
 
   return (
