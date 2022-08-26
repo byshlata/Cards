@@ -1,18 +1,15 @@
 import React from 'react'
 
 import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import {Provider} from 'react-redux'
 import 'index.sass'
 
-import { App } from './app/App'
-import { store } from './store/store'
+import {App} from './app/App'
+import {store} from './store/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement)
 root.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>
+  <Provider store={store}>
+    <App />
+  </Provider>
 )
