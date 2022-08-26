@@ -1,29 +1,48 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { OptionValue } from 'enums'
-import { Field, FieldProps, FormikProvider, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { RootStoreType, selectorIsLoading } from 'store'
 import { RegistrationThunk } from 'store/thunk/registrationThunk'
+import * as yup from 'yup'
+
+import { Path } from '../../enums'
 
 import style from './Registration.module.sass'
 
-type FormikErrorType = {
-  email?: string
-  password?: string
-  confirmPassword?: string
-}
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please enter a valid email format !')
+    .required('Email is required please !'),
+  password: yup
+    .string()
+    .required('No password provided.')
+    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+    .min(8, 'Password is too short - 8 chars minimum.')
+    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+
+  confirmPassword: yup.string().test('password', function (value) {
+    return this.parent.password === value
+  }),
+})
 
 export const Registration = () => {
   const dispatch = useAppDispatch()
 
-  const isLoading = useSelector(selectorIsLoading)
   const isRegistration = useSelector<RootStoreType, boolean>(
     (state) => state.registration.isRegistration
   )
+
+  const isLoading = useSelector(selectorIsLoading)
+
+  const navigate = useNavigate()
+  const onNavigateToLoginPage = useCallback(() => {
+    navigate(`${Path.Login}`)
+  }, [])
 
   const formik = useFormik({
     initialValues: {
@@ -31,34 +50,7 @@ export const Registration = () => {
       password: '',
       confirmPassword: '',
     },
-    validate: (values) => {
-      const errors: FormikErrorType = {}
-      if (!values.email && formik.handleBlur('email')) {
-        errors.email = 'Required'
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email) &&
-        formik.handleBlur('email')
-      ) {
-        errors.email = 'Invalid email address'
-      }
-      if (!values.password) {
-        errors.password = 'Required'
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-      } else if (values.password.length < OptionValue.MinLengthPassword) {
-        errors.password = 'Поле обязательно для заполнения'
-      }
-      if (!values.confirmPassword) {
-        errors.confirmPassword = 'Required'
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-      } else if (values.password.length < 3) {
-        errors.confirmPassword = 'Поле обязательно для заполнения'
-      }
-      if (values.password !== values.confirmPassword) {
-        errors.password = 'Введите одинаковы пароль'
-        errors.confirmPassword = 'Поле обязательно для заполнения'
-      }
-      return errors
-    },
+    validationSchema: schema,
     onSubmit: (values) => {
       dispatch(RegistrationThunk(values))
       formik.resetForm({
@@ -68,7 +60,7 @@ export const Registration = () => {
   })
 
   if (isRegistration) {
-    return <Navigate to={'/profile'} />
+    return <Navigate to={'/login'} />
   }
 
   return (
@@ -98,8 +90,8 @@ export const Registration = () => {
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             type="password"
-            name="confirm password"
-            error={formik.errors.password}
+            name="confirmPassword"
+            error={formik.errors.confirmPassword}
           />
         </div>
         <div className={style.buttonWrapper}>
@@ -110,8 +102,13 @@ export const Registration = () => {
       </form>
       <div>
         <p className={style.textBlockQuestion}>Already have an account?</p>
-        <CustomButton type="button" color="link" disabled={isLoading}>
-          <a href="/login">Sign In</a>
+        <CustomButton
+          type="button"
+          color="link"
+          onClick={onNavigateToLoginPage}
+          disabled={isLoading}
+        >
+          Sign In
         </CustomButton>
       </div>
     </FormBody>

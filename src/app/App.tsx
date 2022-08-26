@@ -9,6 +9,9 @@ import { useSelector } from 'react-redux'
 import { fetchProfilePage, selectorError, selectorIsLoading, selectorsIsInitialized } from 'store'
 import styleMain from 'styles/container.module.sass'
 
+import { Path } from '../enums'
+import { useAppDispatch } from '../hooks'
+
 import style from './App.module.sass'
 
 export const App = () => {
