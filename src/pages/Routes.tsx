@@ -4,7 +4,7 @@ import { Page404 } from 'components/page404/Page404'
 import { Path } from 'enums'
 import { Forgot, ForgotCreatePassword, Login, Profile, Registration } from 'pages'
 import { useSelector } from 'react-redux'
-import { Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { selectorIsAuth, selectorUserId } from 'store'
 
 export const Routers = () => {
