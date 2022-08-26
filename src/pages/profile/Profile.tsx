@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useState } from 'react'
 
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { selectorUserEmail, selectorUserName } from 'store'
 
 import { FormBody } from '../../components'
+import { Path } from '../../enums'
 import { useAppDispatch } from '../../hooks'
 
 import style from './Profile.module.sass'
@@ -25,7 +26,8 @@ export const Profile = () => {
   const dispatch = useAppDispatch()
   const userName = useSelector(selectorUserName)
   const userEmail = useSelector(selectorUserEmail)
-  // const userId = useSelector(selectorUserId)
+  const navigate = useNavigate()
+  let { userId } = useParams()
 
   console.log('profile')
 
@@ -39,6 +41,7 @@ export const Profile = () => {
 
   const logoutHandle = () => {
     dispatch(logoutUser())
+    navigate(`${Path.Login}`)
   }
   const asyncChangeName = () => {
     dispatch(changeProfileName(value))

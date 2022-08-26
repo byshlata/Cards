@@ -3,7 +3,6 @@
 export { appSlice } from './slice/appSlice'
 
 export { forgotSlice } from './slice/forgotSlice'
-export { loginSlice } from './slice/loginSlice'
 export { registrationSlice } from './slice/registrationSlice'
 
 //thunk

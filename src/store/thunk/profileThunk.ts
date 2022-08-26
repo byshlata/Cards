@@ -4,8 +4,7 @@ import axios, { AxiosError } from 'axios'
 import { isSpinAppLoading, setInitialized } from 'store'
 
 import { setAuth } from '../slice/appSlice'
-import { loginIn } from '../slice/loginSlice'
-import { setUserName } from '../slice/profileSlice'
+import { setUserData, setUserName } from '../slice/profileSlice'
 
 export const fetchProfilePage = createAsyncThunk(
   'profileSlice/fetchProlePage',
@@ -14,6 +13,7 @@ export const fetchProfilePage = createAsyncThunk(
       dispatch(setInitialized(true))
       const res = await profileAPI.getAuthUser()
       dispatch(setAuth(true))
+      dispatch(setUserData(res))
       dispatch(setUserName(res.name))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>

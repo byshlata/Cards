@@ -10,7 +10,6 @@ import {
   selectorError,
   selectorIsAuth,
   selectorIsLoading,
-  selectorsIsInitialized,
   selectorUserId,
 } from 'store'
 import styleMain from 'styles/container.module.sass'
@@ -34,7 +33,8 @@ export const App = () => {
 
   useEffect(() => {
     if (isAuth) {
-      navigate(`${Path.Profile}`)
+      console.log({ isAuth: isAuth, userId: userId })
+      navigate(`${Path.Profile}${Path.Root}${userId}`)
     }
   }, [isAuth])
 
@@ -47,6 +47,7 @@ export const App = () => {
       </div>
       <div className={styleMain.container}>
         <Routers />
+        {/*<Profile />*/}
       </div>
     </>
   )
