@@ -3,19 +3,10 @@ import React, { useEffect } from 'react'
 import { Header, LinerProgress } from 'components'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
 import { Loader } from 'components/loader/Loader'
-import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
-import { Login, Profile, Routers } from 'pages'
+import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import {
-  fetchProfilePage,
-  selectorError,
-  selectorIsAuth,
-  selectorIsLoading,
-  selectorsIsInitialized,
-  selectorUserId,
-} from 'store'
+import { fetchProfilePage, selectorError, selectorIsLoading, selectorsIsInitialized } from 'store'
 import styleMain from 'styles/container.module.sass'
 
 import style from './App.module.sass'
