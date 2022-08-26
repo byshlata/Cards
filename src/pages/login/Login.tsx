@@ -18,6 +18,7 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
+  console.log('login')
   const dispatch = useAppDispatch()
   const isLoading = useSelector(selectorIsLoading)
   const isLogIn = useSelector(selectorIsLoginIn)

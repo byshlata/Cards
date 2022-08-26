@@ -1,5 +1,6 @@
-import { AlertElementType } from 'components/customAlert/types/alertElementType'
 import { Nullable } from 'types'
+
+import { AlertElementType } from '../types'
 
 export const removeAlertElement = (
   alerts: Nullable<AlertElementType[]>,

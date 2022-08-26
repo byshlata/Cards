@@ -13,8 +13,8 @@ export const fetchProfilePage = createAsyncThunk(
     try {
       dispatch(setInitialized(true))
       const res = await profileAPI.getAuthUser()
-      dispatch(setUserName(res.name))
       dispatch(setAuth(true))
+      dispatch(setUserName(res.name))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {
@@ -60,7 +60,7 @@ export const logoutUser = createAsyncThunk(
       dispatch(isSpinAppLoading(true))
       const res = await loginAPI.loginOut()
       dispatch(logoutUser())
-      dispatch(loginIn(false))
+      dispatch(setAuth(false))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
       if (axios.isAxiosError(err)) {

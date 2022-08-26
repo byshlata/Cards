@@ -27,3 +27,5 @@ export type { MessageNewPasswordType } from './MessageNewPasswordType'
 export type { RecoveryPasswordType } from './RecoveryPasswordType'
 
 export type { ErrorRecoveryPasswordType } from './ErrorRecoveryPasswordType'
+
+export type { ErrorMessageType } from './ErrorMessageType'

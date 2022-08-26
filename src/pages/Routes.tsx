@@ -17,7 +17,7 @@ export const Routers = () => {
         element={!isAuth ? <ForgotCreatePassword /> : <Profile />}
       />
       <Route path={`${Path.Profile}`} element={isAuth ? <Profile /> : <Login />} />
-      <Route path={`${Path.Login}`} element={<Login />} />
+      <Route path={`${Path.Login}`} element={isAuth ? <Profile /> : <Login />} />
       <Route path={`${Path.Register}`} element={<Registration />} />
     </Routes>
   )

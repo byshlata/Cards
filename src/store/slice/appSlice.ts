@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Nullable } from 'types'
+import { ErrorMessageType } from 'types'
 
 export const initialState: InitialStateType = {
   isLoading: false,
   isInitialized: false,
   isAuth: false,
-  error: '',
+  error: { message: '' },
 }
 
 export const appSlice = createSlice({
@@ -16,7 +16,7 @@ export const appSlice = createSlice({
       state.isLoading = action.payload
     },
     removeErrorMessage: (state) => {
-      state.error = ''
+      state.error = { message: '' }
     },
     setInitialized: (state, action: PayloadAction<boolean>) => {
       state.isInitialized = action.payload
@@ -29,7 +29,7 @@ export const appSlice = createSlice({
     builder.addMatcher(
       (action) => action.type.endsWith('/rejected'),
       (state, action: PayloadAction<string>) => {
-        state.error = action.payload as string
+        state.error = { message: action.payload }
       }
     )
   },
@@ -41,5 +41,5 @@ type InitialStateType = {
   isLoading: boolean
   isInitialized: boolean
   isAuth: boolean
-  error: string
+  error: ErrorMessageType
 }
