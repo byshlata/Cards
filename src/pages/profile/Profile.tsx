@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { selectorUserEmail, selectorUserName } from 'store'
 
 import { FormBody } from '../../components'
+import { Search } from '../../components/search/Search'
 import { useAppDispatch } from '../../hooks'
 
 import style from './Profile.module.sass'
@@ -93,6 +94,7 @@ export const Profile = () => {
           </div>
         </div>
         <div onClick={TestLogin}>Auth</div>
+        <Search />
       </FormBody>
     </div>
   )

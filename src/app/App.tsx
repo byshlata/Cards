@@ -10,11 +10,11 @@ import {
   selectorError,
   selectorIsAuth,
   selectorIsLoading,
-  selectorsIsInitialized,
   selectorUserId,
 } from 'store'
 import styleMain from 'styles/container.module.sass'
 
+import { Search } from '../components/search/Search'
 import { Path } from '../enums'
 import { useAppDispatch } from '../hooks'
 
@@ -47,6 +47,7 @@ export const App = () => {
       </div>
       <div className={styleMain.container}>
         <Routers />
+        {/*<Search />*/}
       </div>
     </>
   )
