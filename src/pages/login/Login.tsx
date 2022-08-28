@@ -20,7 +20,7 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .required('No password provided.')
-    .min(OptionValue.MinLengthPassword, 'Password is too short - 8 chars minimum.'),
+    .min(OptionValue.MinLengthPassword, 'Password is too short - 5 chars minimum.'),
 })
 
 export const Login = () => {
