@@ -1,3 +1,3 @@
 export enum OptionValue {
-  MinLengthPassword = 7,
+  MinLengthPassword = 5,
 }
