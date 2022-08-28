@@ -8,6 +8,8 @@ export const initialState: PacksType = {
   minCardsCount: 0,
   page: 0,
   pageCount: 0,
+  token: '',
+  tokenDeathTime: '',
 }
 
 export const packSlice = createSlice({

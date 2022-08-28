@@ -56,9 +56,10 @@ export const Profile = () => {
   return (
     <>
       <div className={style.exitArrow}>
-        <NavLink to={`${Path.Pack}`}>
-          <CustomButton color="link" justifyContent="start">
-            <img src={exitArrow} alt={'arrow to exit'} /> Back to Packs List
+        <NavLink className={style.buttonBackPacksWrapper} to={`${Path.Pack}`}>
+          <CustomButton color="link">
+            <img style={{ marginRight: '10px' }} src={exitArrow} alt={'arrow to exit'} /> Back to
+            Packs List
           </CustomButton>
         </NavLink>
       </div>

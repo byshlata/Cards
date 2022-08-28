@@ -13,12 +13,14 @@ export const Pack = () => {
   }
 
   return (
-    <Pagination
-      disabled={isLoading}
-      showQuickJumper
-      defaultCurrent={2}
-      total={500}
-      onChange={onChange}
-    />
+    <>
+      <Pagination
+        disabled={isLoading}
+        showQuickJumper
+        defaultCurrent={2}
+        total={500}
+        onChange={onChange}
+      />
+    </>
   )
 }

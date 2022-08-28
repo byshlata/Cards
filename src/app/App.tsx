@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { CustomButton, Header, LinerProgress } from 'components'
+import { CustomButtonBox } from 'components/button/customButton/CustomButtonBox'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
 import { Loader } from 'components/loader/Loader'
 import { useAppDispatch } from 'hooks'
@@ -19,30 +20,18 @@ import styleMain from 'styles/container.module.sass'
 import style from './App.module.sass'
 
 export const App = () => {
-  const [sendPackData, setSendPackData] = useState<boolean>(false)
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorIsLoading)
   const errorMessage = useSelector(selectorError)
   const isInitialized = useSelector(selectorsIsInitialized)
-  const isAuth = useSelector(selectorIsAuth)
 
   useEffect(() => {
     dispatch(fetchProfilePage())
   }, [])
 
-  useEffect(() => {
-    if (sendPackData) {
-      dispatch(getPackData({ packName: 'eng', sortPacks: '' }))
-    }
-  }, [sendPackData])
-
   if (isInitialized) {
     return <Loader />
-  }
-
-  const onSendPackData = () => {
-    setSendPackData(!sendPackData)
   }
 
   return (
@@ -55,10 +44,6 @@ export const App = () => {
       <div className={styleMain.container}>
         <Routers />
       </div>
-
-      <CustomButton color="primary" onClick={onSendPackData}>
-        Get pack Data
-      </CustomButton>
     </>
   )
 }

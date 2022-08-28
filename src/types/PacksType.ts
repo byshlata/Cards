@@ -7,4 +7,6 @@ export type PacksType = {
   minCardsCount: number
   page: number
   pageCount: number
+  token: string
+  tokenDeathTime: string
 }
