@@ -69,7 +69,7 @@ export const HeaderUserInfoMenu = () => {
   const navigate = useNavigate()
 
   const profileHandle = () => {
-    navigate(`${Path.Profile}`)
+    navigate(`${Path.Root}`)
   }
 
   const logoutHandle = () => {
@@ -80,7 +80,7 @@ export const HeaderUserInfoMenu = () => {
     <div className={style.menuContainer}>
       <div className={style.menuContainerArrow}></div>
       <div className={style.menuProfile} onClick={profileHandle}>
-        <img src={user} alt={'log out'} />
+        <img src={user} alt={'profile'} />
         Profile
       </div>
       <div className={style.menuLogOut} onClick={logoutHandle}>
