@@ -8,4 +8,5 @@ export type CustomButtonType = {
   disabled?: boolean
   onClick?: () => void
   children?: ReactNode
+  justifyContent?: 'center' | 'start' | 'end'
 }

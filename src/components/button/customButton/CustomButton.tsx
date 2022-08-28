@@ -5,10 +5,17 @@ import { useStyleCustomButton } from 'components/button/customButton/hooks/useSt
 import { CustomButtonType } from './types/CustomButtonType'
 
 export const CustomButton: FC<CustomButtonType> = React.memo((props): ReactElement => {
-  const { disabled, onClick, color, type, children } = props
+  let { disabled, onClick, color, type, children, justifyContent } = props
   const buttonClassName = useStyleCustomButton(color, disabled)
+
   return (
-    <button type={type} disabled={disabled} className={buttonClassName} onClick={onClick}>
+    <button
+      style={{ justifyContent: `${justifyContent}` }}
+      type={type}
+      disabled={disabled}
+      className={buttonClassName}
+      onClick={onClick}
+    >
       {children}
     </button>
   )

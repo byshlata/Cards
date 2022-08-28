@@ -1,12 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { PathAPI } from 'enums'
-import {
-  ErrorResponseType,
-  PasswordResponseType,
-  RecoveryPasswordType,
-  MessageNewPasswordType,
-  ErrorRecoveryPasswordType,
-} from 'types'
+import { MessageNewPasswordType, PasswordResponseType, RecoveryPasswordType } from 'types'
 
 import { API_CONFIG } from './config'
 

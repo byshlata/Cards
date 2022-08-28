@@ -1,27 +1,19 @@
 import React from 'react'
 
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { OptionValue, Path } from 'enums'
+import { Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { Navigate, NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { selectorIsAuth, selectorIsLoading, selectorUserId } from 'store'
 import { authThunk } from 'store/thunk/loginThunk'
+import { createErrorSchema } from 'utils/createErrorScheme'
 import * as yup from 'yup'
 
 import style from './Login.module.sass'
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Please enter a valid email format !')
-    .required('Email is required please !'),
-  password: yup
-    .string()
-    .required('No password provided.')
-    .min(OptionValue.MinLengthPassword, 'Password is too short - 8 chars minimum.'),
-})
+const schema = yup.object().shape(createErrorSchema(['email', 'password']))
 
 export const Login = () => {
   const dispatch = useAppDispatch()
@@ -38,6 +30,7 @@ export const Login = () => {
       password: '',
       rememberMe: false,
     },
+    validateOnBlur: true,
     validationSchema: schema,
     onSubmit: (values) => {
       dispatch(authThunk(values))
@@ -46,6 +39,9 @@ export const Login = () => {
       })
     },
   })
+
+  const errorEmail = formik.touched.email ? formik.errors.email : undefined
+  const errorPassword = formik.touched.password ? formik.errors.password : undefined
 
   if (isAuth) {
     navigate(`${Path.Profile}${Path.Root}${userId}`)
@@ -61,7 +57,7 @@ export const Login = () => {
             onChange={formik.handleChange}
             type="simple"
             name="email"
-            error={formik.errors.email}
+            error={errorEmail}
           />
         </div>
         <div className={style.inputWrapper}>
@@ -70,7 +66,7 @@ export const Login = () => {
             onChange={formik.handleChange}
             type="password"
             name="password"
-            error={formik.errors.password}
+            error={errorPassword}
           />
         </div>
         <div>

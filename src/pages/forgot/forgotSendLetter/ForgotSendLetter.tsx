@@ -5,9 +5,7 @@ import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectorIsLoading } from 'store'
-import { selectorEmail } from 'store/selectors/selectors'
-import { removeEmail } from 'store/slice/forgotSlice'
+import { selectorIsLoading, selectorEmail, removeEmail } from 'store'
 
 import style from './ForgotSendLetter.module.sass'
 

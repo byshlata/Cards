@@ -11,13 +11,13 @@ export const registrationSlice = createSlice({
   name: 'registrationSlice',
   initialState,
   reducers: {
-    regisrtationUser: (state, action: PayloadAction<boolean>) => {
+    registrationUser: (state, action: PayloadAction<boolean>) => {
       state.isRegistration = action.payload
     },
   },
 })
 
-export const { regisrtationUser } = registrationSlice.actions
+export const { registrationUser } = registrationSlice.actions
 
 type InitialStateType = {
   email: Nullable<string>

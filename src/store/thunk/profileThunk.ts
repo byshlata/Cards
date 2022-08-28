@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { loginAPI, profileAPI } from 'api'
 import axios, { AxiosError } from 'axios'
-import { isSpinAppLoading, setInitialized } from 'store'
-import { removeUserData, setUserData, setUserName } from 'store/slice/profileSlice'
+import { isSpinAppLoading, setInitialized, removeUserData, setUserData, setUserName } from 'store'
+import { setErrorResponse } from 'utils'
 
 import { setAuth } from '../slice/appSlice'
 
@@ -60,13 +60,7 @@ export const logoutUser = createAsyncThunk(
       dispatch(removeUserData())
       dispatch(setAuth(false))
     } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>
-      if (axios.isAxiosError(err)) {
-        const error = err.response?.data ? err.response.data.error : err.message
-        rejectWithValue(error)
-      } else {
-        rejectWithValue(err.message)
-      }
+      return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))
     }

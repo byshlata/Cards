@@ -1,14 +1,14 @@
 import React from 'react'
 
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { OptionValue, Path } from 'enums'
+import { Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import style from 'pages/forgot/forgotEmail/ForgotEmail.module.sass'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { removeEmail, selectorIsLoading, selectorIsPasswordSend } from 'store'
-import { sendNewPassword } from 'store/thunk/forgotThunk'
+import { removeEmail, selectorIsLoading, selectorIsPasswordSend, sendNewPassword } from 'store'
+import { createErrorSchema } from 'utils'
 import * as yup from 'yup'
 
 export const ForgotCreatePassword = () => {
@@ -26,12 +26,7 @@ export const ForgotCreatePassword = () => {
 
   const param = useParams<'token'>()
 
-  const schema = yup.object().shape({
-    password: yup
-      .string()
-      .min(OptionValue.MinLengthPassword, 'Password must contain at least 4 characters')
-      .required('Password is required please !'),
-  })
+  const schema = yup.object().shape(createErrorSchema(['password']))
 
   const formik = useFormik({
     initialValues: {
@@ -48,6 +43,8 @@ export const ForgotCreatePassword = () => {
     },
   })
 
+  const errorPassword = formik.touched.password ? formik.errors.password : undefined
+  const isDisabledButton = isLoading || !formik.isValid
   return (
     <FormBody width={410} height={370}>
       <Title text="Create new password" />
@@ -59,14 +56,14 @@ export const ForgotCreatePassword = () => {
             onChange={formik.handleChange}
             type="password"
             name="password"
-            error={formik.errors.password}
+            error={errorPassword}
           />
         </div>
         <p className={style.textInformationWrapper}>
           Create new password and we will send you further instructions to email{' '}
         </p>
         <div className={style.buttonWrapper}>
-          <CustomButton type="submit" color="primary" disabled={isLoading}>
+          <CustomButton type="submit" color="primary" disabled={isDisabledButton}>
             Create new password
           </CustomButton>
         </div>
