@@ -5,7 +5,7 @@ import { OptionValue, Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { Navigate, NavLink, useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { selectorIsAuth, selectorIsLoading, selectorUserId } from 'store'
 import { signInOnEmail } from 'store/thunk/loginThunk'
 
