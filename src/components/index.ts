@@ -29,3 +29,5 @@ export { ButtonResetFilter } from './button/buttonResetFilter/ButtomResetFilter'
 export { FilterElementContainer } from './filterElementContainer/FilterElementContainer'
 
 export { ButtonChoiceGrope } from './button/buttonChoiceGroupe/ButtonChoiceGrope'
+
+export { Table } from './table/Table'

@@ -5,3 +5,5 @@ export { createErrorSchema } from './createErrorScheme'
 export { maxValue } from './maxValue'
 
 export { minValue } from './minValue'
+
+export { formattedDate } from './formattedDate'

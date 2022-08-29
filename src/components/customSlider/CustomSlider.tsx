@@ -58,7 +58,7 @@ export const CustomSlider = () => {
           onClick={onClickMinButton}
           disabled={disabled}
         >
-          0
+          {value[0]}
         </CustomButtonBox>
       </div>
 
@@ -82,7 +82,7 @@ export const CustomSlider = () => {
           onClick={onClickMaxButton}
           disabled={disabled}
         >
-          30
+          {value[1]}
         </CustomButtonBox>
       </div>
     </div>

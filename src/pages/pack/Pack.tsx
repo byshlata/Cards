@@ -1,24 +1,28 @@
-import React, { ReactElement, useEffect, useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
 import {
-  CustomSlider,
-  TitleWithButton,
-  Search,
   ButtonChoiceGrope,
   ButtonResetFilter,
+  CustomSlider,
   FilterElementContainer,
+  Search,
+  TitleWithButton,
+  Table,
 } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
   getPackData,
+  initialStatePackParams,
   removeIsFirstOpenPage,
-  selectorIsLoading,
-  setIsFirstOpenPage,
-  selectorParams,
   selectorIsFirsOpen,
+  selectorIsLoading,
+  selectorParams,
+  selectorTotalCount,
+  setIsFirstOpenPage,
+  setPackParams,
 } from 'store'
 import { FilterElementType } from 'types'
 
@@ -36,6 +40,7 @@ export const Pack = () => {
 
   const isLoading = useSelector(selectorIsLoading)
   const isFirstOpenPage = useSelector(selectorIsFirsOpen)
+  const totalPack = useSelector(selectorTotalCount)
 
   const params = useSelector(selectorParams)
 
@@ -51,19 +56,10 @@ export const Pack = () => {
       dispatch(removeIsFirstOpenPage())
     }
   }, [])
-  const onChangePack = (number: number) => {
-    console.log(number)
-  }
 
-  const onRemovePack = (number: number) => {
-    console.log(number)
+  const onchangePagination = (page: number, pageSize: number) => {
+    dispatch(setPackParams({ page: page }))
   }
-
-  const onLearnPack = (number: number) => {
-    console.log(number)
-  }
-
-  const onchangePagination = (page: number, pageSize: number) => {}
 
   const onClockButton = () => {}
 
@@ -75,12 +71,14 @@ export const Pack = () => {
           <FilterElementContainer key={title} element={element} title={title} />
         ))}
       </div>
+      <Table />
       <div className={style.paginationWrapper}>
         <Pagination
           disabled={isLoading}
           showQuickJumper
-          defaultCurrent={2}
-          total={500}
+          defaultCurrent={1}
+          pageSize={initialStatePackParams.pageCount}
+          total={totalPack}
           onChange={onchangePagination}
         />
       </div>

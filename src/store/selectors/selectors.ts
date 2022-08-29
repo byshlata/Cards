@@ -46,3 +46,5 @@ export const selectorUserParam_id = (state: RootStoreType): string => state.pack
 export const selectorParams = (state: RootStoreType): PackParamsInitialType => state.packParams
 
 export const selectorIsFirsOpen = (state: RootStoreType): boolean => state.packParams.isFirstOpen
+
+export const selectorTotalCount = (state: RootStoreType): number => state.pack.cardPacksTotalCount

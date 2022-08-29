@@ -36,6 +36,7 @@ export {
   selectorUserParam_id,
   selectorIsFirsOpen,
   selectorParams,
+  selectorTotalCount,
 } from './selectors/selectors'
 
 //other

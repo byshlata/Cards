@@ -3,7 +3,7 @@ import { PackParamsInitialType, PackParamsType } from 'types'
 
 export const initialStatePackParams: PackParamsInitialType = {
   user_id: '',
-  max: 30,
+  max: 110,
   min: 0,
   page: 1,
   pageCount: 8,
