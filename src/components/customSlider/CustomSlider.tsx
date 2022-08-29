@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
 import { Slider } from 'antd'
-import { CustomButtonBox } from 'components/button/customButton/CustomButtonBox'
+import { CustomButtonBox } from 'components'
 import { useAppDispatch, useDebounce } from 'hooks'
 import { useSelector } from 'react-redux'
-import {
-  selectorIsLoading,
-  selectorMaxCardsOnPack,
-  selectorMinCardsOnPack,
-  START_VALUE_PACK_PARAMS,
-} from 'store'
-
+import { getPackData, selectorIsLoading, START_VALUE_PACK_PARAMS } from 'store'
 import 'antd/dist/antd.css'
+import { maxValue, minValue } from 'utils'
 
 import style from './CustomSlider.module.sass'
 
@@ -19,68 +14,73 @@ export const CustomSlider = () => {
   const dispatch = useAppDispatch()
 
   const disabled = useSelector(selectorIsLoading)
-  const minCardsOnPack = useSelector(selectorMinCardsOnPack)
-  const maxCardsOnPack = useSelector(selectorMaxCardsOnPack)
 
-  const [valueMax, setValueMax] = useState<number>(START_VALUE_PACK_PARAMS.maxCardsOnPack)
-  const [valueMin, setValueMin] = useState<number>(START_VALUE_PACK_PARAMS.minCardsOnPack)
+  const [value, setValue] = useState<number[]>([
+    START_VALUE_PACK_PARAMS.minCardsOnPack,
+    START_VALUE_PACK_PARAMS.maxCardsOnPack,
+  ])
 
   const onClickMinButton = () => {
-    setValueMin(START_VALUE_PACK_PARAMS.maxCardsOnPack)
+    console.log([START_VALUE_PACK_PARAMS.minCardsOnPack, value[1]])
+    setValue([START_VALUE_PACK_PARAMS.minCardsOnPack, value[1]])
   }
+
   const onClickMaxButton = () => {
-    setValueMax(START_VALUE_PACK_PARAMS.minCardsOnPack)
+    console.log([value[0], START_VALUE_PACK_PARAMS.maxCardsOnPack])
+    setValue([value[0], START_VALUE_PACK_PARAMS.maxCardsOnPack])
   }
 
   const OnChangeValueSlider = (value: [number, number]) => {
-    if (value[0] > value[1]) {
-      setValueMin(value[1])
-      setValueMax(value[0])
-    } else {
-      setValueMin(value[0])
-      setValueMax(value[1])
-    }
+    setValue(value)
   }
 
-  const debounceValueMax = useDebounce(valueMax)
-  const debounceValueMin = useDebounce(valueMin)
+  const debounceValue = useDebounce(value)
 
   useEffect(() => {
-    if (valueMax !== debounceValueMax) {
-      console.log()
-    }
-    if (valueMin === debounceValueMin) {
-      console.log()
-    }
-  }, [OnChangeValueSlider])
+    const max = maxValue(debounceValue)
+    const min = minValue(debounceValue)
+    dispatch(getPackData({ max, min }))
+  }, [debounceValue])
 
   return (
-    <div className={style.sliderWrapper}>
-      <CustomButtonBox
-        color={'secondary'}
-        borderRadius="2px"
-        onClick={onClickMinButton}
-        disabled={disabled}
-      >
-        0
-      </CustomButtonBox>
-      <Slider
-        style={{ width: '180px' }}
-        range
-        disabled={disabled}
-        defaultValue={[valueMin, valueMax]}
-        max={START_VALUE_PACK_PARAMS.maxCardsOnPack}
-        min={START_VALUE_PACK_PARAMS.minCardsOnPack}
-        onChange={OnChangeValueSlider}
-      />
-      <CustomButtonBox
-        color={'secondary'}
-        borderRadius="2px"
-        onClick={onClickMaxButton}
-        disabled={disabled}
-      >
-        30
-      </CustomButtonBox>
+    <div className={style.CustomSliderWrapper}>
+      <div className={style.buttonWrapper}>
+        <CustomButtonBox
+          color={'secondary'}
+          borderRadius="2px"
+          onClick={onClickMinButton}
+          disabled={disabled}
+        >
+          0
+        </CustomButtonBox>
+      </div>
+
+      <div className={style.sliderWrapper}>
+        <Slider
+          className={style.slider}
+          range
+          disabled={disabled}
+          defaultValue={[
+            START_VALUE_PACK_PARAMS.minCardsOnPack,
+            START_VALUE_PACK_PARAMS.maxCardsOnPack,
+          ]}
+          max={START_VALUE_PACK_PARAMS.maxCardsOnPack}
+          min={START_VALUE_PACK_PARAMS.minCardsOnPack}
+          value={[value[0], value[1]]}
+          onChange={OnChangeValueSlider}
+        />
+      </div>
+
+      <div className={style.buttonWrapper}>
+        <CustomButtonBox
+          color={'secondary'}
+          borderRadius="2px"
+          onClick={onClickMaxButton}
+          disabled={disabled}
+        >
+          30
+        </CustomButtonBox>
+      </div>
     </div>
   )
 }

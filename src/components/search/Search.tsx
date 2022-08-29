@@ -13,6 +13,8 @@ export const Search = () => {
   const disabled = useSelector(selectorIsLoading)
   const countPage = useSelector(selectorCardPacksTotalCount)
 
+  const searchValue = useSelector(se)
+
   const [error, setError] = useState('')
 
   const { value, onChange } = useCustomInput('')

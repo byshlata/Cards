@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { CustomButtonBox } from 'components/button/customButton/CustomButtonBox'
+import { CustomButtonBox } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { getPackData, selectorIsLoading, selectorUserId } from 'store'

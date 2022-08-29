@@ -35,3 +35,5 @@ export const selectorMaxCardsOnPack = (
 export const selectorMinCardsOnPack = (
   state: RootStoreType
 ): ParamsType<number | string> | undefined => state.packParams.min
+
+export const selrctorIsResetFilter (store: RootStoreType): boolean

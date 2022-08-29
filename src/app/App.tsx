@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
 
 import { Header, LinerProgress } from 'components'
-import { ButtonChoiceGrope } from 'components/buttonChoiceGroupe/ButtonChoiceGrope'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
-import { CustomSlider } from 'components/customSlider/CustomSlider'
 import { Loader } from 'components/loader/Loader'
-import { Search } from 'components/search/Search'
 import { useAppDispatch } from 'hooks'
 import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
@@ -39,9 +36,6 @@ export const App = () => {
       <div className={styleMain.container}>
         <Routers />
       </div>
-      <Search />
-      <ButtonChoiceGrope />
-      <CustomSlider />
     </>
   )
 }

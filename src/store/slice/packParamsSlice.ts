@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { OptionValue } from 'enums'
 import { PackParamsType } from 'types'
 
 export const START_VALUE_PACK_PARAMS = {

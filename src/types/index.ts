@@ -37,3 +37,5 @@ export type { PacksType } from './PacksType'
 export type { PackParamsType } from 'types/PackParamsType'
 
 export type { ParamsType } from 'types/ParamsType'
+
+export type { FilterElementType } from './FilterElementType'
