@@ -15,13 +15,7 @@ export const fetchProfilePage = createAsyncThunk(
       dispatch(setAuth(true))
       dispatch(setUserData(res))
     } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>
-      if (axios.isAxiosError(err)) {
-        const error = err.response?.data ? err.response.data.error : err.message
-        return rejectWithValue(error)
-      } else {
-        return rejectWithValue(err.message)
-      }
+      return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(setInitialized(false))
     }

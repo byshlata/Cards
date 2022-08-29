@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { CustomButton, Header, LinerProgress } from 'components'
-import { CustomButtonBox } from 'components/button/customButton/CustomButtonBox'
+import { Header, LinerProgress } from 'components'
 import { ButtonChoiceGrope } from 'components/buttonChoiceGroupe/ButtonChoiceGrope'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
 import { CustomSlider } from 'components/customSlider/CustomSlider'
@@ -10,16 +9,7 @@ import { Search } from 'components/search/Search'
 import { useAppDispatch } from 'hooks'
 import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
-import {
-  fetchProfilePage,
-  selectorError,
-  selectorIsAuth,
-  selectorIsLoading,
-  selectorsIsInitialized,
-  selectorUserId,
-  selectorsIsInitialized,
-} from 'store'
-import { getPackData } from 'store/thunk/pakcThunk'
+import { fetchProfilePage, selectorError, selectorIsLoading, selectorsIsInitialized } from 'store'
 import styleMain from 'styles/container.module.sass'
 
 import style from './App.module.sass'

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import { Slider } from 'antd'
 import { CustomButtonBox } from 'components/button/customButton/CustomButtonBox'
-import { OptionValue } from 'enums'
 import { useAppDispatch, useDebounce } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
@@ -48,15 +47,12 @@ export const CustomSlider = () => {
 
   useEffect(() => {
     if (valueMax !== debounceValueMax) {
-      console.log(debounceValueMax)
+      console.log()
     }
     if (valueMin === debounceValueMin) {
-      console.log(debounceValueMin)
+      console.log()
     }
   }, [OnChangeValueSlider])
-
-  console.log(debounceValueMax)
-  console.log(debounceValueMin)
 
   return (
     <div className={style.sliderWrapper}>
@@ -65,7 +61,9 @@ export const CustomSlider = () => {
         borderRadius="2px"
         onClick={onClickMinButton}
         disabled={disabled}
-      ></CustomButtonBox>
+      >
+        0
+      </CustomButtonBox>
       <Slider
         style={{ width: '180px' }}
         range
@@ -80,7 +78,9 @@ export const CustomSlider = () => {
         borderRadius="2px"
         onClick={onClickMaxButton}
         disabled={disabled}
-      ></CustomButtonBox>
+      >
+        30
+      </CustomButtonBox>
     </div>
   )
 }

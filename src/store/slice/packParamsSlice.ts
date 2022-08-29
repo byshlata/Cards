@@ -4,8 +4,8 @@ import { PackParamsType } from 'types'
 
 export const START_VALUE_PACK_PARAMS = {
   user_id: '',
-  maxCardsOnPack: 0,
-  minCardsOnPack: 30,
+  maxCardsOnPack: 30,
+  minCardsOnPack: 0,
   page: 1,
   pageCount: 0,
   sortPacks: '',
