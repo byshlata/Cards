@@ -55,7 +55,10 @@ export const profileSlice = createSlice({
     logoutUser: () => {
       return initialState
     },
+    setId: (state, action: PayloadAction<string>) => {
+      state._id = action.payload
+    },
   },
 })
 
-export const { setUserName, logoutUser, setUserData } = profileSlice.actions
+export const { setUserName, logoutUser, setUserData, setId } = profileSlice.actions

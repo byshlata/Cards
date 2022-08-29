@@ -2,10 +2,11 @@ import React, { ChangeEvent, useState } from 'react'
 
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { selectorUserEmail, selectorUserName } from 'store'
+import { selectorUserEmail, selectorUserId, selectorUserName } from 'store'
 
 import { FormBody } from '../../components'
 import { Search } from '../../components/search/Search'
+import { Table } from '../../components/table/Table'
 import { useAppDispatch } from '../../hooks'
 
 import style from './Profile.module.sass'
@@ -26,9 +27,10 @@ export const Profile = () => {
   const dispatch = useAppDispatch()
   const userName = useSelector(selectorUserName)
   const userEmail = useSelector(selectorUserEmail)
-  // const userId = useSelector(selectorUserId)
+  const userId = useSelector(selectorUserId)
+  console.log(userId)
 
-  console.log('profile')
+  console.log(userName)
 
   const [mode, setMode] = useState<boolean>(false)
 
@@ -95,6 +97,7 @@ export const Profile = () => {
         </div>
         <div onClick={TestLogin}>Auth</div>
         <Search />
+        <Table />
       </FormBody>
     </div>
   )
