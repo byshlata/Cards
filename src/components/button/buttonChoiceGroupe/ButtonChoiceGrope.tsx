@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-import { CustomButtonBox } from 'components'
+import style from 'components/button/buttonChoiceGroupe/ButtonChoiceGrope.module.sass'
+import { CustomButtonBox } from 'components/index'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { getPackData, selectorIsLoading, selectorUserId } from 'store'
-
-import style from './ButtonChoiceGrope.module.sass'
+import { selectorIsLoading, selectorUserId, selectorUserParam_id, setPackParams } from 'store'
 
 export const ButtonChoiceGrope = () => {
   const dispatch = useAppDispatch()
@@ -29,9 +28,9 @@ export const ButtonChoiceGrope = () => {
 
   useEffect(() => {
     if (isUserCards) {
-      dispatch(getPackData({ user_id: idUser }))
+      dispatch(setPackParams({ user_id: idUser }))
     } else {
-      dispatch(getPackData({ user_id: '' }))
+      dispatch(setPackParams({ user_id: '' }))
     }
   }, [isUserCards])
 

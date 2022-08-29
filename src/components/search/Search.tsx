@@ -5,7 +5,8 @@ import { useCustomInput } from 'components/input/customInput/hooks'
 import style from 'components/search/Search.module.sass'
 import { useAppDispatch, useDebounce } from 'hooks'
 import { useSelector } from 'react-redux'
-import { getPackData, selectorCardPacksTotalCount, selectorIsLoading } from 'store'
+import { selectorCardPacksTotalCount, selectorIsLoading, setPackParams } from 'store'
+import { selectorPackName } from 'store/selectors/selectors'
 
 export const Search = () => {
   const dispatch = useAppDispatch()
@@ -13,21 +14,21 @@ export const Search = () => {
   const disabled = useSelector(selectorIsLoading)
   const countPage = useSelector(selectorCardPacksTotalCount)
 
-  const searchValue = useSelector(se)
+  const searchValue = useSelector(selectorPackName)
 
   const [error, setError] = useState('')
 
-  const { value, onChange } = useCustomInput('')
+  const { value, onChange } = useCustomInput(searchValue)
   const debounceValue = useDebounce(value)
 
   useEffect(() => {
-    if (value === debounceValue && debounceValue !== '') {
-      dispatch(getPackData({ packName: debounceValue }))
+    if (value === debounceValue) {
+      dispatch(setPackParams({ packName: debounceValue }))
     }
   }, [debounceValue])
 
   useEffect(() => {
-    if (countPage) {
+    if (countPage || value === '') {
       setError('')
     } else {
       setError('Cards not found')

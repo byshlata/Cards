@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect, useLayoutEffect, useState } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
@@ -10,8 +10,16 @@ import {
   ButtonResetFilter,
   FilterElementContainer,
 } from 'components'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorIsLoading } from 'store'
+import {
+  getPackData,
+  removeIsFirstOpenPage,
+  selectorIsLoading,
+  setIsFirstOpenPage,
+  selectorParams,
+  selectorIsFirsOpen,
+} from 'store'
 import { FilterElementType } from 'types'
 
 import style from './Pack.module.sass'
@@ -24,8 +32,25 @@ const FILTER_ELEMENT: FilterElementType[] = [
 ]
 
 export const Pack = () => {
-  const isLoading = useSelector(selectorIsLoading)
+  const dispatch = useAppDispatch()
 
+  const isLoading = useSelector(selectorIsLoading)
+  const isFirstOpenPage = useSelector(selectorIsFirsOpen)
+
+  const params = useSelector(selectorParams)
+
+  useLayoutEffect(() => {
+    if (isFirstOpenPage) {
+      dispatch(getPackData(params))
+    }
+  }, [params])
+
+  useLayoutEffect(() => {
+    dispatch(setIsFirstOpenPage())
+    return () => {
+      dispatch(removeIsFirstOpenPage())
+    }
+  }, [])
   const onChangePack = (number: number) => {
     console.log(number)
   }

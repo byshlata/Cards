@@ -4,7 +4,13 @@ import { Slider } from 'antd'
 import { CustomButtonBox } from 'components'
 import { useAppDispatch, useDebounce } from 'hooks'
 import { useSelector } from 'react-redux'
-import { getPackData, selectorIsLoading, START_VALUE_PACK_PARAMS } from 'store'
+import {
+  initialStatePackParams,
+  selectorIsLoading,
+  selectorMaxCardsOnPack,
+  selectorMinCardsOnPack,
+  setPackParams,
+} from 'store'
 import 'antd/dist/antd.css'
 import { maxValue, minValue } from 'utils'
 
@@ -14,20 +20,21 @@ export const CustomSlider = () => {
   const dispatch = useAppDispatch()
 
   const disabled = useSelector(selectorIsLoading)
+  const maxCards = useSelector(selectorMaxCardsOnPack)
+  const minCards = useSelector(selectorMinCardsOnPack)
 
-  const [value, setValue] = useState<number[]>([
-    START_VALUE_PACK_PARAMS.minCardsOnPack,
-    START_VALUE_PACK_PARAMS.maxCardsOnPack,
-  ])
+  const [value, setValue] = useState([minCards, maxCards])
 
   const onClickMinButton = () => {
-    console.log([START_VALUE_PACK_PARAMS.minCardsOnPack, value[1]])
-    setValue([START_VALUE_PACK_PARAMS.minCardsOnPack, value[1]])
+    if (value[0] !== initialStatePackParams.min) {
+      setValue([initialStatePackParams.min, value[1]])
+    }
   }
 
   const onClickMaxButton = () => {
-    console.log([value[0], START_VALUE_PACK_PARAMS.maxCardsOnPack])
-    setValue([value[0], START_VALUE_PACK_PARAMS.maxCardsOnPack])
+    if (value[1] !== initialStatePackParams.max) {
+      setValue([value[0], initialStatePackParams.max])
+    }
   }
 
   const OnChangeValueSlider = (value: [number, number]) => {
@@ -39,7 +46,7 @@ export const CustomSlider = () => {
   useEffect(() => {
     const max = maxValue(debounceValue)
     const min = minValue(debounceValue)
-    dispatch(getPackData({ max, min }))
+    dispatch(setPackParams({ max, min }))
   }, [debounceValue])
 
   return (
@@ -60,12 +67,9 @@ export const CustomSlider = () => {
           className={style.slider}
           range
           disabled={disabled}
-          defaultValue={[
-            START_VALUE_PACK_PARAMS.minCardsOnPack,
-            START_VALUE_PACK_PARAMS.maxCardsOnPack,
-          ]}
-          max={START_VALUE_PACK_PARAMS.maxCardsOnPack}
-          min={START_VALUE_PACK_PARAMS.minCardsOnPack}
+          defaultValue={[initialStatePackParams.min, initialStatePackParams.max]}
+          max={initialStatePackParams.max}
+          min={initialStatePackParams.min}
           value={[value[0], value[1]]}
           onChange={OnChangeValueSlider}
         />

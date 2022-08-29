@@ -7,15 +7,17 @@ import { setErrorResponse } from 'utils'
 
 export const getPackData = createAsyncThunk(
   'packSlice/getPackData',
-  async (payload: PackParamsType, { rejectWithValue, dispatch, getState }) => {
+  async (payload: PackParamsType, { rejectWithValue, dispatch }) => {
     try {
+      // eslint-disable-next-line no-debugger
+      debugger
       dispatch(isSpinAppLoading(true))
-      dispatch(setPackParams(payload))
-      const { packParams } = getState() as RootStoreType
-      const res = await packAPI.getPackData(packParams)
+      const res = await packAPI.getPackData(payload)
       console.log(res)
       dispatch(setPackData(res))
     } catch (e) {
+      // eslint-disable-next-line no-debugger
+      debugger
       return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))

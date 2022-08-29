@@ -1,16 +1,15 @@
 import React from 'react'
 
-import { CustomButtonBox, IconFilterSvg } from 'components'
+import style from 'components/button/buttonResetFilter/ButtomResetFilter.module.sass'
+import { CustomButtonBox, IconFilterSvg } from 'components/index'
 import { useAppDispatch } from 'hooks'
-import { getPackData, START_VALUE_PACK_PARAMS } from 'store'
-
-import style from './ButtomResetFilter.module.sass'
+import { removePackData } from 'store'
 
 export const ButtonResetFilter = () => {
   const dispatch = useAppDispatch()
 
   const onResetFilter = () => {
-    dispatch(getPackData(START_VALUE_PACK_PARAMS))
+    dispatch(removePackData())
   }
 
   return (

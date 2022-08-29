@@ -24,8 +24,8 @@ export { Search } from './search/Search'
 
 export { CustomSlider } from './customSlider/CustomSlider'
 
-export { ButtonResetFilter } from './buttonResetFilter/ButtomResetFilter'
+export { ButtonResetFilter } from './button/buttonResetFilter/ButtomResetFilter'
 
 export { FilterElementContainer } from './filterElementContainer/FilterElementContainer'
 
-export { ButtonChoiceGrope } from './buttonChoiceGroupe/ButtonChoiceGrope'
+export { ButtonChoiceGrope } from './button/buttonChoiceGroupe/ButtonChoiceGrope'

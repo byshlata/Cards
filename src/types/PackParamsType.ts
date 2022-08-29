@@ -2,10 +2,10 @@ import { ParamsType } from 'types/ParamsType'
 
 export type PackParamsType = {
   packName?: ParamsType<string>
-  min?: ParamsType<number | string>
-  max?: ParamsType<number | string>
-  sortPacks?: ParamsType<number | string>
-  page?: ParamsType<number | string>
-  pageCount?: ParamsType<number | string>
+  min?: number
+  max?: number
+  sortPacks?: ParamsType<string | number>
+  page?: number
+  pageCount?: number
   user_id?: ParamsType<string>
 }

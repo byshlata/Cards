@@ -4,7 +4,7 @@ export { appSlice } from './slice/appSlice'
 export { forgotSlice } from './slice/forgotSlice'
 export { registrationSlice } from './slice/registrationSlice'
 export { profileSlice } from './slice/profileSlice'
-export { packParamsSlice, START_VALUE_PACK_PARAMS } from './slice/packParamsSlice'
+export { packParamsSlice, initialStatePackParams } from './slice/packParamsSlice'
 export { packSlice } from './slice/packSlice'
 
 //thunk
@@ -31,6 +31,11 @@ export {
   selectorMinCardsOnPack,
   selectorMaxCardsOnPack,
   selectorPageCount,
+  selectorPackName,
+  selectorPacksData,
+  selectorUserParam_id,
+  selectorIsFirsOpen,
+  selectorParams,
 } from './selectors/selectors'
 
 //other
@@ -49,4 +54,9 @@ export { setUserData, setUserName, removeUserData } from './slice/profileSlice'
 
 export { registrationUser } from './slice/registrationSlice'
 
-export { setPackParams, removePackParams } from './slice/packParamsSlice'
+export {
+  setPackParams,
+  removePackParams,
+  removeIsFirstOpenPage,
+  setIsFirstOpenPage,
+} from './slice/packParamsSlice'
