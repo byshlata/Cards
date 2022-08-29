@@ -2,9 +2,9 @@ import React from 'react'
 
 import { Page404 } from 'components/page404/Page404'
 import { Path } from 'enums'
-import { Forgot, ForgotCreatePassword, Login, Profile, Registration } from 'pages'
+import { Forgot, ForgotCreatePassword, Login, Profile, Registration, Pack } from 'pages'
 import { useSelector } from 'react-redux'
-import { Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { selectorIsAuth, selectorUserId } from 'store'
 
 export const Routers = () => {
@@ -19,6 +19,7 @@ export const Routers = () => {
       <Route path={`${Path.Other}`} element={<Page404 />} />
       <Route path={`${Path.Root}`} element={isAuth ? PROFILE_PAGE : LOGIN_PAGE} />
       <Route path={`${Path.Forgot}`} element={!isAuth ? <Forgot /> : <Profile />} />
+      <Route path={`${Path.Pack}`} element={isAuth ? <Pack /> : <Login />} />
       <Route
         path={`${Path.NewPassword}${Path.Root}${Path.Token}`}
         element={!isAuth ? <ForgotCreatePassword /> : <Profile />}

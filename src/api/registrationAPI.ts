@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { PathAPI } from 'enums'
-import { ErrorResponseType, RegistrationType, RegistrationUserResponseType } from 'types'
+import { RegistrationType, RegistrationUserResponseType } from 'types'
 
 import { API_CONFIG } from './config'
 

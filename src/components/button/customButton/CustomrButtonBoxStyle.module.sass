@@ -1,0 +1,79 @@
+@import './Style.module'
+
+$colorBorder: rgba(217, 217, 217, 1)
+
+.primaryButton, .secondaryButton, .dangerButton, .disabledButton, .linkButton, .disabledButtonLink
+  letter-spacing: 1px
+  display: flex
+  justify-content: center
+  align-items: center
+  font-size: 1rem
+  padding: 5px
+  overflow: hidden
+  box-sizing: border-box
+  border-radius: 2px
+  cursor: pointer
+  margin: 0 auto
+  +buttonOption($colorPrimary)
+
+.primaryButton
+  border-radius: 30px
+  font-size: 16px
+  font-weight: 500
+  &:active:hover
+    +activeHover($colorPrimary)
+  &:hover
+    +hover($colorPrimary)
+
+.secondaryButton
+  width: 100%
+  background-color: inherit
+  border: 1px solid $colorBorder
+  color: inherit
+  &:active:hover
+    +activeHover($colorBorder)
+  &:hover
+    +hover($colorBorder)
+
+.dangerButton
+  +buttonOption($colorDanger)
+  &:active:hover
+    +activeHover($colorDanger)
+  &:hover
+    +hover($colorDanger)
+
+
+.disabledButton
+  +buttonOption($colorDisabled)
+  background-color: $colorDisabled
+  &:hover
+    cursor: not-allowed
+
+.linkButton
+  background-color: inherit
+  border: none
+  box-shadow: none
+  color: $colorPrimary
+  text-decoration: underline
+  &:active:hover
+    transform: scale(0.95)
+    color: $colorActiveLink
+    border: none
+  &:hover
+    border: none
+    color: $colorActiveLink
+
+.disabledButtonLink
+  margin: 0 auto
+  background-color: inherit
+  border: none
+  box-shadow: none
+  color: $colorDisabled
+  text-decoration: underline
+  &:hover
+    cursor: not-allowed
+
+
+
+
+

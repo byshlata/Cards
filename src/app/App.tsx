@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { Header, LinerProgress } from 'components'
+import { CustomButton, Header, LinerProgress } from 'components'
+import { CustomButtonBox } from 'components/button/customButton/CustomButtonBox'
+import { ButtonChoiceGrope } from 'components/buttonChoiceGroupe/ButtonChoiceGrope'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
+import { CustomSlider } from 'components/customSlider/CustomSlider'
 import { Loader } from 'components/loader/Loader'
-import { Path } from 'enums'
+import { Search } from 'components/search/Search'
 import { useAppDispatch } from 'hooks'
-import { Login, Profile, Routers } from 'pages'
+import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import {
   fetchProfilePage,
   selectorError,
@@ -15,7 +17,9 @@ import {
   selectorIsLoading,
   selectorsIsInitialized,
   selectorUserId,
+  selectorsIsInitialized,
 } from 'store'
+import { getPackData } from 'store/thunk/pakcThunk'
 import styleMain from 'styles/container.module.sass'
 
 import style from './App.module.sass'
@@ -45,6 +49,9 @@ export const App = () => {
       <div className={styleMain.container}>
         <Routers />
       </div>
+      <Search />
+      <ButtonChoiceGrope />
+      <CustomSlider />
     </>
   )
 }

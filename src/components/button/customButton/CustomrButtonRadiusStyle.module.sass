@@ -1,22 +1,4 @@
-$colorPrimary: rgba(21, 43, 100, 1)
-$colorSecondary: rgba(144, 201, 32, 1)
-$colorDanger: rgba(255, 5, 0, 1)
-$colorDisabled: rgba(134, 131, 131, 0.2)
-$colorBackground: rgba(203, 199, 199, 1)
-$colorActiveLink: rgba(96, 190, 248, 1)
-$colorText: rgba(255, 255, 255, 1)
-
-@mixin buttonOption($color)
-  width: 100%
-  background-color: $color
-  border: 1px solid $color
-  color: $colorText
-
-@mixin activeHover($color)
-  transform: scale(0.99)
-
-@mixin hover($color)
-  box-shadow: 0 0 1px $color, 0 0 2px $color, 0 0 3px $color
+@import './Style.module'
 
 .primaryButton, .secondaryButton, .dangerButton, .disabledButton, .linkButton, .disabledButtonLink
   letter-spacing: 1px
@@ -24,7 +6,7 @@ $colorText: rgba(255, 255, 255, 1)
   justify-content: center
   align-items: center
   font-size: 1rem
-  padding: 8px
+  padding: 5px
   overflow: hidden
   box-sizing: border-box
   border-radius: 30px
