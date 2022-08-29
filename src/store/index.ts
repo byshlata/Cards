@@ -4,7 +4,7 @@ export { appSlice } from './slice/appSlice'
 export { forgotSlice } from './slice/forgotSlice'
 export { registrationSlice } from './slice/registrationSlice'
 export { profileSlice } from './slice/profileSlice'
-export { packParamsSlice } from './slice/packParamsSlice'
+export { packParamsSlice, START_VALUE_PACK_PARAMS } from './slice/packParamsSlice'
 export { packSlice } from './slice/packSlice'
 
 //thunk
@@ -27,6 +27,10 @@ export {
   selectorUserEmail,
   selectorUserId,
   selectorIsRegistration,
+  selectorCardPacksTotalCount,
+  selectorMinCardsOnPack,
+  selectorMaxCardsOnPack,
+  selectorPageCount,
 } from './selectors/selectors'
 
 //other
@@ -37,7 +41,7 @@ export type { AppDispatchType, RootStoreType } from './store'
 
 export { setInitialized, isSpinAppLoading, removeErrorMessage, setAuth } from './slice/appSlice'
 
-export { removeEmail, sendLetter, isPasswordSend} from './slice/forgotSlice'
+export { removeEmail, sendLetter, isPasswordSend } from './slice/forgotSlice'
 
 export { removePackData, setPackData } from './slice/packSlice'
 

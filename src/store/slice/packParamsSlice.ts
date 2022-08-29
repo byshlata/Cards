@@ -1,13 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PackParamsType, PacksType, ParamsType, UserResponseType } from 'types'
+import { OptionValue } from 'enums'
+import { PackParamsType } from 'types'
+
+export const START_VALUE_PACK_PARAMS = {
+  user_id: '',
+  maxCardsOnPack: 0,
+  minCardsOnPack: 30,
+  page: 1,
+  pageCount: 0,
+  sortPacks: '',
+  packName: '',
+}
 
 export const initialState: PackParamsType = {
   user_id: '',
-  max: 20,
-  min: 0,
-  page: 1,
-  pageCount: '',
-  sortPacks: '',
+  max: START_VALUE_PACK_PARAMS.maxCardsOnPack,
+  min: START_VALUE_PACK_PARAMS.minCardsOnPack,
+  page: START_VALUE_PACK_PARAMS.page,
+  pageCount: START_VALUE_PACK_PARAMS.pageCount,
+  sortPacks: START_VALUE_PACK_PARAMS.sortPacks,
   packName: '',
 }
 

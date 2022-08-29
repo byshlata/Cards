@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const TIME_TO_REQUEST = 350
+const TIME_TO_REQUEST = 5000
 
 export const useDebounce = <T>(value: T, delay = TIME_TO_REQUEST): T => {
   const [debouncedValue, setDebouncedValue] = useState(value)

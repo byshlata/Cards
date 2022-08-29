@@ -1,54 +1,46 @@
 import React, { useEffect, useState } from 'react'
 
-import { API_CONFIG } from '../../api/config'
-import { CustomInput } from '../input'
-
-import { useDebounce } from './debounce'
-import { useInput } from './input'
-import style from './search.module.sass'
+import { CustomInput } from 'components'
+import { useCustomInput } from 'components/input/customInput/hooks'
+import style from 'components/search/Search.module.sass'
+import { useAppDispatch, useDebounce } from 'hooks'
+import { useSelector } from 'react-redux'
+import { getPackData, selectorCardPacksTotalCount, selectorIsLoading } from 'store'
 
 export const Search = () => {
-  type PackType = {
-    _id: string
-    user_id: string
-    user_name: string
-    private: boolean
-    name: string
-    path: string
-    grade: number
-    shots: number
-    cardsCount: number
-    type: string
-    rating: number
-    created: string
-    updated: string
-    more_id: string
-    __v: number
-  }
-  const [packs, setPacks] = useState<PackType[]>([])
-  const searchingsPacks = packs.map((el) => (
-    <div key={el._id}>
-      <h2>{el.name}</h2>
-    </div>
-  ))
-  const MIN_CHARACTERS = 2
-  const input = useInput('')
+  const dispatch = useAppDispatch()
 
-  const debounce = useDebounce(input.value)
+  const disabled = useSelector(selectorIsLoading)
+  const countPage = useSelector(selectorCardPacksTotalCount)
+
+  const [error, setError] = useState('')
+
+  const { value, onChange } = useCustomInput('')
+  const debounceValue = useDebounce(value)
 
   useEffect(() => {
-    if (debounce.length > MIN_CHARACTERS) {
-      API_CONFIG.get('cards/pack', {
-        params: { packName: debounce },
-      }).then((res) => {
-        setPacks(res.data.cardPacks)
-      })
+    if (value === debounceValue && debounceValue !== '') {
+      dispatch(getPackData({ packName: debounceValue }))
     }
-  }, [debounce])
+  }, [debounceValue])
+
+  useEffect(() => {
+    if (countPage) {
+      setError('')
+    } else {
+      setError('Cards not found')
+    }
+  }, [countPage])
+
   return (
     <div className={style.searchWrapper}>
-      <CustomInput type={'search'} {...input} />
-      <div className={style.dropDown}>{searchingsPacks}</div>
+      <CustomInput
+        type="search"
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        error={error}
+      />
     </div>
   )
 }

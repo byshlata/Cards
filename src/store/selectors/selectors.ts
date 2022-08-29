@@ -1,5 +1,5 @@
 import { RootStoreType } from 'store'
-import { ErrorMessageType, Nullable, PackResponseType } from 'types'
+import { ErrorMessageType, Nullable, PackResponseType, ParamsType } from 'types'
 
 export const selectorsIsInitialized = (state: RootStoreType): boolean => state.app.isInitialized
 
@@ -23,6 +23,15 @@ export const selectorIsRegistration = (state: RootStoreType) => state.registrati
 
 export const selectorPacksData = (state: RootStoreType): PackResponseType[] => state.pack.cardPacks
 
-export const selectorCountPage = (state: RootStoreType): number => state.pack.cardPacksTotalCount
+export const selectorCardPacksTotalCount = (state: RootStoreType): number =>
+  state.pack.cardPacksTotalCount
 
 export const selectorPageCount = (state: RootStoreType): number => state.pack.pageCount
+
+export const selectorMaxCardsOnPack = (
+  state: RootStoreType
+): ParamsType<number | string> | undefined => state.packParams.max
+
+export const selectorMinCardsOnPack = (
+  state: RootStoreType
+): ParamsType<number | string> | undefined => state.packParams.min

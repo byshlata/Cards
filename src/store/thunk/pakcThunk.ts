@@ -12,7 +12,6 @@ export const getPackData = createAsyncThunk(
       dispatch(isSpinAppLoading(true))
       dispatch(setPackParams(payload))
       const { packParams } = getState() as RootStoreType
-      console.log('createAsyncThunk', packParams)
       const res = await packAPI.getPackData(packParams)
       console.log(res)
       dispatch(setPackData(res))
