@@ -1,34 +1,22 @@
 import React from 'react'
 
 import { useSelector } from 'react-redux'
-import { selectorUserName } from 'store'
+import { selectorIsAuth } from 'store'
 
-import avatar from '../../assets/image/avatar.png'
-import itIncubatorLogo from '../../assets/image/itIncubatorLogo.png'
-import styleMain from '../../styles/container.module.sass'
+import itIncubatorLogo from '../../assets/image/logo-ItIncubator.svg'
 
 import style from './Header.module.sass'
+import { HeaderAuthButton } from './HeaderAuthButton'
+import { HeaderUserInfo } from './HeaderUserInfo'
 
 export const Header = () => {
-  const userName = useSelector(selectorUserName)
-
+  const isAuth = useSelector(selectorIsAuth)
   return (
-    <>
-      <header className={style.header}>
-        <div className={styleMain.container}>
-          <div className={style.pageHeader}>
-            <div className={style.logo}>
-              <img src={itIncubatorLogo} alt={'logo'} />
-            </div>
-            <div className={style.info}>
-              <div className={style.infoName}>{userName}</div>
-              <div className={style.infoAvatar}>
-                <img src={avatar} alt={'avatar miniature picture'} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-    </>
+    <header className={style.header}>
+      <div className={style.logo}>
+        <img src={itIncubatorLogo} alt={'logo'} />
+      </div>
+      <div className={style.classAuth}>{!isAuth ? <HeaderAuthButton /> : <HeaderUserInfo />}</div>
+    </header>
   )
 }
