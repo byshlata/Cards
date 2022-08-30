@@ -25,6 +25,8 @@ export const selectorUserEmail = (state: RootStoreType): string => state.profile
 
 export const selectorUserId = (state: RootStoreType): string => state.profile._id
 
+export const selectorAvatarUser = (state: RootStoreType): string | undefined => state.profile.avatar
+
 export const selectorIsRegistration = (state: RootStoreType) => state.registration.isRegistration
 
 export const selectorPacksData = (state: RootStoreType): PackResponseType[] => state.pack.cardPacks

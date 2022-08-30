@@ -16,8 +16,6 @@ export { CustomInput } from './input'
 
 export { CustomButtonBox } from './button'
 
-export { IconFilterSvg } from './iconFilterSVG/IconFilterSVG'
-
 export { TitleWithButton } from './titleWithButton/TitleWithButton'
 
 export { Search } from './search/Search'
@@ -31,3 +29,15 @@ export { FilterElementContainer } from './filterElementContainer/FilterElementCo
 export { ButtonChoiceGrope } from './button/buttonChoiceGroupe/ButtonChoiceGrope'
 
 export { Table } from './table/Table'
+
+export { AvatarUser } from './avatarUser/AvatarUser'
+
+export { ButtonUpload } from './button/buttonUpload/ButtonUpload'
+
+export { ButtonBack } from './button/buttonBack/ButtonBack'
+
+export { IconUploadSvg } from './iconSVG/iconUploadSVG/IconUploadSVG'
+
+export { IconArrowSvg } from './iconSVG/iconArrowSVG/IconArrowSVG'
+
+export { IconFilterSvg } from './iconSVG/iconFilterSVG/IconFilterSVG'

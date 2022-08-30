@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
-import { CustomButton, FormBody, Title } from 'components'
+import { AvatarUser, ButtonBack, CustomButton, FormBody, Title } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
@@ -56,24 +56,15 @@ export const Profile = () => {
   return (
     <>
       <div className={style.exitArrow}>
-        <NavLink className={style.buttonBackPacksWrapper} to={`${Path.Pack}`}>
-          <CustomButton color="link">
-            <img style={{ marginRight: '10px' }} src={exitArrow} alt={'arrow to exit'} /> Back to
-            Packs List
-          </CustomButton>
-        </NavLink>
+        <div className={style.buttonBackPacksWrapper}>
+          <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
+        </div>
       </div>
 
       <FormBody width={415} height={410}>
         <Title text="Personal Information" />
-        <div className={style.profileImage}>
-          <img src={avatar} alt={'avatar picture'} />
-          <NavLink to={`${Path.Login}`}>
-            <div className={style.changeProfileImage}>
-              <img src={camera} alt={'change avatar picture'} />
-            </div>
-          </NavLink>
-        </div>
+
+        <AvatarUser />
         <div className={style.changeProfileNameWrapper}>
           {mode ? (
             <input value={value} onChange={NameChanger} autoFocus onBlur={asyncChangeName} />
