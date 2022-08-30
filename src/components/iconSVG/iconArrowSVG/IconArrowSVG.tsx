@@ -5,7 +5,7 @@ export const IconArrowSvg = () => {
     <svg
       width="16"
       height="11"
-      style={{ marginRight: '5px' }}
+      style={{ marginRight: '10px' }}
       viewBox="0 0 16 11"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

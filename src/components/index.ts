@@ -41,3 +41,5 @@ export { IconUploadSvg } from './iconSVG/iconUploadSVG/IconUploadSVG'
 export { IconArrowSvg } from './iconSVG/iconArrowSVG/IconArrowSVG'
 
 export { IconFilterSvg } from './iconSVG/iconFilterSVG/IconFilterSVG'
+
+export { SortElement } from './sortElement/SortElement'

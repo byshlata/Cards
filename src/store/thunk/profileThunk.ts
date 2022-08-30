@@ -32,13 +32,7 @@ export const changeProfileName = createAsyncThunk(
       })
       dispatch(setUserName(res.updatedUser.name))
     } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>
-      if (axios.isAxiosError(err)) {
-        const error = err.response?.data ? err.response.data.error : err.message
-        rejectWithValue(error)
-      } else {
-        rejectWithValue(err.message)
-      }
+      return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))
     }

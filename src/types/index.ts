@@ -41,3 +41,5 @@ export type { ParamsType } from 'types/ParamsType'
 export type { FilterElementType } from './FilterElementType'
 
 export type { PackParamsInitialType } from './PackParamsInitialType'
+
+export type { SortParamType } from './SortParamType'
