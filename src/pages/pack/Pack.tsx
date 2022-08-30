@@ -11,6 +11,7 @@ import {
   TitleWithButton,
   Table,
 } from 'components'
+import { TableHeadElementType, TabletHeadType } from 'components/table/Table'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
@@ -33,6 +34,24 @@ const FILTER_ELEMENT: FilterElementType[] = [
   { title: 'Show packs cards', element: <ButtonChoiceGrope /> },
   { title: 'Number of cards', element: <CustomSlider /> },
   { title: '', element: <ButtonResetFilter /> },
+]
+
+const TABLET_HEADER: TableHeadElementType[] = [
+  {
+    title: 'Name',
+    sortParam: 'name',
+    stateSortElement: 'off',
+  },
+  {
+    title: 'Cards',
+    sortParam: 'cardsCount',
+    stateSortElement: 'off',
+  },
+  {
+    title: 'Last Updated',
+    sortParam: 'updated',
+    stateSortElement: 'off',
+  },
 ]
 
 export const Pack = () => {
@@ -71,7 +90,7 @@ export const Pack = () => {
           <FilterElementContainer key={title} element={element} title={title} />
         ))}
       </div>
-      <Table />
+      <Table headData={TABLET_HEADER} />
       <div className={style.paginationWrapper}>
         <Pagination
           disabled={isLoading}

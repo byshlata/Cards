@@ -43,3 +43,5 @@ export type { FilterElementType } from './FilterElementType'
 export type { PackParamsInitialType } from './PackParamsInitialType'
 
 export type { SortParamType } from './SortParamType'
+
+export type { SortParamElementType } from './SortParamElementType'

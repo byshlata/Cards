@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
 import { useSelector } from 'react-redux'
+import { selectorUserName } from 'store'
 
 import avatar from '../../assets/image/avatar.png'
-import { selectorUserName } from '../../store'
 
 import { HeaderUserInfoMenu } from './HeaderUserInfoMenu'
 import style from './UserInfo.module.sass'
@@ -24,8 +24,8 @@ export const HeaderUserInfo = () => {
         <div className={style.infoAvatar}>
           <img className={style.imgUserAvatar} src={avatar} alt={'avatar miniature picture'} />
         </div>
+        {isActive && <HeaderUserInfoMenu />}
       </div>
-      {isActive && <HeaderUserInfoMenu />}
     </>
   )
 }

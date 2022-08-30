@@ -1,47 +1,41 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { SortElement } from 'components/sortElement/SortElement'
 import { useAppDispatch } from 'hooks'
 import { setPackParams } from 'store'
-import { SortParamType } from 'types'
+import { SortParamElementType, SortParamType } from 'types'
+import { setParamFilter } from 'utils/setParamFilter'
 
 import { sortArrow } from '../index'
+import { TableHeadElementType, TabletHeadType } from '../Table'
 import { TableCell } from '../tableCell/TableCell'
 
 import style from './TableHeader.module.sass'
 
-type TableHeaderType = {
-  title: string
-  sortParam: SortParamType
-}
-
-const TABLET_HEADER: TableHeaderType[] = [
-  {
-    title: 'Name',
-    sortParam: 'name',
-  },
-  {
-    title: 'Cards',
-    sortParam: 'cardsCount',
-  },
-  {
-    title: 'Last Updated',
-    sortParam: 'updated',
-  },
-]
-
-export const TableHeader = () => {
+export const TableHeader = ({ headData }: TabletHeadType) => {
   const dispatch = useAppDispatch()
+  const [tableHeadData, setTableHeadData] = useState<TableHeadElementType[]>(headData)
 
-  const onSortColumn = (sortValue: string) => {
-    dispatch(setPackParams({ sortPacks: sortValue }))
-  }
+  const onSortColumn = useCallback(
+    (sortValue: string, sortParam: SortParamType, stateSortElement: SortParamElementType) => {
+      dispatch(setPackParams({ sortPacks: sortValue }))
+      const changeParam = setParamFilter(tableHeadData, sortParam, stateSortElement)
+      if (changeParam) {
+        setTableHeadData(changeParam)
+      }
+    },
+    [tableHeadData]
+  )
 
   return (
     <div className={style.headerWrapper}>
-      {TABLET_HEADER.map(({ sortParam, title }) => (
+      {tableHeadData.map(({ sortParam, title, stateSortElement }) => (
         <TableCell key={title} title={title}>
-          <SortElement onSort={onSortColumn} sortParam={sortParam} />
+          <SortElement
+            stateSortElement={stateSortElement}
+            onSort={onSortColumn}
+            sortParam={sortParam}
+          />
         </TableCell>
       ))}
       <div className={style.tableHeaderWithButton}>

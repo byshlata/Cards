@@ -1,10 +1,8 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { Header, LinerProgress } from 'components'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
-import { IconSortElementSvg } from 'components/iconSVG/iconSortElementSVG/IconSortElementSVG'
 import { Loader } from 'components/loader/Loader'
-import { SortElement } from 'components/sortElement/SortElement'
 import { useAppDispatch } from 'hooks'
 import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
@@ -42,8 +40,6 @@ export const App = () => {
       <div className={styleMain.container}>
         <Routers />
       </div>
-
-      <SortElement onSort={onSortParam} sortParam={'_id'} />
     </>
   )
 }

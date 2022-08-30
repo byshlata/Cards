@@ -1,37 +1,47 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
-import { SortParamType } from 'types'
+import { SortParamElementType, SortParamType } from 'types'
 
-const HELP_MAGIC_INDEX_TWO = 2
-const SORT_ELEMENT = ['', '1', '0']
-
-export const useSortElement = (onSort: (sortValue: string) => void, sortParam: SortParamType) => {
-  const [count, setCount] = useState<number>(0)
-  const [activeSortElement, setActiveSortElement] = useState<boolean[]>([false, false])
+export const useSortElement = (
+  onSort: (
+    sortValue: string,
+    sortParam: SortParamType,
+    stateSortElement: SortParamElementType
+  ) => void,
+  sortParam: SortParamType,
+  stateSortElement: SortParamElementType
+) => {
+  const [sortParamElement, setSortParamElement] = useState<SortParamElementType>('off')
+  console.log('use')
+  let activeSortElement = [false, false]
 
   const onChangeSortElement = () => {
-    if (count < HELP_MAGIC_INDEX_TWO) {
-      setCount(count + 1)
-      onSort(`${SORT_ELEMENT[count + 1]}${sortParam}`)
-    } else {
-      setCount(0)
-      onSort('')
+    if (sortParamElement === 'off') {
+      onSort(`1${sortParam}`, sortParam, 'up')
+    }
+    if (sortParamElement === 'up') {
+      onSort(`0${sortParam}`, sortParam, 'down')
+    }
+    if (sortParamElement === 'down') {
+      onSort(``, sortParam, 'off')
     }
   }
 
+  if (sortParamElement === 'off') {
+    activeSortElement = [false, false]
+  }
+
+  if (sortParamElement === 'up') {
+    activeSortElement = [true, false]
+  }
+
+  if (sortParamElement === 'down') {
+    activeSortElement = [false, true]
+  }
+
   useEffect(() => {
-    if (count === 0) {
-      setActiveSortElement([false, false])
-    }
-
-    if (count === 1) {
-      setActiveSortElement([true, false])
-    }
-
-    if (count === HELP_MAGIC_INDEX_TWO) {
-      setActiveSortElement([false, true])
-    }
-  }, [count])
+    setSortParamElement(stateSortElement)
+  }, [stateSortElement])
 
   return { onChangeSortElement, activeSortElement }
 }

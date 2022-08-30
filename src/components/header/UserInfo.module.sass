@@ -1,79 +1,75 @@
 .info
   min-width: 80px
-  height: 40px
-  //position: relative
-  margin-right: 136px
+  position: relative
   display: flex
   justify-content: space-between
   align-items: center
-  &:hover
-    cursor: pointer
+  cursor: pointer
 
-  .infoName
-    display: flex
-    align-items: center
-    height: 40px
-    font-weight: 500
-    font-size: 16px
-    line-height: 24px
+.infoName
+  font-weight: 500
+  font-size: 16px
+  margin-right: 5px
 
-  .infoAvatar
-    width: 40px
-    height: 40px
-    padding-left: 10px
-    .imgUserAvatar
-      max-width: 40px
-      border-radius: 100%
+.infoAvatar
+  width: 40px
+  height: 40px
+
+.imgUserAvatar
+  width: 100%
+  height: 100%
+  border-radius: 50%
 
 .menuContainer
   position: absolute
-  display: block
-  width: 122px
-  height: 104px
-  top: 55px
-  left: 1222px
+  top: 100%
+  right: 0
   border: 1px solid #CFCFCF
   border-radius: 3px
-  background-color: #ffffff
+  background-color:
   cursor: pointer
-  z-index: 2
-  //& :before
-  //  content: ''
-  //  width: 5px
-  //  height: 5px
-  //  top: -3px
-  //  left: 87px
-  //  transform: rotate(45deg)
-  //  border: 1px solid #CFCFCF
-  //  background-color: #ffffff
-  //  position: absolute
-  //& :after
-  //  content: ''
-  //  position: absolute
-  //  width: 10px
-  //  height: 6px
-  //  top: 0px
-  //  left: 85px
-  //  background-color: #ffffff
-  .menuProfile
-    width: 122px
-    height: 52px
-    display: flex
-    align-items: center
-    justify-content: center
-    &:hover
-      background-color: #EFEFEF
+  z-index: 100
 
-  .menuLogOut
-    width: 122px
-    height: 52px
-    display: flex
-    align-items: center
-    justify-content: center
-    &:hover
-      background-color: #EFEFEF
+.angle
+  position: absolute
+  content: ''
+  width: 10px
+  height: 10px
+  top: 0
+  right: 20%
+  transform: rotate(45deg) translateX(-50%)
+  border: 1px solid #CFCFCF
+  background-color: #ffffff
+  z-index: 1
 
-  img
-    width: 16px
-    height: 16px
-    margin-right: 10px
+.helpBlock
+  width: 100%
+  height: 100%
+  position: relative
+  background-color: #ffffff
+  border-radius: 3px
+  z-index: 200
+
+.menuProfile
+  width: 100%
+  height: 50px
+  display: flex
+  align-items: center
+  justify-content: center
+  border-radius: 3px
+  &:hover
+    background-color: #EFEFEF
+
+.menuLogOut
+  width: 122px
+  height: 52px
+  display: flex
+  align-items: center
+  justify-content: center
+  &:hover
+    background-color: #EFEFEF
+
+img
+  width: 16px
+  height: 16px
+  margin-right: 10px
