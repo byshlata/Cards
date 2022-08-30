@@ -26,10 +26,6 @@ export const App = () => {
     return <Loader />
   }
 
-  const onSortParam = (value: string) => {
-    console.log(value)
-  }
-
   return (
     <>
       <CustomAlert severity="error" message={errorMessage} />

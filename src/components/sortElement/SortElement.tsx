@@ -19,7 +19,6 @@ export type SortElementType = {
 
 export const SortElement = React.memo(
   ({ onSort, sortParam, stateSortElement }: SortElementType) => {
-    console.log('SortElement')
     const { activeSortElement, onChangeSortElement } = useSortElement(
       onSort,
       sortParam,

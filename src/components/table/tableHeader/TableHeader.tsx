@@ -38,12 +38,6 @@ export const TableHeader = ({ headData }: TabletHeadType) => {
           />
         </TableCell>
       ))}
-      <div className={style.tableHeaderWithButton}>
-        <TableCell title={'Created By'} />
-        <div>
-          <img src={sortArrow} alt={'sort arrow'} className={style.sortArrow} />
-        </div>
-      </div>
       <TableCell title={'Actions'} />
     </div>
   )

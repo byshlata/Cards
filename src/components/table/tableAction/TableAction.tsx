@@ -2,10 +2,9 @@ import React from 'react'
 
 import { CustomButtonBox } from 'components/button'
 import { useSelector } from 'react-redux'
+import { selectorUserId } from 'store'
 
-import { API_CONFIG } from '../../../api/config'
-import { selectorUserId } from '../../../store'
-import { learnIcon, editIcon, removeIcon } from '../index'
+import { editIcon, learnIcon, removeIcon } from '../index'
 
 import style from './TableAction.module.sass'
 

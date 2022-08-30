@@ -48,8 +48,13 @@ const TABLET_HEADER: TableHeadElementType[] = [
     stateSortElement: 'off',
   },
   {
-    title: 'Last Updated',
+    title: 'Last updated',
     sortParam: 'updated',
+    stateSortElement: 'off',
+  },
+  {
+    title: 'Create by',
+    sortParam: 'user_name',
     stateSortElement: 'off',
   },
 ]

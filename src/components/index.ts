@@ -42,4 +42,6 @@ export { IconArrowSvg } from './iconSVG/iconArrowSVG/IconArrowSVG'
 
 export { IconFilterSvg } from './iconSVG/iconFilterSVG/IconFilterSVG'
 
+export { IconSortElementSvg } from './iconSVG/iconSortElementSVG/IconSortElementSVG'
+
 export { SortElement } from './sortElement/SortElement'

@@ -11,7 +11,6 @@ export const getPackData = createAsyncThunk(
     try {
       dispatch(isSpinAppLoading(true))
       const res = await packAPI.getPackData(payload)
-      console.log(res)
       dispatch(setPackData(res))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
