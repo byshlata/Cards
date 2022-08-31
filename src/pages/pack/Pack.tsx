@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
@@ -18,11 +18,12 @@ import { useSelector } from 'react-redux'
 import {
   getPackData,
   initialStatePackParams,
+  mountingComponent,
   removeIsFirstOpenPage,
-  renderPageElement,
+  resetPackParams,
   selectorCurrentPage,
-  selectorIsFirsOpen,
   selectorIsLoading,
+  selectorIsMounting,
   selectorParams,
   selectorTotalCount,
   setIsFirstOpenPage,
@@ -66,24 +67,25 @@ export const Pack = () => {
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorIsLoading)
-  const isFirstOpenPage = useSelector(selectorIsFirsOpen)
   const totalPack = useSelector(selectorTotalCount)
   const currentPage = useSelector(selectorCurrentPage)
   const params = useSelector(selectorParams)
+  const isMounting = useSelector(selectorIsMounting)
 
-  useLayoutEffect(() => {
-    if (isFirstOpenPage && !params.isResetFilter) {
-      console.log('isFirstOpenPage', isFirstOpenPage)
-      console.log('!params.isResetFilter', !params.isResetFilter)
-      console.log('params', params)
+  useEffect(() => {
+    if (params.isFirstOpen) {
       dispatch(getPackData(params))
-    }
-    if (params.isResetFilter) {
-      dispatch(renderPageElement())
     }
   }, [params])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    if (isMounting) {
+      dispatch(resetPackParams())
+      dispatch(mountingComponent())
+    }
+  }, [isMounting])
+
+  useEffect(() => {
     dispatch(setIsFirstOpenPage())
     return () => {
       dispatch(removeIsFirstOpenPage())
@@ -99,7 +101,7 @@ export const Pack = () => {
   return (
     <div className={style.packWrapper}>
       <TitleWithButton titleText="Pack list" buttonText="Add new pack" onClick={onClockButton} />
-      {!params.isResetFilter && (
+      {!isMounting ? (
         <>
           <div className={style.filterElementWrapper}>
             {FILTER_ELEMENT.map(({ element, title }) => (
@@ -118,6 +120,8 @@ export const Pack = () => {
             />
           </div>
         </>
+      ) : (
+        <span />
       )}
     </div>
   )

@@ -39,6 +39,7 @@ export {
   selectorTotalCount,
   selectorAvatarUser,
   selectorCurrentPage,
+  selectorIsMounting,
 } from './selectors/selectors'
 
 //other
@@ -62,6 +63,7 @@ export {
   removePackParams,
   removeIsFirstOpenPage,
   setIsFirstOpenPage,
-  resetPageElement,
-  renderPageElement,
+  resetPackParams,
 } from './slice/packParamsSlice'
+
+export { mountingComponent, unmountingComponent } from './slice/resetSlice'

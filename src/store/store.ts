@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { appSlice, forgotSlice, packParamsSlice, packSlice, registrationSlice } from 'store'
+import { resetSlice } from 'store/slice/resetSlice'
 
 import { profileSlice } from './slice/profileSlice'
 
@@ -11,6 +12,7 @@ export const store = configureStore({
     profile: profileSlice.reducer,
     pack: packSlice.reducer,
     packParams: packParamsSlice.reducer,
+    reset: resetSlice.reducer,
   },
 })
 

@@ -10,7 +10,9 @@ export const SearchByPack = () => {
   const searchValue = useSelector(selectorPackName)
 
   const onChangeValue = (debounceValue: string) => {
-    dispatch(setPackParams({ packName: debounceValue }))
+    if (searchValue !== debounceValue) {
+      dispatch(setPackParams({ packName: debounceValue }))
+    }
   }
 
   return <Search searchValue={searchValue} onChangeDebounceValue={onChangeValue} />

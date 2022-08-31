@@ -3,14 +3,13 @@ import React from 'react'
 import style from 'components/button/buttonResetFilter/ButtomResetFilter.module.sass'
 import { CustomButtonBox, IconFilterSvg } from 'components/index'
 import { useAppDispatch } from 'hooks'
-import { removePackData, resetPageElement } from 'store'
+import { unmountingComponent } from 'store'
 
 export const ButtonResetFilter = () => {
   const dispatch = useAppDispatch()
 
   const onResetFilter = () => {
-    dispatch(resetPageElement())
-    dispatch(removePackData())
+    dispatch(unmountingComponent())
   }
 
   return (

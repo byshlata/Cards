@@ -10,10 +10,9 @@ export const initialStatePackParams: PackParamsInitialType = {
   sortPacks: '',
   packName: '',
   isFirstOpen: false,
-  isResetFilter: false,
 }
 
-export const resetStatePackParams: PackParamsInitialType = {
+const resetStatePackParams: PackParamsInitialType = {
   user_id: '',
   max: 110,
   min: 0,
@@ -22,7 +21,6 @@ export const resetStatePackParams: PackParamsInitialType = {
   sortPacks: '',
   packName: '',
   isFirstOpen: true,
-  isResetFilter: false,
 }
 
 export const packParamsSlice = createSlice({
@@ -39,19 +37,15 @@ export const packParamsSlice = createSlice({
     removeIsFirstOpenPage: (state) => {
       state.isFirstOpen = false
     },
-    resetPageElement: (state) => {
-      state.isResetFilter = true
-    },
-    renderPageElement: (state) => resetStatePackParams,
     removePackParams: () => initialStatePackParams,
+    resetPackParams: () => resetStatePackParams,
   },
 })
 
 export const {
   setPackParams,
   removePackParams,
+  resetPackParams,
   removeIsFirstOpenPage,
   setIsFirstOpenPage,
-  resetPageElement,
-  renderPageElement,
 } = packParamsSlice.actions

@@ -51,4 +51,6 @@ export const selectorIsFirsOpen = (state: RootStoreType): boolean => state.packP
 
 export const selectorTotalCount = (state: RootStoreType): number => state.pack.cardPacksTotalCount
 
-export const selectorCurrentPage = (state: RootStoreType): number => state.pack.page
+export const selectorCurrentPage = (state: RootStoreType): number => state.packParams.page
+
+export const selectorIsMounting = (state: RootStoreType): boolean => state.reset.isMounting

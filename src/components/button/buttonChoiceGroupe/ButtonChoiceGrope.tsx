@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import style from 'components/button/buttonChoiceGroupe/ButtonChoiceGrope.module.sass'
 import { CustomButtonBox } from 'components/index'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import {
-  selectorIsFirsOpen,
-  selectorIsLoading,
-  selectorUserId,
-  selectorUserParam_id,
-  setPackParams,
-} from 'store'
+import { selectorIsLoading, selectorUserId, setPackParams } from 'store'
 
 export const ButtonChoiceGrope = () => {
   const dispatch = useAppDispatch()
 
   const disabled = useSelector(selectorIsLoading)
   const idUser = useSelector(selectorUserId)
-  const isFirstOpenPage = useSelector(selectorIsFirsOpen)
-
-  console.log('isFirstOpenPage', isFirstOpenPage)
 
   const [isUserCards, setIsUserCards] = useState<boolean>(false)
 
