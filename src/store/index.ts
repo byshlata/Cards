@@ -37,6 +37,8 @@ export {
   selectorIsFirsOpen,
   selectorParams,
   selectorTotalCount,
+  selectorAvatarUser,
+  selectorCurrentPage,
 } from './selectors/selectors'
 
 //other
@@ -60,4 +62,6 @@ export {
   removePackParams,
   removeIsFirstOpenPage,
   setIsFirstOpenPage,
+  resetPageElement,
+  renderPageElement,
 } from './slice/packParamsSlice'

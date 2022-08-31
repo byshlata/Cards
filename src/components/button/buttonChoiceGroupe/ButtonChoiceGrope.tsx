@@ -4,13 +4,22 @@ import style from 'components/button/buttonChoiceGroupe/ButtonChoiceGrope.module
 import { CustomButtonBox } from 'components/index'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorIsLoading, selectorUserId, selectorUserParam_id, setPackParams } from 'store'
+import {
+  selectorIsFirsOpen,
+  selectorIsLoading,
+  selectorUserId,
+  selectorUserParam_id,
+  setPackParams,
+} from 'store'
 
 export const ButtonChoiceGrope = () => {
   const dispatch = useAppDispatch()
 
   const disabled = useSelector(selectorIsLoading)
   const idUser = useSelector(selectorUserId)
+  const isFirstOpenPage = useSelector(selectorIsFirsOpen)
+
+  console.log('isFirstOpenPage', isFirstOpenPage)
 
   const [isUserCards, setIsUserCards] = useState<boolean>(false)
 
@@ -18,21 +27,15 @@ export const ButtonChoiceGrope = () => {
     if (!isUserCards) {
       setIsUserCards(true)
     }
+    dispatch(setPackParams({ user_id: idUser }))
   }
 
   const onClickAllButton = () => {
     if (isUserCards) {
       setIsUserCards(false)
     }
+    dispatch(setPackParams({ user_id: '' }))
   }
-
-  useEffect(() => {
-    if (isUserCards) {
-      dispatch(setPackParams({ user_id: idUser }))
-    } else {
-      dispatch(setPackParams({ user_id: '' }))
-    }
-  }, [isUserCards])
 
   return (
     <div className={style.buttonWrapper}>

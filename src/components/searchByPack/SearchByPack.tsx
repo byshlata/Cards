@@ -5,7 +5,7 @@ import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { selectorPackName, setPackParams } from 'store'
 
-export const SearchByPacks = () => {
+export const SearchByPack = () => {
   const dispatch = useAppDispatch()
   const searchValue = useSelector(selectorPackName)
 

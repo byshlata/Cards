@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
-import { AvatarUser, ButtonBack, CustomButton, FormBody, Title } from 'components'
+import { AvatarUser, ButtonBack, CustomButton, FormBody, IconLogoutSvg, Title } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
@@ -86,8 +86,10 @@ export const Profile = () => {
           <h4>{userEmail}</h4>
         </div>
         <div className={style.buttonLogout} onClick={logoutHandle}>
-          <img src={logout} alt={'log out'} />
-          Log Out
+          <CustomButton color="secondary">
+            <IconLogoutSvg />
+            Log Out
+          </CustomButton>
         </div>
       </FormBody>
     </>

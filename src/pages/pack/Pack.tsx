@@ -5,20 +5,22 @@ import { Pagination } from 'antd'
 import {
   ButtonChoiceGrope,
   ButtonResetFilter,
-  CustomSlider,
+  CustomSliderByPack,
   FilterElementContainer,
   Search,
-  SearchByPacks,
+  SearchByPack,
   Table,
   TitleWithButton,
 } from 'components'
-import { TableHeadElementType, TabletHeadType } from 'components/table/Table'
+import { TableHeadElementType } from 'components/table/Table'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
   getPackData,
   initialStatePackParams,
   removeIsFirstOpenPage,
+  renderPageElement,
+  selectorCurrentPage,
   selectorIsFirsOpen,
   selectorIsLoading,
   selectorParams,
@@ -31,9 +33,9 @@ import { FilterElementType } from 'types'
 import style from './Pack.module.sass'
 
 const FILTER_ELEMENT: FilterElementType[] = [
-  { title: 'Search', element: <SearchByPacks /> },
+  { title: 'Search', element: <SearchByPack /> },
   { title: 'Show packs cards', element: <ButtonChoiceGrope /> },
-  { title: 'Number of cards', element: <CustomSlider /> },
+  { title: 'Number of cards', element: <CustomSliderByPack /> },
   { title: '', element: <ButtonResetFilter /> },
 ]
 
@@ -66,12 +68,18 @@ export const Pack = () => {
   const isLoading = useSelector(selectorIsLoading)
   const isFirstOpenPage = useSelector(selectorIsFirsOpen)
   const totalPack = useSelector(selectorTotalCount)
-
+  const currentPage = useSelector(selectorCurrentPage)
   const params = useSelector(selectorParams)
 
   useLayoutEffect(() => {
-    if (isFirstOpenPage) {
+    if (isFirstOpenPage && !params.isResetFilter) {
+      console.log('isFirstOpenPage', isFirstOpenPage)
+      console.log('!params.isResetFilter', !params.isResetFilter)
+      console.log('params', params)
       dispatch(getPackData(params))
+    }
+    if (params.isResetFilter) {
+      dispatch(renderPageElement())
     }
   }, [params])
 
@@ -91,22 +99,26 @@ export const Pack = () => {
   return (
     <div className={style.packWrapper}>
       <TitleWithButton titleText="Pack list" buttonText="Add new pack" onClick={onClockButton} />
-      <div className={style.filterElementWrapper}>
-        {FILTER_ELEMENT.map(({ element, title }) => (
-          <FilterElementContainer key={title} element={element} title={title} />
-        ))}
-      </div>
-      <Table headData={TABLET_HEADER} />
-      <div className={style.paginationWrapper}>
-        <Pagination
-          disabled={isLoading}
-          showQuickJumper
-          defaultCurrent={1}
-          pageSize={initialStatePackParams.pageCount}
-          total={totalPack}
-          onChange={onchangePagination}
-        />
-      </div>
+      {!params.isResetFilter && (
+        <>
+          <div className={style.filterElementWrapper}>
+            {FILTER_ELEMENT.map(({ element, title }) => (
+              <FilterElementContainer key={title} element={element} title={title} />
+            ))}
+          </div>
+          <Table headData={TABLET_HEADER} />
+          <div className={style.paginationWrapper}>
+            <Pagination
+              disabled={isLoading}
+              showQuickJumper
+              current={currentPage}
+              pageSize={initialStatePackParams.pageCount}
+              total={totalPack}
+              onChange={onchangePagination}
+            />
+          </div>
+        </>
+      )}
     </div>
   )
 }

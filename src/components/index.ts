@@ -42,8 +42,12 @@ export { IconArrowSvg } from './iconSVG/iconArrowSVG/IconArrowSVG'
 
 export { IconFilterSvg } from './iconSVG/iconFilterSVG/IconFilterSVG'
 
+export { IconLogoutSvg } from './iconSVG/iconLogoutSVG/IconLogoutSVG'
+
 export { IconSortElementSvg } from './iconSVG/iconSortElementSVG/IconSortElementSVG'
 
 export { SortElement } from './sortElement/SortElement'
 
-export { SearchByPacks } from './search/SearchByPacks'
+export { SearchByPack } from './searchByPack/SearchByPack'
+
+export { CustomSliderByPack } from './customSliderByPack/CustomSliderByPack'

@@ -9,4 +9,5 @@ export type PackParamsInitialType = {
   pageCount: number
   user_id: ParamsType<string>
   isFirstOpen: boolean
+  isResetFilter: boolean
 }
