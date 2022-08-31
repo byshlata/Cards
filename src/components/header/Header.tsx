@@ -1,34 +1,27 @@
 import React from 'react'
 
+import { CustomButton } from 'components/button'
 import { useSelector } from 'react-redux'
-import { selectorUserName } from 'store'
+import { selectorIsAuth } from 'store'
 
-import avatar from '../../assets/image/avatar.png'
-import itIncubatorLogo from '../../assets/image/itIncubatorLogo.png'
+import itIncubatorLogo from '../../assets/image/logo-ItIncubator.svg'
 import styleMain from '../../styles/container.module.sass'
 
 import style from './Header.module.sass'
+import { HeaderUserInfo } from './HeaderUserInfo'
 
 export const Header = () => {
-  const userName = useSelector(selectorUserName)
-
+  const isAuth = useSelector(selectorIsAuth)
   return (
-    <>
-      <header className={style.header}>
-        <div className={styleMain.container}>
-          <div className={style.pageHeader}>
-            <div className={style.logo}>
-              <img src={itIncubatorLogo} alt={'logo'} />
-            </div>
-            <div className={style.info}>
-              <div className={style.infoName}>{userName}</div>
-              <div className={style.infoAvatar}>
-                <img src={avatar} alt={'avatar miniature picture'} />
-              </div>
-            </div>
+    <header className={style.header}>
+      <div className={styleMain.container}>
+        <div className={style.headerContainer}>
+          <img className={style.logo} src={itIncubatorLogo} alt={'logo'} />
+          <div className={style.wrapper}>
+            {!isAuth ? <CustomButton color="primary">Sing In</CustomButton> : <HeaderUserInfo />}
           </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   )
 }

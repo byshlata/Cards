@@ -6,11 +6,11 @@ type TableCellType = {
   title?: string | number
   children?: ReactNode
 }
-export const TableCell: React.FC<TableCellType> = ({ title, children }) => {
+export const TableCell: React.FC<TableCellType> = React.memo(({ title, children }) => {
   return (
     <div className={style.cell}>
       {title}
       {children}
     </div>
   )
-}
+})
