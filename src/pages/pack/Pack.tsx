@@ -4,6 +4,8 @@ import 'antd/dist/antd.css'
 import { Pagination } from 'antd'
 import { useSelector } from 'react-redux'
 
+import { SecondTableContainer } from '../../components/seondTable/SecondTableContainer'
+
 import style from './Pack.module.sass'
 
 import {

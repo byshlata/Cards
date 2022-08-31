@@ -8,6 +8,7 @@ import camera from '../../assets/image/camera.png'
 import exitArrow from '../../assets/image/exitArrow.png'
 import logout from '../../assets/image/logout.png'
 import pencil from '../../assets/image/pencil.png'
+import { SecondTableContainer } from '../../components/seondTable/SecondTableContainer'
 import { Cards } from '../cards/Cards'
 
 import style from './Profile.module.sass'
@@ -91,7 +92,8 @@ export const Profile = () => {
           <img src={logout} alt={'log out'} />
           Log Out
         </div>
-        <Cards />
+        {/*<Cards />*/}
+        <SecondTableContainer />
       </FormBody>
     </>
   )

@@ -12,7 +12,7 @@ import { CustomButtonBox } from 'components/button'
 import { selectorUserId } from 'store'
 
 type TableActionType = {
-  user_id: string
+  user_id?: string
 }
 export const TableAction: React.FC<TableActionType> = ({ user_id }) => {
   const dispatch = useAppDispatch()
@@ -47,7 +47,7 @@ export const TableAction: React.FC<TableActionType> = ({ user_id }) => {
               <img src={removeIcon} alt={'edit pack'} className={style.icon} />
             </CustomButtonBox>
           </div>
-          <div onClick={onCreatePack}>+</div>
+          {/*<div onClick={onCreatePack}>+</div>*/}
         </>
       ) : null}
     </div>
