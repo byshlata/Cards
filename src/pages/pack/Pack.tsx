@@ -8,8 +8,9 @@ import {
   CustomSlider,
   FilterElementContainer,
   Search,
-  TitleWithButton,
+  SearchByPacks,
   Table,
+  TitleWithButton,
 } from 'components'
 import { TableHeadElementType, TabletHeadType } from 'components/table/Table'
 import { useAppDispatch } from 'hooks'
@@ -30,7 +31,7 @@ import { FilterElementType } from 'types'
 import style from './Pack.module.sass'
 
 const FILTER_ELEMENT: FilterElementType[] = [
-  { title: 'Search', element: <Search /> },
+  { title: 'Search', element: <SearchByPacks /> },
   { title: 'Show packs cards', element: <ButtonChoiceGrope /> },
   { title: 'Number of cards', element: <CustomSlider /> },
   { title: '', element: <ButtonResetFilter /> },

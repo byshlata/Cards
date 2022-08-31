@@ -8,13 +8,14 @@ import { useSelector } from 'react-redux'
 import { selectorCardPacksTotalCount, selectorIsLoading, setPackParams } from 'store'
 import { selectorPackName } from 'store/selectors/selectors'
 
-export const Search = () => {
-  const dispatch = useAppDispatch()
+type SearchType = {
+  searchValue: string
+  onChangeDebounceValue: (debounceValue: string) => void
+}
 
+export const Search = ({ searchValue, onChangeDebounceValue }: SearchType) => {
   const disabled = useSelector(selectorIsLoading)
   const countPage = useSelector(selectorCardPacksTotalCount)
-
-  const searchValue = useSelector(selectorPackName)
 
   const [error, setError] = useState('')
 
@@ -23,7 +24,7 @@ export const Search = () => {
 
   useEffect(() => {
     if (value === debounceValue) {
-      dispatch(setPackParams({ packName: debounceValue }))
+      onChangeDebounceValue(debounceValue)
     }
   }, [debounceValue])
 
