@@ -6,20 +6,15 @@ import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectorIsLoading } from 'store'
-import { sendLetterOnEmail } from 'store/thunk/forgotThunk'
+import { selectorIsLoading, sendLetterOnEmail } from 'store'
+import { createErrorSchema } from 'utils'
 import * as yup from 'yup'
 
 import style from './ForgotEmail.module.sass'
 
 const name = 'Aliaksandr'
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Please enter a valid email format !')
-    .required('Email is required please !'),
-})
+const schema = yup.object().shape(createErrorSchema(['email']))
 
 export const ForgotEmail = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -45,6 +40,9 @@ export const ForgotEmail = React.memo(() => {
     navigate(`${Path.Login}`)
   }, [])
 
+  const errorEmail = formik.touched.email ? formik.errors.email : undefined
+  const isDisabledButton = isLoading || !formik.isValid
+
   return (
     <FormBody width={410} height={460}>
       <Title text="Forgot your password?" />
@@ -55,7 +53,7 @@ export const ForgotEmail = React.memo(() => {
             value={formik.values.email}
             name="email"
             type="simple"
-            error={formik.errors.email}
+            error={errorEmail}
             disabled={isLoading}
           />
         </div>
@@ -63,7 +61,7 @@ export const ForgotEmail = React.memo(() => {
           Enter your email address and we will send you further instructions
         </p>
         <div className={style.buttonWrapper}>
-          <CustomButton type="submit" color="primary" disabled={isLoading || !formik.isValid}>
+          <CustomButton type="submit" color="primary" disabled={isDisabledButton}>
             Send Instructions
           </CustomButton>
         </div>

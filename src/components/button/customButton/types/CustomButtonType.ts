@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { ColorCustomButtonType } from 'components/button/customButton/type/ColorCustomButtonType'
+import { ColorCustomButtonType } from 'components/button/customButton/types/ColorCustomButtonType'
 
 export type CustomButtonType = {
   type?: 'submit' | 'button' | 'reset'

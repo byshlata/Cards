@@ -1,62 +1,50 @@
 import React from 'react'
 
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { OptionValue, Path } from 'enums'
+import { Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { selectorIsAuth, selectorIsLoading, selectorUserId } from 'store'
-import { signInOnEmail } from 'store/thunk/loginThunk'
+import { authThunk } from 'store/thunk/loginThunk'
+import { createErrorSchema } from 'utils/createErrorScheme'
+import * as yup from 'yup'
 
 import style from './Login.module.sass'
 
-type FormikErrorType = {
-  email?: string
-  password?: string
-  rememberMe?: boolean
-}
+const schema = yup.object().shape(createErrorSchema(['email', 'password']))
 
 export const Login = () => {
-  console.log('login')
   const dispatch = useAppDispatch()
+
   const isLoading = useSelector(selectorIsLoading)
   const isAuth = useSelector(selectorIsAuth)
   const userId = useSelector(selectorUserId)
+
+  const navigate = useNavigate()
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
       rememberMe: false,
     },
-    validate: (values) => {
-      const errors: FormikErrorType = {}
-      if (!values.email && formik.handleBlur('email')) {
-        errors.email = 'Required'
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email) &&
-        formik.handleBlur('email')
-      ) {
-        errors.email = 'Invalid email address'
-      }
-      if (!values.password && formik.handleBlur('password')) {
-        errors.password = 'Required'
-      } else if (values.password.length < OptionValue.MinLengthPassword) {
-        errors.password = 'The field is required to fill in'
-      }
-      return errors
-    },
-
+    validateOnBlur: true,
+    validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(signInOnEmail(values))
+      dispatch(authThunk(values))
       formik.resetForm({
         values: { email: '', password: '', rememberMe: false },
       })
     },
   })
 
+  const errorEmail = formik.touched.email ? formik.errors.email : undefined
+  const errorPassword = formik.touched.password ? formik.errors.password : undefined
+
   if (isAuth) {
-    return <Navigate to={`${Path.Profile}`} />
+    navigate(`${Path.Profile}${Path.Root}${userId}`)
   }
 
   return (
@@ -69,7 +57,7 @@ export const Login = () => {
             onChange={formik.handleChange}
             type="simple"
             name="email"
-            error={formik.errors.email}
+            error={errorEmail}
           />
         </div>
         <div className={style.inputWrapper}>
@@ -78,7 +66,7 @@ export const Login = () => {
             onChange={formik.handleChange}
             type="password"
             name="password"
-            error={formik.errors.password}
+            error={errorPassword}
           />
         </div>
         <div>
@@ -87,9 +75,9 @@ export const Login = () => {
             Remember Me
           </label>
         </div>
-        <div className={style.forgotPassword}>
-          <a href={'/forgot'}> Forgot Password?</a>
-        </div>
+        <NavLink to={`${Path.Forgot}`}>
+          <div className={style.forgotPassword}>Forgot Password?</div>
+        </NavLink>
         <div className={style.buttonWrapper}>
           <CustomButton type="submit" color="primary" disabled={isLoading}>
             Sign In
@@ -99,7 +87,7 @@ export const Login = () => {
       <div>
         <p className={style.textBlockQuestion}>Already have an account?</p>
         <CustomButton type="button" color="link" disabled={isLoading}>
-          <a href="/registration"> Sign Up</a>
+          <NavLink to={`${Path.Register}`}>Sign Up</NavLink>
         </CustomButton>
       </div>
     </FormBody>

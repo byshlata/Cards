@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { CustomButtonBox } from 'components/button'
 import { useSelector } from 'react-redux'
 
 import { API_CONFIG } from '../../../api/config'
@@ -12,38 +13,32 @@ type TableActionType = {
   user_id: string
 }
 export const TableAction: React.FC<TableActionType> = ({ user_id }) => {
-  const createPack = () => {
-    API_CONFIG.post(`cards/pack`, { cardsPack: { name: 'new Pack' } })
-  }
-  const editPack = () => {
-    API_CONFIG.put(`cards/pack`, { cardsPack: { _id: packId, name: 'change name' } })
-  }
-  const removePack = () => {
-    API_CONFIG.delete(`cards/pack`, { params: { id: '630cd8581d127a000430028a' } })
-  }
   const userId = useSelector(selectorUserId)
-  const packId = '630cd9f01d127a000430028b'
+  const onLearnPack = () => {}
+  const onEditPack = () => {}
+  const onRemovePack = () => {}
 
   return (
     <div className={style.actionWrapper}>
+      <div className={style.item}>
+        <CustomButtonBox color="link" onClick={onLearnPack}>
+          <img src={learnIcon} alt={'learn pack'} className={style.icon} />
+        </CustomButtonBox>
+      </div>
       {user_id === userId ? (
         <>
           <div className={style.item}>
-            <img src={learnIcon} alt={'learn pack'} className={style.icon} />
+            <CustomButtonBox color="link" onClick={onEditPack}>
+              <img src={editIcon} alt={'edit pack'} className={style.icon} />
+            </CustomButtonBox>
           </div>
           <div className={style.item}>
-            <img src={editIcon} alt={'edit pack'} className={style.icon} onClick={editPack} />
-          </div>
-          <div className={style.item}>
-            <img src={removeIcon} alt={'remove pack'} className={style.icon} onClick={removePack} />
+            <CustomButtonBox color="link" onClick={onRemovePack}>
+              <img src={removeIcon} alt={'edit pack'} className={style.icon} />
+            </CustomButtonBox>
           </div>
         </>
-      ) : (
-        <div className={style.item}>
-          <img src={learnIcon} alt={'learn pack'} className={style.icon} />
-        </div>
-      )}
-      {/*<div onClick={createPack}>+</div>*/}
+      ) : null}
     </div>
   )
 }

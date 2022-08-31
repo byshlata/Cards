@@ -1,8 +1,10 @@
-import { ColorCustomButtonType } from 'components/button/customButton/type/ColorCustomButtonType'
+import { ColorCustomButtonType } from 'components/button/customButton/types/ColorCustomButtonType'
 
-import style from '../CustomrButton.module.sass'
-
-export const useStyleCustomButton = (color: ColorCustomButtonType, disabled = false): string => {
+export const useStyleCustomButton = (
+  color: ColorCustomButtonType,
+  disabled = false,
+  style: any
+): string => {
   let buttonClassName = style.primaryButton
 
   if (color === 'primary' && !disabled) {

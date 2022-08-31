@@ -1,19 +1,19 @@
 import { useState } from 'react'
 
 type useModalType = {
-  isOpen: boolean
-  setOpen: () => void
-  setClose: () => void
+  isOpenModal: boolean
+  onOpenModal: () => void
+  onCloseModal: () => void
 }
 
 export function useModal(): useModalType {
-  const [isOpen, setIsOpen] = useState(false)
-  const setClose = (): void => {
-    setIsOpen(false)
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const onCloseModal = (): void => {
+    setIsOpenModal(false)
   }
 
-  const setOpen = (): void => {
-    setIsOpen(true)
+  const onOpenModal = (): void => {
+    setIsOpenModal(true)
   }
-  return { isOpen, setOpen, setClose }
+  return { isOpenModal, onOpenModal, onCloseModal }
 }

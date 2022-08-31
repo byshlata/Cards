@@ -6,4 +6,6 @@ export enum PathAPI {
   Me = '/me',
   Forgot = '/forgot',
   NewPassword = '/set-new-password',
+  Pack = '/pack',
+  Cards = '/cards',
 }

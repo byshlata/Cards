@@ -1,42 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
 import { Header, LinerProgress } from 'components'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
-import { Login, Profile, Routers } from 'pages'
+import { IconSortElementSvg } from 'components/iconSVG/iconSortElementSVG/IconSortElementSVG'
+import { Loader } from 'components/loader/Loader'
+import { SortElement } from 'components/sortElement/SortElement'
+import { useAppDispatch } from 'hooks'
+import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import {
-  fetchProfilePage,
-  selectorError,
-  selectorIsAuth,
-  selectorIsLoading,
-  selectorUserId,
-} from 'store'
+import { fetchProfilePage, selectorError, selectorIsLoading, selectorsIsInitialized } from 'store'
 import styleMain from 'styles/container.module.sass'
-
-import { Search } from '../components/search/Search'
-import { Path } from '../enums'
-import { useAppDispatch } from '../hooks'
 
 import style from './App.module.sass'
 
 export const App = () => {
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
   const isLoading = useSelector(selectorIsLoading)
   const errorMessage = useSelector(selectorError)
-  const isAuth = useSelector(selectorIsAuth)
-  const userId = useSelector(selectorUserId)
+  const isInitialized = useSelector(selectorsIsInitialized)
 
-  const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchProfilePage())
   }, [])
 
-  useEffect(() => {
-    if (isAuth) {
-      navigate(`${Path.Profile}`)
-    }
-  }, [isAuth])
+  if (isInitialized) {
+    return <Loader />
+  }
+
+  const onSortParam = (value: string) => {
+    console.log(value)
+  }
 
   return (
     <>
@@ -47,8 +41,9 @@ export const App = () => {
       </div>
       <div className={styleMain.container}>
         <Routers />
-        {/*<Search />*/}
       </div>
+
+      <SortElement onSort={onSortParam} sortParam={'_id'} />
     </>
   )
 }

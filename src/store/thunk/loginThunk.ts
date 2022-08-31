@@ -1,13 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { loginAPI } from 'api'
-import axios, { AxiosError } from 'axios'
-import { isSpinAppLoading } from 'store'
-import { setAuth } from 'store/slice/appSlice'
+import { isSpinAppLoading, setAuth, setUserData } from 'store'
 import { LoginType } from 'types'
+import { setErrorResponse } from 'utils'
 
-import { setUserData } from '../slice/profileSlice'
-
-export const signInOnEmail = createAsyncThunk(
+export const authThunk = createAsyncThunk(
   'loginSlice/signInOnEmail',
   async ({ password, rememberMe, email }: LoginType, { rejectWithValue, dispatch }) => {
     try {
@@ -16,13 +13,7 @@ export const signInOnEmail = createAsyncThunk(
       dispatch(setAuth(true))
       dispatch(setUserData(res))
     } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>
-      if (axios.isAxiosError(err)) {
-        const error = err.response?.data ? err.response.data.error : err.message
-        return rejectWithValue(error)
-      } else {
-        return rejectWithValue(err.message)
-      }
+      return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))
     }

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { CustomButton, CustomButtonBox } from 'components/button'
+
 import { TableAction } from '../tableAction/TableAction'
 import { TableCell } from '../tableCell/TableCell'
 
@@ -20,9 +22,14 @@ export const TableRow: React.FC<TableRowType> = ({
   updated,
   cardsCount,
 }) => {
+  const onClick = () => {}
   return (
     <div className={style.rowWrapper}>
-      <TableCell title={name} />
+      <TableCell>
+        <CustomButtonBox color={'link'} onClick={onClick}>
+          {name}
+        </CustomButtonBox>
+      </TableCell>
       <TableCell title={cardsCount} />
       <TableCell title={updated} />
       <TableCell title={user_name} />
