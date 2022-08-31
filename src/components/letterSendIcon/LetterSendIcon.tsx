@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react'
 
-import style from 'components/letterSendIcon/LetterSendIcon.module.sass'
-
 import { LetterSendIconType } from './types/LetterSendIconType'
+
+import style from 'components/letterSendIcon/LetterSendIcon.module.sass'
 
 export const LetterSendIcon = ({ width }: LetterSendIconType): ReactElement => (
   <svg

@@ -1,10 +1,20 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
+import { useSelector } from 'react-redux'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
+
+import avatar from '../../assets/image/avatar.png'
+import camera from '../../assets/image/camera.png'
+import exitArrow from '../../assets/image/exitArrow.png'
+import logout from '../../assets/image/logout.png'
+import pencil from '../../assets/image/pencil.png'
+import { Cards } from '../cards/Cards'
+
+import style from './Profile.module.sass'
+
 import { AvatarUser, ButtonBack, CustomButton, FormBody, Title } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
-import { useSelector } from 'react-redux'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import {
   selectorUserEmail,
   selectorUserName,
@@ -12,14 +22,6 @@ import {
   logoutUser,
   selectorUserId,
 } from 'store'
-
-import avatar from '../../assets/image/avatar.png'
-import camera from '../../assets/image/camera.png'
-import exitArrow from '../../assets/image/exitArrow.png'
-import logout from '../../assets/image/logout.png'
-import pencil from '../../assets/image/pencil.png'
-
-import style from './Profile.module.sass'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -89,6 +91,7 @@ export const Profile = () => {
           <img src={logout} alt={'log out'} />
           Log Out
         </div>
+        <Cards />
       </FormBody>
     </>
   )

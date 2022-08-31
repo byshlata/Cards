@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react'
 
-import { CustomButton, Title } from 'components'
-
 import style from './TitleWithButton.module.sass'
+
+import { CustomButton, Title } from 'components'
 
 type TitleWithButtonType = {
   titleText: string

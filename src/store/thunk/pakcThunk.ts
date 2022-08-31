@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+
 import { packAPI } from 'api'
 import { isSpinAppLoading, RootStoreType, setPackParams } from 'store'
 import { setPackData } from 'store/slice/packSlice'
@@ -11,6 +12,7 @@ export const getPackData = createAsyncThunk(
     try {
       dispatch(isSpinAppLoading(true))
       const res = await packAPI.getPackData(payload)
+
       dispatch(setPackData(res))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)

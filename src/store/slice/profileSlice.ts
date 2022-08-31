@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { UserResponseType } from 'types'
 
 export const initialState: UserResponseType = {

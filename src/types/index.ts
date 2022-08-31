@@ -45,3 +45,7 @@ export type { PackParamsInitialType } from './PackParamsInitialType'
 export type { SortParamType } from './SortParamType'
 
 export type { SortParamElementType } from './SortParamElementType'
+
+export type { CardsPackType } from './CardsPackType'
+
+export type { EditResponseType } from './EditResponseType'

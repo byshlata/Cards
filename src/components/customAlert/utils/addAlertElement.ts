@@ -1,6 +1,6 @@
-import { Nullable } from 'types'
-
 import { AlertElementType } from '../types'
+
+import { Nullable } from 'types'
 
 export const addAlertElement = (
   alerts: Nullable<AlertElementType[]>,
@@ -9,5 +9,6 @@ export const addAlertElement = (
   if (alerts) {
     return [...alerts, alert]
   }
+
   return [alert]
 }

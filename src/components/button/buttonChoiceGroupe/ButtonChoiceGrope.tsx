@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
+import { useSelector } from 'react-redux'
+
 import style from 'components/button/buttonChoiceGroupe/ButtonChoiceGrope.module.sass'
 import { CustomButtonBox } from 'components/index'
 import { useAppDispatch } from 'hooks'
-import { useSelector } from 'react-redux'
 import { selectorIsLoading, selectorUserId, selectorUserParam_id, setPackParams } from 'store'
 
 export const ButtonChoiceGrope = () => {

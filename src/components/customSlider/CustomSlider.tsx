@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
 import { Slider } from 'antd'
+import { useSelector } from 'react-redux'
+
+import style from './CustomSlider.module.sass'
+
 import { CustomButtonBox } from 'components'
 import { useAppDispatch, useDebounce } from 'hooks'
-import { useSelector } from 'react-redux'
 import {
   initialStatePackParams,
   selectorIsLoading,
@@ -11,10 +14,8 @@ import {
   selectorMinCardsOnPack,
   setPackParams,
 } from 'store'
-import 'antd/dist/antd.css'
 import { maxValue, minValue } from 'utils'
-
-import style from './CustomSlider.module.sass'
+import 'antd/dist/antd.css'
 
 export const CustomSlider = () => {
   const dispatch = useAppDispatch()
@@ -46,6 +47,7 @@ export const CustomSlider = () => {
   useEffect(() => {
     const max = maxValue(debounceValue)
     const min = minValue(debounceValue)
+
     dispatch(setPackParams({ max, min }))
   }, [debounceValue])
 

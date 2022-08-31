@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 
+import { useSelector } from 'react-redux'
+
+import style from './App.module.sass'
+
 import { Header, LinerProgress } from 'components'
 import { CustomAlert } from 'components/customAlert/CustomAlert'
 import { Loader } from 'components/loader/Loader'
 import { useAppDispatch } from 'hooks'
 import { Routers } from 'pages'
-import { useSelector } from 'react-redux'
 import { fetchProfilePage, selectorError, selectorIsLoading, selectorsIsInitialized } from 'store'
 import styleMain from 'styles/container.module.sass'
-
-import style from './App.module.sass'
 
 export const App = () => {
   const dispatch = useAppDispatch()

@@ -1,8 +1,9 @@
 import { AxiosResponse } from 'axios'
-import { PathAPI } from 'enums'
-import { MessageNewPasswordType, PasswordResponseType, RecoveryPasswordType } from 'types'
 
 import { API_CONFIG } from './config'
+
+import { PathAPI } from 'enums'
+import { MessageNewPasswordType, PasswordResponseType, RecoveryPasswordType } from 'types'
 
 const from = 'test-front-admin <byshlata@yandex.by>'
 
@@ -33,6 +34,7 @@ export const forgotAPI = {
       AxiosResponse<PasswordResponseType>,
       MessageNewPasswordType
     >(`${PathAPI.Auth}${PathAPI.Forgot}`, { email, message, from })
+
     return response.data
   },
 

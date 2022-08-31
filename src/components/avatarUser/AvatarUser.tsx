@@ -1,14 +1,15 @@
 import React, { SyntheticEvent } from 'react'
 
-import { ButtonUpload } from 'components/button/buttonUpload/ButtonUpload'
-import { useModal } from 'components/modal/hooks/useModal'
-import { Modal } from 'components/modal/Modal'
 import { useSelector } from 'react-redux'
-import { selectorAvatarUser } from 'store/selectors/selectors'
 
 import defaultAvatar from '../../assets/image/avatar.png'
 
 import style from './AvatarUser.module.sass'
+
+import { ButtonUpload } from 'components/button/buttonUpload/ButtonUpload'
+import { useModal } from 'components/modal/hooks/useModal'
+import { Modal } from 'components/modal/Modal'
+import { selectorAvatarUser } from 'store/selectors/selectors'
 
 export const AvatarUser = () => {
   let avatar = useSelector(selectorAvatarUser)

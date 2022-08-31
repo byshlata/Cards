@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { appSlice, forgotSlice, packParamsSlice, packSlice, registrationSlice } from 'store'
 
 import { profileSlice } from './slice/profileSlice'
+
+import { appSlice, forgotSlice, packParamsSlice, packSlice, registrationSlice } from 'store'
 
 export const store = configureStore({
   reducer: {

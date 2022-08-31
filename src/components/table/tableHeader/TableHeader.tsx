@@ -1,16 +1,16 @@
 import React, { useCallback, useState } from 'react'
 
-import { SortElement } from 'components/sortElement/SortElement'
-import { useAppDispatch } from 'hooks'
-import { setPackParams } from 'store'
-import { SortParamElementType, SortParamType } from 'types'
-import { setParamFilter } from 'utils/setParamFilter'
-
 import { sortArrow } from '../index'
 import { TableHeadElementType, TabletHeadType } from '../Table'
 import { TableCell } from '../tableCell/TableCell'
 
 import style from './TableHeader.module.sass'
+
+import { SortElement } from 'components/sortElement/SortElement'
+import { useAppDispatch } from 'hooks'
+import { setPackParams } from 'store'
+import { SortParamElementType, SortParamType } from 'types'
+import { setParamFilter } from 'utils/setParamFilter'
 
 export const TableHeader = ({ headData }: TabletHeadType) => {
   const dispatch = useAppDispatch()
@@ -20,6 +20,7 @@ export const TableHeader = ({ headData }: TabletHeadType) => {
     (sortValue: string, sortParam: SortParamType, stateSortElement: SortParamElementType) => {
       dispatch(setPackParams({ sortPacks: sortValue }))
       const changeParam = setParamFilter(tableHeadData, sortParam, stateSortElement)
+
       if (changeParam) {
         setTableHeadData(changeParam)
       }

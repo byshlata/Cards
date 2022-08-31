@@ -1,8 +1,6 @@
 import React from 'react'
 
-import { CustomButton } from 'components/button'
 import { useSelector } from 'react-redux'
-import { selectorIsAuth } from 'store'
 
 import itIncubatorLogo from '../../assets/image/logo-ItIncubator.svg'
 import styleMain from '../../styles/container.module.sass'
@@ -10,8 +8,12 @@ import styleMain from '../../styles/container.module.sass'
 import style from './Header.module.sass'
 import { HeaderUserInfo } from './HeaderUserInfo'
 
+import { CustomButton } from 'components/button'
+import { selectorIsAuth } from 'store'
+
 export const Header = () => {
   const isAuth = useSelector(selectorIsAuth)
+
   return (
     <header className={style.header}>
       <div className={styleMain.container}>

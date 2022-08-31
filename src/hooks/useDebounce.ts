@@ -4,6 +4,7 @@ const TIME_TO_REQUEST = 500
 
 export const useDebounce = <T>(value: T, delay = TIME_TO_REQUEST): T => {
   const [debouncedValue, setDebouncedValue] = useState(value)
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value)
@@ -13,5 +14,6 @@ export const useDebounce = <T>(value: T, delay = TIME_TO_REQUEST): T => {
       clearTimeout(handler)
     }
   }, [value, delay])
+
   return debouncedValue
 }

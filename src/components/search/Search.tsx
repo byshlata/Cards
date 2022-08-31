@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
+import { useSelector } from 'react-redux'
+
 import { CustomInput } from 'components'
 import { useCustomInput } from 'components/input/customInput/hooks'
 import style from 'components/search/Search.module.sass'
 import { useAppDispatch, useDebounce } from 'hooks'
-import { useSelector } from 'react-redux'
 import { selectorCardPacksTotalCount, selectorIsLoading, setPackParams } from 'store'
 import { selectorPackName } from 'store/selectors/selectors'
 

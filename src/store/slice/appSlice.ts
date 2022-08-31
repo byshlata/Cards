@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { ErrorMessageType } from 'types'
 
 export const initialState: InitialStateType = {
@@ -15,7 +16,7 @@ export const appSlice = createSlice({
     isSpinAppLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
     },
-    removeErrorMessage: (state) => {
+    removeErrorMessage: state => {
       state.error = { message: '' }
     },
     setInitialized: (state, action: PayloadAction<boolean>) => {
@@ -25,9 +26,9 @@ export const appSlice = createSlice({
       state.isAuth = action.payload
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addMatcher(
-      (action) => action.type.endsWith('/rejected'),
+      action => action.type.endsWith('/rejected'),
       (state, action: PayloadAction<string>) => {
         state.error = { message: action.payload }
       }

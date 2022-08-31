@@ -10,7 +10,7 @@ export const ButtonResetFilter = () => {
 
   const onResetFilter = () => {
     // dispatch(removePackData())
-      alert('yo')
+    alert('yo')
   }
 
   return (

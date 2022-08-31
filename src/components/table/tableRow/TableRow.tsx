@@ -1,11 +1,13 @@
 import React from 'react'
 
-import { CustomButton, CustomButtonBox } from 'components/button'
-
+import { Table } from '../Table'
 import { TableAction } from '../tableAction/TableAction'
 import { TableCell } from '../tableCell/TableCell'
+import { TableGrade } from '../tableGrade/TableGrade'
 
 import style from './TableRow.module.sass'
+
+import { CustomButton, CustomButtonBox } from 'components/button'
 
 type TableRowType = {
   name: string
@@ -23,6 +25,7 @@ export const TableRow: React.FC<TableRowType> = ({
   cardsCount,
 }) => {
   const onClick = () => {}
+
   return (
     <div className={style.rowWrapper}>
       <TableCell>
@@ -34,6 +37,7 @@ export const TableRow: React.FC<TableRowType> = ({
       <TableCell title={updated} />
       <TableCell title={user_name} />
       <TableAction user_id={user_id} />
+      {/*<TableGrade />*/}
     </div>
   )
 }

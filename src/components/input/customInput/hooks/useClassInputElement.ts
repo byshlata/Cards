@@ -22,5 +22,6 @@ export const useClassInputElement = (error = '', disable = false) => {
     (disable && error) || disable ? style.iconButtonDisable : style.iconButtonSearch
 
   const classIcon = (disable && error) || disable ? style.iconButtonDisable : style.iconButton
+
   return { classInput, classLabel, classBar, classIcon, classSearchIcon }
 }

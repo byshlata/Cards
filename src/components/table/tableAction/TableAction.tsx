@@ -1,21 +1,32 @@
 import React from 'react'
 
-import { CustomButtonBox } from 'components/button'
 import { useSelector } from 'react-redux'
-import { selectorUserId } from 'store'
 
+import { packAPI } from '../../../api'
+import { useAppDispatch } from '../../../hooks'
 import { editIcon, learnIcon, removeIcon } from '../index'
 
 import style from './TableAction.module.sass'
+
+import { CustomButtonBox } from 'components/button'
+import { selectorUserId } from 'store'
 
 type TableActionType = {
   user_id: string
 }
 export const TableAction: React.FC<TableActionType> = ({ user_id }) => {
+  const dispatch = useAppDispatch()
   const userId = useSelector(selectorUserId)
   const onLearnPack = () => {}
-  const onEditPack = () => {}
+  const onCreatePack = () => {
+    dispatch(packAPI.createPack('second less'))
+  }
+  const onEditPack = () => {
+    dispatch(packAPI.editPack('630cdb7b1d127a000430028d', 'rr_test-2'))
+  }
   const onRemovePack = () => {}
+
+  //dispatch(packAPI.removePack('630f68b42e50022c906cb732'))
 
   return (
     <div className={style.actionWrapper}>
@@ -36,6 +47,7 @@ export const TableAction: React.FC<TableActionType> = ({ user_id }) => {
               <img src={removeIcon} alt={'edit pack'} className={style.icon} />
             </CustomButtonBox>
           </div>
+          <div onClick={onCreatePack}>+</div>
         </>
       ) : null}
     </div>

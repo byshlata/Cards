@@ -2,6 +2,10 @@ import React, { useLayoutEffect } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
+import { useSelector } from 'react-redux'
+
+import style from './Pack.module.sass'
+
 import {
   ButtonChoiceGrope,
   ButtonResetFilter,
@@ -14,7 +18,6 @@ import {
 } from 'components'
 import { TableHeadElementType, TabletHeadType } from 'components/table/Table'
 import { useAppDispatch } from 'hooks'
-import { useSelector } from 'react-redux'
 import {
   getPackData,
   initialStatePackParams,
@@ -27,8 +30,6 @@ import {
   setPackParams,
 } from 'store'
 import { FilterElementType } from 'types'
-
-import style from './Pack.module.sass'
 
 const FILTER_ELEMENT: FilterElementType[] = [
   { title: 'Search', element: <SearchByPacks /> },
@@ -77,6 +78,7 @@ export const Pack = () => {
 
   useLayoutEffect(() => {
     dispatch(setIsFirstOpenPage())
+
     return () => {
       dispatch(removeIsFirstOpenPage())
     }

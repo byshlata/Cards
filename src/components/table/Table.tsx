@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 
 import { useSelector } from 'react-redux'
-import { selectorPacksData } from 'store'
-import { SortParamElementType, SortParamType } from 'types'
-import { formattedDate } from 'utils'
 
 import style from './Table.module.sass'
 import { TableHeader } from './tableHeader/TableHeader'
 import { TableRow } from './tableRow/TableRow'
+
+import { selectorPacksData } from 'store'
+import { SortParamElementType, SortParamType } from 'types'
+import { formattedDate } from 'utils'
 
 export type TableHeadElementType = {
   title: string

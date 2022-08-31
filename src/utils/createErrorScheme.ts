@@ -1,7 +1,8 @@
-import { OptionValue } from 'enums'
 import * as yup from 'yup'
 import { RequiredStringSchema } from 'yup/lib/string'
 import { AnyObject } from 'yup/lib/types'
+
+import { OptionValue } from 'enums'
 
 type KeySchemeType = keyof SchemaElementType
 
@@ -30,7 +31,7 @@ export const createErrorSchema = (params: KeySchemeType[]) => {
 
   const schema: SchemaElementType = {}
 
-  params.forEach((element) => {
+  params.forEach(element => {
     if (element in schemaElement) {
       // @ts-ignore
       schema[element] = schemaElement[element]

@@ -1,8 +1,9 @@
 import React from 'react'
 
+import { useSelector } from 'react-redux'
+
 import { Search } from 'components/search/Search'
 import { useAppDispatch } from 'hooks'
-import { useSelector } from 'react-redux'
 import { selectorPackName, setPackParams } from 'store'
 
 export const SearchByPacks = () => {

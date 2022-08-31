@@ -1,8 +1,8 @@
 import React, { DetailedHTMLProps, MouseEvent, ReactElement, ReactNode } from 'react'
 
-import { CustomButton } from 'components/button'
-
 import style from './Modal.module.sass'
+
+import { CustomButton } from 'components/button'
 
 type ModalType = {
   onClose: () => void
