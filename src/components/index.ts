@@ -45,3 +45,5 @@ export { IconFilterSvg } from './iconSVG/iconFilterSVG/IconFilterSVG'
 export { IconSortElementSvg } from './iconSVG/iconSortElementSVG/IconSortElementSVG'
 
 export { SortElement } from './sortElement/SortElement'
+
+export { SearchByPacks } from './search/SearchByPacks'
