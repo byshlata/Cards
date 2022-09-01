@@ -10,12 +10,34 @@ import style from './TableAction.module.sass'
 
 type TableActionType = {
   user_id: string
+  onClickEditAction?: (value: string) => void
+  onClickDeleteAction?: (value: string) => void
+  onClickLearnAction?: (value: string) => void
 }
-export const TableAction: React.FC<TableActionType> = ({ user_id }) => {
+export const TableAction = ({
+  user_id,
+  onClickEditAction,
+  onClickDeleteAction,
+  onClickLearnAction,
+}: TableActionType) => {
   const userId = useSelector(selectorUserId)
-  const onLearnPack = () => {}
-  const onEditPack = () => {}
-  const onRemovePack = () => {}
+
+  const onLearnPack = () => {
+    if (onClickLearnAction) {
+      onClickLearnAction(user_id)
+    }
+  }
+
+  const onEditPack = () => {
+    if (onClickEditAction) {
+      onClickEditAction(user_id)
+    }
+  }
+  const onDeletePack = () => {
+    if (onClickDeleteAction) {
+      onClickDeleteAction(user_id)
+    }
+  }
 
   return (
     <div className={style.actionWrapper}>
@@ -32,7 +54,7 @@ export const TableAction: React.FC<TableActionType> = ({ user_id }) => {
             </CustomButtonBox>
           </div>
           <div className={style.item}>
-            <CustomButtonBox color="link" onClick={onRemovePack}>
+            <CustomButtonBox color="link" onClick={onDeletePack}>
               <img src={removeIcon} alt={'edit packsList'} className={style.icon} />
             </CustomButtonBox>
           </div>

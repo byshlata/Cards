@@ -6,7 +6,6 @@ import { setPackParams } from 'store'
 import { SortParamElementType, SortParamType } from 'types'
 import { setParamFilter } from 'utils/setParamFilter'
 
-import { sortArrow } from '../index'
 import { TableHeadElementType, TabletHeadType } from '../Table'
 import { TableCell } from '../tableCell/TableCell'
 

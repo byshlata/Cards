@@ -50,7 +50,7 @@ export { IconDeleteSvg } from './iconSVG/iconDeleteSVG/IconDeleteSVG'
 
 export { IconEditSvg } from './iconSVG/iconEditSVG/IconEditSVG'
 
-export { IconTeacherSvg } from './iconSVG/iconTeachSVG/IconTeacherSVG'
+export { IconLearnSVG } from './iconSVG/iconLearnSVG/IconLearnSVG'
 
 export { IconUserSvg } from './iconSVG/iconUserSVG/IconUserSVG'
 
