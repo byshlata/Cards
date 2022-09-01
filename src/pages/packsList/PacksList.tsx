@@ -8,10 +8,10 @@ import {
   CustomSliderByPack,
   FilterElementContainer,
   Search,
-  Table,
+  TablePackList,
   TitleWithButton,
 } from 'components'
-import { TableHeadElementType } from 'components/table/Table'
+import { TableHeadElementType } from 'components/table/tablePackList/TablePackList'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
@@ -123,7 +123,7 @@ export const PacksList = () => {
               <ButtonResetFilter />
             </FilterElementContainer>
           </div>
-          <Table headData={TABLET_HEADER} />
+          <TablePackList headData={TABLET_HEADER} />
           <div className={style.paginationWrapper}>
             <Pagination
               disabled={isLoading}

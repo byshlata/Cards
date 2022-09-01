@@ -6,6 +6,8 @@ export { registrationSlice } from './slice/registrationSlice'
 export { profileSlice } from './slice/profileSlice'
 export { packParamsSlice, initialStatePackParams } from './slice/packParamsSlice'
 export { packSlice } from './slice/packSlice'
+export { cardParamsSlice } from './slice/cardParamsSlice'
+export { cardSlice } from './slice/cardSlice'
 
 //thunk
 
@@ -52,11 +54,13 @@ export { setInitialized, isSpinAppLoading, removeErrorMessage, setAuth } from '.
 
 export { removeEmail, sendLetter, isPasswordSend } from './slice/forgotSlice'
 
-export { removePackData, setPackData } from './slice/packSlice'
-
 export { setUserData, setUserName, removeUserData } from './slice/profileSlice'
 
 export { registrationUser } from './slice/registrationSlice'
+
+export { removePackData, setPackData } from './slice/packSlice'
+
+export { removeCardData, setCardData } from './slice/cardSlice'
 
 export {
   setPackParams,
@@ -65,5 +69,13 @@ export {
   setIsFirstOpenPage,
   resetPackParams,
 } from './slice/packParamsSlice'
+
+export {
+  setCardParams,
+  removeCardParams,
+  removeIsFirstOpenCardPage,
+  setIsFirstOpenCardPage,
+  resetCardParams,
+} from './slice/cardParamsSlice'
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'

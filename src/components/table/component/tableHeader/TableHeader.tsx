@@ -6,10 +6,10 @@ import { setPackParams } from 'store'
 import { SortParamElementType, SortParamType } from 'types'
 import { setParamFilter } from 'utils/setParamFilter'
 
-import { TableHeadElementType, TabletHeadType } from '../Table'
-import { TableCell } from '../tableCell/TableCell'
+import { TableHeadElementType, TabletHeadType } from 'components/table/tablePackList/TablePackList'
+import { TableCell } from 'components/table/component/tableCell/TableCell'
 
-import style from './TableHeader.module.sass'
+import style from 'components/table/component/tableHeader/TableHeader.module.sass'
 
 export const TableHeader = ({ headData }: TabletHeadType) => {
   const dispatch = useAppDispatch()

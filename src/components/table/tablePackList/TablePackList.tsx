@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 
+import { TableHeader } from 'components/table/component/tableHeader/TableHeader'
+import style from 'components/table/tablePackList/TablePackList.module.sass'
+import { TablePackListRow } from 'components/table/tablePackList/tablePackListRow/TablePackListRow'
 import { useSelector } from 'react-redux'
 import { selectorPacksData } from 'store'
 import { SortParamElementType, SortParamType } from 'types'
 import { formattedDate } from 'utils'
-
-import style from './Table.module.sass'
-import { TableHeader } from './tableHeader/TableHeader'
-import { TableRow } from './tableRow/TableRow'
 
 export type TableHeadElementType = {
   title: string
@@ -19,10 +18,16 @@ export type TabletHeadType = {
   headData: TableHeadElementType[]
 }
 
-export const Table = ({ headData }: TabletHeadType) => {
+export const TablePackList = ({ headData }: TabletHeadType) => {
   const packData = useSelector(selectorPacksData)
+
+  const onClickHandler = (idPack: string, cardsCount: number, backValue: any) => {
+    console.log(idPack)
+  }
+
   const mappedPacks = packData.map(({ user_id, _id, user_name, updated, cardsCount, name }) => (
-    <TableRow
+    <TablePackListRow
+      onClick={onClickHandler}
       key={_id}
       pack_id={_id}
       name={name}

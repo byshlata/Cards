@@ -28,7 +28,7 @@ export { FilterElementContainer } from './filterElementContainer/FilterElementCo
 
 export { ButtonChoiceGrope } from './button/buttonChoiceGroupe/ButtonChoiceGrope'
 
-export { Table } from './table/Table'
+export { TablePackList } from 'components/table/tablePackList/TablePackList'
 
 export { AvatarUser } from './avatarUser/AvatarUser'
 

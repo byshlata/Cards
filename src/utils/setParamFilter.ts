@@ -1,4 +1,4 @@
-import { TableHeadElementType } from 'components/table/Table'
+import { TableHeadElementType } from 'components/table/tablePackList/TablePackList'
 import { SortParamElementType, SortParamType } from 'types'
 
 export const setParamFilter = (

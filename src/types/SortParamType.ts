@@ -6,3 +6,8 @@ export type SortParamType =
   | 'created'
   | 'updated'
   | 'user_name'
+  | 'answer'
+  | 'question'
+  | 'cardsPack_id'
+  | 'grade'
+  | 'shots'
