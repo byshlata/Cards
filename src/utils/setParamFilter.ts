@@ -11,12 +11,13 @@ export const setParamFilter = (
   for (let i = 0; i < headData.length; i += 1) {
     if (headData[i].sortParam === filterActive) {
       index += 1
-      headDataOff.push(headData[i])
+      headDataOff.push({ ...headData[i] })
       headDataOff[i].stateSortElement = stateSortElement
     } else {
-      headDataOff.push(headData[i])
+      headDataOff.push({ ...headData[i] })
       headDataOff[i].stateSortElement = 'off'
     }
   }
+
   return index ? headDataOff : false
 }

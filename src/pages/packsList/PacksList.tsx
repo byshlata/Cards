@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
@@ -8,7 +8,6 @@ import {
   CustomSliderByPack,
   FilterElementContainer,
   Search,
-  SearchByPack,
   Table,
   TitleWithButton,
 } from 'components'
@@ -29,16 +28,8 @@ import {
   setIsFirstOpenPage,
   setPackParams,
 } from 'store'
-import { FilterElementType } from 'types'
 
-import style from './Pack.module.sass'
-
-const FILTER_ELEMENT: FilterElementType[] = [
-  { title: 'Search', element: <SearchByPack /> },
-  { title: 'Show packs cards', element: <ButtonChoiceGrope /> },
-  { title: 'Number of cards', element: <CustomSliderByPack /> },
-  { title: '', element: <ButtonResetFilter /> },
-]
+import style from './РacksList.module.sass'
 
 const TABLET_HEADER: TableHeadElementType[] = [
   {
@@ -63,7 +54,7 @@ const TABLET_HEADER: TableHeadElementType[] = [
   },
 ]
 
-export const Pack = () => {
+export const PacksList = () => {
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorIsLoading)
@@ -96,17 +87,41 @@ export const Pack = () => {
     dispatch(setPackParams({ page: page }))
   }
 
+  const onSearch = (searchValuer: string) => {
+    dispatch(setPackParams({ packName: searchValuer }))
+  }
+
   const onClockButton = () => {}
+
+  const errorSearchValue = totalPack ? '' : 'Cards not found'
 
   return (
     <div className={style.packWrapper}>
-      <TitleWithButton titleText="Pack list" buttonText="Add new pack" onClick={onClockButton} />
+      <TitleWithButton
+        titleText="PacksList list"
+        buttonText="Add new pack"
+        onClick={onClockButton}
+      />
       {!isMounting ? (
         <>
           <div className={style.filterElementWrapper}>
-            {FILTER_ELEMENT.map(({ element, title }) => (
-              <FilterElementContainer key={title} element={element} title={title} />
-            ))}
+            <FilterElementContainer title="Search">
+              <Search
+                searchValue={params.packName}
+                onChangeDebounceValue={onSearch}
+                disabled={isLoading}
+                error={errorSearchValue}
+              />
+            </FilterElementContainer>
+            <FilterElementContainer title="Show packs cards">
+              <ButtonChoiceGrope />
+            </FilterElementContainer>
+            <FilterElementContainer title="Number of cards">
+              <CustomSliderByPack />
+            </FilterElementContainer>
+            <FilterElementContainer>
+              <ButtonResetFilter />
+            </FilterElementContainer>
           </div>
           <Table headData={TABLET_HEADER} />
           <div className={style.paginationWrapper}>
@@ -120,9 +135,7 @@ export const Pack = () => {
             />
           </div>
         </>
-      ) : (
-        <span />
-      )}
+      ) : null}
     </div>
   )
 }

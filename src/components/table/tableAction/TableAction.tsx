@@ -21,19 +21,19 @@ export const TableAction: React.FC<TableActionType> = ({ user_id }) => {
     <div className={style.actionWrapper}>
       <div className={style.item}>
         <CustomButtonBox color="link" onClick={onLearnPack}>
-          <img src={learnIcon} alt={'learn pack'} className={style.icon} />
+          <img src={learnIcon} alt={'learn packsList'} className={style.icon} />
         </CustomButtonBox>
       </div>
       {user_id === userId ? (
         <>
           <div className={style.item}>
             <CustomButtonBox color="link" onClick={onEditPack}>
-              <img src={editIcon} alt={'edit pack'} className={style.icon} />
+              <img src={editIcon} alt={'edit packsList'} className={style.icon} />
             </CustomButtonBox>
           </div>
           <div className={style.item}>
             <CustomButtonBox color="link" onClick={onRemovePack}>
-              <img src={removeIcon} alt={'edit pack'} className={style.icon} />
+              <img src={removeIcon} alt={'edit packsList'} className={style.icon} />
             </CustomButtonBox>
           </div>
         </>

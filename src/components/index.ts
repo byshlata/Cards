@@ -54,12 +54,16 @@ export { IconTeacherSvg } from './iconSVG/iconTeachSVG/IconTeacherSVG'
 
 export { IconUserSvg } from './iconSVG/iconUserSVG/IconUserSVG'
 
-export {} from 'components/iconSVG/iconCirclePointSVG/IconCirclePointSVG'
+export { IconCirclePointSVG } from 'components/iconSVG/iconCirclePointSVG/IconCirclePointSVG'
 
 export { SortElement } from './sortElement/SortElement'
-
-export { SearchByPack } from './searchByPack/SearchByPack'
 
 export { CustomSliderByPack } from './customSliderByPack/CustomSliderByPack'
 
 export { Menu } from './menu/Menu'
+
+export { MenuHeader } from './menuHeader/MenuHeader'
+
+export { AvatarUserSmall } from './avatarUserSmall/AvatarUserSmall'
+
+export { MenuUserPack } from './menuUserPack/MenuUserPack'

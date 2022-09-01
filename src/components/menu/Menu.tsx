@@ -1,5 +1,3 @@
-import { isNull } from 'util'
-
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 
 import style from './Menu.module.sass'
@@ -38,7 +36,7 @@ export const Menu = ({ headMenu, children }: MenuType) => {
       {headMenu}
       {isOpenMenu && (
         <div className={style.menuContainer} onClick={onOpenMenu}>
-          <div className={style.angle}></div>
+          <div className={style.angle} />
           <div className={style.helpBlock}>
             {children.map((element, index) => (
               <div key={index} className={style.menuItem}>

@@ -21,7 +21,7 @@ export type TabletHeadType = {
 
 export const Table = ({ headData }: TabletHeadType) => {
   const packData = useSelector(selectorPacksData)
-
+  console.log('headData', headData)
   const mappedPacks = packData.map(({ user_id, _id, user_name, updated, cardsCount, name }) => (
     <TableRow
       key={_id}

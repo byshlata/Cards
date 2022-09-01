@@ -55,12 +55,7 @@ export const Profile = () => {
 
   return (
     <>
-      <div className={style.exitArrow}>
-        <div className={style.buttonBackPacksWrapper}>
-          <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
-        </div>
-      </div>
-
+      <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
       <FormBody width={415} height={410}>
         <Title text="Personal Information" />
 
