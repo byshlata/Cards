@@ -1,5 +1,12 @@
 import { RootStoreType } from 'store'
-import { ErrorMessageType, Nullable, PackParamsInitialType, PackType, ParamsType } from 'types'
+import {
+  CardType,
+  ErrorMessageType,
+  Nullable,
+  PackParamsInitialType,
+  PackType,
+  ParamsType,
+} from 'types'
 
 export const selectorsIsInitialized = (state: RootStoreType): boolean => state.app.isInitialized
 
@@ -52,3 +59,9 @@ export const selectorPackName = (state: RootStoreType): ParamsType<string> =>
 export const selectorMaxCardsOnPack = (state: RootStoreType): number => state.packParams.max
 
 export const selectorMinCardsOnPack = (state: RootStoreType): number => state.packParams.min
+
+//cards
+
+export const selectorCardData = (state: RootStoreType): CardType[] => state.card.cards
+
+//cardParam
