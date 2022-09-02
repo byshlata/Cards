@@ -76,7 +76,7 @@ export const PacksList = () => {
 
   const onClockButton = () => {}
 
-  const errorSearchValue = totalPack ? '' : 'Cards not found'
+  const errorSearchValue = totalPack ? '' : !params.packName ? '' : 'Cards not found'
 
   return (
     <div className={style.packWrapper}>
