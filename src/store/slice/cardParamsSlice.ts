@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {
-  CardParamsInitialType,
-  CardParamsResetInitialType,
-  CardParamsType,
-  PackParamsType,
-} from 'types'
+import { CardParamsInitialType, CardParamsResetInitialType, CardParamsType } from 'types'
 
 export const initialStateCardParams: CardParamsInitialType = {
   cardAnswer: '',

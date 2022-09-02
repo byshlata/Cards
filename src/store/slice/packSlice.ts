@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PackResponseType, UserResponseType } from 'types'
+import { PackResponseType } from 'types'
 
 export const initialState: PackResponseType = {
   cardPacks: [],

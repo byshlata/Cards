@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { packsListAPI } from 'api'
-import { isSpinAppLoading, RootStoreType, setPackParams } from 'store'
+import { isSpinAppLoading } from 'store'
 import { setPackData } from 'store/slice/packSlice'
 import { PackParamsType } from 'types'
 import { setErrorResponse } from 'utils'
