@@ -26,9 +26,6 @@ export const UserPack = () => {
 
   const isAuthUser = authUserId === user_id
 
-  console.log(authUserId)
-  console.log('user_id', user_id)
-
   const tableHeadData = isAuthUser ? TABLET_HEADER_AUTH_USER : TABLET_HEADER_ALL_USER
 
   return (

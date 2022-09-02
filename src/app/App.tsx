@@ -7,6 +7,7 @@ import { useAppDispatch } from 'hooks'
 import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
 import { fetchProfilePage, selectorError, selectorIsLoading, selectorsIsInitialized } from 'store'
+import { selectorWarningMessage } from 'store/selectors/selectors'
 import styleMain from 'styles/container.module.sass'
 
 import style from './App.module.sass'
@@ -16,6 +17,7 @@ export const App = () => {
 
   const isLoading = useSelector(selectorIsLoading)
   const errorMessage = useSelector(selectorError)
+  const warningMessage = useSelector(selectorWarningMessage)
   const isInitialized = useSelector(selectorsIsInitialized)
 
   useEffect(() => {
@@ -29,6 +31,7 @@ export const App = () => {
   return (
     <>
       <CustomAlert severity="error" message={errorMessage} />
+      <CustomAlert severity="success" message={warningMessage} />
       <Header />
       <div className={style.linerProgressWrapper}>
         <LinerProgress isLoading={isLoading} />

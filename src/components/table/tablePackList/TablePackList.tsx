@@ -4,7 +4,13 @@ import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectorPacksData, selectorAuthUserId, setPackParams, selectorTotalCountCard } from 'store'
+import {
+  selectorPacksData,
+  selectorAuthUserId,
+  setPackParams,
+  selectorTotalCountCard,
+  setWarningMessage,
+} from 'store'
 import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
 
@@ -29,8 +35,10 @@ export const TablePackList = ({ headData }: TabletHeadType) => {
   const onClickHandler = (idPack: string, cardsCount: number, backValue: BackValueType) => {
     switch (backValue) {
       case 'name':
-        if (countCard > 0) {
+        if (cardsCount) {
           navigate(`${Path.Pack}${Path.Root}${idPack}`)
+        } else {
+          dispatch(setWarningMessage('Pack not have cards'))
         }
     }
   }

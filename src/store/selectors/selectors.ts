@@ -34,6 +34,8 @@ export const selectorIsRegistration = (state: RootStoreType) => state.registrati
 export const selectorIsMounting = (state: RootStoreType): boolean => state.reset.isMounting
 
 export const selectorTotalCount = (state: RootStoreType): number => state.pack.cardPacksTotalCount
+
+export const selectorWarningMessage = (state: RootStoreType): ErrorMessageType => state.app.warning
 //pack
 
 export const selectorPacksData = (state: RootStoreType): PackType[] => state.pack.cardPacks
