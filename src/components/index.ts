@@ -69,3 +69,7 @@ export { MenuUserPack } from './menuUserPack/MenuUserPack'
 export { TableCard } from './table/tableCard/TableCard'
 
 export { TablePackList } from 'components/table/tablePackList/TablePackList'
+
+export { CustomAlert } from './customAlert/CustomAlert'
+
+export { Loader } from './loader/Loader'

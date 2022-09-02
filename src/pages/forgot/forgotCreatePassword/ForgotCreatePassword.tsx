@@ -4,13 +4,12 @@ import { CustomButton, CustomInput, FormBody, Title } from 'components'
 import { Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
+import style from 'pages/forgot/forgotEmail/ForgotEmail.module.sass'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { removeEmail, selectorIsLoading, selectorIsPasswordSend, sendNewPassword } from 'store'
 import { createErrorSchema } from 'utils'
 import * as yup from 'yup'
-
-import style from './ForgotEmail.module.sass'
 
 export const ForgotCreatePassword = () => {
   const dispatch = useAppDispatch()

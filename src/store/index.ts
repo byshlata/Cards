@@ -1,5 +1,7 @@
 //slice
 
+import exp from 'constants'
+
 export { appSlice } from './slice/appSlice'
 export { forgotSlice } from './slice/forgotSlice'
 export { registrationSlice } from './slice/registrationSlice'
@@ -20,35 +22,50 @@ export { getCardData } from './thunk/cardThunk'
 //selector
 
 export {
+  selectorCardData,
+  selectorTotalCountCard,
+  selectorTitlePack,
+} from './selectors/selectorsCard'
+
+export {
+  selectorCardPacksTotalCount,
+  selectorPageCount,
+  selectorPacksData,
+  selectorTotalCount,
+} from './selectors/selectorsPack'
+
+export { selectorEmail, selectorIsPasswordSend } from './selectors/selectorsForgot'
+
+export { selectorIsMounting } from './selectors/selectorsReset'
+
+export {
+  selectorAuthUserId,
+  selectorUserName,
+  selectorUserEmail,
+  selectorAvatarUser,
+} from './selectors/selectorsProfile'
+
+export {
   selectorsIsInitialized,
   selectorIsLoading,
   selectorError,
-  selectorEmail,
-  selectorIsPasswordSend,
   selectorIsAuth,
-  selectorUserName,
-  selectorUserEmail,
-  selectorAuthUserId,
-  selectorIsRegistration,
-  selectorCardPacksTotalCount,
-  selectorMinCardsOnPack,
-  selectorMaxCardsOnPack,
-  selectorPageCount,
-  selectorPackName,
-  selectorPacksData,
-  selectorUserParam_id,
+  selectorWarningMessage,
+} from './selectors/selectorsApp'
+
+export { selectorCurrentPageCard, selectorParamsCard } from './selectors/selectorsCardParams'
+
+export {
+  selectorCurrentPage,
   selectorIsFirsOpen,
   selectorParams,
-  selectorTotalCount,
-  selectorAvatarUser,
-  selectorCurrentPage,
-  selectorIsMounting,
-  selectorCardData,
-  selectorCurrentPageCard,
-  selectorParamsCard,
-  selectorTotalCountCard,
-  selectorTitlePack,
-} from './selectors/selectors'
+  selectorUserParam_id,
+  selectorMaxCardsOnPack,
+  selectorPackName,
+  selectorMinCardsOnPack,
+} from './selectors/selectorsPackParams'
+
+export { selectorIsRegistration } from './selectors/selectorsRegistration'
 
 //other
 

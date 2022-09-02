@@ -28,7 +28,6 @@ export const TablePackList = ({ headData }: TabletHeadType) => {
 
   const packData = useSelector(selectorPacksData)
   const userId = useSelector(selectorAuthUserId)
-  const countCard = useSelector(selectorTotalCountCard)
 
   const navigate = useNavigate()
 

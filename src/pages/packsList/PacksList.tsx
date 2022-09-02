@@ -63,10 +63,11 @@ export const PacksList = () => {
 
   const onchangePagination = (page: number, pageSize: number) => {
     dispatch(setPackParams({ page: page }))
+    dispatch(setPackParams({ pageCount: pageSize }))
   }
 
   const onSearch = (searchValuer: string) => {
-    dispatch(setPackParams({ sortPacks: searchValuer }))
+    dispatch(setPackParams({ packName: searchValuer }))
   }
 
   const onResetFilter = () => {

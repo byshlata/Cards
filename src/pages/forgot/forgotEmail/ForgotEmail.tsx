@@ -65,19 +65,20 @@ export const ForgotEmail = React.memo(() => {
             Send Instructions
           </CustomButton>
         </div>
+        <div>
+          <div className={style.wrapperForm}>
+            <p className={style.textBlockQuestion}>Did you remember your password?</p>
+            <CustomButton
+              type="button"
+              color="link"
+              onClick={onNavigateToLoginPage}
+              disabled={isLoading}
+            >
+              Try logging in
+            </CustomButton>
+          </div>
+        </div>
       </form>
-
-      <div>
-        <p className={style.textBlockQuestion}>Did you remember your password?</p>
-        <CustomButton
-          type="button"
-          color="link"
-          onClick={onNavigateToLoginPage}
-          disabled={isLoading}
-        >
-          Try logging in
-        </CustomButton>
-      </div>
     </FormBody>
   )
 })

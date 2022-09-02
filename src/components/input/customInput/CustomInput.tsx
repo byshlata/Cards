@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react'
 
-import { FieldProps } from 'formik'
-
 import style from './CustomInput.module.sass'
 import { useClassInputElement } from './hooks/useClassInputElement'
 import { usePasswordInput } from './hooks/usePasswordInput'

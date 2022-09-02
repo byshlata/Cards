@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, MouseEvent, ReactElement, ReactNode } from 'react'
+import React, { MouseEvent, ReactElement, ReactNode } from 'react'
 
 import { CustomButton } from 'components/button'
 

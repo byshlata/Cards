@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 
-import style from 'components/table/tablePackList/tablePackListAction/TablePackListAction.module.sass'
+import style from './TablePackListAction.module.sass'
 
 type TableActionType = {
   authUser_id: string

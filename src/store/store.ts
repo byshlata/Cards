@@ -22,7 +22,7 @@ export const store = configureStore({
     packParams: packParamsSlice.reducer,
     reset: resetSlice.reducer,
     card: cardSlice.reducer,
-    cardParam: cardParamsSlice.reducer,
+    cardParams: cardParamsSlice.reducer,
   },
 })
 

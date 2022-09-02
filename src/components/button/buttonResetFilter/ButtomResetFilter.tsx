@@ -1,10 +1,8 @@
 import React from 'react'
 
-import style from 'components/button/buttonResetFilter/ButtomResetFilter.module.sass'
 import { CustomButtonBox, IconFilterSvg } from 'components/index'
-import { useAppDispatch } from 'hooks'
-import { useSelector } from 'react-redux'
-import { selectorIsLoading, unmountingComponent } from 'store'
+
+import style from './ButtomResetFilter.module.sass'
 
 type buttonResetFilterType = {
   onResetFilter: () => void

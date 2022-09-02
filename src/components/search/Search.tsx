@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { CustomInput } from 'components/index'
 import { useCustomInput } from 'components/input/customInput/hooks'

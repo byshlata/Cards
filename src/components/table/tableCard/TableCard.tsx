@@ -2,9 +2,8 @@ import React from 'react'
 
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorAuthUserId, setCardParams } from 'store'
-import { selectorCardData } from 'store/selectors/selectors'
-import { BackValueType, TableHeadElementType, TabletHeadDataType } from 'types'
+import { selectorAuthUserId, selectorCardData, setCardParams } from 'store'
+import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
 
 import { TableHeader } from '../component/tableHeader/TableHeader'

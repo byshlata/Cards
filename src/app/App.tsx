@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
 
-import { Header, LinerProgress } from 'components'
-import { CustomAlert } from 'components/customAlert/CustomAlert'
-import { Loader } from 'components/loader/Loader'
+import { Header, LinerProgress, CustomAlert, Loader } from 'components'
 import { useAppDispatch } from 'hooks'
 import { Routers } from 'pages'
 import { useSelector } from 'react-redux'
-import { fetchProfilePage, selectorError, selectorIsLoading, selectorsIsInitialized } from 'store'
-import { selectorWarningMessage } from 'store/selectors/selectors'
+import {
+  fetchProfilePage,
+  selectorError,
+  selectorIsLoading,
+  selectorsIsInitialized,
+  selectorWarningMessage,
+} from 'store'
 import styleMain from 'styles/container.module.sass'
 
 import style from './App.module.sass'
