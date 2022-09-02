@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { forgotAPI } from 'api'
-import axios, { AxiosError } from 'axios'
 import { isPasswordSend, isSpinAppLoading, sendLetter } from 'store'
 import { RecoveryPasswordType } from 'types'
+import { setErrorResponse } from 'utils'
 
 export const sendLetterOnEmail = createAsyncThunk(
   'forgotSlice/sendLetterOnEmail',
@@ -18,14 +18,7 @@ export const sendLetterOnEmail = createAsyncThunk(
       await forgotAPI.sendLetter(payload.email, payload.name)
       dispatch(sendLetter(payload.email))
     } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>
-      if (axios.isAxiosError(err)) {
-        const error = err.response?.data ? err.response.data.error : err.message
-
-        return rejectWithValue(error)
-      } else {
-        return rejectWithValue(err.message)
-      }
+      return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))
     }
@@ -40,13 +33,7 @@ export const sendNewPassword = createAsyncThunk(
       await forgotAPI.setNewPassword(payload)
       dispatch(isPasswordSend())
     } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>
-      if (axios.isAxiosError(err)) {
-        const error = err.response?.data ? err.response.data.error : err.message
-        rejectWithValue(error)
-      } else {
-        rejectWithValue(err.message)
-      }
+      return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))
     }

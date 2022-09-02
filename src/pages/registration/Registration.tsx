@@ -1,41 +1,23 @@
 import React, { useCallback } from 'react'
 
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { Path } from 'enums'
 import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { RootStoreType, selectorIsLoading } from 'store'
-import { RegistrationThunk } from 'store/thunk/registrationThunk'
+import { RootStoreType, selectorIsLoading, selectorIsRegistration, RegistrationThunk } from 'store'
+import { createErrorSchema } from 'utils'
 import * as yup from 'yup'
-
-import { Path } from '../../enums'
 
 import style from './Registration.module.sass'
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Please enter a valid email format !')
-    .required('Email is required please !'),
-  password: yup
-    .string()
-    .required('No password provided.')
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    .min(8, 'Password is too short - 8 chars minimum.')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
-
-  confirmPassword: yup.string().test('password', function (value) {
-    return this.parent.password === value
-  }),
-})
+const schema = yup.object().shape(createErrorSchema(['email', 'password', 'confirmPassword']))
 
 export const Registration = () => {
   const dispatch = useAppDispatch()
 
-  const isRegistration = useSelector<RootStoreType, boolean>(
-    (state) => state.registration.isRegistration
-  )
+  const isRegistration = useSelector<RootStoreType, boolean>(selectorIsRegistration)
 
   const isLoading = useSelector(selectorIsLoading)
 
@@ -63,6 +45,12 @@ export const Registration = () => {
     return <Navigate to={'/login'} />
   }
 
+  const errorEmail = formik.touched.email ? formik.errors.email : undefined
+  const errorPassword = formik.touched.password ? formik.errors.password : undefined
+  const errorConfirmPassword = formik.touched.confirmPassword
+    ? formik.errors.confirmPassword
+    : undefined
+
   return (
     <FormBody width={415} height={550}>
       <Title text="Sign Up" />
@@ -73,7 +61,7 @@ export const Registration = () => {
             onChange={formik.handleChange}
             type="simple"
             name="email"
-            error={formik.errors.email}
+            error={errorEmail}
           />
         </div>
         <div className={style.inputWrapper}>
@@ -82,7 +70,7 @@ export const Registration = () => {
             onChange={formik.handleChange}
             type="password"
             name="password"
-            error={formik.errors.password}
+            error={errorPassword}
           />
         </div>
         <div className={style.inputWrapper}>
@@ -91,7 +79,7 @@ export const Registration = () => {
             onChange={formik.handleChange}
             type="password"
             name="confirmPassword"
-            error={formik.errors.confirmPassword}
+            error={errorConfirmPassword}
           />
         </div>
         <div className={style.buttonWrapper}>

@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 type useCustomInputReturnType = {
   value: string
-  setValue: (value: any) => void
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const useCustomInput = (initialValue: string): useCustomInputReturnType => {
+export const useCustomInput = (initialValue = ''): useCustomInputReturnType => {
   const [value, setValue] = useState(initialValue)
 
-  return { value, setValue }
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value)
+  }
+
+  return { value, onChange }
 }

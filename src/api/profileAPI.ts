@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios'
-
-import { PathAPI } from '../enums'
-import { ChangeInformationUserType, UpdateUserResponseType, UserResponseType } from '../types'
+import { PathAPI } from 'enums'
+import { ChangeInformationUserType, UpdateUserResponseType, UserResponseType } from 'types'
 
 import { API_CONFIG } from './config'
 
