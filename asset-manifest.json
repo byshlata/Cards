@@ -1,18 +1,15 @@
 {
   "files": {
-    "main.css": "/Cards/static/css/main.e696e7a0.css",
-    "main.js": "/Cards/static/js/main.c9ee1fbd.js",
-    "static/media/avatar.png": "/Cards/static/media/avatar.1f2dccadb278ea928dce.png",
+    "main.css": "/Cards/static/css/main.79bc4399.css",
+    "main.js": "/Cards/static/js/main.158dbdb6.js",
     "static/media/pencil.png": "/Cards/static/media/pencil.48a509a89a20feb467d3.png",
-    "static/media/camera.png": "/Cards/static/media/camera.e4b171aa2da395b00e68.png",
-    "static/media/logout.png": "/Cards/static/media/logout.0becdbc391b7088ace83.png",
-    "static/media/logo-ItIncubator.svg": "/Cards/static/media/logo-ItIncubator.f5da7f8bedc2bfe87aba.svg",
+    "static/media/logo-ItIncubator.svg": "/Cards/static/media/logo-ItIncubator.f5da7f8bedc2bfe87aba97c3ef658738.svg",
     "index.html": "/Cards/index.html",
-    "main.e696e7a0.css.map": "/Cards/static/css/main.e696e7a0.css.map",
-    "main.c9ee1fbd.js.map": "/Cards/static/js/main.c9ee1fbd.js.map"
+    "main.79bc4399.css.map": "/Cards/static/css/main.79bc4399.css.map",
+    "main.158dbdb6.js.map": "/Cards/static/js/main.158dbdb6.js.map"
   },
   "entrypoints": [
-    "static/css/main.e696e7a0.css",
-    "static/js/main.c9ee1fbd.js"
+    "static/css/main.79bc4399.css",
+    "static/js/main.158dbdb6.js"
   ]
 }
