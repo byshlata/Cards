@@ -1,12 +1,8 @@
 import React from 'react'
 
-import { CustomButtonBox } from 'components/button'
-import { IconDeleteSvg } from 'components/iconSVG/iconDeleteSVG/IconDeleteSVG'
-import { IconEditSvg } from 'components/iconSVG/iconEditSVG/IconEditSVG'
-import { IconLearnSVG } from 'components/iconSVG/iconLearnSVG/IconLearnSVG'
-import { TableCell } from 'components/table/component/tableCell/TableCell'
-import { TablePackListAction } from 'components/table/tablePackList/tablePackListAction/TablePackListAction'
-import style from 'components/table/tablePackList/tablePackListRow/TablePackListRow.module.sass'
+import { TableCell } from '../../component/tableCell/TableCell'
+
+import style from './TableCardRow.module.sass'
 
 type TableCardRowType = {
   user_id: string
@@ -15,6 +11,7 @@ type TableCardRowType = {
   answer: string
   grade: number
   updated: string
+  create: string
   onClick?: (idPack: string, cardsCount: number, backValue: BackValueType) => void
 }
 
@@ -34,8 +31,8 @@ export const TableCardRow = ({
       <TableCell title={question} />
       <TableCell title={answer} />
       <TableCell title={updated} />
+      <TableCell title={updated} />
       <TableCell title={grade} />
-      <TableCell title={grade}></TableCell>
     </div>
   )
 }

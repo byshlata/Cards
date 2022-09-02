@@ -6,12 +6,14 @@ import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { selectorIsLoading, unmountingComponent } from 'store'
 
-export const ButtonResetFilter = () => {
-  const dispatch = useAppDispatch()
-  const isLoading = useSelector(selectorIsLoading)
+type buttonResetFilterType = {
+  onResetFilter: () => void
+  disable: boolean
+}
 
-  const onResetFilter = () => {
-    dispatch(unmountingComponent())
+export const ButtonResetFilter = ({ onResetFilter, disable }: buttonResetFilterType) => {
+  const onResetFilterHandle = () => {
+    onResetFilter()
   }
 
   return (
@@ -19,8 +21,8 @@ export const ButtonResetFilter = () => {
       <CustomButtonBox
         color="secondary"
         borderRadius="2px"
-        onClick={onResetFilter}
-        disabled={isLoading}
+        onClick={onResetFilterHandle}
+        disabled={disable}
       >
         <IconFilterSvg />
       </CustomButtonBox>

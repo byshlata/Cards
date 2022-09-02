@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
@@ -11,7 +11,6 @@ import {
   TablePackList,
   TitleWithButton,
 } from 'components'
-import { TableHeadElementType } from 'components/table/tablePackList/TablePackList'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
@@ -27,7 +26,9 @@ import {
   selectorTotalCount,
   setIsFirstOpenPage,
   setPackParams,
+  unmountingComponent,
 } from 'store'
+import { TableHeadElementType } from 'types'
 
 import style from './РacksList.module.sass'
 
@@ -36,21 +37,31 @@ const TABLET_HEADER: TableHeadElementType[] = [
     title: 'Name',
     sortParam: 'name',
     stateSortElement: 'off',
+    type: 'sort',
   },
   {
     title: 'Cards',
     sortParam: 'cardsCount',
     stateSortElement: 'off',
+    type: 'sort',
   },
   {
     title: 'Last updated',
     sortParam: 'updated',
     stateSortElement: 'off',
+    type: 'sort',
   },
   {
     title: 'Create by',
     sortParam: 'user_name',
     stateSortElement: 'off',
+    type: 'sort',
+  },
+  {
+    title: 'Action',
+    sortParam: '',
+    stateSortElement: '',
+    type: 'noSort',
   },
 ]
 
@@ -88,7 +99,11 @@ export const PacksList = () => {
   }
 
   const onSearch = (searchValuer: string) => {
-    dispatch(setPackParams({ packName: searchValuer }))
+    dispatch(setPackParams({ sortPacks: searchValuer }))
+  }
+
+  const onResetFilter = () => {
+    dispatch(unmountingComponent())
   }
 
   const onClockButton = () => {}
@@ -120,7 +135,7 @@ export const PacksList = () => {
               <CustomSliderByPack />
             </FilterElementContainer>
             <FilterElementContainer>
-              <ButtonResetFilter />
+              <ButtonResetFilter onResetFilter={onResetFilter} disable={isLoading} />
             </FilterElementContainer>
           </div>
           <TablePackList headData={TABLET_HEADER} />

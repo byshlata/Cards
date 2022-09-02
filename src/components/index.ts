@@ -28,8 +28,6 @@ export { FilterElementContainer } from './filterElementContainer/FilterElementCo
 
 export { ButtonChoiceGrope } from './button/buttonChoiceGroupe/ButtonChoiceGrope'
 
-export { TablePackList } from 'components/table/tablePackList/TablePackList'
-
 export { AvatarUser } from './avatarUser/AvatarUser'
 
 export { ButtonUpload } from './button/buttonUpload/ButtonUpload'
@@ -67,3 +65,7 @@ export { MenuHeader } from './menuHeader/MenuHeader'
 export { AvatarUserSmall } from './avatarUserSmall/AvatarUserSmall'
 
 export { MenuUserPack } from './menuUserPack/MenuUserPack'
+
+export { TableCard } from './table/tableCard/TableCard'
+
+export { TablePackList } from 'components/table/tablePackList/TablePackList'

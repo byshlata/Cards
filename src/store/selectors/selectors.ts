@@ -1,5 +1,6 @@
 import { RootStoreType } from 'store'
 import {
+  CardParamsInitialType,
   CardType,
   ErrorMessageType,
   Nullable,
@@ -32,6 +33,7 @@ export const selectorIsRegistration = (state: RootStoreType) => state.registrati
 
 export const selectorIsMounting = (state: RootStoreType): boolean => state.reset.isMounting
 
+export const selectorTotalCount = (state: RootStoreType): number => state.pack.cardPacksTotalCount
 //pack
 
 export const selectorPacksData = (state: RootStoreType): PackType[] => state.pack.cardPacks
@@ -39,7 +41,7 @@ export const selectorPacksData = (state: RootStoreType): PackType[] => state.pac
 export const selectorCardPacksTotalCount = (state: RootStoreType): number =>
   state.pack.cardPacksTotalCount
 
-export const selectorTotalCount = (state: RootStoreType): number => state.pack.cardPacksTotalCount
+export const selectorCurrentPage = (state: RootStoreType): number => state.packParams.page
 
 export const selectorPageCount = (state: RootStoreType): number => state.pack.pageCount
 
@@ -48,8 +50,6 @@ export const selectorPageCount = (state: RootStoreType): number => state.pack.pa
 export const selectorParams = (state: RootStoreType): PackParamsInitialType => state.packParams
 
 export const selectorIsFirsOpen = (state: RootStoreType): boolean => state.packParams.isFirstOpen
-
-export const selectorCurrentPage = (state: RootStoreType): number => state.packParams.page
 
 export const selectorUserParam_id = (state: RootStoreType): string => state.packParams.user_id
 
@@ -64,4 +64,10 @@ export const selectorMinCardsOnPack = (state: RootStoreType): number => state.pa
 
 export const selectorCardData = (state: RootStoreType): CardType[] => state.card.cards
 
+export const selectorTotalCountCard = (state: RootStoreType): number => state.card.cardsTotalCount
+
 //cardParam
+
+export const selectorCurrentPageCard = (state: RootStoreType): number => state.cardParam.page
+
+export const selectorParamsCard = (state: RootStoreType): CardParamsInitialType => state.cardParam

@@ -12,4 +12,4 @@ export { Routers } from './Routes'
 
 export { PacksList } from './packsList/PacksList'
 
-export { UserPack } from './userPack/userPack'
+export { UserPack } from './userCard/userPack'

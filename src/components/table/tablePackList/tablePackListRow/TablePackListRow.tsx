@@ -7,6 +7,7 @@ import { IconLearnSVG } from 'components/iconSVG/iconLearnSVG/IconLearnSVG'
 import { TableCell } from 'components/table/component/tableCell/TableCell'
 import { TablePackListAction } from 'components/table/tablePackList/tablePackListAction/TablePackListAction'
 import style from 'components/table/tablePackList/tablePackListRow/TablePackListRow.module.sass'
+import {BackValueType} from "types";
 
 type TableSimpleRowType = {
   name: string
@@ -18,7 +19,7 @@ type TableSimpleRowType = {
   onClick: (idPack: string, cardsCount: number, backValue: BackValueType) => void
 }
 
-type BackValueType = 'name' | 'edit' | 'learn' | 'delete'
+
 
 export const TablePackListRow = ({
   name,

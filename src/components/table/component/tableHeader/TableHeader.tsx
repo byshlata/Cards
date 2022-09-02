@@ -1,24 +1,26 @@
 import React, { useCallback, useState } from 'react'
 
-import { SortElement } from 'components/sortElement/SortElement'
+import { SortElement } from 'components'
 import { useAppDispatch } from 'hooks'
 import { setPackParams } from 'store'
+import { TableHeadElementType, TabletHeadDataType } from 'types'
 import { SortParamElementType, SortParamType } from 'types'
 import { setParamFilter } from 'utils/setParamFilter'
 
-import { TableHeadElementType, TabletHeadType } from 'components/table/tablePackList/TablePackList'
-import { TableCell } from 'components/table/component/tableCell/TableCell'
+import { TableCell } from '../tableCell/TableCell'
 
-import style from 'components/table/component/tableHeader/TableHeader.module.sass'
+import style from './TableHeader.module.sass'
 
-export const TableHeader = ({ headData }: TabletHeadType) => {
-  const dispatch = useAppDispatch()
+type TableHeaderType = TabletHeadDataType & {
+  onSortColumn: (sortValue: string) => void
+}
 
+export const TableHeader = ({ headData, onSortColumn }: TableHeaderType) => {
   const [tableHeadData, setTableHeadData] = useState<TableHeadElementType[]>(headData)
 
-  const onSortColumn = useCallback(
+  const onSortColumnHandler = useCallback(
     (sortValue: string, sortParam: SortParamType, stateSortElement: SortParamElementType) => {
-      dispatch(setPackParams({ sortPacks: sortValue }))
+      onSortColumn(sortValue)
 
       const changeParam = setParamFilter(tableHeadData, sortParam, stateSortElement)
 
@@ -31,16 +33,19 @@ export const TableHeader = ({ headData }: TabletHeadType) => {
 
   return (
     <div className={style.headerWrapper}>
-      {tableHeadData.map(({ sortParam, title, stateSortElement }) => (
-        <TableCell key={title} title={title}>
-          <SortElement
-            stateSortElement={stateSortElement}
-            onSort={onSortColumn}
-            sortParam={sortParam}
-          />
-        </TableCell>
-      ))}
-      <TableCell title={'Actions'} />
+      {tableHeadData.map(({ sortParam, title, stateSortElement, type }) => {
+        return type === 'sort' ? (
+          <TableCell key={title} title={title}>
+            <SortElement
+              stateSortElement={stateSortElement}
+              onSort={onSortColumnHandler}
+              sortParam={sortParam}
+            />
+          </TableCell>
+        ) : (
+          <TableCell title={title} />
+        )
+      })}
     </div>
   )
 }

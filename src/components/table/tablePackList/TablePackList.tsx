@@ -3,26 +3,34 @@ import React from 'react'
 import { TableHeader } from 'components/table/component/tableHeader/TableHeader'
 import style from 'components/table/tablePackList/TablePackList.module.sass'
 import { TablePackListRow } from 'components/table/tablePackList/tablePackListRow/TablePackListRow'
+import { Path } from 'enums'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorPacksData } from 'store'
-import { SortParamElementType, SortParamType } from 'types'
+import { useNavigate } from 'react-router-dom'
+import { selectorPacksData, setCardParams, setPackParams } from 'store'
+import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
-
-export type TableHeadElementType = {
-  title: string
-  sortParam: SortParamType
-  stateSortElement: SortParamElementType
-}
 
 export type TabletHeadType = {
   headData: TableHeadElementType[]
 }
 
 export const TablePackList = ({ headData }: TabletHeadType) => {
+  const dispatch = useAppDispatch()
+
   const packData = useSelector(selectorPacksData)
 
-  const onClickHandler = (idPack: string, cardsCount: number, backValue: any) => {
-    console.log(idPack)
+  const navigate = useNavigate()
+
+  const onClickHandler = (idPack: string, cardsCount: number, backValue: BackValueType) => {
+    switch (backValue) {
+      case 'name':
+        navigate(`${Path.Pack}${Path.Root}${idPack}`)
+    }
+  }
+
+  const onSortValue = (sortValue: string) => {
+    dispatch(setPackParams({ packName: sortValue }))
   }
 
   const mappedPacks = packData.map(({ user_id, _id, user_name, updated, cardsCount, name }) => (
@@ -40,7 +48,7 @@ export const TablePackList = ({ headData }: TabletHeadType) => {
 
   return (
     <div className={style.tableWrapper}>
-      <TableHeader headData={headData} />
+      <TableHeader headData={headData} onSortColumn={onSortValue} />
       {mappedPacks}
     </div>
   )

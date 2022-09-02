@@ -1,48 +1,49 @@
 import React from 'react'
 
-import { TableHeader } from 'components/table/component/tableHeader/TableHeader'
-import { TableCardRow } from 'components/table/tableCard/tableCardRow/TableCardRow'
-import style from 'components/table/tablePackList/TablePackList.module.sass'
-import { TablePackListRow } from 'components/table/tablePackList/tablePackListRow/TablePackListRow'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorPacksData } from 'store'
+import { setCardParams } from 'store'
 import { selectorCardData } from 'store/selectors/selectors'
-import { SortParamElementType, SortParamType } from 'types'
+import { TabletHeadDataType } from 'types'
 import { formattedDate } from 'utils'
 
-export type TableHeadElementType = {
-  title: string
-  sortParam: SortParamType
-  stateSortElement: SortParamElementType
-}
+import { TableHeader } from '../component/tableHeader/TableHeader'
 
-export type TabletHeadType = {
-  headData: TableHeadElementType[]
-}
+import style from './TableCard.module.sass'
+import { TableCardRow } from './tableCardRow/TableCardRow'
 
-export const TableCard = ({ headData }: TabletHeadType) => {
+export const TableCard = ({ headData }: TabletHeadDataType) => {
+  const dispatch = useAppDispatch()
+
   const packData = useSelector(selectorCardData)
 
   const onClickHandler = (idPack: string, cardsCount: number, backValue: any) => {
     console.log(idPack)
   }
 
-  const mappedPacks = packData.map(({ user_id, _id, question, updated, answer, grade }) => (
-    <TableCardRow
-      onClick={onClickHandler}
-      key={_id}
-      updated={formattedDate(updated)}
-      user_id={user_id}
-      _id={_id}
-      answer={answer}
-      question={question}
-      grade={grade}
-    />
-  ))
+  const onSortValue = (sortValue: string) => {
+    dispatch(setCardParams({ sortCards: sortValue }))
+  }
+
+  const mappedPacks = packData.map(
+    ({ user_id, _id, question, updated, created, answer, grade }) => (
+      <TableCardRow
+        onClick={onClickHandler}
+        key={_id}
+        create={created}
+        updated={formattedDate(updated)}
+        user_id={user_id}
+        _id={_id}
+        answer={answer}
+        question={question}
+        grade={grade}
+      />
+    )
+  )
 
   return (
     <div className={style.tableWrapper}>
-      <TableHeader headData={headData} />
+      <TableHeader headData={headData} onSortColumn={onSortValue} />
       {mappedPacks}
     </div>
   )

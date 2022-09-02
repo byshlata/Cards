@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { IconSortElementSvg } from 'components/iconSVG/iconSortElementSVG/IconSortElementSVG'
-import { TableHeadElementType } from 'components/table/tablePackList/TablePackList'
 import { SortParamElementType, SortParamType } from 'types'
 
 import { useSortElement } from './hooks/useSortElement'

@@ -11,3 +11,4 @@ export type SortParamType =
   | 'cardsPack_id'
   | 'grade'
   | 'shots'
+  | ''

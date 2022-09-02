@@ -53,3 +53,11 @@ export type { CardParamsType } from './CardParamsType'
 export type { CardResponseType } from './CardResponseType'
 
 export type { CardType } from './CardType'
+
+export type { TableHeadElementType } from './TableHeadElementType'
+
+export type { TabletHeadDataType } from './TabletHeadDataType'
+
+export type { BackValueType } from './BackValueType'
+
+export type { CardParamsResetInitialType } from './CardParamsResetInitialType'
