@@ -5,21 +5,22 @@ import { useSelector } from 'react-redux'
 import { selectorUserId } from 'store'
 
 type TableActionType = {
+  authUser_id: string
   user_id: string
   children?: ReactElement[]
 }
-export const TablePackListAction = ({ user_id, children }: TableActionType) => {
-  const userId = useSelector(selectorUserId)
 
+const INDEX_ELEMENT = 2
+
+export const TablePackListAction = ({ user_id, children, authUser_id }: TableActionType) => {
   const buttonLearn = children ? children[0] : null
   const buttonEdit = children ? children[1] : null
-  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  const buttonDelete = children ? children[2] : null
+  const buttonDelete = children ? children[INDEX_ELEMENT] : null
 
   return (
     <div className={style.actionWrapper}>
       <div className={style.item}>{buttonLearn}</div>
-      {user_id === userId ? (
+      {user_id === authUser_id ? (
         <>
           <div className={style.item}>{buttonEdit}</div>
           <div className={style.item}>{buttonDelete}</div>

@@ -1,10 +1,12 @@
 import React, { useCallback, useState } from 'react'
 
 import { SortElement } from 'components'
-import { useAppDispatch } from 'hooks'
-import { setPackParams } from 'store'
-import { TableHeadElementType, TabletHeadDataType } from 'types'
-import { SortParamElementType, SortParamType } from 'types'
+import {
+  SortParamElementType,
+  SortParamType,
+  TableHeadElementType,
+  TabletHeadDataType,
+} from 'types'
 import { setParamFilter } from 'utils/setParamFilter'
 
 import { TableCell } from '../tableCell/TableCell'
@@ -43,7 +45,7 @@ export const TableHeader = ({ headData, onSortColumn }: TableHeaderType) => {
             />
           </TableCell>
         ) : (
-          <TableCell title={title} />
+          <TableCell key={title} title={title} />
         )
       })}
     </div>

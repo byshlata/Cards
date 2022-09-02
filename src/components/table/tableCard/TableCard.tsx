@@ -2,9 +2,9 @@ import React from 'react'
 
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { setCardParams } from 'store'
+import { selectorUserId, setCardParams } from 'store'
 import { selectorCardData } from 'store/selectors/selectors'
-import { TabletHeadDataType } from 'types'
+import { BackValueType, TabletHeadDataType } from 'types'
 import { formattedDate } from 'utils'
 
 import { TableHeader } from '../component/tableHeader/TableHeader'
@@ -16,9 +16,11 @@ export const TableCard = ({ headData }: TabletHeadDataType) => {
   const dispatch = useAppDispatch()
 
   const packData = useSelector(selectorCardData)
+  const userId = useSelector(selectorUserId)
 
-  const onClickHandler = (idPack: string, cardsCount: number, backValue: any) => {
+  const onClickAction = (idPack: string, backValue: BackValueType) => {
     console.log(idPack)
+    console.log(backValue)
   }
 
   const onSortValue = (sortValue: string) => {
@@ -28,11 +30,12 @@ export const TableCard = ({ headData }: TabletHeadDataType) => {
   const mappedPacks = packData.map(
     ({ user_id, _id, question, updated, created, answer, grade }) => (
       <TableCardRow
-        onClick={onClickHandler}
+        onClickAction={onClickAction}
         key={_id}
         create={created}
         updated={formattedDate(updated)}
         user_id={user_id}
+        authUser_id={userId}
         _id={_id}
         answer={answer}
         question={question}

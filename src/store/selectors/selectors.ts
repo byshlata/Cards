@@ -66,6 +66,8 @@ export const selectorCardData = (state: RootStoreType): CardType[] => state.card
 
 export const selectorTotalCountCard = (state: RootStoreType): number => state.card.cardsTotalCount
 
+export const selectorTitlePack = (state: RootStoreType): string => state.card.packName
+
 //cardParam
 
 export const selectorCurrentPageCard = (state: RootStoreType): number => state.cardParam.page

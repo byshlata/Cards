@@ -6,7 +6,7 @@ export { registrationSlice } from './slice/registrationSlice'
 export { profileSlice } from './slice/profileSlice'
 export { packParamsSlice, initialStatePackParams } from './slice/packParamsSlice'
 export { packSlice } from './slice/packSlice'
-export { cardParamsSlice } from './slice/cardParamsSlice'
+export { cardParamsSlice, initialStateCardParams } from './slice/cardParamsSlice'
 export { cardSlice } from './slice/cardSlice'
 
 //thunk
@@ -15,6 +15,7 @@ export { sendLetterOnEmail, sendNewPassword } from './thunk/forgotThunk'
 export { RegistrationThunk } from './thunk/registrationThunk'
 export { fetchProfilePage, changeProfileName, logoutUser } from './thunk/profileThunk'
 export { getPackData } from './thunk/pakcThunk'
+export { getCardData } from './thunk/cardThunk'
 
 //selector
 
@@ -42,6 +43,11 @@ export {
   selectorAvatarUser,
   selectorCurrentPage,
   selectorIsMounting,
+  selectorCardData,
+  selectorCurrentPageCard,
+  selectorParamsCard,
+  selectorTotalCountCard,
+  selectorTitlePack,
 } from './selectors/selectors'
 
 //other

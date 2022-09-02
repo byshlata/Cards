@@ -4,7 +4,7 @@ import style from 'components/table/component/tableCell/TableCell.module.sass'
 
 type TableCellType = {
   title?: string | number
-  children?: ReactElement | ReactElement[]
+  children?: ReactNode | ReactElement[]
 }
 export const TableCell: React.FC<TableCellType> = React.memo(({ title, children }) => {
   return (
