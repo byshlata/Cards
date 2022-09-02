@@ -9,9 +9,11 @@ import exitArrow from '../../assets/image/exitArrow.png'
 import logout from '../../assets/image/logout.png'
 import pencil from '../../assets/image/pencil.png'
 import { SecondTableContainer } from '../../components/seondTable/SecondTableContainer'
+import { TableGrade } from '../../components/table/tableGrade/TableGrade'
 import { Cards } from '../cards/Cards'
 
 import style from './Profile.module.sass'
+import { UserName } from './UserName'
 
 import { AvatarUser, ButtonBack, CustomButton, FormBody, Title } from 'components'
 import { Path } from 'enums'
@@ -68,13 +70,13 @@ export const Profile = () => {
         <Title text="Personal Information" />
 
         <AvatarUser />
+        {/*<UserName />*/}
         <div className={style.changeProfileNameWrapper}>
           {mode ? (
             <input value={value} onChange={NameChanger} autoFocus onBlur={asyncChangeName} />
           ) : (
             <>
               <h3 className={style.profileName}>{value}</h3>
-
               <img
                 src={pencil}
                 alt={'change name'}
@@ -92,8 +94,7 @@ export const Profile = () => {
           <img src={logout} alt={'log out'} />
           Log Out
         </div>
-        {/*<Cards />*/}
-        <SecondTableContainer />
+        <TableGrade rating={4.5} />
       </FormBody>
     </>
   )
