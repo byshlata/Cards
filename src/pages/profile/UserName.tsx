@@ -7,10 +7,10 @@ import { useAppDispatch } from '../../hooks'
 import { changeProfileName, selectorUserName } from '../../store'
 
 import style from './UserName.module.sass'
-const dispatch = useAppDispatch()
-const userName = useSelector(selectorUserName)
 
 export const UserName = () => {
+  const dispatch = useAppDispatch()
+  const userName = useSelector(selectorUserName)
   const [mode, setMode] = useState<boolean>(false)
 
   const [value, setValue] = useState<string>(userName)
