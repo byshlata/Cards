@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react'
 
 import style from 'components/table/tablePackList/tablePackListAction/TablePackListAction.module.sass'
-import { useSelector } from 'react-redux'
-import { selectorUserId } from 'store'
 
 type TableActionType = {
   authUser_id: string

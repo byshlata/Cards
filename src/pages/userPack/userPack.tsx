@@ -3,21 +3,20 @@ import React, { useEffect } from 'react'
 import { ButtonBack } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
-import { AllUserCard } from 'pages/userCard/allUserCard/AllUserCard'
-import { AuthUserCard } from 'pages/userCard/authUserCard/AuthUserCard'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { selectorUserId, setCardParams } from 'store'
-
 import {
+  AllUserCard,
+  AuthUserCard,
   TABLET_HEADER_ALL_USER,
   TABLET_HEADER_AUTH_USER,
-} from './optionHeaderTable/optionTableHeader'
+} from 'pages/userPack'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { selectorAuthUserId, setCardParams } from 'store'
 
 export const UserPack = () => {
   const dispatch = useAppDispatch()
 
-  const AuthUserId = useSelector(selectorUserId)
+  const authUserId = useSelector(selectorAuthUserId)
 
   const param = useParams<'id'>()
   const user_id = param.id
@@ -25,7 +24,10 @@ export const UserPack = () => {
     dispatch(setCardParams({ cardsPack_id: user_id }))
   }, [])
 
-  const isAuthUser = AuthUserId === user_id
+  const isAuthUser = authUserId === user_id
+
+  console.log(authUserId)
+  console.log('user_id', user_id)
 
   const tableHeadData = isAuthUser ? TABLET_HEADER_AUTH_USER : TABLET_HEADER_ALL_USER
 
@@ -33,9 +35,9 @@ export const UserPack = () => {
     <>
       <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
       {isAuthUser ? (
-        <AllUserCard tableHeadData={tableHeadData} />
-      ) : (
         <AuthUserCard tableHeadData={tableHeadData} />
+      ) : (
+        <AllUserCard tableHeadData={tableHeadData} />
       )}
     </>
   )

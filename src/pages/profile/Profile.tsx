@@ -1,22 +1,18 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import { AvatarUser, ButtonBack, CustomButton, FormBody, IconLogoutSvg, Title } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
-  selectorUserEmail,
-  selectorUserName,
   changeProfileName,
   logoutUser,
-  selectorUserId,
+  selectorUserEmail,
+  selectorAuthUserId,
+  selectorUserName,
 } from 'store'
 
-import avatar from '../../assets/image/avatar.png'
-import camera from '../../assets/image/camera.png'
-import exitArrow from '../../assets/image/exitArrow.png'
-import logout from '../../assets/image/logout.png'
 import pencil from '../../assets/image/pencil.png'
 
 import style from './Profile.module.sass'
@@ -25,7 +21,7 @@ export const Profile = () => {
   const dispatch = useAppDispatch()
   const userName = useSelector(selectorUserName)
   const userEmail = useSelector(selectorUserEmail)
-  const realUserId = useSelector(selectorUserId)
+  const realUserId = useSelector(selectorAuthUserId)
 
   const navigate = useNavigate()
 

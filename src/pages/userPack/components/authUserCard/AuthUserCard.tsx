@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { MenuUserPack, TitleWithButton } from 'components'
-import { BasicContentCardPage } from 'pages/userCard/basicContentCardPage/BasicContentCardPage'
+import { BasicContentCardPage } from 'pages/userPack/index'
 import { useSelector } from 'react-redux'
 import { selectorTitlePack } from 'store'
-import { TableHeadElementType } from 'types'
+import { BackValueType, TableHeadElementType } from 'types'
 
 type authUserCardType = {
   tableHeadData: TableHeadElementType[]
@@ -13,14 +13,16 @@ type authUserCardType = {
 export const AuthUserCard = ({ tableHeadData }: authUserCardType) => {
   const titlePack = useSelector(selectorTitlePack)
 
-  const onLearnCard = () => {}
+  const onAddNewCard = () => {}
+
+  const onClickActionTable = (idCard: string, backValue: BackValueType) => {}
 
   return (
     <>
-      <TitleWithButton titleText={titlePack} buttonText="Learn to pack" onClick={onLearnCard}>
+      <TitleWithButton titleText={titlePack} buttonText="Add new card" onClick={onAddNewCard}>
         <MenuUserPack />
       </TitleWithButton>
-      <BasicContentCardPage tableHeadData={tableHeadData} />
+      <BasicContentCardPage tableHeadData={tableHeadData} onClickActionTable={onClickActionTable} />
     </>
   )
 }

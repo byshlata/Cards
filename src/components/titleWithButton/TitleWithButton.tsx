@@ -19,7 +19,7 @@ export const TitleWithButton = ({
 }: TitleWithButtonType) => {
   return (
     <div className={style.titleWithButtonWrapper}>
-      <div>
+      <div className={style.titleMenuWrapper}>
         <Title text={titleText} />
         {children}
       </div>

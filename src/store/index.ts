@@ -28,7 +28,7 @@ export {
   selectorIsAuth,
   selectorUserName,
   selectorUserEmail,
-  selectorUserId,
+  selectorAuthUserId,
   selectorIsRegistration,
   selectorCardPacksTotalCount,
   selectorMinCardsOnPack,

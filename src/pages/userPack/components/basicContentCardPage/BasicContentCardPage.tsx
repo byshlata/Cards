@@ -19,15 +19,19 @@ import {
   setIsFirstOpenCardPage,
   unmountingComponent,
 } from 'store'
-import { TableHeadElementType } from 'types'
+import { BackValueType, TableHeadElementType } from 'types'
 
 import style from './BasicContentCardPage.module.sass'
 
 type BasicContentCardPageType = {
   tableHeadData: TableHeadElementType[]
+  onClickActionTable?: (idCard: string, backValue: BackValueType) => void
 }
 
-export const BasicContentCardPage = ({ tableHeadData }: BasicContentCardPageType) => {
+export const BasicContentCardPage = ({
+  tableHeadData,
+  onClickActionTable,
+}: BasicContentCardPageType) => {
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorIsLoading)
@@ -69,8 +73,6 @@ export const BasicContentCardPage = ({ tableHeadData }: BasicContentCardPageType
     dispatch(unmountingComponent())
   }
 
-  const onLearnCard = () => {}
-
   const errorSearchValue = totalCard ? '' : 'Cards not found'
 
   return (
@@ -87,7 +89,7 @@ export const BasicContentCardPage = ({ tableHeadData }: BasicContentCardPageType
               />
               <ButtonResetFilter onResetFilter={onResetFilter} disable={isLoading} />
             </div>
-            <TableCard headData={tableHeadData} />
+            <TableCard heardTableData={tableHeadData} onClickActionTable={onClickActionTable} />
             <Pagination
               disabled={isLoading}
               showQuickJumper
