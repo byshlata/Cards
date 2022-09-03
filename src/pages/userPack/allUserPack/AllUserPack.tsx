@@ -2,9 +2,12 @@ import React from 'react'
 
 import { Search, TitleWithButton } from 'components'
 import { useSelector } from 'react-redux'
-import { selectorIsLoading } from 'store'
+import { openCloseAddNewPackModal, selectorIsLoading } from 'store'
+
+import { useAppDispatch } from '../../../hooks'
 
 export const AllUserPack = () => {
+  const dispatch = useAppDispatch()
   const isLoading = useSelector(selectorIsLoading)
   const learnPack = () => {}
   const onSearch = (searchValue: string) => {}

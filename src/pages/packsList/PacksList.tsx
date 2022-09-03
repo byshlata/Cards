@@ -7,6 +7,7 @@ import {
   ButtonResetFilter,
   CustomSliderByPack,
   FilterElementContainer,
+  Modal,
   Search,
   Table,
   TitleWithButton,
@@ -18,6 +19,7 @@ import {
   getPackData,
   initialStatePackParams,
   mountingComponent,
+  openCloseAddNewPackModal,
   removeIsFirstOpenPage,
   resetPackParams,
   selectorCurrentPage,
@@ -28,6 +30,9 @@ import {
   setIsFirstOpenPage,
   setPackParams,
 } from 'store'
+
+import { AddPackModal } from '../../components/modal/addPack-modal/AddPack-modal'
+import { useModal } from '../../components/modal/hooks/useModal'
 
 import style from './РacksList.module.sass'
 
@@ -90,8 +95,9 @@ export const PacksList = () => {
   const onSearch = (searchValuer: string) => {
     dispatch(setPackParams({ packName: searchValuer }))
   }
-
-  const onClockButton = () => {}
+  const onClickButton = () => {
+    dispatch(openCloseAddNewPackModal(true))
+  }
 
   const errorSearchValue = totalPack ? '' : 'Cards not found'
 
@@ -100,7 +106,7 @@ export const PacksList = () => {
       <TitleWithButton
         titleText="PacksList list"
         buttonText="Add new pack"
-        onClick={onClockButton}
+        onClick={onClickButton}
       />
       {!isMounting ? (
         <>
@@ -136,6 +142,7 @@ export const PacksList = () => {
           </div>
         </>
       ) : null}
+      <AddPackModal name={'Add new pack'} />
     </div>
   )
 }

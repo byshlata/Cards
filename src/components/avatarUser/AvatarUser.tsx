@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { selectorAvatarUser } from 'store/selectors/selectors'
 
 import defaultAvatar from '../../assets/image/avatar.png'
+import { AddPackModal } from '../modal/addPack-modal/AddPack-modal'
 
 import style from './AvatarUser.module.sass'
 
@@ -25,7 +26,7 @@ export const AvatarUser = () => {
   return (
     <div className={style.avatarUserWrapper}>
       <Modal onClose={onCloseModal} isOpen={isOpenModal}>
-        {<img src={avatar} alt="avatarUser" />}
+        <img src={avatar} alt="avatarUser" />
       </Modal>
       <img
         className={style.imgAvatar}

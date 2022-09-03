@@ -5,6 +5,9 @@ import { Path } from 'enums'
 import style from 'pages/page404/Page404.module.sass'
 import { useNavigate } from 'react-router-dom'
 
+import { AddPackModal } from '../../components/modal/addPack-modal/AddPack-modal'
+import { useModal } from '../../components/modal/hooks/useModal'
+
 export const Page404 = (): ReactElement => {
   const text = "Oops. The page you're looking for doesn't exist."
 
@@ -13,7 +16,6 @@ export const Page404 = (): ReactElement => {
   const onLoginPage = () => {
     navigate(`${Path.Login}`)
   }
-
   return (
     <div className={style.center}>
       <div className={style.error}>

@@ -42,6 +42,8 @@ export {
   selectorIsMounting,
 } from './selectors/selectors'
 
+export { addNewPackModal } from './selectors/selectorsModal'
+
 //other
 
 export type { AppDispatchType, RootStoreType } from './store'
@@ -67,3 +69,4 @@ export {
 } from './slice/packParamsSlice'
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'
+export { openCloseAddNewPackModal } from './slice/modalSlice'
