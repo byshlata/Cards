@@ -8,6 +8,8 @@ type GradeType = {
   rating: number
 }
 export const Grade: FC<GradeType> = ({ rating }) => {
+  // const divKey = new Date().getMilliseconds() * Math.floor(Math.random() * 100)
+
   const grader = (rating: number) => {
     let integer = Math.floor(rating)
     let fullStarElement = (
