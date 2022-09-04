@@ -16,9 +16,9 @@ export type StarGradeType = {
 }
 
 const START_GRADE = {
-  fullStar: <img className={style.starWrapper} src={fullStar} alt={'full star'} />,
-  halfStar: <img className={style.starWrapper} src={halfStar} alt={'half star'} />,
-  emptyStar: <img className={style.starWrapper} src={emptyStar} alt={'empty star'} />,
+  fullStar: <img className={style.starItem} src={fullStar} alt={'full star'} />,
+  halfStar: <img className={style.starItem} src={halfStar} alt={'half star'} />,
+  emptyStar: <img className={style.starItem} src={emptyStar} alt={'empty star'} />,
 }
 
 export const Grade: FC<GradeType> = ({ rating }) => {
@@ -26,7 +26,15 @@ export const Grade: FC<GradeType> = ({ rating }) => {
 
   return (
     <>
-      <div className={style.gradeWrapper}>{totalRating}</div>
+      <div className={style.gradeWrapper}>
+        {totalRating.map((element, index) => {
+          return (
+            <div className={style.starWrapper} key={index}>
+              {element}
+            </div>
+          )
+        })}
+      </div>
     </>
   )
 }
