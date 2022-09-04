@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import logout from '../../assets/image/logout.png'
+import { Grade } from '../../components/grade/Grade'
 import { TableGrade } from '../../components/table/tableGrade/TableGrade'
 
 import style from './Profile.module.sass'
@@ -54,7 +55,13 @@ export const Profile = () => {
           <img src={logout} alt={'log out'} />
           Log Out
         </div>
-        <TableGrade rating={4.5} />
+        {/*<TableGrade rating={4.5} />*/}
+        {/*<TableGrade rating={4.3} />*/}
+        {/*<TableGrade rating={1.0} />*/}
+        <Grade rating={1.1} />
+        <Grade rating={2.8} />
+        <Grade rating={3.0} />
+        <Grade rating={4.8} />
       </FormBody>
     </>
   )
