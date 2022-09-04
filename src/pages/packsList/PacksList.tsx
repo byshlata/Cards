@@ -30,9 +30,9 @@ import {
   unmountingComponent,
 } from 'store'
 
-import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import { AddPackModal } from '../../components/modal/addPack-modal/AddPack-modal'
 
+import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
 
 export const PacksList = () => {
