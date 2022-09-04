@@ -1,6 +1,7 @@
-import React, { MouseEvent, ReactElement, ReactNode } from 'react'
+import React, { ReactElement, ReactNode, useEffect, useRef } from 'react'
 
 import { CustomButton } from 'components/button'
+import { useModalClass } from 'components/modal/hooks/useModalClass'
 
 import style from './Modal.module.sass'
 
@@ -13,16 +14,31 @@ type ModalType = {
 export const Modal: React.FC<ModalType> = (props): ReactElement | null => {
   const { onClose, isOpen, children } = props
 
-  const classModal = isOpen ? style.modalOpen : style.modalClose
-  const classContent = isOpen ? style.contentOpen : style.contentClose
+  const { classModal, classContent } = useModalClass(isOpen)
+  const ref = useRef<HTMLDivElement>(null)
 
-  const onStopPropagation = (e: MouseEvent) => {
-    e.stopPropagation()
+  const onCloseOutside = (event: any) => {
+    if (ref.current) {
+      if (!ref.current.contains(event.target)) {
+        onClose()
+      } else {
+        return
+      }
+    }
   }
 
+  useEffect(() => {
+    document.addEventListener('mousedown', onCloseOutside)
+    document.addEventListener('keydown', onCloseOutside)
+    return () => {
+      document.addEventListener('mousedown', onCloseOutside)
+      document.addEventListener('keydown', onCloseOutside)
+    }
+  }, [])
+
   return (
-    <div className={classModal} onClick={onClose}>
-      <div className={classContent} onClick={onStopPropagation}>
+    <div className={classModal} onClick={onClose} ref={ref}>
+      <div className={classContent}>
         <div className={style.buttonClose}>
           <CustomButton color="link" disabled={false} onClick={onClose}>
             <div className={style.close} />

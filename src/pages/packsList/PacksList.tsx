@@ -13,6 +13,7 @@ import {
 } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 import {
   getPackData,
   initialStatePackParams,
@@ -41,6 +42,20 @@ export const PacksList = () => {
   const params = useSelector(selectorParams)
   const isMounting = useSelector(selectorIsMounting)
 
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  // useEffect(() => {
+  //   setSearchParams(
+  //     { user_id: '' },
+  //     { max: '' },
+  //     { min: '' },
+  //     { page: '' },
+  //     { pageCount: '' },
+  //     { sortPacks: '' },
+  //     { packName: '' }
+  //   )
+  // }, [])
+
   useEffect(() => {
     if (params.isFirstOpen) {
       dispatch(getPackData(params))
@@ -66,8 +81,9 @@ export const PacksList = () => {
     dispatch(setPackParams({ pageCount: pageSize }))
   }
 
-  const onSearch = (searchValuer: string) => {
-    dispatch(setPackParams({ packName: searchValuer }))
+  const onSearch = (searchValue: string) => {
+    dispatch(setPackParams({ packName: searchValue }))
+    setSearchParams({ packName: searchValue })
   }
 
   const onResetFilter = () => {
