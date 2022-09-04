@@ -1,18 +1,24 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 
-import { CustomButton, MenuHeader, Modal } from 'components'
+import { CustomButton, MenuHeader } from 'components'
+import { Path } from 'enums'
 import { useSelector } from 'react-redux'
-import { selectorAvatarUser, selectorIsAuth } from 'store'
+import { useNavigate } from 'react-router-dom'
+import { selectorIsAuth } from 'store'
 
-import defaultAvatar from '../../assets/image/avatar.png'
 import itIncubatorLogo from '../../assets/image/logo-ItIncubator.svg'
 import styleMain from '../../styles/container.module.sass'
-import { useModal } from '../modal/hooks/useModal'
 
 import style from './Header.module.sass'
 
 export const Header = () => {
   const isAuth = useSelector(selectorIsAuth)
+
+  const navigate = useNavigate()
+
+  const onClickRoute = () => {
+    navigate(`${Path.Login}`)
+  }
 
   return (
     <header className={style.header}>
@@ -22,7 +28,13 @@ export const Header = () => {
             <img className={style.logo} src={itIncubatorLogo} alt={'logo'} />
           </a>
           <div className={style.wrapper}>
-            {!isAuth ? <CustomButton color="primary">Sing In</CustomButton> : <MenuHeader />}
+            {!isAuth ? (
+              <CustomButton color="primary" onClick={onClickRoute}>
+                Sing In
+              </CustomButton>
+            ) : (
+              <MenuHeader />
+            )}
           </div>
         </div>
       </div>

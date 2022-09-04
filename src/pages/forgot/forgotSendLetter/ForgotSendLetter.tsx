@@ -47,7 +47,7 @@ export const ForgotSendLetter = () => {
   }
 
   return (
-    <FormBody width={410} height={410}>
+    <FormBody width={410} height={450}>
       <Title text="Check Email" />
       <div className={style.iconSendWrapper}>
         <LetterSendIcon width={110} />

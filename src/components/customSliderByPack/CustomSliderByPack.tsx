@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CustomSlider } from 'components/customSlider/CustomSlider'
+import { CustomSlider } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { selectorMaxCardsOnPack, selectorMinCardsOnPack, setPackParams } from 'store'

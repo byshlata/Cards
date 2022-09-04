@@ -2,15 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import { Slider } from 'antd'
 import { CustomButtonBox } from 'components'
-import { useAppDispatch, useDebounce } from 'hooks'
+import { useDebounce } from 'hooks'
 import { useSelector } from 'react-redux'
-import {
-  initialStatePackParams,
-  selectorIsLoading,
-  selectorMaxCardsOnPack,
-  selectorMinCardsOnPack,
-  setPackParams,
-} from 'store'
+import { initialStatePackParams, selectorIsLoading } from 'store'
 import 'antd/dist/antd.css'
 import { maxValue, minValue } from 'utils'
 

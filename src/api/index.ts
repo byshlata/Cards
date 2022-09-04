@@ -6,4 +6,6 @@ export { registrationAPI } from './registrationAPI'
 
 export { forgotAPI } from './forgotAPI'
 
-export { packAPI } from './packAPI'
+export { packsListAPI } from 'api/packsListAPI'
+
+export { cardAPI } from 'api/cardAPI'

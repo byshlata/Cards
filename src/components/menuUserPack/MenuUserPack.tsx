@@ -5,7 +5,7 @@ import {
   IconCirclePointSVG,
   IconDeleteSvg,
   IconEditSvg,
-  IconTeacherSvg,
+  IconLearnSVG,
   Menu,
 } from 'components'
 
@@ -25,7 +25,7 @@ export const MenuUserPack = () => {
         Delete
       </CustomButtonBox>
       <CustomButtonBox color={'link'} onClick={learnPack}>
-        <IconTeacherSvg />
+        <IconLearnSVG />
         Learn
       </CustomButtonBox>
     </Menu>

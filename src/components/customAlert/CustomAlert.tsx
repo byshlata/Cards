@@ -11,7 +11,6 @@ import { CustomAlertType } from './types/CusstomAlertType'
 
 export const CustomAlert = React.memo(({ message, severity }: CustomAlertType) => {
   const [alerts, setAlerts] = useState<Nullable<AlertElementType[]>>(null)
-
   const onCloseAlert = useCallback(
     (id: string) => {
       const newAlerts = removeAlertElement(alerts, id)

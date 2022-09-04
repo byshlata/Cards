@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 
-import style from './TableCell.module.sass'
+import style from 'components/table/component/tableCell/TableCell.module.sass'
 
 type TableCellType = {
   title?: string | number
-  children?: ReactNode
+  children?: ReactNode | ReactElement[]
 }
 export const TableCell: React.FC<TableCellType> = React.memo(({ title, children }) => {
   return (

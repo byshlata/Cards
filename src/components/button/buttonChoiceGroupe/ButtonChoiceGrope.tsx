@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 
-import style from 'components/button/buttonChoiceGroupe/ButtonChoiceGrope.module.sass'
 import { CustomButtonBox } from 'components/index'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorIsLoading, selectorUserId, setPackParams } from 'store'
+import { selectorIsLoading, selectorAuthUserId, setPackParams } from 'store'
+
+import style from './ButtonChoiceGrope.module.sass'
 
 export const ButtonChoiceGrope = () => {
   const dispatch = useAppDispatch()
 
   const disabled = useSelector(selectorIsLoading)
-  const idUser = useSelector(selectorUserId)
+  const idUser = useSelector(selectorAuthUserId)
 
   const [isUserCards, setIsUserCards] = useState<boolean>(false)
 

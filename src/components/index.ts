@@ -28,8 +28,6 @@ export { FilterElementContainer } from './filterElementContainer/FilterElementCo
 
 export { ButtonChoiceGrope } from './button/buttonChoiceGroupe/ButtonChoiceGrope'
 
-export { Table } from './table/Table'
-
 export { AvatarUser } from './avatarUser/AvatarUser'
 
 export { ButtonUpload } from './button/buttonUpload/ButtonUpload'
@@ -50,7 +48,7 @@ export { IconDeleteSvg } from './iconSVG/iconDeleteSVG/IconDeleteSVG'
 
 export { IconEditSvg } from './iconSVG/iconEditSVG/IconEditSVG'
 
-export { IconTeacherSvg } from './iconSVG/iconTeachSVG/IconTeacherSVG'
+export { IconLearnSVG } from './iconSVG/iconLearnSVG/IconLearnSVG'
 
 export { IconUserSvg } from './iconSVG/iconUserSVG/IconUserSVG'
 
@@ -67,3 +65,11 @@ export { MenuHeader } from './menuHeader/MenuHeader'
 export { AvatarUserSmall } from './avatarUserSmall/AvatarUserSmall'
 
 export { MenuUserPack } from './menuUserPack/MenuUserPack'
+
+export { TableCard } from './table/tableCard/TableCard'
+
+export { TablePackList } from 'components/table/tablePackList/TablePackList'
+
+export { CustomAlert } from './customAlert/CustomAlert'
+
+export { Loader } from './loader/Loader'

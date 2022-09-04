@@ -1,10 +1,10 @@
 import React, { SyntheticEvent } from 'react'
 
-import { ButtonUpload } from 'components/button/buttonUpload/ButtonUpload'
+import { ButtonUpload } from 'components'
 import { useModal } from 'components/modal/hooks/useModal'
 import { Modal } from 'components/modal/Modal'
 import { useSelector } from 'react-redux'
-import { selectorAvatarUser } from 'store/selectors/selectors'
+import { selectorAvatarUser } from 'store'
 
 import defaultAvatar from '../../assets/image/avatar.png'
 import { AddPackModal } from '../modal/addPack-modal/AddPack-modal'

@@ -13,11 +13,11 @@ import {
 import { Page404 } from 'pages/page404/Page404'
 import { useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { selectorIsAuth, selectorUserId } from 'store'
+import { selectorIsAuth, selectorAuthUserId } from 'store'
 
 export const Routers = () => {
   const isAuth = useSelector(selectorIsAuth)
-  const userId = useSelector(selectorUserId)
+  const userId = useSelector(selectorAuthUserId)
 
   const PROFILE_PAGE = <Navigate to={`${Path.Profile}${Path.Root}${userId}`} />
   const LOGIN_PAGE = <Navigate to={`${Path.Login}`} />

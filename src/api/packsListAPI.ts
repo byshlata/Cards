@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios'
 import { PathAPI } from 'enums'
-import { PackParamsType, PackResponseType, PacksType } from 'types'
+import { PackParamsType, PackType, PackResponseType } from 'types'
 
 import { API_CONFIG } from './config'
 
-export const packAPI = {
+export const packsListAPI = {
   getPackData: async ({
     packName,
     min,
@@ -16,11 +16,11 @@ export const packAPI = {
   }: PackParamsType) => {
     const response = await API_CONFIG.get<
       any,
-      AxiosResponse<PacksType, PackResponseType>,
+      AxiosResponse<PackResponseType, PackType>,
       PackParamsType
     >(`${PathAPI.Cards}${PathAPI.Pack}`, {
       params: {
-        packName: packName,
+        packName,
         min,
         max,
         sortPacks,

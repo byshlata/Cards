@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { loginAPI, profileAPI } from 'api'
-import axios, { AxiosError } from 'axios'
-import { isSpinAppLoading, setInitialized, removeUserData, setUserData, setUserName } from 'store'
+import { isSpinAppLoading, removeUserData, setInitialized, setUserData, setUserName } from 'store'
 import { setErrorResponse } from 'utils'
 
 import { setAuth } from '../slice/appSlice'

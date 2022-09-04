@@ -1,5 +1,4 @@
-import { TableHeadElementType } from 'components/table/Table'
-import { SortParamElementType, SortParamType } from 'types'
+import { SortParamElementType, SortParamType, TableHeadElementType } from 'types'
 
 export const setParamFilter = (
   headData: TableHeadElementType[],

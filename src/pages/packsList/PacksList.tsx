@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
@@ -7,12 +7,10 @@ import {
   ButtonResetFilter,
   CustomSliderByPack,
   FilterElementContainer,
-  Modal,
   Search,
-  Table,
+  TablePackList,
   TitleWithButton,
 } from 'components'
-import { TableHeadElementType } from 'components/table/Table'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
@@ -29,35 +27,13 @@ import {
   selectorTotalCount,
   setIsFirstOpenPage,
   setPackParams,
+  unmountingComponent,
 } from 'store'
 
+import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import { AddPackModal } from '../../components/modal/addPack-modal/AddPack-modal'
-import { useModal } from '../../components/modal/hooks/useModal'
 
 import style from './РacksList.module.sass'
-
-const TABLET_HEADER: TableHeadElementType[] = [
-  {
-    title: 'Name',
-    sortParam: 'name',
-    stateSortElement: 'off',
-  },
-  {
-    title: 'Cards',
-    sortParam: 'cardsCount',
-    stateSortElement: 'off',
-  },
-  {
-    title: 'Last updated',
-    sortParam: 'updated',
-    stateSortElement: 'off',
-  },
-  {
-    title: 'Create by',
-    sortParam: 'user_name',
-    stateSortElement: 'off',
-  },
-]
 
 export const PacksList = () => {
   const dispatch = useAppDispatch()
@@ -90,10 +66,15 @@ export const PacksList = () => {
 
   const onchangePagination = (page: number, pageSize: number) => {
     dispatch(setPackParams({ page: page }))
+    dispatch(setPackParams({ pageCount: pageSize }))
   }
 
   const onSearch = (searchValuer: string) => {
     dispatch(setPackParams({ packName: searchValuer }))
+  }
+
+  const onResetFilter = () => {
+    dispatch(unmountingComponent())
   }
   const onClickButton = () => {
     dispatch(openCloseAddNewPackModal(true))
@@ -126,10 +107,10 @@ export const PacksList = () => {
               <CustomSliderByPack />
             </FilterElementContainer>
             <FilterElementContainer>
-              <ButtonResetFilter />
+              <ButtonResetFilter onResetFilter={onResetFilter} disable={isLoading} />
             </FilterElementContainer>
           </div>
-          <Table headData={TABLET_HEADER} />
+          <TablePackList headData={TABLET_HEADER} />
           <div className={style.paginationWrapper}>
             <Pagination
               disabled={isLoading}

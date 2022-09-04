@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { CustomInput } from 'components/index'
 import { useCustomInput } from 'components/input/customInput/hooks'
@@ -12,9 +12,7 @@ type SearchType = {
   onChangeDebounceValue: (debounceValue: string) => void
 }
 
-export const Search = ({ searchValue, onChangeDebounceValue, disabled }: SearchType) => {
-  const [error, setError] = useState('')
-
+export const Search = ({ searchValue, onChangeDebounceValue, disabled, error }: SearchType) => {
   const { value, onChange } = useCustomInput(searchValue)
   const debounceValue = useDebounce(value)
 
@@ -23,14 +21,6 @@ export const Search = ({ searchValue, onChangeDebounceValue, disabled }: SearchT
       onChangeDebounceValue(debounceValue)
     }
   }, [debounceValue])
-
-  useEffect(() => {
-    if (error) {
-      setError(error)
-    } else {
-      setError('')
-    }
-  }, [error])
 
   return (
     <div className={style.searchWrapper}>
