@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import logout from '../../assets/image/logout.png'
 import { EmptyPack } from '../../components/emptyPack/EmptyPack'
 import { Grade } from '../../components/grade/Grade'
+import { PackMenu } from '../../components/packMenu/PackMenu'
 import { TableGrade } from '../../components/table/tableGrade/TableGrade'
 
 import style from './Profile.module.sass'
@@ -57,9 +58,7 @@ export const Profile = () => {
           Log Out
         </div>
         <Grade rating={1.1} />
-        <Grade rating={2.8} />
-        <Grade rating={3.0} />
-        <Grade rating={4.8} />
+        <PackMenu />
       </FormBody>
       <EmptyPack />
     </>
