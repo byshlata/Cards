@@ -10,16 +10,15 @@ export { packParamsSlice, initialStatePackParams } from './slice/packParamsSlice
 export { packSlice } from './slice/packSlice'
 export { cardParamsSlice, initialStateCardParams } from './slice/cardParamsSlice'
 export { cardSlice } from './slice/cardSlice'
+export { modalSlice } from './slice/modalSlice'
 
 //thunk
 
 export { sendLetterOnEmail, sendNewPassword } from './thunk/forgotThunk'
 export { RegistrationThunk } from './thunk/registrationThunk'
 export { fetchProfilePage, changeProfileName, logoutUser } from './thunk/profileThunk'
-export { getPackData } from './thunk/pakcThunk'
+export { getPackData, addNewPack, editPack } from './thunk/pakcThunk'
 export { getCardData } from './thunk/cardThunk'
-export { editPackThank } from './thunk/editPakcThunk'
-export { addNewPackThank } from './thunk/addNewPakcThunk'
 
 //selector
 
@@ -69,7 +68,11 @@ export {
 
 export { selectorIsRegistration } from './selectors/selectorsRegistration'
 
-export { getModalId, getModalDataId, getInputName } from './selectors/selectorsModal'
+export {
+  selectorModalElementId,
+  selectorModalElementAction,
+  selectorModalElementName,
+} from './selectors/selectorsModal'
 
 //other
 
@@ -112,4 +115,5 @@ export {
 } from './slice/cardParamsSlice'
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'
+
 export { openModal, closeModal } from './slice/modalSlice'

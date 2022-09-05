@@ -1,14 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { PathAPI } from 'enums'
-import {
-  PackParamsType,
-  PackType,
-  PackResponseType,
-  CardParamsType,
-  CardResponseType,
-  CardType,
-  ParamsType,
-} from 'types'
+import { CardParamsType, CardResponseType, CardType } from 'types'
 
 import { API_CONFIG } from './config'
 

@@ -1,1 +1,1 @@
-export type BackValueType = 'name' | 'edit' | 'learn' | 'delete'
+export type BackValueType = 'name' | 'edit' | 'learn' | 'delete' | 'add' | ''

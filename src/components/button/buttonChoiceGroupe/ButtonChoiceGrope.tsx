@@ -7,26 +7,27 @@ import { selectorIsLoading, selectorAuthUserId, setPackParams } from 'store'
 
 import style from './ButtonChoiceGrope.module.sass'
 
-export const ButtonChoiceGrope = () => {
-  const dispatch = useAppDispatch()
+type ButtonChoiceGropeType = {
+  onClickButton: (value: string) => void
+  disabled: boolean
+  value: string
+}
 
-  const disabled = useSelector(selectorIsLoading)
-  const idUser = useSelector(selectorAuthUserId)
-
+export const ButtonChoiceGrope = ({ onClickButton, disabled, value }: ButtonChoiceGropeType) => {
   const [isUserCards, setIsUserCards] = useState<boolean>(false)
 
   const onClickUserButton = () => {
     if (!isUserCards) {
       setIsUserCards(true)
     }
-    dispatch(setPackParams({ user_id: idUser }))
+    onClickButton(value)
   }
 
   const onClickAllButton = () => {
     if (isUserCards) {
       setIsUserCards(false)
     }
-    dispatch(setPackParams({ user_id: '' }))
+    onClickButton('')
   }
 
   return (

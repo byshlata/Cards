@@ -1,5 +1,5 @@
 import { RootStoreType } from 'store'
 
-export const getModalId = (state: RootStoreType): string => state.modal.modalId
-export const getModalDataId = (state: RootStoreType): string => state.modal.modalDataId || ''
-export const getInputName = (state: RootStoreType): string => state.modal.data.name || ''
+export const selectorModalElementId = (state: RootStoreType): string => state.modal.id
+export const selectorModalElementAction = (state: RootStoreType): string => state.modal.action
+export const selectorModalElementName = (state: RootStoreType): string => state.modal.name

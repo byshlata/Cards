@@ -6,10 +6,10 @@ import style from './ButtomResetFilter.module.sass'
 
 type buttonResetFilterType = {
   onResetFilter: () => void
-  disable: boolean
+  disabled: boolean
 }
 
-export const ButtonResetFilter = ({ onResetFilter, disable }: buttonResetFilterType) => {
+export const ButtonResetFilter = ({ onResetFilter, disabled }: buttonResetFilterType) => {
   const onResetFilterHandle = () => {
     onResetFilter()
   }
@@ -20,7 +20,7 @@ export const ButtonResetFilter = ({ onResetFilter, disable }: buttonResetFilterT
         color="secondary"
         borderRadius="2px"
         onClick={onResetFilterHandle}
-        disabled={disable}
+        disabled={disabled}
       >
         <IconFilterSvg />
       </CustomButtonBox>

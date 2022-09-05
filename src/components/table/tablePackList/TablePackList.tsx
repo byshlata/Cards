@@ -23,45 +23,27 @@ import { TablePackListRow } from './tablePackListRow/TablePackListRow'
 
 export type TabletHeadType = {
   headData: TableHeadElementType[]
+  onClickTableAction: (
+    idPack: string,
+    backValue: BackValueType,
+    cardsCount: number,
+    name: string
+  ) => void
 }
 
-export const TablePackList = ({ headData }: TabletHeadType) => {
+export const TablePackList = ({ headData, onClickTableAction }: TabletHeadType) => {
   const dispatch = useAppDispatch()
 
   const packData = useSelector(selectorPacksData)
   const userId = useSelector(selectorAuthUserId)
 
-  const navigate = useNavigate()
-
   const onClickHandler = (
     idPack: string,
     cardsCount: number,
     backValue: BackValueType,
-    name?: string
+    name: string
   ) => {
-    switch (backValue) {
-      case 'name':
-        if (cardsCount) {
-          navigate(`${Path.Pack}${Path.Root}${idPack}`)
-        } else {
-          dispatch(setWarningMessage('Pack not have cards'))
-        }
-        break
-      case 'edit':
-        if (idPack) {
-          dispatch(
-            openModal({ modalId: 'NewPackModal', modalDataId: idPack, data: { name: name || '' } })
-          )
-        }
-        break
-      case 'delete':
-        if (idPack) {
-          // @ts-ignore
-          dispatch(removePackThank(idPack))
-          console.log(idPack)
-        }
-        break
-    }
+    onClickTableAction(idPack, backValue, cardsCount, name)
   }
 
   const onSortValue = (sortValue: string) => {

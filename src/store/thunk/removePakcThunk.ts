@@ -1,9 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { removePackAPI } from 'api/removePackAPI'
 import { isSpinAppLoading, setPackData } from 'store'
-
-import { removePackAPI } from '../../api/removePackAPI'
-import { RemovePackType } from '../../types'
-import { setErrorResponse } from '../../utils'
+import { RemovePackType } from 'types'
+import { setErrorResponse } from 'utils'
 
 export const removePackThank = createAsyncThunk(
   'modalSlice',

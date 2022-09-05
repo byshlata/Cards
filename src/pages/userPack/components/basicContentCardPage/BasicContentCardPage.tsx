@@ -87,7 +87,7 @@ export const BasicContentCardPage = ({
                 error={errorSearchValue}
                 onChangeDebounceValue={onSearch}
               />
-              <ButtonResetFilter onResetFilter={onResetFilter} disable={isLoading} />
+              <ButtonResetFilter onResetFilter={onResetFilter} disabled={isLoading} />
             </div>
             <TableCard heardTableData={tableHeadData} onClickActionTable={onClickActionTable} />
             <Pagination
