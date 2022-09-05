@@ -1,16 +1,8 @@
-import { AxiosResponse } from 'axios'
-import { PathAPI } from 'enums'
-import {
-  PackParamsType,
-  PackType,
-  PackResponseType,
-  CardParamsType,
-  CardResponseType,
-  CardType,
-  ParamsType,
-} from 'types'
+import {AxiosResponse} from 'axios'
+import {PathAPI} from 'enums'
+import {CardParamsType, CardResponseType, CardType,} from 'types'
 
-import { API_CONFIG } from './config'
+import {API_CONFIG} from './config'
 
 export const cardAPI = {
   getCardData: async ({
