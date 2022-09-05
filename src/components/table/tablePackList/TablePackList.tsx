@@ -4,13 +4,7 @@ import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import {
-  selectorPacksData,
-  selectorAuthUserId,
-  setPackParams,
-  selectorTotalCountCard,
-  setWarningMessage,
-} from 'store'
+import { selectorAuthUserId, selectorPacksData, setPackParams, setWarningMessage } from 'store'
 import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
 
