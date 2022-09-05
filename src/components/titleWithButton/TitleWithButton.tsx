@@ -2,9 +2,6 @@ import React, { ReactElement } from 'react'
 
 import { CustomButton, Modal, Title } from 'components'
 
-import { AddPackModal } from '../modal/addPack-modal/AddPack-modal'
-import { useModal } from '../modal/hooks/useModal'
-
 import style from './TitleWithButton.module.sass'
 
 type TitleWithButtonType = {

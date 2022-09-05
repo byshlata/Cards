@@ -15,6 +15,7 @@ import {
 import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
 
+import { removePackThank } from '../../../store/thunk/removePakcThunk'
 import { TableHeader } from '../component/tableHeader/TableHeader'
 
 import style from './TablePackList.module.sass'
@@ -49,8 +50,15 @@ export const TablePackList = ({ headData }: TabletHeadType) => {
       case 'edit':
         if (idPack) {
           dispatch(
-            openModal({ modalId: 'AddPackModal', modalDataId: idPack, data: { name: name || '' } })
+            openModal({ modalId: 'NewPackModal', modalDataId: idPack, data: { name: name || '' } })
           )
+        }
+        break
+      case 'delete':
+        if (idPack) {
+          // @ts-ignore
+          dispatch(removePackThank(idPack))
+          console.log(idPack)
         }
         break
     }

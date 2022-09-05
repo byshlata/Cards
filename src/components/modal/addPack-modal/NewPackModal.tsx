@@ -12,19 +12,15 @@ import { ModalToolkit } from '../ModalToolkit'
 
 import style from './Add-Modal.module.sass'
 
-export const AddPackModal = () => {
-  const modalId = 'AddPackModal'
+export const NewPackModal = () => {
+  const modalId = 'NewPackModal'
   const dispatch = useAppDispatch()
   const isOpenModal = useSelector(getModalId)
   const modalDataId = useSelector(getModalDataId)
   const namePack = useSelector(getInputName)
   const isOpen = isOpenModal === modalId
 
-  // const valueInput = modalDataId ? namePack : ''
   const [value, setValue] = useState<string>('')
-  console.log(`"value": ${value}`)
-  console.log({ value: value, namePack: namePack })
-  // const [value, setValue] = useState('')
   const [checked, isChecked] = useState(false)
 
   const onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

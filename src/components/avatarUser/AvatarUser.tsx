@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux'
 import { selectorAvatarUser } from 'store'
 
 import defaultAvatar from '../../assets/image/avatar.png'
-import { AddPackModal } from '../modal/addPack-modal/AddPack-modal'
 
 import style from './AvatarUser.module.sass'
 

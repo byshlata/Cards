@@ -29,7 +29,7 @@ import {
   unmountingComponent,
 } from 'store'
 
-import { AddPackModal } from '../../components/modal/addPack-modal/AddPack-modal'
+import { NewPackModal } from '../../components/modal/addPack-modal/NewPackModal'
 import { openModal } from '../../store/slice/modalSlice'
 
 import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
@@ -77,7 +77,7 @@ export const PacksList = () => {
     dispatch(unmountingComponent())
   }
   const onClickButton = () => {
-    dispatch(openModal({ modalId: 'AddPackModal', modalDataId: '', data: { name: '' } }))
+    dispatch(openModal({ modalId: 'NewPackModal', modalDataId: '', data: { name: '' } }))
   }
 
   const errorSearchValue = totalPack ? '' : 'Cards not found'
@@ -123,7 +123,7 @@ export const PacksList = () => {
           </div>
         </>
       ) : null}
-      <AddPackModal />
+      <NewPackModal />
     </div>
   )
 }
