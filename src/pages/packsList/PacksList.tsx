@@ -126,9 +126,9 @@ export const PacksList = () => {
           <div className={style.paginationWrapper}>
             <Pagination
               disabled={isLoading}
+              showSizeChanger
               showQuickJumper
               current={currentPage}
-              pageSize={initialStatePackParams.pageCount}
               total={totalPack}
               onChange={onchangePagination}
             />
