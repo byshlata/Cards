@@ -17,7 +17,6 @@ import {
   getPackData,
   initialStatePackParams,
   mountingComponent,
-  openCloseAddNewPackModal,
   removeIsFirstOpenPage,
   resetPackParams,
   selectorCurrentPage,
@@ -31,6 +30,7 @@ import {
 } from 'store'
 
 import { AddPackModal } from '../../components/modal/addPack-modal/AddPack-modal'
+import { openModal } from '../../store/slice/modalSlice'
 
 import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
@@ -77,7 +77,7 @@ export const PacksList = () => {
     dispatch(unmountingComponent())
   }
   const onClickButton = () => {
-    dispatch(openCloseAddNewPackModal(true))
+    dispatch(openModal({ modalId: 'AddPackModal', modalDataId: '', data: { name: '' } }))
   }
 
   const errorSearchValue = totalPack ? '' : 'Cards not found'
@@ -123,7 +123,7 @@ export const PacksList = () => {
           </div>
         </>
       ) : null}
-      <AddPackModal name={'Add new pack'} />
+      <AddPackModal />
     </div>
   )
 }

@@ -18,6 +18,8 @@ export { RegistrationThunk } from './thunk/registrationThunk'
 export { fetchProfilePage, changeProfileName, logoutUser } from './thunk/profileThunk'
 export { getPackData } from './thunk/pakcThunk'
 export { getCardData } from './thunk/cardThunk'
+export { editPackThank } from './thunk/editPakcThunk'
+export { addNewPackThank } from './thunk/addNewPakcThunk'
 
 //selector
 
@@ -67,7 +69,7 @@ export {
 
 export { selectorIsRegistration } from './selectors/selectorsRegistration'
 
-export { addNewPackModal } from './selectors/selectorsModal'
+export { getModalId, getModalDataId, getInputName } from './selectors/selectorsModal'
 
 //other
 
@@ -110,4 +112,4 @@ export {
 } from './slice/cardParamsSlice'
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'
-export { openCloseAddNewPackModal } from './slice/modalSlice'
+export { openModal, closeModal } from './slice/modalSlice'

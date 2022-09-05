@@ -1,25 +1,44 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export const initialState = {
-  addNewPackModal: false,
-  editPackModal: false,
-  deletePackModal: false,
-  addNewCardModal: false,
-  editCardModal: false,
-  deleteCardModal: false,
+export const initialState: initialStateType = {
+  modalId: '',
+  modalDataId: '',
+  data: {
+    name: '',
+  },
 }
-// type initialStateType = ReturnType<typeof initialState>
+type initialStateType = {
+  modalId: string
+  modalDataId?: string | undefined
+  data: {
+    name: string
+  }
+}
 
 export const modalSlice = createSlice({
   name: 'modalSlice',
   initialState,
   reducers: {
-    openCloseAddNewPackModal: (state, action: PayloadAction<boolean>) => {
-      console.log(action.payload)
-      state.addNewPackModal = action.payload
+    openModal: (
+      state,
+      {
+        payload: {
+          modalId,
+          modalDataId,
+          data: { name },
+        },
+      }: PayloadAction<initialStateType>
+    ) => {
+      state.modalId = modalId
+      state.modalDataId = modalDataId
+      state.data.name = name
+    },
+    closeModal: (state) => {
+      state.modalId = ''
+      state.modalDataId = ''
     },
     removePackData: () => initialState,
   },
 })
 
-export const { openCloseAddNewPackModal, removePackData } = modalSlice.actions
+export const { openModal, closeModal, removePackData } = modalSlice.actions

@@ -61,3 +61,7 @@ export type { TabletHeadDataType } from './TabletHeadDataType'
 export type { BackValueType } from './BackValueType'
 
 export type { CardParamsResetInitialType } from './CardParamsResetInitialType'
+
+export type { EditPackType } from './EditPackType'
+
+export type { AddPackType } from './AddPackType'

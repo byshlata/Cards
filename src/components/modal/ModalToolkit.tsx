@@ -3,7 +3,6 @@ import React, { DetailedHTMLProps, MouseEvent, ReactElement, ReactNode } from 'r
 import { CustomButton } from 'components/button'
 
 import { useAppDispatch } from '../../hooks'
-import { openCloseAddNewPackModal } from '../../store'
 
 import style from './Modal.module.sass'
 
@@ -25,7 +24,7 @@ export const ModalToolkit: React.FC<ModalType> = (props): ReactElement | null =>
   }
 
   const modalCloseHandler = () => {
-    dispatch(openCloseAddNewPackModal(false))
+    // dispatch(openCloseAddNewPackModal(false))
   }
   return (
     <div className={classModal}>

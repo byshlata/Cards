@@ -1,24 +1,30 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
-import { openCloseAddNewPackModal, addNewPackModal } from 'store'
+import { editPackThank, getInputName, getModalDataId, getModalId } from 'store'
+import { closeModal } from 'store/slice/modalSlice'
 
 import { useAppDispatch } from '../../../hooks'
+import { addNewPackThank } from '../../../store/thunk/addNewPakcThunk'
 import { CustomButton } from '../../button'
 import { CustomInput } from '../../input'
 import { ModalToolkit } from '../ModalToolkit'
 
 import style from './Add-Modal.module.sass'
 
-type AddPackModalType = {
-  name: string
-}
-
-export const AddPackModal = (props: AddPackModalType) => {
-  const isOpenModal = useSelector(addNewPackModal)
+export const AddPackModal = () => {
+  const modalId = 'AddPackModal'
   const dispatch = useAppDispatch()
+  const isOpenModal = useSelector(getModalId)
+  const modalDataId = useSelector(getModalDataId)
+  const namePack = useSelector(getInputName)
+  const isOpen = isOpenModal === modalId
 
-  const [value, setValue] = useState('')
+  // const valueInput = modalDataId ? namePack : ''
+  const [value, setValue] = useState<string>('')
+  console.log(`"value": ${value}`)
+  console.log({ value: value, namePack: namePack })
+  // const [value, setValue] = useState('')
   const [checked, isChecked] = useState(false)
 
   const onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,16 +32,26 @@ export const AddPackModal = (props: AddPackModalType) => {
   }
 
   const isCloseButton = () => {
-    dispatch(openCloseAddNewPackModal(false))
+    dispatch(closeModal())
     setValue('')
   }
-  const saveButtonHandler = () => {}
+  const saveButtonHandler = () => {
+    if (!modalDataId) {
+      dispatch(addNewPackThank({ name: value }))
+    } else {
+      dispatch(editPackThank({ _id: modalDataId, name: value }))
+    }
+  }
+
+  useEffect(() => {
+    setValue(namePack)
+  }, [namePack, isOpen])
 
   return (
-    <ModalToolkit isOpen={isOpenModal}>
+    <ModalToolkit isOpen={isOpen}>
       <div className={style.container}>
         <div className={style.wrapperTitle}>
-          <div className={style.title}>{props.name}</div>
+          <div className={style.title}>{modalDataId ? 'edit pack' : 'add pack'}</div>
           <div className={style.closeButton}>
             <a href="#" className={style.close} />
           </div>

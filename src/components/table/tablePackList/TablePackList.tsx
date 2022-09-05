@@ -10,6 +10,7 @@ import {
   setPackParams,
   selectorTotalCountCard,
   setWarningMessage,
+  openModal,
 } from 'store'
 import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
@@ -31,7 +32,12 @@ export const TablePackList = ({ headData }: TabletHeadType) => {
 
   const navigate = useNavigate()
 
-  const onClickHandler = (idPack: string, cardsCount: number, backValue: BackValueType) => {
+  const onClickHandler = (
+    idPack: string,
+    cardsCount: number,
+    backValue: BackValueType,
+    name?: string
+  ) => {
     switch (backValue) {
       case 'name':
         if (cardsCount) {
@@ -39,6 +45,14 @@ export const TablePackList = ({ headData }: TabletHeadType) => {
         } else {
           dispatch(setWarningMessage('Pack not have cards'))
         }
+        break
+      case 'edit':
+        if (idPack) {
+          dispatch(
+            openModal({ modalId: 'AddPackModal', modalDataId: idPack, data: { name: name || '' } })
+          )
+        }
+        break
     }
   }
 
