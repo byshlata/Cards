@@ -1,15 +1,16 @@
 import React from 'react'
 
-import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { Path } from 'enums'
 import { useFormik } from 'formik'
-import { useAppDispatch } from 'hooks'
-import style from 'pages/forgot/forgotEmail/ForgotEmail.module.sass'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import * as yup from 'yup'
+
+import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { Path } from 'enums'
+import { useAppDispatch } from 'hooks'
+import style from 'pages/forgot/forgotEmail/ForgotEmail.module.sass'
 import { removeEmail, selectorIsLoading, selectorIsPasswordSend, sendNewPassword } from 'store'
 import { createErrorSchema } from 'utils'
-import * as yup from 'yup'
 
 export const ForgotCreatePassword = () => {
   const dispatch = useAppDispatch()
@@ -33,7 +34,7 @@ export const ForgotCreatePassword = () => {
       password: '',
     },
     validationSchema: schema,
-    onSubmit: (values) => {
+    onSubmit: values => {
       if (param.token) {
         dispatch(sendNewPassword({ password: values.password, resetPasswordToken: param.token }))
         formik.resetForm({
@@ -45,6 +46,7 @@ export const ForgotCreatePassword = () => {
 
   const errorPassword = formik.touched.password ? formik.errors.password : undefined
   const isDisabledButton = isLoading || !formik.isValid
+
   return (
     <FormBody width={410} height={370}>
       <Title text="Create new password" />

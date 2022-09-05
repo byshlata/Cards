@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, memo } from 'react'
 
 import style from './CustomInput.module.sass'
 import { useClassInputElement } from './hooks/useClassInputElement'
@@ -6,7 +6,7 @@ import { usePasswordInput } from './hooks/usePasswordInput'
 import { EyeIconCloseSvg, EyeIconOpenSVG, SearchIconSvg } from './iconsSVG'
 import { CustomInputType } from './types/CustomInputType'
 
-export const CustomInput: React.FC<CustomInputType> = React.memo(
+export const CustomInput: React.FC<CustomInputType> = memo(
   ({ type, name, error, disabled, onClick, value, onChange }): ReactElement => {
     const { onWatchPassword, typeInputValue, isEyeOpenIcon, isEyeIcon, isSearchIcon, labelName } =
       usePasswordInput(type, error, name)

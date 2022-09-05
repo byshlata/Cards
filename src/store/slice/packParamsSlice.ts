@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { PackParamsInitialType, PackParamsType } from 'types'
 
 export const initialStatePackParams: PackParamsInitialType = {
@@ -31,10 +32,10 @@ export const packParamsSlice = createSlice({
       ...state,
       ...action.payload,
     }),
-    setIsFirstOpenPage: (state) => {
+    setIsFirstOpenPage: state => {
       state.isFirstOpen = true
     },
-    removeIsFirstOpenPage: (state) => {
+    removeIsFirstOpenPage: state => {
       state.isFirstOpen = false
     },
     removePackParams: () => initialStatePackParams,

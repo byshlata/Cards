@@ -16,5 +16,6 @@ export const useAlertStyle = (
   const classAlert = severity === 'success' ? style.customAlertSuccess : style.customAlertError
   const classCross = severity === 'success' ? style.closeSuccess : style.closeError
   const iconElement = severity === 'success' ? icon.success : icon.error
+
   return { classAlert, classCross, iconElement }
 }
