@@ -4740,10 +4740,10 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-it-incubator@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-it-incubator/-/eslint-config-it-incubator-1.0.2.tgz#7ef37521f6b4c6d1a81924d85367b7db437c18b4"
-  integrity sha512-/zQkCA4bQl/1eYHBgSLxqtyIf5jj8jf19HhoB2zn/hc7nC16LH0i/618C5/f8v4/thQoRR5J5MCPimSN7X270w==
+eslint-config-it-incubator@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/eslint-config-it-incubator/-/eslint-config-it-incubator-1.0.10.tgz#ce384a1c8ac354e3e63657f7cad65be5ed4cea2b"
+  integrity sha512-J6f5n/DICbRMiA4EiUMLVrx37EI/Db+MIrLXf/je/GfpRWtl8oWjBIM6Pea8WxY75HA5JWW6vf5DoPXSjg39NA==
 
 eslint-config-prettier@8.3.0:
   version "8.3.0"
