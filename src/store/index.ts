@@ -1,12 +1,14 @@
 //slice
 
-import exp from 'constants'
-
 export { appSlice } from './slice/appSlice'
 export { forgotSlice } from './slice/forgotSlice'
 export { registrationSlice } from './slice/registrationSlice'
 export { profileSlice } from './slice/profileSlice'
-export { packParamsSlice, initialStatePackParams } from './slice/packParamsSlice'
+export {
+  packParamsSlice,
+  initialStatePackParams,
+  resetStatePackParams,
+} from './slice/packParamsSlice'
 export { packSlice } from './slice/packSlice'
 export { cardParamsSlice, initialStateCardParams } from './slice/cardParamsSlice'
 export { cardSlice } from './slice/cardSlice'
@@ -72,6 +74,7 @@ export {
   selectorModalElementId,
   selectorModalElementAction,
   selectorModalElementName,
+  selectorIsCloseModalAfterRequest,
 } from './selectors/selectorsModal'
 
 //other
@@ -116,4 +119,4 @@ export {
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'
 
-export { openModal, closeModal } from './slice/modalSlice'
+export { openModal, closeModal, onCloseModalAfterRequest } from './slice/modalSlice'

@@ -94,7 +94,6 @@ export const BasicContentCardPage = ({
               disabled={isLoading}
               showQuickJumper
               current={currentPage}
-              pageSize={initialStateCardParams.pageCount}
               total={totalCard}
               onChange={onchangePagination}
             />

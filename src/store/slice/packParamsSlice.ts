@@ -12,7 +12,7 @@ export const initialStatePackParams: PackParamsInitialType = {
   isFirstOpen: false,
 }
 
-const resetStatePackParams: PackParamsInitialType = {
+export const resetStatePackParams: PackParamsInitialType = {
   user_id: '',
   max: 110,
   min: 0,

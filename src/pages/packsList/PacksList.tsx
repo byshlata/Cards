@@ -3,11 +3,11 @@ import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
 import {
+  FilterContainer,
+  FormModalPackListGrope,
   Modal,
   TablePackList,
   TitleWithButton,
-  FormModalPackListGrope,
-  FilterContainer,
 } from 'components'
 import { useModal } from 'components/modal/hooks/useModal'
 import { Path } from 'enums'
@@ -21,6 +21,7 @@ import {
   removeIsFirstOpenPage,
   resetPackParams,
   selectorCurrentPage,
+  selectorIsCloseModalAfterRequest,
   selectorIsLoading,
   selectorIsMounting,
   selectorParams,
@@ -41,6 +42,7 @@ export const PacksList = () => {
   const currentPage = useSelector(selectorCurrentPage)
   const params = useSelector(selectorParams)
   const isMounting = useSelector(selectorIsMounting)
+  const isCloseModalAfterRequest = useSelector(selectorIsCloseModalAfterRequest)
 
   const navigate = useNavigate()
 
@@ -61,10 +63,17 @@ export const PacksList = () => {
 
   useEffect(() => {
     dispatch(setIsFirstOpenPage())
+
     return () => {
       dispatch(removeIsFirstOpenPage())
     }
   }, [])
+
+  useEffect(() => {
+    if (isOpenModal && isCloseModalAfterRequest) {
+      onCloseModal()
+    }
+  }, [isCloseModalAfterRequest])
 
   const onchangePagination = (page: number, pageSize: number) => {
     dispatch(setPackParams({ page: page }))

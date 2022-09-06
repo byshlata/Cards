@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from 'react'
 type useCustomInputReturnType = {
   value: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  resetInput: () => void
 }
 
 export const useCustomInput = (initialValue = ''): useCustomInputReturnType => {
@@ -12,5 +13,9 @@ export const useCustomInput = (initialValue = ''): useCustomInputReturnType => {
     setValue(e.currentTarget.value)
   }
 
-  return { value, onChange }
+  const resetInput = () => {
+    setValue('')
+  }
+
+  return { value, onChange, resetInput }
 }

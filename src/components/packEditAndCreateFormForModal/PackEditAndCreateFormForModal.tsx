@@ -34,7 +34,6 @@ export const PackEditAndCreateFormForModal = ({
 
   const onClickCancel = () => {
     setCheckedBox(false)
-    valueInput = ''
     onClickCancelButton()
   }
 
@@ -46,7 +45,7 @@ export const PackEditAndCreateFormForModal = ({
       <hr className={style.hr} />
       <CustomInput type="simple" value={value} onChange={onChange} name={labelInput} />
       <div className={style.checkBoxWrapper}>
-        <CustomCheckBox checked={checkedBox} onClick={setCheckedBox} label={labelCheckBox} />
+        <CustomCheckBox checked={checkedBox} onChange={setCheckedBox} label={labelCheckBox} />
       </div>
       <div className={style.buttonWrapper}>
         <div className={style.buttonCancelItem}>

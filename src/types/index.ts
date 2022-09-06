@@ -67,3 +67,5 @@ export type { EditPackType } from './EditPackType'
 export type { AddPackType } from './AddPackType'
 
 export type { RemovePackType } from './RemovePackType'
+
+export type { DataFormModalType } from './DataFormModalType'

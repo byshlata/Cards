@@ -1,9 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { packsListAPI } from 'api'
-import { isSpinAppLoading } from 'store'
-import { setPackData } from 'store/slice/packSlice'
+import {
+  isSpinAppLoading,
+  resetPackParams,
+  RootStoreType,
+  setPackData,
+  unmountingComponent,
+  resetStatePackParams,
+  onCloseModalAfterRequest,
+} from 'store'
 import { AddPackType, EditPackType, PackParamsType } from 'types'
-import { setErrorResponse } from 'utils'
+import { isComparisonOfTwoObjects, setErrorResponse } from 'utils'
 
 export const getPackData = createAsyncThunk(
   'packSlice/getPackData',
@@ -11,22 +18,34 @@ export const getPackData = createAsyncThunk(
     try {
       dispatch(isSpinAppLoading(true))
       const res = await packsListAPI.getPackData(payload)
+
       dispatch(setPackData(res))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))
+      dispatch(onCloseModalAfterRequest(true))
     }
   }
 )
 
 export const addNewPack = createAsyncThunk(
   'modalSlice',
-  async (payload: AddPackType, { rejectWithValue, dispatch }) => {
+  async (payload: AddPackType, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      const res = await packsListAPI.postPackData(payload)
-      dispatch(setPackData(res))
+      dispatch(onCloseModalAfterRequest(false))
+      await packsListAPI.postPackData(payload)
+
+      const state = getState() as RootStoreType
+      const packParamsNow = state.packParams
+
+      if (isComparisonOfTwoObjects(resetStatePackParams, packParamsNow)) {
+        getPackData(packParamsNow)
+      } else {
+        dispatch(unmountingComponent())
+      }
+      dispatch(resetPackParams())
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
@@ -37,11 +56,19 @@ export const addNewPack = createAsyncThunk(
 
 export const editPack = createAsyncThunk(
   'modalSlice',
-  async (payload: EditPackType, { rejectWithValue, dispatch }) => {
+  async (payload: EditPackType, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      const res = await packsListAPI.putEditPuckName(payload)
-      dispatch(setPackData(res))
+      await packsListAPI.putEditPuckName(payload)
+
+      const state = getState() as RootStoreType
+      const packParamsNow = state.packParams
+
+      if (isComparisonOfTwoObjects(resetStatePackParams, packParamsNow)) {
+        getPackData(packParamsNow)
+      } else {
+        dispatch(unmountingComponent())
+      }
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
