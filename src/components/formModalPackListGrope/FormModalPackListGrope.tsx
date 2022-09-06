@@ -11,9 +11,10 @@ import {
 
 type FormModalPackListGropeType = {
   onClose: () => void
+  isOpenModal: boolean
 }
 
-export const FormModalPackListGrope = ({ onClose }: FormModalPackListGropeType) => {
+export const FormModalPackListGrope = ({ onClose, isOpenModal }: FormModalPackListGropeType) => {
   const dispatch = useAppDispatch()
 
   const packName = useSelector(selectorModalElementName)
@@ -38,6 +39,7 @@ export const FormModalPackListGrope = ({ onClose }: FormModalPackListGropeType) 
         labelCheckBox="Private pack"
         onClickSaveButton={onEditPack}
         onClickCancelButton={onClose}
+        isOpenModal={isOpenModal}
       />
     )
   }
@@ -56,6 +58,7 @@ export const FormModalPackListGrope = ({ onClose }: FormModalPackListGropeType) 
         labelCheckBox="Private pack"
         onClickSaveButton={onAddPack}
         onClickCancelButton={onClose}
+        isOpenModal={isOpenModal}
       />
     )
   }

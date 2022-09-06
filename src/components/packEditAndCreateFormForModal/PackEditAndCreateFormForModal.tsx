@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { TitleModal, CustomCheckBox, CustomButton, CustomInput } from 'components'
 import { useCustomCheckBox } from 'components/customCheckBox/hooks/useChecked'
@@ -14,6 +14,7 @@ type PackEditAndCreateFormForModalType = {
   labelCheckBox: string
   onClickSaveButton: (valueInput: string, valueCheckBox: boolean) => void
   onClickCancelButton: () => void
+  isOpenModal: boolean
 }
 
 export const PackEditAndCreateFormForModal = ({
@@ -24,9 +25,16 @@ export const PackEditAndCreateFormForModal = ({
   onClickCancelButton,
   onClickSaveButton,
   title,
+  isOpenModal,
 }: PackEditAndCreateFormForModalType) => {
   const { checkedBox, setCheckedBox } = useCustomCheckBox(valueCheckBox)
-  const { value, onChange } = useCustomInput(valueInput)
+  const { value, onChange, resetInput } = useCustomInput(valueInput)
+
+  useEffect(() => {
+    if (!valueInput) {
+      resetInput()
+    }
+  }, [isOpenModal])
 
   const onClickSave = () => {
     onClickSaveButton(value, checkedBox)

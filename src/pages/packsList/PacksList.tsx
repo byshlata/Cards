@@ -134,7 +134,7 @@ export const PacksList = () => {
       ) : null}
 
       <Modal onClose={onCloseModal} isOpen={isOpenModal}>
-        <FormModalPackListGrope onClose={onCloseModal} />
+        <FormModalPackListGrope onClose={onCloseModal} isOpenModal={isOpenModal} />
       </Modal>
     </div>
   )
