@@ -1,4 +1,4 @@
-import { PackEditAndCreateFormForModal } from 'components/packEditAndCreateFormForModal/PackEditAndCreateFormForModal'
+import { FormPackEditAndCreate } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
@@ -31,7 +31,7 @@ export const FormModalPackListGrope = ({ onClose, isOpenModal }: FormModalPackLi
 
   if (modalAction === 'edit') {
     return (
-      <PackEditAndCreateFormForModal
+      <FormPackEditAndCreate
         title="Edit pack"
         valueInput={packName}
         valueCheckBox={false}
@@ -50,7 +50,7 @@ export const FormModalPackListGrope = ({ onClose, isOpenModal }: FormModalPackLi
 
   if (modalAction === 'add') {
     return (
-      <PackEditAndCreateFormForModal
+      <FormPackEditAndCreate
         title="Add new pack"
         valueInput=""
         valueCheckBox={false}

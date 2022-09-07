@@ -9,7 +9,6 @@ type SchemaElementType = {
   email?: RequiredStringSchema<string | undefined, AnyObject>
   password?: RequiredStringSchema<string | undefined, AnyObject>
   confirmPassword?: yup.StringSchema<string | undefined, AnyObject, string | undefined>
-  simple?: RequiredStringSchema<string | undefined, AnyObject>
 }
 
 export const createErrorSchema = (params: KeySchemeType[]) => {
@@ -28,9 +27,6 @@ export const createErrorSchema = (params: KeySchemeType[]) => {
       return this.parent.password === value
     }),
 
-    simple: yup
-        .string()
-        .required('Value is required please!')
   }
 
   const schema: SchemaElementType = {}

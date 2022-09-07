@@ -4,13 +4,9 @@ import { TitleModal, CustomCheckBox, CustomButton, CustomInput } from 'component
 import { useCustomCheckBox } from 'components/customCheckBox/hooks/useChecked'
 import { useCustomInput } from 'components/input/customInput/hooks'
 
-import style from './PackEditAndCreateFormForModal.module.sass'
-import { createErrorSchema } from 'utils'
+import style from './FormPackEditAndCreate.module.sass'
 
-import * as yup from 'yup'
-import { useFormik } from 'formik'
-
-type PackEditAndCreateFormForModalType = {
+type FormPackEditAndCreateType = {
   title: string
   valueInput: string
   valueCheckBox: boolean
@@ -21,9 +17,7 @@ type PackEditAndCreateFormForModalType = {
   isOpenModal: boolean
 }
 
-const schema = yup.object().shape(createErrorSchema(['simple']))
-
-export const PackEditAndCreateFormForModal = ({
+export const FormPackEditAndCreate = ({
   labelCheckBox,
   valueCheckBox,
   labelInput,
@@ -32,35 +26,27 @@ export const PackEditAndCreateFormForModal = ({
   onClickSaveButton,
   title,
   isOpenModal,
-}: PackEditAndCreateFormForModalType) => {
+}: FormPackEditAndCreateType) => {
   const { checkedBox, setCheckedBox } = useCustomCheckBox(valueCheckBox)
   const { value, onChange, resetInput } = useCustomInput(valueInput)
 
   useEffect(() => {
     if (!valueInput) {
-      setCheckedBox(false)
       resetInput()
     }
   }, [isOpenModal])
 
+  const onClickSave = () => {
+    onClickSaveButton(value, checkedBox)
+  }
+
   const onClickCancel = () => {
+    setCheckedBox(false)
     onClickCancelButton()
   }
 
-  const formik = useFormik({
-    initialValues: {
-      value: '',
-      private: false
-    },
-    validationSchema: schema,
-    onSubmit: (values, private) => {
-      onClickSaveButton(value, checkedBox)
-    },
-  })
-
-
   return (
-    <form className={style.formWrapper}>
+    <div className={style.formWrapper}>
       <div className={style.titleWrapper}>
         <TitleModal text={title} />
       </div>
@@ -76,11 +62,11 @@ export const PackEditAndCreateFormForModal = ({
           </CustomButton>
         </div>
         <div className={style.buttonSaveItem}>
-          <CustomButton color="primary" type="submit" onClick={formik.handleSubmit}>
+          <CustomButton color="primary" onClick={onClickSave}>
             Save
           </CustomButton>
         </div>
       </div>
-    </form>
+    </div>
   )
 }

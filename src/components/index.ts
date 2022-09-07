@@ -80,4 +80,4 @@ export { TitleModal } from './titleModal/TitleModal'
 
 export { FormModalPackListGrope } from './formModalPackListGrope/FormModalPackListGrope'
 
-export { PackEditAndCreateFormForModal } from './packEditAndCreateFormForModal/PackEditAndCreateFormForModal'
+export { FormPackEditAndCreate } from './formPackEditAndCreate/FormPackEditAndCreate'
