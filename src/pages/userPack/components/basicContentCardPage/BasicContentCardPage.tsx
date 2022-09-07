@@ -73,7 +73,7 @@ export const BasicContentCardPage = ({
     dispatch(unmountingComponent())
   }
 
-  const errorSearchValue = totalCard ? '' : 'Cards not found'
+  const errorSearchValue = totalCard ? '' : !paramsCard.cardQuestion ? '' : 'Cards not found'
 
   return (
     <>

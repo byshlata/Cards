@@ -53,7 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
     "eslint": "^8.22.0",
-    "eslint-config-it-incubator": "^1.0.1",
+    "eslint-config-it-incubator": "^1.0.10",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "3.4.0",
