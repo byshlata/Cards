@@ -1,3 +1,5 @@
+import { LearnTypeResponseType } from '../slice/learnSlice'
+
 import { RootStoreType } from 'store'
 import {
   ErrorMessageType,
