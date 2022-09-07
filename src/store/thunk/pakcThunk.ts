@@ -20,12 +20,8 @@ export const getPackData = createAsyncThunk(
 
       dispatch(setPackData(res))
     } catch (e) {
-      // eslint-disable-next-line no-debugger
-      debugger
       return setErrorResponse(e, rejectWithValue)
     } finally {
-      // eslint-disable-next-line no-debugger
-      debugger
       dispatch(isSpinAppLoading(false))
       dispatch(onCloseModalAfterRequest(true))
     }
@@ -44,7 +40,7 @@ export const addNewPack = createAsyncThunk(
       const packParamsNow = state.packParams
 
       if (isComparisonOfTwoObjects(resetStatePackParams, packParamsNow)) {
-        getPackData(packParamsNow)
+        dispatch(getPackData(packParamsNow))
       } else {
         dispatch(unmountingComponent())
       }
@@ -67,7 +63,7 @@ export const editPack = createAsyncThunk(
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
 
-      getPackData(packParamsNow)
+      dispatch(getPackData(packParamsNow))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
@@ -86,8 +82,7 @@ export const deletePack = createAsyncThunk(
 
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
-
-      getPackData(packParamsNow)
+      dispatch(getPackData(packParamsNow))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
