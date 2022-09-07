@@ -32,6 +32,7 @@ import {
   setPackParams,
 } from 'store'
 import { FilterElementType } from 'types'
+import { Learn } from 'pages/learn/Learn'
 
 const FILTER_ELEMENT: FilterElementType[] = [
   { title: 'Search', element: <SearchByPacks /> },
@@ -110,6 +111,7 @@ export const Pack = () => {
           total={totalPack}
           onChange={onchangePagination}
         />
+        <Learn />
       </div>
     </div>
   )
