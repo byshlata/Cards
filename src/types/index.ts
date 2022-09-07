@@ -46,11 +46,10 @@ export type { SortParamType } from './SortParamType'
 
 export type { SortParamElementType } from './SortParamElementType'
 
-<<<<<<<<< Temporary merge branch 1
 export type { CardsPackType } from './CardsPackType'
 
 export type { EditResponseType } from './EditResponseType'
-=========
+
 export type { CardParamsInitialType } from './CardParamsInitialType'
 
 export type { CardParamsType } from './CardParamsType'
@@ -74,4 +73,3 @@ export type { AddPackType } from './AddPackType'
 export type { RemovePackType } from './RemovePackType'
 
 export type { DataFormModalType } from './DataFormModalType'
->>>>>>>>> Temporary merge branch 2

@@ -1,22 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
-<<<<<<<<< Temporary merge branch 1
-=========
 import {
   appSlice,
   cardParamsSlice,
   cardSlice,
   forgotSlice,
+  modalSlice,
   packParamsSlice,
   packSlice,
+  profileSlice,
   registrationSlice,
 } from 'store'
+import { learnSlice } from 'store/slice/learnSlice'
 import { resetSlice } from 'store/slice/resetSlice'
->>>>>>>>> Temporary merge branch 2
-
-import { modalSlice } from './slice/modalSlice'
-import { profileSlice } from './slice/profileSlice'
-
-import { appSlice, forgotSlice, packParamsSlice, packSlice, registrationSlice } from 'store'
 
 export const store = configureStore({
   reducer: {

@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 
+import { createGrade } from 'components/grade/utils/createGrade'
 import style from './Grade.module.sass'
 
 import { emptyStar, fullStar, halfStar } from './index'
-import { createGrade } from 'components/grade/utils/createGrade'
 
 type GradeType = {
   rating: number
