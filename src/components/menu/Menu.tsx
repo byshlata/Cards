@@ -15,19 +15,22 @@ export const Menu = ({ headMenu, children }: MenuType) => {
     setIsOpen(!isOpen)
   }
 
-  const onCloseOutside = (event: any) => {
-    if (ref.current) {
-      if (!ref.current.contains(event.target)) {
-        setIsOpen(false)
-      } else {
-        return
+  useEffect(() => {
+    const onCloseOutside = (event: any) => {
+      if (ref.current) {
+        if (!ref.current.contains(event.target)) {
+          setIsOpen(false)
+        } else {
+          return
+        }
       }
     }
-  }
-
-  useEffect(() => {
     document.addEventListener('mousedown', onCloseOutside)
-  }, [])
+
+    return () => {
+      document.addEventListener('mousedown', onCloseOutside)
+    }
+  }, [ref.current])
 
   const isOpenMenu = children?.length && isOpen
 

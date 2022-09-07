@@ -26,7 +26,6 @@ export const createErrorSchema = (params: KeySchemeType[]) => {
     confirmPassword: yup.string().test('password', function (value) {
       return this.parent.password === value
     }),
-
   }
 
   const schema: SchemaElementType = {}

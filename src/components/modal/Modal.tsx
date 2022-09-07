@@ -17,28 +17,38 @@ export const Modal: React.FC<ModalType> = (props): ReactElement | null => {
   const { classModal, classContent } = useModalClass(isOpen)
   const ref = useRef<HTMLDivElement>(null)
 
-  const onCloseOutside = (event: any) => {
-    if (ref.current) {
-      if (!ref.current.contains(event.target)) {
+  useEffect(() => {
+    const onKeyPress = (event: KeyboardEvent) => {
+      if (isOpen && event.key === 'Escape') {
+        onClose()
+      }
+    }
+    document.addEventListener('keydown', onKeyPress)
+
+    return () => {
+      document.addEventListener('keydown', onKeyPress)
+    }
+  }, [isOpen, onClose])
+
+  useEffect(() => {
+    const onCloseOutside = (event: MouseEvent) => {
+      if (!ref.current?.contains(event.target as Node)) {
         onClose()
       } else {
         return
       }
     }
-  }
 
-  useEffect(() => {
     document.addEventListener('mousedown', onCloseOutside)
-    document.addEventListener('keydown', onCloseOutside)
+
     return () => {
       document.addEventListener('mousedown', onCloseOutside)
-      document.addEventListener('keydown', onCloseOutside)
     }
-  }, [])
+  }, [ref.current])
 
   return (
-    <div className={classModal} onClick={onClose} ref={ref}>
-      <div className={classContent}>
+    <div className={classModal}>
+      <div className={classContent} ref={ref}>
         <div className={style.buttonClose}>
           <CustomButton color="link" disabled={false} onClick={onClose}>
             <div className={style.close} />
