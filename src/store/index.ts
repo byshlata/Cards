@@ -75,6 +75,7 @@ export {
   selectorModalElementAction,
   selectorModalElementName,
   selectorIsCloseModalAfterRequest,
+  selectorUserId,
 } from './selectors/selectorsModal'
 
 //other
@@ -119,4 +120,4 @@ export {
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'
 
-export { openModal, closeModal, onCloseModalAfterRequest } from './slice/modalSlice'
+export { setDataForFormModal, closeModal, onCloseModalAfterRequest } from './slice/modalSlice'

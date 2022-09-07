@@ -29,7 +29,7 @@ export const ForgotEmail = memo(() => {
       email: '',
     },
     validationSchema: schema,
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(sendLetterOnEmail({ email: values.email, name }))
       formik.resetForm({
         values: { email: '' },

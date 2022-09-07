@@ -8,14 +8,17 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   changeProfileName,
   logoutUser,
-  selectorUserEmail,
   selectorAuthUserId,
+  selectorUserEmail,
   selectorUserName,
 } from 'store'
 
 import pencil from '../../assets/image/pencil.png'
 
 import style from './Profile.module.sass'
+import { Grade } from 'components/grade/Grade'
+import { UserName } from './UserName'
+import { EmptyPack } from 'pages/emptyPack/EmptyPack'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()

@@ -32,10 +32,10 @@ export const packParamsSlice = createSlice({
       ...state,
       ...action.payload,
     }),
-    setIsFirstOpenPage: state => {
+    setIsFirstOpenPage: (state) => {
       state.isFirstOpen = true
     },
-    removeIsFirstOpenPage: state => {
+    removeIsFirstOpenPage: (state) => {
       state.isFirstOpen = false
     },
     removePackParams: () => initialStatePackParams,

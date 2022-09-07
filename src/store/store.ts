@@ -1,4 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
+<<<<<<<<< Temporary merge branch 1
+=========
 import {
   appSlice,
   cardParamsSlice,
@@ -9,9 +11,12 @@ import {
   registrationSlice,
 } from 'store'
 import { resetSlice } from 'store/slice/resetSlice'
+>>>>>>>>> Temporary merge branch 2
 
 import { modalSlice } from './slice/modalSlice'
 import { profileSlice } from './slice/profileSlice'
+
+import { appSlice, forgotSlice, packParamsSlice, packSlice, registrationSlice } from 'store'
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +30,7 @@ export const store = configureStore({
     card: cardSlice.reducer,
     cardParams: cardParamsSlice.reducer,
     modal: modalSlice.reducer,
+    learn: learnSlice.reducer,
   },
 })
 

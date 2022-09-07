@@ -30,9 +30,9 @@ export type { ErrorRecoveryPasswordType } from './ErrorRecoveryPasswordType'
 
 export type { ErrorMessageType } from './ErrorMessageType'
 
-export type { PackResponseType } from './PackResponseType'
+export type { PackType } from 'types/PackType'
 
-export type { PacksType } from './PacksType'
+export type { PackResponseType } from 'types/PackResponseType'
 
 export type { PackParamsType } from 'types/PackParamsType'
 
@@ -46,6 +46,11 @@ export type { SortParamType } from './SortParamType'
 
 export type { SortParamElementType } from './SortParamElementType'
 
+<<<<<<<<< Temporary merge branch 1
+export type { CardsPackType } from './CardsPackType'
+
+export type { EditResponseType } from './EditResponseType'
+=========
 export type { CardParamsInitialType } from './CardParamsInitialType'
 
 export type { CardParamsType } from './CardParamsType'
@@ -69,3 +74,4 @@ export type { AddPackType } from './AddPackType'
 export type { RemovePackType } from './RemovePackType'
 
 export type { DataFormModalType } from './DataFormModalType'
+>>>>>>>>> Temporary merge branch 2

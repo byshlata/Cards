@@ -34,7 +34,7 @@ export const ForgotCreatePassword = () => {
       password: '',
     },
     validationSchema: schema,
-    onSubmit: values => {
+    onSubmit: (values) => {
       if (param.token) {
         dispatch(sendNewPassword({ password: values.password, resetPasswordToken: param.token }))
         formik.resetForm({

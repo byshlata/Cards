@@ -31,7 +31,7 @@ export const createErrorSchema = (params: KeySchemeType[]) => {
 
   const schema: SchemaElementType = {}
 
-  params.forEach(element => {
+  params.forEach((element) => {
     if (element in schemaElement) {
       // @ts-ignore
       schema[element] = schemaElement[element]

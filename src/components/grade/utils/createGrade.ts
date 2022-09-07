@@ -1,6 +1,9 @@
 import { StarGradeType } from 'components/grade/Grade'
 
 export const createGrade = (rating: number, starGrade: StarGradeType) => {
+  const integer = Math.floor(rating)
+
+  const emptyArray = []
   let integer = Math.floor(rating)
 
   let emptyArray = []
@@ -8,6 +11,7 @@ export const createGrade = (rating: number, starGrade: StarGradeType) => {
   for (let i = 0; i < integer; i++) {
     emptyArray.push(starGrade.fullStar)
   }
+  const differenceBetweenNumbers = rating - integer
   let differenceBetweenNumbers = rating - integer
 
   if (differenceBetweenNumbers > 0) {

@@ -1,21 +1,9 @@
 import React from 'react'
-
-import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import {
-  selectorPacksData,
-  selectorAuthUserId,
-  setPackParams,
-  selectorTotalCountCard,
-  setWarningMessage,
-  openModal,
-} from 'store'
+import { selectorAuthUserId, selectorPacksData, setPackParams } from 'store'
 import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
-
-import { removePackThank } from '../../../store/thunk/removePakcThunk'
 import { TableHeader } from '../component/tableHeader/TableHeader'
 
 import style from './TablePackList.module.sass'
@@ -27,6 +15,7 @@ export type TabletHeadType = {
     idPack: string,
     backValue: BackValueType,
     cardsCount: number,
+    userId: string,
     name: string
   ) => void
 }
@@ -41,9 +30,10 @@ export const TablePackList = ({ headData, onClickTableAction }: TabletHeadType) 
     idPack: string,
     cardsCount: number,
     backValue: BackValueType,
+    userId: string,
     name: string
   ) => {
-    onClickTableAction(idPack, backValue, cardsCount, name)
+    onClickTableAction(idPack, backValue, cardsCount, userId, name)
   }
 
   const onSortValue = (sortValue: string) => {

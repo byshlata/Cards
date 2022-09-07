@@ -31,7 +31,7 @@ export const CustomAlert = memo(({ message, severity }: CustomAlertType) => {
 
   return (
     <>
-      {alerts?.map(element => (
+      {alerts?.map((element) => (
         <CustomAlertChild
           key={element.id}
           message={element.message}

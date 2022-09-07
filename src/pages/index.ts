@@ -12,4 +12,8 @@ export { Routers } from './Routes'
 
 export { PacksList } from './packsList/PacksList'
 
-export { UserPack } from './userPack/userPack'
+export { CardsPack } from 'pages/cardsPack/CardsPack'
+
+export { CardsPackAuthUser } from './cardsPackAuthUser/CardsPackAuthUser'
+
+export { CarsPackAllUser } from './cardsPackAllUser/CarsPackAllUser'

@@ -10,3 +10,5 @@ export const selectorModalElementName = (state: RootStoreType): string => state.
 
 export const selectorIsCloseModalAfterRequest = (state: RootStoreType): boolean =>
   state.modal.isCloseModalRequest
+
+export const selectorUserId = (state: RootStoreType): string => state.modal.userId

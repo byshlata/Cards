@@ -19,6 +19,7 @@ type TableSimpleRowType = {
     idPack: string,
     cardsCount: number,
     backValue: BackValueType,
+    userId: string,
     name: string
   ) => void
 }
@@ -34,10 +35,10 @@ export const TablePackListRow = ({
   onClickAction,
 }: TableSimpleRowType) => {
   const onClickActionHandle = (backValue: BackValueType) => {
-    if (backValue === 'edit' || backValue === 'delete') {
-      onClickAction(pack_id, cardsCount, backValue, name)
+    if (backValue === 'edit' || backValue === 'delete' || backValue === 'learn') {
+      onClickAction(pack_id, cardsCount, backValue, user_id, name)
     } else {
-      onClickAction(pack_id, cardsCount, backValue, '')
+      onClickAction(pack_id, cardsCount, backValue, user_id, '')
     }
   }
 

@@ -1,9 +1,6 @@
 import React from 'react'
 
-import { CustomButtonBox } from 'components/button'
-import { IconDeleteSvg } from 'components/iconSVG/iconDeleteSVG/IconDeleteSVG'
-import { IconEditSvg } from 'components/iconSVG/iconEditSVG/IconEditSVG'
-import { IconLearnSVG } from 'components/iconSVG/iconLearnSVG/IconLearnSVG'
+import { CustomButtonBox, IconDeleteSvg, IconEditSvg, Grade } from 'components'
 import { TablePackListAction } from 'components/table/tablePackList/tablePackListAction/TablePackListAction'
 import { BackValueType } from 'types'
 
@@ -37,7 +34,7 @@ export const TableCardRow = ({
     onClickAction && onClickAction(_id, backValue)
   }
 
-  const isAuthTable = authUser_id === user_id
+  const isAuthUserTable = authUser_id === user_id
 
   return (
     <div className={style.rowWrapper}>
@@ -45,8 +42,10 @@ export const TableCardRow = ({
       <TableCell title={answer} />
       <TableCell title={updated} />
       <TableCell title={updated} />
-      <TableCell>{grade}</TableCell>
-      {isAuthTable && (
+      <TableCell>
+        <Grade rating={grade} />
+      </TableCell>
+      {isAuthUserTable && (
         <TablePackListAction user_id={user_id} authUser_id={authUser_id}>
           <CustomButtonBox color="link" onClick={() => onClickActionHandle('edit')}>
             <IconEditSvg />
