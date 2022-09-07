@@ -9,7 +9,9 @@ export type LearnType = {
 }
 
 export type ResponseLearnType = {
-    updatedGrade: LearnType
+    updatedGrade: LearnType,
+    token: string,
+    tokenDeathTime:number
 }
 export type LearnRequestType = {
     grade: number

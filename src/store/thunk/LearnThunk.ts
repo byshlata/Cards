@@ -10,7 +10,7 @@ export const getLearnData = createAsyncThunk(
         try {
             dispatch(isSpinAppLoading(true))
             const res = await learnAPI.sendGrade(payload.grade, payload.card_id)
-            dispatch(setLearnData(res))
+            //dispatch(setLearnData(res))
         } catch (e) {
             return setErrorResponse(e, rejectWithValue)
         } finally {
