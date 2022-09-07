@@ -50,7 +50,6 @@ export const FormPackEditAndCreate = ({
       <div className={style.titleWrapper}>
         <TitleModal text={title} />
       </div>
-      <hr className={style.hr} />
       <CustomInput type="simple" value={value} onChange={onChange} name={labelInput} />
       <div className={style.checkBoxWrapper}>
         <CustomCheckBox checked={checkedBox} onChange={setCheckedBox} label={labelCheckBox} />

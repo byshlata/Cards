@@ -81,3 +81,5 @@ export { TitleModal } from './titleModal/TitleModal'
 export { FormModalPackListGrope } from './formModalPackListGrope/FormModalPackListGrope'
 
 export { FormPackEditAndCreate } from './formPackEditAndCreate/FormPackEditAndCreate'
+
+export { FormDelete } from './formDelete/FormDelete'

@@ -19,7 +19,7 @@ export { modalSlice } from './slice/modalSlice'
 export { sendLetterOnEmail, sendNewPassword } from './thunk/forgotThunk'
 export { RegistrationThunk } from './thunk/registrationThunk'
 export { fetchProfilePage, changeProfileName, logoutUser } from './thunk/profileThunk'
-export { getPackData, addNewPack, editPack } from './thunk/pakcThunk'
+export { getPackData, addNewPack, editPack, deletePack } from './thunk/pakcThunk'
 export { getCardData } from './thunk/cardThunk'
 
 //selector

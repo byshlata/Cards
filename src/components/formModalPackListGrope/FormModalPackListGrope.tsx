@@ -1,4 +1,4 @@
-import { FormPackEditAndCreate } from 'components'
+import { FormDelete, FormPackEditAndCreate } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
@@ -8,6 +8,7 @@ import {
   selectorModalElementId,
   selectorModalElementName,
 } from 'store'
+import { deletePack } from 'store/thunk/pakcThunk'
 
 type FormModalPackListGropeType = {
   onClose: () => void
@@ -22,11 +23,15 @@ export const FormModalPackListGrope = ({ onClose, isOpenModal }: FormModalPackLi
   const modalAction = useSelector(selectorModalElementAction)
 
   const onAddPack = (valueInput: string, valueCheckBox: boolean) => {
-    dispatch(addNewPack({ name: valueInput, private: valueCheckBox }))
+    dispatch(addNewPack({ name: valueInput, privateValue: valueCheckBox }))
   }
 
   const onEditPack = (valueInput: string, valueCheckBox: boolean) => {
-    dispatch(editPack({ name: valueInput, private: valueCheckBox, _id: packId }))
+    dispatch(editPack({ name: valueInput, privateValue: valueCheckBox, _id: packId }))
+  }
+
+  const onDeletePack = () => {
+    dispatch(deletePack(packId))
   }
 
   if (modalAction === 'edit') {
@@ -45,7 +50,15 @@ export const FormModalPackListGrope = ({ onClose, isOpenModal }: FormModalPackLi
   }
 
   if (modalAction === 'delete') {
-    return <div></div>
+    return (
+      <FormDelete
+        packOrCard="pack"
+        title="Delete pack"
+        nameDeleteValue={packName}
+        onClickDeleteButton={onDeletePack}
+        onClickCancelButton={onClose}
+      />
+    )
   }
 
   if (modalAction === 'add') {

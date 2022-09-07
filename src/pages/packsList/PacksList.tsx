@@ -75,7 +75,7 @@ export const PacksList = () => {
     }
   }, [isCloseModalAfterRequest])
 
-  const onchangePagination = (page: number, pageSize: number) => {
+  const onChangePagination = (page: number, pageSize: number) => {
     dispatch(setPackParams({ page: page }))
     dispatch(setPackParams({ pageCount: pageSize }))
   }
@@ -127,7 +127,7 @@ export const PacksList = () => {
               showQuickJumper
               current={currentPage}
               total={totalPack}
-              onChange={onchangePagination}
+              onChange={onChangePagination}
             />
           </div>
         </>

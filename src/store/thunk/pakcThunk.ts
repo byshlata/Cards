@@ -2,12 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { packsListAPI } from 'api'
 import {
   isSpinAppLoading,
-  resetPackParams,
+  onCloseModalAfterRequest,
+  resetStatePackParams,
   RootStoreType,
   setPackData,
   unmountingComponent,
-  resetStatePackParams,
-  onCloseModalAfterRequest,
 } from 'store'
 import { AddPackType, EditPackType, PackParamsType } from 'types'
 import { isComparisonOfTwoObjects, setErrorResponse } from 'utils'
@@ -21,8 +20,12 @@ export const getPackData = createAsyncThunk(
 
       dispatch(setPackData(res))
     } catch (e) {
+      // eslint-disable-next-line no-debugger
+      debugger
       return setErrorResponse(e, rejectWithValue)
     } finally {
+      // eslint-disable-next-line no-debugger
+      debugger
       dispatch(isSpinAppLoading(false))
       dispatch(onCloseModalAfterRequest(true))
     }
@@ -35,7 +38,7 @@ export const addNewPack = createAsyncThunk(
     try {
       dispatch(isSpinAppLoading(true))
       dispatch(onCloseModalAfterRequest(false))
-      await packsListAPI.postPackData(payload)
+      await packsListAPI.createPack(payload)
 
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
@@ -45,7 +48,6 @@ export const addNewPack = createAsyncThunk(
       } else {
         dispatch(unmountingComponent())
       }
-      dispatch(resetPackParams())
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
@@ -59,16 +61,33 @@ export const editPack = createAsyncThunk(
   async (payload: EditPackType, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      await packsListAPI.putEditPuckName(payload)
+      dispatch(onCloseModalAfterRequest(false))
+      await packsListAPI.editPuckName(payload)
 
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
 
-      if (isComparisonOfTwoObjects(resetStatePackParams, packParamsNow)) {
-        getPackData(packParamsNow)
-      } else {
-        dispatch(unmountingComponent())
-      }
+      getPackData(packParamsNow)
+    } catch (e) {
+      return setErrorResponse(e, rejectWithValue)
+    } finally {
+      dispatch(isSpinAppLoading(false))
+    }
+  }
+)
+
+export const deletePack = createAsyncThunk(
+  'packSlice/deletePack',
+  async (idPack: string, { rejectWithValue, dispatch, getState }) => {
+    try {
+      dispatch(isSpinAppLoading(true))
+      dispatch(onCloseModalAfterRequest(false))
+      await packsListAPI.deletePack(idPack)
+
+      const state = getState() as RootStoreType
+      const packParamsNow = state.packParams
+
+      getPackData(packParamsNow)
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {

@@ -7,5 +7,10 @@ type TitleModalType = {
 }
 
 export const TitleModal = React.memo(({ text }: TitleModalType) => {
-  return <h2 className={style.titleModal}>{text}</h2>
+  return (
+    <>
+      <h2 className={style.titleModal}>{text}</h2>
+      <hr className={style.hr} />
+    </>
+  )
 })
