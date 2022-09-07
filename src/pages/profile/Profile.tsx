@@ -8,14 +8,15 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   changeProfileName,
   logoutUser,
-  selectorUserEmail,
   selectorAuthUserId,
+  selectorUserEmail,
   selectorUserName,
 } from 'store'
 
-import pencil from '../../assets/image/pencil.png'
-
 import style from './Profile.module.sass'
+import { Grade } from 'components/grade/Grade'
+import { UserName } from './UserName'
+import { EmptyPack } from 'pages/emptyPack/EmptyPack'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -66,12 +67,7 @@ export const Profile = () => {
             Log Out
           </CustomButton>
         </div>
-        <Grade rating={1.1} />
-        <Grade rating={2.8} />
-        <Grade rating={3.0} />
-        <Grade rating={4.8} />
       </FormBody>
-      <EmptyPack />
     </>
   )
 }

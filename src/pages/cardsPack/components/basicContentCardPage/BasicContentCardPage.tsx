@@ -6,9 +6,9 @@ import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
   getCardData,
-  initialStateCardParams,
   mountingComponent,
-  removeIsFirstOpenCardPage,
+  removeCardData,
+  removeCardParams,
   resetCardParams,
   selectorCurrentPageCard,
   selectorIsLoading,
@@ -57,7 +57,8 @@ export const BasicContentCardPage = ({
     dispatch(setIsFirstOpenCardPage())
 
     return () => {
-      dispatch(removeIsFirstOpenCardPage())
+      dispatch(removeCardParams())
+      dispatch(removeCardData())
     }
   }, [])
 

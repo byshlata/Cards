@@ -1,20 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {
-  appSlice,
-  cardParamsSlice,
-  cardSlice,
-  forgotSlice,
-  packParamsSlice,
-  packSlice,
-  registrationSlice,
-} from 'store'
+
 import { resetSlice } from 'store/slice/resetSlice'
 
 import { modalSlice } from './slice/modalSlice'
 import { learnSlice } from './slice/learnSlice'
 import { profileSlice } from './slice/profileSlice'
 
-import { appSlice, forgotSlice, packParamsSlice, packSlice, registrationSlice } from 'store'
+import {
+  appSlice,
+  forgotSlice,
+  packParamsSlice,
+  packSlice,
+  registrationSlice,
+  cardSlice,
+  cardParamsSlice,
+} from 'store'
 
 export const store = configureStore({
   reducer: {

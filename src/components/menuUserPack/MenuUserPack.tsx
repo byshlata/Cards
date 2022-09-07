@@ -9,11 +9,13 @@ import {
   Menu,
 } from 'components'
 
-export const MenuUserPack = () => {
-  const editPack = () => {}
-  const deletePack = () => {}
-  const learnPack = () => {}
+type MenuUserPackType = {
+  editPack: () => void
+  deletePack: () => void
+  learnPack: () => void
+}
 
+export const MenuUserPack = ({ learnPack, editPack, deletePack }: MenuUserPackType) => {
   return (
     <Menu headMenu={<IconCirclePointSVG />}>
       <CustomButtonBox color={'link'} onClick={editPack}>

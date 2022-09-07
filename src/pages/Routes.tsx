@@ -8,7 +8,7 @@ import {
   Profile,
   Registration,
   PacksList,
-  UserPack,
+  CardsPack,
 } from 'pages'
 import { Page404 } from 'pages/page404/Page404'
 import { useSelector } from 'react-redux'
@@ -30,7 +30,7 @@ export const Routers = () => {
       <Route path={`${Path.PacksList}`} element={isAuth ? <PacksList /> : LOGIN_PAGE} />
       <Route
         path={`${Path.Pack}${Path.Root}${Path.Id}`}
-        element={isAuth ? <UserPack /> : LOGIN_PAGE}
+        element={isAuth ? <CardsPack /> : LOGIN_PAGE}
       />
       <Route
         path={`${Path.NewPassword}${Path.Root}${Path.Token}`}

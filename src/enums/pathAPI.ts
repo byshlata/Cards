@@ -9,5 +9,5 @@ export enum PathAPI {
   Pack = '/pack',
   Cards = '/cards',
   Card = '/card',
-  Grade = '/grade'
+  Grade = '/grade',
 }

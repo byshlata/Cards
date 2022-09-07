@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { PathAPI } from 'enums'
-import { PackParamsType, PackResponseType, PacksType } from 'types'
+import { PackParamsType, PackResponseType, PackType } from 'types'
 
 import { API_CONFIG } from './config'
 
@@ -16,7 +16,7 @@ export const packAPI = {
   }: PackParamsType) => {
     const response = await API_CONFIG.get<
       any,
-      AxiosResponse<PacksType, PackResponseType>,
+      AxiosResponse<PackType, PackResponseType>,
       PackParamsType
     >(`${PathAPI.Cards}${PathAPI.Pack}`, {
       params: {

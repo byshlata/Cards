@@ -3,6 +3,7 @@ import { BackValueType, DataFormModalType } from 'types'
 
 export const initialState: initialStateType = {
   id: '',
+  userId: '',
   action: '',
   name: '',
   isCloseModalRequest: true,
@@ -12,7 +13,7 @@ export const modalSlice = createSlice({
   name: 'modalSlice',
   initialState,
   reducers: {
-    openModal: (state, action: PayloadAction<DataFormModalType>) => ({
+    setDataForFormModal: (state, action: PayloadAction<DataFormModalType>) => ({
       ...state,
       ...action.payload,
     }),
@@ -23,10 +24,11 @@ export const modalSlice = createSlice({
   },
 })
 
-export const { openModal, closeModal, onCloseModalAfterRequest } = modalSlice.actions
+export const { setDataForFormModal, closeModal, onCloseModalAfterRequest } = modalSlice.actions
 
 type initialStateType = {
   id: string
+  userId: string
   action: BackValueType
   name: string
   isCloseModalRequest: boolean

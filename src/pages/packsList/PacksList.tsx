@@ -17,8 +17,8 @@ import { useNavigate } from 'react-router-dom'
 import {
   getPackData,
   mountingComponent,
-  openModal,
-  removeIsFirstOpenPage,
+  removePackData,
+  removePackParams,
   resetPackParams,
   selectorCurrentPage,
   selectorIsCloseModalAfterRequest,
@@ -26,6 +26,7 @@ import {
   selectorIsMounting,
   selectorParams,
   selectorTotalCount,
+  setDataForFormModal,
   setIsFirstOpenPage,
   setPackParams,
 } from 'store'
@@ -65,7 +66,7 @@ export const PacksList = () => {
     dispatch(setIsFirstOpenPage())
 
     return () => {
-      dispatch(removeIsFirstOpenPage())
+      dispatch(removePackData())
     }
   }, [])
 
@@ -82,27 +83,27 @@ export const PacksList = () => {
 
   const onOpenModalAddPack = () => {
     onOpenModal()
-    dispatch(openModal({ name: '', id: '', action: 'add' }))
+    dispatch(setDataForFormModal({ name: '', id: '', action: 'add', userId: '' }))
   }
 
   const onClickTableAction = (
     idPack: string,
     backValue: BackValueType,
     cardsCount: number,
+    userId: string,
     name: string
   ) => {
     switch (backValue) {
       case 'edit':
       case 'delete':
         onOpenModal()
-        dispatch(openModal({ name: name, id: idPack, action: backValue }))
+        dispatch(setDataForFormModal({ name: name, id: idPack, action: backValue, userId: userId }))
         break
       case 'learn':
         break
       case 'name':
-        if (cardsCount) {
-          navigate(`${Path.Pack}${Path.Root}${idPack}`)
-        }
+        dispatch(setDataForFormModal({ name: name, id: idPack, action: backValue, userId: userId }))
+        navigate(`${Path.Pack}${Path.Root}${idPack}`)
         break
     }
   }

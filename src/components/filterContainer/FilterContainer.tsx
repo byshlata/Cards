@@ -13,6 +13,7 @@ import {
   selectorMinCardsOnPack,
   selectorPackName,
   selectorTotalCount,
+  selectorUserParam_id,
   setPackParams,
   unmountingComponent,
 } from 'store'
@@ -23,7 +24,8 @@ export const FilterContainer = () => {
   const disabled = useSelector(selectorIsLoading)
   const totalPack = useSelector(selectorTotalCount)
   const packName = useSelector(selectorPackName)
-  const idUser = useSelector(selectorAuthUserId)
+  const authUserId = useSelector(selectorAuthUserId)
+  const userIdParam = useSelector(selectorUserParam_id)
   const maxCards = useSelector(selectorMaxCardsOnPack)
   const minCards = useSelector(selectorMinCardsOnPack)
 
@@ -58,8 +60,9 @@ export const FilterContainer = () => {
       <FilterElementContainer title="Show packs cards">
         <ButtonChoiceGrope
           disabled={disabled}
-          value={idUser}
+          authUserId={authUserId}
           onClickButton={onClickButtonChoiceGrope}
+          userIdParam={userIdParam}
         />
       </FilterElementContainer>
       <FilterElementContainer title="Number of cards">
