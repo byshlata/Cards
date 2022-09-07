@@ -87,22 +87,24 @@ export const Learn = () => {
     //dispatch(setCartGrade(grade))
     dispatch(getLearnData({ grade: convertValueToGrade(value), card_id: id }))
     //console.log(convertValueToGrade(value), value, id)
+    setIsShow(false)
   }
 
   return (
     <div className={style.learnWrapper}>
+      <div className={style.question}>
+        <span>Question:</span>
+        {` ${cards.question}`}
+        {/*берём с стейта рандомный впорс*/}
+      </div>
       <div className={style.shotsWrapper}>
         {/*берём с редакс кол-во попыток*/}
         {`Количтесвтво попыток ответа на вопрос : ${cards.shots}`}
       </div>
-      <div className={style.question}>
-        Question:{` ${cards.question}`}
-        {/*берём с стейта рандомный впорс*/}
-      </div>
       {isShow ? (
         <div className={style.answerWrapper}>
           <div className={style.answer}>
-            Answer: {` ${cards.answer}`}
+            <span>Answer:</span> {` ${cards.answer}`}
             {/*берем ответ из обьекта в стейте*/}
           </div>
           <div>Rate yourself:</div>
@@ -125,7 +127,7 @@ export const Learn = () => {
         </div>
       ) : (
         <div className={style.showButton} onClick={answerShower}>
-          SHOW ANSWER
+          Show answer
         </div>
       )}
     </div>
