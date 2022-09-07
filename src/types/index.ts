@@ -30,9 +30,9 @@ export type { ErrorRecoveryPasswordType } from './ErrorRecoveryPasswordType'
 
 export type { ErrorMessageType } from './ErrorMessageType'
 
-export type { PackType } from 'types/PackType'
+export type { PackResponseType } from './PackResponseType'
 
-export type { PackResponseType } from 'types/PackResponseType'
+export type { PacksType } from './PacksType'
 
 export type { PackParamsType } from 'types/PackParamsType'
 

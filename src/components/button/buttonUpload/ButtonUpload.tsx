@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 
-import { IconUploadSvg, CustomButtonBox } from 'components'
-
 import style from './ButtonUpload.module.sass'
+
+import { IconUploadSvg, CustomButtonBox } from 'components'
 
 export const ButtonUpload = () => {
   const inRef = useRef<HTMLInputElement>(null)

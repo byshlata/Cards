@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { Nullable } from 'types'
 
 export const initialState: InitialStateType = {
@@ -13,7 +14,7 @@ export const forgotSlice = createSlice({
     sendLetter: (state, action: PayloadAction<string>) => {
       state.email = action.payload
     },
-    isPasswordSend: (state) => {
+    isPasswordSend: state => {
       state.isPasswordSend = true
     },
     removeEmail: () => {

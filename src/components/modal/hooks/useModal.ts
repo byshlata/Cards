@@ -15,5 +15,6 @@ export function useModal(): useModalType {
   const onOpenModal = (): void => {
     setIsOpenModal(true)
   }
+
   return { isOpenModal, onOpenModal, onCloseModal }
 }

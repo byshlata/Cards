@@ -1,10 +1,10 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, memo } from 'react'
 
 import style from './CustomrButtonBoxStyle.module.sass'
 import { useStyleCustomButton } from './hooks/useStyleCustomButton'
 import { CustomButtonBoxType } from './types/CustomButtonBoxType'
 
-export const CustomButtonBox: FC<CustomButtonBoxType> = React.memo((props): ReactElement => {
+export const CustomButtonBox: FC<CustomButtonBoxType> = memo((props): ReactElement => {
   let { disabled, onClick, color, type, children, borderRadius } = props
   const buttonClassName = useStyleCustomButton(color, disabled, style)
 
