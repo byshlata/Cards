@@ -56,23 +56,7 @@ export const Profile = () => {
         <Title text="Personal Information" />
 
         <AvatarUser />
-        <div className={style.changeProfileNameWrapper}>
-          {mode ? (
-            <input value={value} onChange={NameChanger} autoFocus onBlur={asyncChangeName} />
-          ) : (
-            <>
-              <h3 className={style.profileName}>{value}</h3>
-
-              <img
-                src={pencil}
-                alt={'change name'}
-                onClick={() => {
-                  setMode(true)
-                }}
-              />
-            </>
-          )}
-        </div>
+        <UserName />
         <div className={style.profileEmail}>
           <h4>{userEmail}</h4>
         </div>
@@ -82,7 +66,12 @@ export const Profile = () => {
             Log Out
           </CustomButton>
         </div>
+        <Grade rating={1.1} />
+        <Grade rating={2.8} />
+        <Grade rating={3.0} />
+        <Grade rating={4.8} />
       </FormBody>
+      <EmptyPack />
     </>
   )
 }

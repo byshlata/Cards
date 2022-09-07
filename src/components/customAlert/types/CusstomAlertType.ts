@@ -1,6 +1,6 @@
-import { ErrorMessageType } from 'types'
-
 import { SeverityType } from './SeverityType'
+
+import { ErrorMessageType } from 'types'
 
 export type CustomAlertType = {
   message: ErrorMessageType

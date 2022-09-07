@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react'
 
-import { LinerProgressType } from 'components/linerProgress/types/LinerProgressType'
-
 import style from './LinerProgress.module.sass'
+
+import { LinerProgressType } from 'components/linerProgress/types/LinerProgressType'
 
 export const LinerProgress = ({ isLoading }: LinerProgressType): ReactElement =>
   isLoading ? (

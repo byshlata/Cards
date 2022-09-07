@@ -69,3 +69,7 @@ export type { AddPackType } from './AddPackType'
 export type { RemovePackType } from './RemovePackType'
 
 export type { DataFormModalType } from './DataFormModalType'
+
+export type { CardsPackType } from './CardsPackType'
+
+export type { EditResponseType } from './EditResponseType'

@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+
 import { loginAPI } from 'api'
 import { isSpinAppLoading, setAuth, setUserData } from 'store'
 import { LoginType } from 'types'
@@ -10,6 +11,7 @@ export const authThunk = createAsyncThunk(
     try {
       dispatch(isSpinAppLoading(true))
       const res = await loginAPI.loginIn({ password, rememberMe, email })
+
       dispatch(setAuth(true))
       dispatch(setUserData(res))
     } catch (e) {

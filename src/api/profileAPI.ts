@@ -1,14 +1,16 @@
 import { AxiosResponse } from 'axios'
-import { PathAPI } from 'enums'
-import { ChangeInformationUserType, UpdateUserResponseType, UserResponseType } from 'types'
 
 import { API_CONFIG } from './config'
+
+import { PathAPI } from 'enums'
+import { ChangeInformationUserType, UpdateUserResponseType, UserResponseType } from 'types'
 
 export const profileAPI = {
   getAuthUser: async () => {
     const response = await API_CONFIG.post<any, AxiosResponse<UserResponseType>>(
       `${PathAPI.Auth}${PathAPI.Me}`
     )
+
     return response.data
   },
 
@@ -18,6 +20,7 @@ export const profileAPI = {
       AxiosResponse<UpdateUserResponseType>,
       ChangeInformationUserType
     >(`${PathAPI.Auth}${PathAPI.Me}`, payload)
+
     return response.data
   },
 }

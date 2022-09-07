@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
 
-import { CustomButton } from 'components'
-import { useAppDispatch } from 'hooks'
-import { removeErrorMessage } from 'store'
-
 import style from './CustomAlertChild.module.sass'
 import { useAlertStyle } from './hooks/useClassAlertElement'
 import { SuccessIcon, ErrorIcon } from './icon'
-import { CustomAlertChildType } from './types'
-import { IconAlertType } from './types'
+import { CustomAlertChildType, IconAlertType } from './types'
+
+import { CustomButton } from 'components'
+import { useAppDispatch } from 'hooks'
+import { removeErrorMessage } from 'store'
 
 const ICON: IconAlertType = {
   success: <SuccessIcon />,
@@ -30,6 +29,7 @@ export const CustomAlertChild = ({ message, severity, onClose, id }: CustomAlert
       onClose(id)
       dispatch(removeErrorMessage())
     }, DALEY_ALERT)
+
     return () => {
       clearTimeout(timer)
     }

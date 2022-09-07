@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { Nullable } from 'types'
 
 export const initialState: InitialStateType = {
