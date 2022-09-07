@@ -5,6 +5,10 @@ import { useCustomCheckBox } from 'components/customCheckBox/hooks/useChecked'
 import { useCustomInput } from 'components/input/customInput/hooks'
 
 import style from './PackEditAndCreateFormForModal.module.sass'
+import { createErrorSchema } from 'utils'
+
+import * as yup from 'yup'
+import { useFormik } from 'formik'
 
 type PackEditAndCreateFormForModalType = {
   title: string
@@ -16,6 +20,8 @@ type PackEditAndCreateFormForModalType = {
   onClickCancelButton: () => void
   isOpenModal: boolean
 }
+
+const schema = yup.object().shape(createErrorSchema(['simple']))
 
 export const PackEditAndCreateFormForModal = ({
   labelCheckBox,
@@ -32,21 +38,29 @@ export const PackEditAndCreateFormForModal = ({
 
   useEffect(() => {
     if (!valueInput) {
+      setCheckedBox(false)
       resetInput()
     }
   }, [isOpenModal])
 
-  const onClickSave = () => {
-    onClickSaveButton(value, checkedBox)
-  }
-
   const onClickCancel = () => {
-    setCheckedBox(false)
     onClickCancelButton()
   }
 
+  const formik = useFormik({
+    initialValues: {
+      value: '',
+      private: false
+    },
+    validationSchema: schema,
+    onSubmit: (values, private) => {
+      onClickSaveButton(value, checkedBox)
+    },
+  })
+
+
   return (
-    <div className={style.formWrapper}>
+    <form className={style.formWrapper}>
       <div className={style.titleWrapper}>
         <TitleModal text={title} />
       </div>
@@ -62,11 +76,11 @@ export const PackEditAndCreateFormForModal = ({
           </CustomButton>
         </div>
         <div className={style.buttonSaveItem}>
-          <CustomButton color="primary" onClick={onClickSave}>
+          <CustomButton color="primary" type="submit" onClick={formik.handleSubmit}>
             Save
           </CustomButton>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
