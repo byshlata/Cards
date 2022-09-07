@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { selectorIsAuth, selectorIsLoading, selectorUserId } from 'store'
+import { selectorIsAuth, selectorIsLoading, selectorAuthUserId } from 'store'
 import { authThunk } from 'store/thunk/loginThunk'
 import { createErrorSchema } from 'utils/createErrorScheme'
 import * as yup from 'yup'
@@ -20,7 +20,7 @@ export const Login = () => {
 
   const isLoading = useSelector(selectorIsLoading)
   const isAuth = useSelector(selectorIsAuth)
-  const userId = useSelector(selectorUserId)
+  const userId = useSelector(selectorAuthUserId)
 
   const navigate = useNavigate()
 

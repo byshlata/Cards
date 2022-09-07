@@ -5,6 +5,7 @@ export enum Path {
   Register = '/registration',
   NewPassword = '/set-new-password',
   Profile = '/profile',
+  PacksList = '/packslist',
   Pack = '/pack',
   Page404 = 'page404',
   Other = '*',

@@ -6,6 +6,8 @@ $colorCross: rgba(51, 51, 51, 1)
   position: fixed
   top: 0
   left: 0
+  bottom: 0
+  right: 0
   width: 100vw
   height: 100vh
   display: flex
@@ -14,8 +16,9 @@ $colorCross: rgba(51, 51, 51, 1)
   background-color: $colorMainModal
   opacity: 0
   pointer-events: none
-  transition: 0.5s
+  transition: 0.3s
   z-index: 1000
+
 
 .modalOpen
   opacity: 1
@@ -61,6 +64,6 @@ $colorCross: rgba(51, 51, 51, 1)
   transform: rotate(45deg)
 
 .close:after
-  transform: rotate(-45deg)
+  transform: rotate(135deg)
 
 

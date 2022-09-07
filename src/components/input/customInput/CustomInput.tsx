@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react'
 
-import { FieldProps } from 'formik'
-
 import style from './CustomInput.module.sass'
 import { useClassInputElement } from './hooks/useClassInputElement'
 import { usePasswordInput } from './hooks/usePasswordInput'
@@ -9,7 +7,7 @@ import { EyeIconCloseSvg, EyeIconOpenSVG, SearchIconSvg } from './iconsSVG'
 import { CustomInputType } from './types/CustomInputType'
 
 export const CustomInput: React.FC<CustomInputType> = React.memo(
-  ({ type, name, error, disabled, onClick, value, onChange }): ReactElement => {
+  ({ type, name, error, disabled, onClick, value, onChange, className }): ReactElement => {
     const { onWatchPassword, typeInputValue, isEyeOpenIcon, isEyeIcon, isSearchIcon, labelName } =
       usePasswordInput(type, error, name)
 
@@ -41,7 +39,7 @@ export const CustomInput: React.FC<CustomInputType> = React.memo(
             autoComplete="on | off"
             name={name}
             type={typeInputValue}
-            className={classInput}
+            className={`${classInput}${className ? ` ${className}` : ''}`}
             required
             disabled={disabled}
             value={value}

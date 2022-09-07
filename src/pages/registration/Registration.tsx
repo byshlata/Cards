@@ -42,7 +42,7 @@ export const Registration = () => {
   })
 
   if (isRegistration) {
-    return <Navigate to={'/login'} />
+    return <Navigate to={`${Path.Login}`} />
   }
 
   const errorEmail = formik.touched.email ? formik.errors.email : undefined

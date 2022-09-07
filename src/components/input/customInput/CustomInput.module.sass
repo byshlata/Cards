@@ -19,13 +19,16 @@ $width: 350px
   width: 100%
   height: $width/5
   margin: 0 auto
+  .group
+    width: 100%
+    height: $width/5
+    overflow: hidden
+    position: relative
+    box-sizing: border-box
+    input
+      .pt1
+        background-color: #293b49
 
-.group
-  width: 100%
-  height: $width/5
-  overflow: hidden
-  position: relative
-  box-sizing: border-box
 
 .customLabel, .customLabelError, .customLabelDisable
   position: absolute
@@ -118,7 +121,7 @@ $width: 350px
 .iconButtonSearch, .iconButtonDisable
   pointer-events: none
   cursor: no-drop
-  opacity: 0.4
+  opacity: 1
 
 .iconButtonSearch
   cursor: no-drop

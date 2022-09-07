@@ -1,15 +1,23 @@
 import React from 'react'
 
-import { Page404 } from 'components/page404/Page404'
 import { Path } from 'enums'
-import { Forgot, ForgotCreatePassword, Login, Profile, Registration, Pack } from 'pages'
+import {
+  Forgot,
+  ForgotCreatePassword,
+  Login,
+  Profile,
+  Registration,
+  PacksList,
+  UserPack,
+} from 'pages'
+import { Page404 } from 'pages/page404/Page404'
 import { useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { selectorIsAuth, selectorUserId } from 'store'
+import { selectorIsAuth, selectorAuthUserId } from 'store'
 
 export const Routers = () => {
   const isAuth = useSelector(selectorIsAuth)
-  const userId = useSelector(selectorUserId)
+  const userId = useSelector(selectorAuthUserId)
 
   const PROFILE_PAGE = <Navigate to={`${Path.Profile}${Path.Root}${userId}`} />
   const LOGIN_PAGE = <Navigate to={`${Path.Login}`} />
@@ -19,7 +27,11 @@ export const Routers = () => {
       <Route path={`${Path.Other}`} element={<Page404 />} />
       <Route path={`${Path.Root}`} element={isAuth ? PROFILE_PAGE : LOGIN_PAGE} />
       <Route path={`${Path.Forgot}`} element={!isAuth ? <Forgot /> : <Profile />} />
-      <Route path={`${Path.Pack}`} element={isAuth ? <Pack /> : <Login />} />
+      <Route path={`${Path.PacksList}`} element={isAuth ? <PacksList /> : LOGIN_PAGE} />
+      <Route
+        path={`${Path.Pack}${Path.Root}${Path.Id}`}
+        element={isAuth ? <UserPack /> : LOGIN_PAGE}
+      />
       <Route
         path={`${Path.NewPassword}${Path.Root}${Path.Token}`}
         element={!isAuth ? <ForgotCreatePassword /> : <Profile />}

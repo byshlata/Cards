@@ -1,86 +1,88 @@
 import React, { useEffect, useState } from 'react'
 
 import { Slider } from 'antd'
-import { CustomButtonBox } from 'components/button/customButton/CustomButtonBox'
-import { useAppDispatch, useDebounce } from 'hooks'
+import { CustomButtonBox } from 'components'
+import { useDebounce } from 'hooks'
 import { useSelector } from 'react-redux'
-import {
-  selectorIsLoading,
-  selectorMaxCardsOnPack,
-  selectorMinCardsOnPack,
-  START_VALUE_PACK_PARAMS,
-} from 'store'
-
+import { initialStatePackParams, selectorIsLoading } from 'store'
 import 'antd/dist/antd.css'
+import { maxValue, minValue } from 'utils'
 
 import style from './CustomSlider.module.sass'
 
-export const CustomSlider = () => {
-  const dispatch = useAppDispatch()
+type CustomSliderType = {
+  onChange: (max: number, min: number) => void
+  maxCards: number
+  minCards: number
+}
 
+export const CustomSlider = ({ onChange, minCards, maxCards }: CustomSliderType) => {
   const disabled = useSelector(selectorIsLoading)
-  const minCardsOnPack = useSelector(selectorMinCardsOnPack)
-  const maxCardsOnPack = useSelector(selectorMaxCardsOnPack)
 
-  const [valueMax, setValueMax] = useState<number>(START_VALUE_PACK_PARAMS.maxCardsOnPack)
-  const [valueMin, setValueMin] = useState<number>(START_VALUE_PACK_PARAMS.minCardsOnPack)
+  const [value, setValue] = useState([minCards, maxCards])
 
   const onClickMinButton = () => {
-    setValueMin(START_VALUE_PACK_PARAMS.maxCardsOnPack)
-  }
-  const onClickMaxButton = () => {
-    setValueMax(START_VALUE_PACK_PARAMS.minCardsOnPack)
-  }
-
-  const OnChangeValueSlider = (value: [number, number]) => {
-    if (value[0] > value[1]) {
-      setValueMin(value[1])
-      setValueMax(value[0])
-    } else {
-      setValueMin(value[0])
-      setValueMax(value[1])
+    if (value[0] !== initialStatePackParams.min) {
+      setValue([initialStatePackParams.min, value[1]])
     }
   }
 
-  const debounceValueMax = useDebounce(valueMax)
-  const debounceValueMin = useDebounce(valueMin)
+  const onClickMaxButton = () => {
+    if (value[1] !== initialStatePackParams.max) {
+      setValue([value[0], initialStatePackParams.max])
+    }
+  }
+
+  const onChangeValueSlider = (value: [number, number]) => {
+    setValue(value)
+  }
+
+  const debounceValue = useDebounce(value)
 
   useEffect(() => {
-    if (valueMax !== debounceValueMax) {
-      console.log()
+    if (debounceValue[0] !== minCards || debounceValue[1] !== maxCards) {
+      const max = maxValue(debounceValue)
+      const min = minValue(debounceValue)
+      onChange(max, min)
     }
-    if (valueMin === debounceValueMin) {
-      console.log()
-    }
-  }, [OnChangeValueSlider])
+  }, [debounceValue])
 
   return (
-    <div className={style.sliderWrapper}>
-      <CustomButtonBox
-        color={'secondary'}
-        borderRadius="2px"
-        onClick={onClickMinButton}
-        disabled={disabled}
-      >
-        0
-      </CustomButtonBox>
-      <Slider
-        style={{ width: '180px' }}
-        range
-        disabled={disabled}
-        defaultValue={[valueMin, valueMax]}
-        max={START_VALUE_PACK_PARAMS.maxCardsOnPack}
-        min={START_VALUE_PACK_PARAMS.minCardsOnPack}
-        onChange={OnChangeValueSlider}
-      />
-      <CustomButtonBox
-        color={'secondary'}
-        borderRadius="2px"
-        onClick={onClickMaxButton}
-        disabled={disabled}
-      >
-        30
-      </CustomButtonBox>
+    <div className={style.CustomSliderWrapper}>
+      <div className={style.buttonWrapper}>
+        <CustomButtonBox
+          color={'secondary'}
+          borderRadius="2px"
+          onClick={onClickMinButton}
+          disabled={disabled}
+        >
+          {value[0]}
+        </CustomButtonBox>
+      </div>
+
+      <div className={style.sliderWrapper}>
+        <Slider
+          className={style.slider}
+          range
+          disabled={disabled}
+          defaultValue={[initialStatePackParams.min, initialStatePackParams.max]}
+          max={initialStatePackParams.max}
+          min={initialStatePackParams.min}
+          value={[value[0], value[1]]}
+          onChange={onChangeValueSlider}
+        />
+      </div>
+
+      <div className={style.buttonWrapper}>
+        <CustomButtonBox
+          color={'secondary'}
+          borderRadius="2px"
+          onClick={onClickMaxButton}
+          disabled={disabled}
+        >
+          {value[1]}
+        </CustomButtonBox>
+      </div>
     </div>
   )
 }

@@ -1,37 +1,51 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { OptionValue } from 'enums'
-import { PackParamsType } from 'types'
+import { PackParamsInitialType, PackParamsType } from 'types'
 
-export const START_VALUE_PACK_PARAMS = {
+export const initialStatePackParams: PackParamsInitialType = {
   user_id: '',
-  maxCardsOnPack: 30,
-  minCardsOnPack: 0,
+  max: 110,
+  min: 0,
   page: 1,
-  pageCount: 0,
+  pageCount: 8,
   sortPacks: '',
   packName: '',
+  isFirstOpen: false,
 }
 
-export const initialState: PackParamsType = {
+export const resetStatePackParams: PackParamsInitialType = {
   user_id: '',
-  max: START_VALUE_PACK_PARAMS.maxCardsOnPack,
-  min: START_VALUE_PACK_PARAMS.minCardsOnPack,
-  page: START_VALUE_PACK_PARAMS.page,
-  pageCount: START_VALUE_PACK_PARAMS.pageCount,
-  sortPacks: START_VALUE_PACK_PARAMS.sortPacks,
+  max: 110,
+  min: 0,
+  page: 1,
+  pageCount: 8,
+  sortPacks: '',
   packName: '',
+  isFirstOpen: true,
 }
 
 export const packParamsSlice = createSlice({
   name: 'packParamsSlice',
-  initialState,
+  initialState: initialStatePackParams,
   reducers: {
     setPackParams: (state, action: PayloadAction<PackParamsType>) => ({
       ...state,
       ...action.payload,
     }),
-    removePackParams: () => initialState,
+    setIsFirstOpenPage: (state) => {
+      state.isFirstOpen = true
+    },
+    removeIsFirstOpenPage: (state) => {
+      state.isFirstOpen = false
+    },
+    removePackParams: () => initialStatePackParams,
+    resetPackParams: () => resetStatePackParams,
   },
 })
 
-export const { setPackParams, removePackParams } = packParamsSlice.actions
+export const {
+  setPackParams,
+  removePackParams,
+  resetPackParams,
+  removeIsFirstOpenPage,
+  setIsFirstOpenPage,
+} = packParamsSlice.actions

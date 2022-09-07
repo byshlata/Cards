@@ -15,8 +15,8 @@ export const createErrorSchema = (params: KeySchemeType[]) => {
   const schemaElement: SchemaElementType = {
     email: yup
       .string()
-      .email('Please enter a valid email format !')
-      .required('Email is required please !'),
+      .email('Please enter a valid email format!')
+      .required('Email is required please!'),
 
     password: yup
       .string()

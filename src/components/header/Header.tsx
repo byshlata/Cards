@@ -1,34 +1,43 @@
 import React from 'react'
 
+import { CustomButton, MenuHeader } from 'components'
+import { Path } from 'enums'
 import { useSelector } from 'react-redux'
-import { selectorUserName } from 'store'
+import { useNavigate } from 'react-router-dom'
+import { selectorIsAuth } from 'store'
 
-import avatar from '../../assets/image/avatar.png'
-import itIncubatorLogo from '../../assets/image/itIncubatorLogo.png'
+import itIncubatorLogo from '../../assets/image/logo-ItIncubator.svg'
 import styleMain from '../../styles/container.module.sass'
 
 import style from './Header.module.sass'
 
 export const Header = () => {
-  const userName = useSelector(selectorUserName)
+  const isAuth = useSelector(selectorIsAuth)
+
+  const navigate = useNavigate()
+
+  const onClickRoute = () => {
+    navigate(`${Path.Login}`)
+  }
 
   return (
-    <>
-      <header className={style.header}>
-        <div className={styleMain.container}>
-          <div className={style.pageHeader}>
-            <div className={style.logo}>
-              <img src={itIncubatorLogo} alt={'logo'} />
-            </div>
-            <div className={style.info}>
-              <div className={style.infoName}>{userName}</div>
-              <div className={style.infoAvatar}>
-                <img src={avatar} alt={'avatar miniature picture'} />
-              </div>
-            </div>
+    <header className={style.header}>
+      <div className={styleMain.container}>
+        <div className={style.headerContainer}>
+          <a href="/Profile">
+            <img className={style.logo} src={itIncubatorLogo} alt={'logo'} />
+          </a>
+          <div className={style.wrapper}>
+            {!isAuth ? (
+              <CustomButton color="primary" onClick={onClickRoute}>
+                Sing In
+              </CustomButton>
+            ) : (
+              <MenuHeader />
+            )}
           </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   )
 }

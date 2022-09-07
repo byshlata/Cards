@@ -1,0 +1,57 @@
+$colorBorder: rgba( 207, 207, 207, 1)
+$colorMainMenu: rgba(255, 255, 255, 0.9)
+$colorHoverMenu: rgba(160, 160, 160, 0.2)
+
+
+.menu
+  min-width: 36px
+  position: relative
+  display: flex
+  justify-content: space-between
+  align-items: center
+  cursor: pointer
+
+.menuContainer
+  position: absolute
+  top: 120%
+  right: 0
+  border: 1px solid $colorBorder
+  border-radius: 3px
+  background-color:
+  cursor: pointer
+  z-index: 100
+
+.angle
+  position: absolute
+  top: 0
+  right: 10%
+  border: 1px solid $colorBorder
+  content: ''
+  width: 10px
+  height: 10px
+  transform: rotate(45deg) translateX(-50%)
+  background-color: $colorMainMenu
+  z-index: 1
+
+.helpBlock
+  width: 100%
+  height: 100%
+  position: relative
+  background-color: $colorMainMenu
+  border-radius: 3px
+  z-index: 200
+  margin: 0
+  padding: 0
+
+.menuItem
+  width: 120px
+  height: 50px
+  list-style-type: none
+  &:first-child
+    -moz-border-radius-topleft: 3px
+    -moz-border-radius-topright: 3px
+  &:last-child
+    -moz-border-radius-bottomleft: 3px
+    -moz-border-radius-bottomright: 3px
+  &:hover
+    background-color: $colorHoverMenu

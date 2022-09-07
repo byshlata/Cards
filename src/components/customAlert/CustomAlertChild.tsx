@@ -39,7 +39,7 @@ export const CustomAlertChild = ({ message, severity, onClose, id }: CustomAlert
     <div className={classAlert}>
       <div>{iconElement}</div>
       <div>
-        <h6 className={style.title}>Success</h6>
+        <h6 className={style.title}>{severity}</h6>
         {message}
       </div>
       <div style={{ width: '16px' }}>
