@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 import { PackParamsInitialType, PackParamsType } from 'types'
 
 export const initialStatePackParams: PackParamsInitialType = {

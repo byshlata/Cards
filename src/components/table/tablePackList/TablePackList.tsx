@@ -1,9 +1,11 @@
 import React from 'react'
+
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { selectorAuthUserId, selectorPacksData, setPackParams } from 'store'
 import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
+
 import { TableHeader } from '../component/tableHeader/TableHeader'
 
 import style from './TablePackList.module.sass'
@@ -11,13 +13,7 @@ import { TablePackListRow } from './tablePackListRow/TablePackListRow'
 
 export type TabletHeadType = {
   headData: TableHeadElementType[]
-  onClickTableAction: (
-    idPack: string,
-    backValue: BackValueType,
-    cardsCount: number,
-    userId: string,
-    name: string
-  ) => void
+  onClickTableAction: (idPack: string, backValue: BackValueType, namePack: string) => void
 }
 
 export const TablePackList = ({ headData, onClickTableAction }: TabletHeadType) => {
@@ -26,14 +22,8 @@ export const TablePackList = ({ headData, onClickTableAction }: TabletHeadType) 
   const packData = useSelector(selectorPacksData)
   const userId = useSelector(selectorAuthUserId)
 
-  const onClickHandler = (
-    idPack: string,
-    cardsCount: number,
-    backValue: BackValueType,
-    userId: string,
-    name: string
-  ) => {
-    onClickTableAction(idPack, backValue, cardsCount, userId, name)
+  const onClickHandler = (idPack: string, backValue: BackValueType, namePack: string) => {
+    onClickTableAction(idPack, backValue, namePack)
   }
 
   const onSortValue = (sortValue: string) => {

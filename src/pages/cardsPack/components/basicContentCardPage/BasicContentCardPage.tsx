@@ -10,6 +10,7 @@ import {
   removeCardData,
   removeCardParams,
   resetCardParams,
+  selectorCardQuestion,
   selectorCurrentPageCard,
   selectorIsLoading,
   selectorIsMounting,
@@ -37,30 +38,8 @@ export const BasicContentCardPage = ({
   const isLoading = useSelector(selectorIsLoading)
   const totalCard = useSelector(selectorTotalCountCard)
   const currentPage = useSelector(selectorCurrentPageCard)
-  const paramsCard = useSelector(selectorParamsCard)
   const isMounting = useSelector(selectorIsMounting)
-
-  useEffect(() => {
-    if (paramsCard.isFirstOpen) {
-      dispatch(getCardData(paramsCard))
-    }
-  }, [paramsCard])
-
-  useEffect(() => {
-    if (isMounting) {
-      dispatch(resetCardParams())
-      dispatch(mountingComponent())
-    }
-  }, [isMounting])
-
-  useEffect(() => {
-    dispatch(setIsFirstOpenCardPage())
-
-    return () => {
-      dispatch(removeCardParams())
-      dispatch(removeCardData())
-    }
-  }, [])
+  const cardQuestion = useSelector(selectorCardQuestion)
 
   const onchangePagination = (page: number, pageSize: number) => {
     dispatch(setCardParams({ page: page, pageCount: pageSize }))
@@ -74,7 +53,7 @@ export const BasicContentCardPage = ({
     dispatch(unmountingComponent())
   }
 
-  const errorSearchValue = totalCard ? '' : !paramsCard.cardQuestion ? '' : 'Cards not found'
+  const errorSearchValue = totalCard ? '' : !cardQuestion ? '' : 'Cards not found'
 
   return (
     <>
@@ -84,7 +63,7 @@ export const BasicContentCardPage = ({
             <div className={style.filterWrapper}>
               <Search
                 disabled={isLoading}
-                searchValue={paramsCard.cardQuestion}
+                searchValue={cardQuestion}
                 error={errorSearchValue}
                 onChangeDebounceValue={onSearch}
               />

@@ -12,7 +12,7 @@ import style from './AvatarUser.module.sass'
 
 export const AvatarUser = () => {
   let avatar = useSelector(selectorAvatarUser)
-  const { onCloseModal, onOpenModal, isOpenModal } = useModal()
+  const [isOpenModal, onOpenModal, onCloseModal] = useModal()
 
   if (!avatar) {
     avatar = defaultAvatar

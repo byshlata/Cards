@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { FormModalCardsPackGrope, MenuUserPack, Modal, TitleWithButton } from 'components'
+import {
+  FormModalCardsPackGrope,
+  FormModalPackListGrope,
+  MenuUserPack,
+  Modal,
+  TitleWithButton,
+} from 'components'
 import { useModal } from 'components/modal/hooks/useModal'
-import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { BasicContentCardPage } from 'pages/cardsPack/components/basicContentCardPage/BasicContentCardPage'
 import { TABLET_HEADER_AUTH_USER } from 'pages/cardsPackAuthUser/optionHeaderTableAuthUser/optionTableAuthUser'
 import { EmptyPack } from 'pages/emptyPack/EmptyPack'
-import { setDataForFormModal } from 'store'
-import { setDataForFormModalPack } from 'store/slice/modalSlice'
+import { useSelector } from 'react-redux'
+import { selectorIsCloseModal, setDataForFormModalCard } from 'store'
 import { BackValueType } from 'types'
 
 type CardsPackAuthUserType = {
@@ -20,13 +25,34 @@ type CardsPackAuthUserType = {
 export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAuthUserType) => {
   const dispatch = useAppDispatch()
 
-  const { isOpenModal, onCloseModal, onOpenModal } = useModal()
+  const isCloseModal = useSelector(selectorIsCloseModal)
+
+  const [isOpenModalPack, onOpenModalPack, onCloseModalPack] = useModal()
+  const [isOpenModalCard, onOpenModalCard, onCloseModalCard] = useModal()
+
+  const [actionMenu, setActionMenu] = useState<BackValueType>('')
+
+  useEffect(() => {
+    if (isOpenModalPack && isCloseModal) {
+      onCloseModalPack()
+    }
+  }, [isCloseModal])
+
+  useEffect(() => {
+    if (isOpenModalCard && isCloseModal) {
+      onCloseModalCard()
+    }
+  }, [isCloseModal])
 
   const onAddCards = () => {}
 
-  const deletePack = () => {}
+  const deletePack = () => {
+    setActionMenu('delete')
+  }
 
-  const editPack = () => {}
+  const editPack = () => {
+    setActionMenu('edit')
+  }
 
   const learnPack = () => {}
 
@@ -34,11 +60,11 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
     switch (backValue) {
       case 'edit':
       case 'delete':
-        onOpenModal()
+        onOpenModalCard()
         dispatch(
-          setDataForFormModalPack({
-            namePack: question,
-            id: idCard,
+          setDataForFormModalCard({
+            questionCard: question,
+            idCard: idCard,
             action: backValue,
           })
         )
@@ -59,8 +85,17 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
             tableHeadData={TABLET_HEADER_AUTH_USER}
             onClickActionTable={onClickActionTable}
           />
-          <Modal onClose={onCloseModal} isOpen={isOpenModal}>
-            <FormModalCardsPackGrope onClose={onCloseModal} isOpenModal={isOpenModal} />
+          <Modal onClose={onCloseModalCard} isOpen={isOpenModalCard}>
+            <FormModalCardsPackGrope onClose={onCloseModalCard} isOpenModal={isOpenModalCard} />
+          </Modal>
+          <Modal onClose={onCloseModalPack} isOpen={isOpenModalPack}>
+            <FormModalPackListGrope
+              onClose={onCloseModalPack}
+              isOpenModal={isOpenModalPack}
+              packId={idPack || ''}
+              packName={titlePack}
+              modalAction={actionMenu}
+            />
           </Modal>
         </>
       ) : (

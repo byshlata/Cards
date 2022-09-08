@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 
-type useCustomInputReturnType = {
-  value: string
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+type useCustomInputReturnType = [
+  value: string,
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void,
   resetInput: () => void
-}
+]
 
 export const useCustomInput = (initialValue = ''): useCustomInputReturnType => {
   const [value, setValue] = useState(initialValue)
@@ -21,5 +21,5 @@ export const useCustomInput = (initialValue = ''): useCustomInputReturnType => {
     setValue('')
   }
 
-  return { value, onChange, resetInput }
+  return [value, onChange, resetInput]
 }

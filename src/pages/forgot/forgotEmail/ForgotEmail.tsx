@@ -1,17 +1,16 @@
 import React, { useCallback, memo } from 'react'
 
+import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { Path } from 'enums'
 import { useFormik } from 'formik'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { selectorIsLoading, sendLetterOnEmail } from 'store'
+import { createErrorSchema } from 'utils'
 import * as yup from 'yup'
 
 import style from './ForgotEmail.module.sass'
-
-import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { Path } from 'enums'
-import { useAppDispatch } from 'hooks'
-import { selectorIsLoading, sendLetterOnEmail } from 'store'
-import { createErrorSchema } from 'utils'
 
 const name = 'Aliaksandr'
 

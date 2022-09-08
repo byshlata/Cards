@@ -12,7 +12,6 @@ export {
 export { packSlice } from './slice/packSlice'
 export { cardParamsSlice, initialStateCardParams } from './slice/cardParamsSlice'
 export { cardSlice } from './slice/cardSlice'
-export { modalPackSlice } from './slice/modalPackSlice'
 export { modalCardSlice } from './slice/modalCardSlice'
 
 //thunk
@@ -29,6 +28,7 @@ export {
   selectorCardData,
   selectorTotalCountCard,
   selectorTitlePack,
+  selectorPackUserId,
 } from './selectors/selectorsCard'
 
 export {
@@ -55,9 +55,14 @@ export {
   selectorError,
   selectorIsAuth,
   selectorWarningMessage,
+  selectorIsCloseModal,
 } from './selectors/selectorsApp'
 
-export { selectorCurrentPageCard, selectorParamsCard } from './selectors/selectorsCardParams'
+export {
+  selectorCurrentPageCard,
+  selectorParamsCard,
+  selectorCardQuestion,
+} from './selectors/selectorsCardParams'
 
 export {
   selectorCurrentPage,
@@ -72,16 +77,7 @@ export {
 export { selectorIsRegistration } from './selectors/selectorsRegistration'
 
 export {
-  selectorModalPackAction,
-  selectorIsCloseModalPackAfterRequest,
-  selectorModalPackName,
-  selectorModalPackId,
-  selectorUserId,
-  selectorCardsCountPack,
-} from './selectors/selectorsModalPack'
-
-export {
-  selectorIsCloseModalCardRequest,
+  selectorIsCloseModalCardAfterRequest,
   selectorModalCardAction,
   selectorModalCardId,
   selectorModalCardQuestion,
@@ -99,6 +95,7 @@ export {
   removeErrorMessage,
   setAuth,
   setWarningMessage,
+  isCloseModal,
 } from './slice/appSlice'
 
 export { removeEmail, sendLetter, isPasswordSend } from './slice/forgotSlice'
@@ -128,12 +125,6 @@ export {
 } from './slice/cardParamsSlice'
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'
-
-export {
-  setDataForFormModalPack,
-  onCloseModalPackAfterRequest,
-  closeModalPack,
-} from './slice/modalPackSlice'
 
 export {
   setDataForFormModalCard,

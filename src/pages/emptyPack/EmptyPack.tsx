@@ -1,6 +1,6 @@
 import React from 'react'
-import { CustomButton } from 'components/button'
 
+import { CustomButton } from 'components/button'
 import style from 'pages/emptyPack/emptyPack.module.sass'
 
 export const EmptyPack = () => {

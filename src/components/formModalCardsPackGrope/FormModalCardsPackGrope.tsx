@@ -1,13 +1,12 @@
 import { FormDelete } from 'components'
+import { FormCardEditAndCreate } from 'components/formCardEditAndCreate/FormCardEditAndCreate'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
-  addNewPack,
   deleteCard,
-  editPack,
-  selectorModalPackAction,
-  selectorModalPackId,
-  selectorModalPackName,
+  selectorModalCardAction,
+  selectorModalCardId,
+  selectorModalCardQuestion,
 } from 'store'
 
 type FormModalPackListGropeType = {
@@ -18,16 +17,18 @@ type FormModalPackListGropeType = {
 export const FormModalCardsPackGrope = ({ onClose, isOpenModal }: FormModalPackListGropeType) => {
   const dispatch = useAppDispatch()
 
-  const cardName = useSelector(selectorModalPackName)
-  const cardId = useSelector(selectorModalPackId)
-  const modalAction = useSelector(selectorModalPackAction)
+  const cardQuestion = useSelector(selectorModalCardQuestion)
+  const cardId = useSelector(selectorModalCardId)
+  const modalAction = useSelector(selectorModalCardAction)
 
-  const onAddCards = (valueInput: string, valueCheckBox: boolean) => {
-    dispatch(addNewPack({ name: valueInput, privateValue: valueCheckBox }))
+  const onAddCards = (valueQuestionInput: string, valueAnswerInput: string) => {
+    // dispatch(addNewPack({ name: valueInput, privateValue: valueCheckBox }))
+    console.log('add')
   }
 
-  const onEditCard = (valueInput: string, valueCheckBox: boolean) => {
-    dispatch(editPack({ name: valueInput, privateValue: valueCheckBox, _id: cardId }))
+  const onEditCard = (valueQuestionInput: string, valueAnswerInput: string) => {
+    console.log('edit')
+    // dispatch(editPack({ name: valueInput, privateValue: valueCheckBox, _id: cardId }))
   }
 
   const onDeleteCard = () => {
@@ -35,7 +36,19 @@ export const FormModalCardsPackGrope = ({ onClose, isOpenModal }: FormModalPackL
   }
 
   if (modalAction === 'edit') {
-    return <></>
+    return (
+      <FormCardEditAndCreate
+        title="Edit crd"
+        valueQuestionInput={'1'}
+        valueAnswerInput={'2'}
+        labelSelector={'3'}
+        labelQuestionInput="Question"
+        labelAnswerInput="Answer"
+        onClickSaveButton={onEditCard}
+        onClickCancelButton={onClose}
+        isOpenModal={isOpenModal}
+      />
+    )
   }
 
   if (modalAction === 'add') {
@@ -47,7 +60,7 @@ export const FormModalCardsPackGrope = ({ onClose, isOpenModal }: FormModalPackL
       <FormDelete
         packOrCard="card"
         title="Delete card"
-        nameDeleteValue={cardName}
+        nameDeleteValue={cardQuestion}
         onClickDeleteButton={onDeleteCard}
         onClickCancelButton={onClose}
       />

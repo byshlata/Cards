@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
@@ -20,12 +20,11 @@ import {
   removePackData,
   resetPackParams,
   selectorCurrentPage,
-  selectorIsCloseModalAfterRequest,
+  selectorIsCloseModal,
   selectorIsLoading,
   selectorIsMounting,
   selectorParams,
   selectorTotalCount,
-  setDataForFormModalPack,
   setIsFirstOpenPage,
   setPackParams,
 } from 'store'
@@ -34,6 +33,11 @@ import { BackValueType } from 'types'
 import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
 
+type ModalPackDataType = {
+  packName: string
+  packId: string
+  action: BackValueType
+}
 export const PacksList = () => {
   const dispatch = useAppDispatch()
 
@@ -42,11 +46,17 @@ export const PacksList = () => {
   const currentPage = useSelector(selectorCurrentPage)
   const params = useSelector(selectorParams)
   const isMounting = useSelector(selectorIsMounting)
-  const isCloseModalAfterRequest = useSelector(selectorIsCloseModalAfterRequest)
+  const isCloseModalPackAfterRequest = useSelector(selectorIsCloseModal)
+
+  const [modalPackData, setModalPackData] = useState<ModalPackDataType>({
+    packName: '',
+    packId: '',
+    action: '',
+  })
 
   const navigate = useNavigate()
 
-  const { isOpenModal, onOpenModal, onCloseModal } = useModal()
+  const [isOpenModal, onOpenModal, onCloseModal] = useModal()
 
   useEffect(() => {
     if (params.isFirstOpen) {
@@ -70,10 +80,10 @@ export const PacksList = () => {
   }, [])
 
   useEffect(() => {
-    if (isOpenModal && isCloseModalAfterRequest) {
+    if (isOpenModal && isCloseModalPackAfterRequest) {
       onCloseModal()
     }
-  }, [isCloseModalAfterRequest])
+  }, [isCloseModalPackAfterRequest])
 
   const onChangePagination = (page: number, pageSize: number) => {
     dispatch(setPackParams({ page: page, pageCount: pageSize }))
@@ -81,42 +91,25 @@ export const PacksList = () => {
 
   const onOpenModalAddPack = () => {
     onOpenModal()
-    dispatch(setDataForFormModalPack({ action: 'add' }))
+    setModalPackData({ packId: '', packName: '', action: 'add' })
   }
 
-  const onClickTableAction = (
-    idPack: string,
-    backValue: BackValueType,
-    cardsCount: number,
-    userId: string,
-    name: string
-  ) => {
+  const onClickTableAction = (idPack: string, backValue: BackValueType, namePack: string) => {
     switch (backValue) {
       case 'edit':
       case 'delete':
         onOpenModal()
-        dispatch(
-          setDataForFormModalPack({
-            namePack: name,
-            idPack: idPack,
-            cardsCountPack: cardsCount,
-            action: backValue,
-            userId: userId,
-          })
-        )
+
+        setModalPackData({
+          packId: idPack,
+          action: backValue,
+          packName: namePack,
+        })
+
         break
       case 'learn':
         break
       case 'name':
-        dispatch(
-          setDataForFormModalPack({
-            namePack: name,
-            idPack: idPack,
-            cardsCountPack: cardsCount,
-            action: backValue,
-            userId: userId,
-          })
-        )
         navigate(`${Path.Pack}${Path.Root}${idPack}`)
         break
     }
@@ -149,7 +142,13 @@ export const PacksList = () => {
       ) : null}
 
       <Modal onClose={onCloseModal} isOpen={isOpenModal}>
-        <FormModalPackListGrope onClose={onCloseModal} isOpenModal={isOpenModal} />
+        <FormModalPackListGrope
+          onClose={onCloseModal}
+          isOpenModal={isOpenModal}
+          packId={modalPackData.packId}
+          modalAction={modalPackData.action}
+          packName={modalPackData.packName}
+        />
       </Modal>
     </div>
   )

@@ -28,7 +28,7 @@ export const FormPackEditAndCreate = ({
   isOpenModal,
 }: FormPackEditAndCreateType) => {
   const { checkedBox, setCheckedBox } = useCustomCheckBox(valueCheckBox)
-  const { value, onChange, resetInput } = useCustomInput(valueInput)
+  const [value, onChange, resetInput] = useCustomInput(valueInput)
 
   useEffect(() => {
     if (!valueInput) {

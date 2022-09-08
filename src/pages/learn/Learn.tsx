@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 
-import { useSelector } from 'react-redux'
+import { CustomRadio } from 'components/customRadio/CustomRadio'
+import { useAppDispatch } from 'hooks'
 
-import { useAppDispatch } from '../../hooks'
 import { getLearnData } from '../../store/thunk/LearnThunk'
 
 import style from './Learn.module.sass'
-
-import { CustomRadio } from 'components/customRadio/CustomRadio'
-import { setCartGrade } from 'store/slice/learnSlice'
 
 export const Learn = () => {
   const dispatch = useAppDispatch()

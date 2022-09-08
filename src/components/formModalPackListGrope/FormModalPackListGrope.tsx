@@ -1,26 +1,25 @@
 import { FormDelete, FormPackEditAndCreate } from 'components'
 import { useAppDispatch } from 'hooks'
-import { useSelector } from 'react-redux'
-import {
-  addNewPack,
-  editPack,
-  selectorModalPackAction,
-  selectorModalPackId,
-  selectorModalPackName,
-} from 'store'
+import { addNewPack, editPack } from 'store'
 import { deletePack } from 'store/thunk/pakcThunk'
+import { BackValueType } from 'types'
 
 type FormModalPackListGropeType = {
   onClose: () => void
   isOpenModal: boolean
+  packName: string
+  packId: string
+  modalAction: BackValueType
 }
 
-export const FormModalPackListGrope = ({ onClose, isOpenModal }: FormModalPackListGropeType) => {
+export const FormModalPackListGrope = ({
+  onClose,
+  isOpenModal,
+  packName,
+  packId,
+  modalAction,
+}: FormModalPackListGropeType) => {
   const dispatch = useAppDispatch()
-
-  const packName = useSelector(selectorModalPackName)
-  const packId = useSelector(selectorModalPackId)
-  const modalAction = useSelector(selectorModalPackAction)
 
   const onAddPack = (valueInput: string, valueCheckBox: boolean) => {
     dispatch(addNewPack({ name: valueInput, privateValue: valueCheckBox }))

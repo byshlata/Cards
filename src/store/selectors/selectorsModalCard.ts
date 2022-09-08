@@ -9,5 +9,5 @@ export const selectorModalCardAction = (state: RootStoreType): BackValueType =>
 export const selectorModalCardQuestion = (state: RootStoreType): string =>
   state.modalCard.questionCard
 
-export const selectorIsCloseModalCardRequest = (state: RootStoreType): boolean =>
+export const selectorIsCloseModalCardAfterRequest = (state: RootStoreType): boolean =>
   state.modalCard.isCloseModalCardRequest

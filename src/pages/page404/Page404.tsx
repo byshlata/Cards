@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react'
 
 import { CustomButton } from 'components/button'
 import { Path } from 'enums'
-
 import { useNavigate } from 'react-router-dom'
 
 import style from './Page404.module.sass'

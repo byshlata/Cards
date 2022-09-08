@@ -10,3 +10,6 @@ export const selectorError = (state: RootStoreType): ErrorMessageType => state.a
 export const selectorIsAuth = (state: RootStoreType): boolean => state.app.isAuth
 
 export const selectorWarningMessage = (state: RootStoreType): ErrorMessageType => state.app.warning
+
+export const selectorIsCloseModal = (state: RootStoreType): boolean =>
+  state.app.isCloseModalAfterRequest

@@ -14,7 +14,7 @@ type SearchType = {
 }
 
 export const Search = ({ searchValue, onChangeDebounceValue, disabled, error }: SearchType) => {
-  const { value, onChange } = useCustomInput(searchValue)
+  const [value, onChange] = useCustomInput(searchValue)
 
   const debounceValue = useDebounce(value)
 

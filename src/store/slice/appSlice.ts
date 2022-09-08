@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 import { ErrorMessageType } from 'types'
 
 export const initialState: InitialStateType = {
   isLoading: false,
   isInitialized: true,
   isAuth: false,
+  isCloseModalAfterRequest: true,
   error: { message: '' },
   warning: { message: '' },
 }
@@ -16,6 +16,9 @@ export const appSlice = createSlice({
   reducers: {
     isSpinAppLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
+    },
+    isCloseModal: (state, action: PayloadAction<boolean>) => {
+      state.isCloseModalAfterRequest = action.payload
     },
     removeErrorMessage: (state) => {
       state.error = { message: '' }
@@ -40,12 +43,19 @@ export const appSlice = createSlice({
   },
 })
 
-export const { isSpinAppLoading, removeErrorMessage, setInitialized, setAuth, setWarningMessage } =
-  appSlice.actions
+export const {
+  isSpinAppLoading,
+  removeErrorMessage,
+  setInitialized,
+  setAuth,
+  setWarningMessage,
+  isCloseModal,
+} = appSlice.actions
 
 type InitialStateType = {
   isLoading: boolean
   isInitialized: boolean
+  isCloseModalAfterRequest: boolean
   isAuth: boolean
   error: ErrorMessageType
   warning: ErrorMessageType

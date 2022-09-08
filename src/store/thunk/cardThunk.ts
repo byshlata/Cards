@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { cardAPI } from 'api'
-import { isSpinAppLoading, onCloseModalPackAfterRequest, RootStoreType, setCardData } from 'store'
+import { isSpinAppLoading, onCloseModalCardAfterRequest, RootStoreType, setCardData } from 'store'
 import { CardParamsType } from 'types'
 import { setErrorResponse } from 'utils'
 
@@ -15,7 +15,7 @@ export const getCardData = createAsyncThunk(
       return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))
-      dispatch(onCloseModalPackAfterRequest(true))
+      dispatch(onCloseModalCardAfterRequest(true))
     }
   }
 )
@@ -25,7 +25,7 @@ export const deleteCard = createAsyncThunk(
   async (idCard: string, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      dispatch(onCloseModalPackAfterRequest(false))
+      dispatch(onCloseModalCardAfterRequest(false))
       await cardAPI.deleteCard(idCard)
 
       const state = getState() as RootStoreType
