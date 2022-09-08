@@ -18,7 +18,6 @@ import {
   getPackData,
   mountingComponent,
   removePackData,
-  removePackParams,
   resetPackParams,
   selectorCurrentPage,
   selectorIsCloseModalAfterRequest,
@@ -26,7 +25,7 @@ import {
   selectorIsMounting,
   selectorParams,
   selectorTotalCount,
-  setDataForFormModal,
+  setDataForFormModalPack,
   setIsFirstOpenPage,
   setPackParams,
 } from 'store'
@@ -77,13 +76,12 @@ export const PacksList = () => {
   }, [isCloseModalAfterRequest])
 
   const onChangePagination = (page: number, pageSize: number) => {
-    dispatch(setPackParams({ page: page }))
-    dispatch(setPackParams({ pageCount: pageSize }))
+    dispatch(setPackParams({ page: page, pageCount: pageSize }))
   }
 
   const onOpenModalAddPack = () => {
     onOpenModal()
-    dispatch(setDataForFormModal({ name: '', id: '', action: 'add', userId: '' }))
+    dispatch(setDataForFormModalPack({ action: 'add' }))
   }
 
   const onClickTableAction = (
@@ -97,12 +95,28 @@ export const PacksList = () => {
       case 'edit':
       case 'delete':
         onOpenModal()
-        dispatch(setDataForFormModal({ name: name, id: idPack, action: backValue, userId: userId }))
+        dispatch(
+          setDataForFormModalPack({
+            namePack: name,
+            idPack: idPack,
+            cardsCountPack: cardsCount,
+            action: backValue,
+            userId: userId,
+          })
+        )
         break
       case 'learn':
         break
       case 'name':
-        dispatch(setDataForFormModal({ name: name, id: idPack, action: backValue, userId: userId }))
+        dispatch(
+          setDataForFormModalPack({
+            namePack: name,
+            idPack: idPack,
+            cardsCountPack: cardsCount,
+            action: backValue,
+            userId: userId,
+          })
+        )
         navigate(`${Path.Pack}${Path.Root}${idPack}`)
         break
     }

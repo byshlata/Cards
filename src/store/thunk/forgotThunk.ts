@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-
 import { forgotAPI } from 'api'
 import { isPasswordSend, isSpinAppLoading, sendLetter } from 'store'
 import { RecoveryPasswordType } from 'types'

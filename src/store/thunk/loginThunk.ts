@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-
 import { loginAPI } from 'api'
 import { isSpinAppLoading, setAuth, setUserData } from 'store'
 import { LoginType } from 'types'

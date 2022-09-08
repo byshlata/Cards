@@ -1,8 +1,7 @@
+import { OptionValue } from 'enums'
 import * as yup from 'yup'
 import { RequiredStringSchema } from 'yup/lib/string'
 import { AnyObject } from 'yup/lib/types'
-
-import { OptionValue } from 'enums'
 
 type KeySchemeType = keyof SchemaElementType
 

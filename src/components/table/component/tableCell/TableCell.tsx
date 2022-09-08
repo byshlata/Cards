@@ -5,12 +5,15 @@ import style from 'components/table/component/tableCell/TableCell.module.sass'
 type TableCellType = {
   title?: string | number
   children?: ReactNode | ReactElement[]
+  widthCellPercent?: string
 }
-export const TableCell: React.FC<TableCellType> = React.memo(({ title, children }) => {
-  return (
-    <div className={style.cell}>
-      {title}
-      {children}
-    </div>
-  )
-})
+export const TableCell: React.FC<TableCellType> = React.memo(
+  ({ title, widthCellPercent, children }) => {
+    return (
+      <div className={style.cell} style={{ width: `${widthCellPercent}%` }}>
+        <span className={style.text}>{title}</span>
+        {children}
+      </div>
+    )
+  }
+)

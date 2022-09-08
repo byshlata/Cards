@@ -1,11 +1,8 @@
-export type CardType = {
+import { CardShortType } from 'types/CardShortType'
+
+export type CardType = CardShortType & {
   _id: string
-  cardsPack_id: string
   user_id: string
-  answer: string
-  question: string
-  grade: number
-  shots: number
   comments: string
   type: string
   rating: number
@@ -13,8 +10,4 @@ export type CardType = {
   created: string
   updated: string
   __v: number
-  answerImg: string
-  answerVideo: string
-  questionImg: string
-  questionVideo: string
 }

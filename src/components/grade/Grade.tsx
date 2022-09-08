@@ -1,9 +1,11 @@
 import React, { FC, ReactElement } from 'react'
 
 import { createGrade } from 'components/grade/utils/createGrade'
-import style from './Grade.module.sass'
 
-import { emptyStar, fullStar, halfStar } from './index'
+import emptyStar from './../../assets/image/emptyStar.png'
+import halfStar from './../../assets/image/halfStar.png'
+import fullStar from './../../assets/image/Star.png'
+import style from './Grade.module.sass'
 
 type GradeType = {
   rating: number

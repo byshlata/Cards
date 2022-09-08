@@ -25,7 +25,7 @@ import style from './BasicContentCardPage.module.sass'
 
 type BasicContentCardPageType = {
   tableHeadData: TableHeadElementType[]
-  onClickActionTable?: (idCard: string, backValue: BackValueType) => void
+  onClickActionTable?: (idCard: string, question: string, backValue: BackValueType) => void
 }
 
 export const BasicContentCardPage = ({
@@ -63,7 +63,7 @@ export const BasicContentCardPage = ({
   }, [])
 
   const onchangePagination = (page: number, pageSize: number) => {
-    dispatch(setCardParams({ page: page }))
+    dispatch(setCardParams({ page: page, pageCount: pageSize }))
   }
 
   const onSearch = (searchValuer: string) => {

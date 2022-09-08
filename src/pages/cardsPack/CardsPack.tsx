@@ -3,24 +3,24 @@ import React, { useEffect } from 'react'
 import { ButtonBack } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
+import { CarsPackAllUser } from 'pages/cardsPackAllUser/CarsPackAllUser'
+import { CardsPackAuthUser } from 'pages/cardsPackAuthUser/CardsPackAuthUser'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import {
   selectorAuthUserId,
+  selectorCardsCountPack,
   selectorTitlePack,
-  selectorTotalCountCard,
   selectorUserId,
   setCardParams,
 } from 'store'
 import { BackValueType } from 'types'
-import { CardsPackAuthUser } from 'pages/cardsPackAuthUser/CardsPackAuthUser'
-import { CarsPackAllUser } from 'pages/cardsPackAllUser/CarsPackAllUser'
 
 export const CardsPack = () => {
   const dispatch = useAppDispatch()
 
   const titlePack = useSelector(selectorTitlePack)
-  const countCard = useSelector(selectorTotalCountCard)
+  const countCard = useSelector(selectorCardsCountPack)
   const authUserId = useSelector(selectorAuthUserId)
   const userId = useSelector(selectorUserId)
 

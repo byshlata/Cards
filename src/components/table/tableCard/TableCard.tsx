@@ -13,7 +13,7 @@ import { TableCardRow } from './tableCardRow/TableCardRow'
 
 type TableCardType = {
   heardTableData: TableHeadElementType[]
-  onClickActionTable?: (idCard: string, backValue: BackValueType) => void
+  onClickActionTable?: (idCard: string, question: string, backValue: BackValueType) => void
 }
 
 export const TableCard = ({ heardTableData, onClickActionTable }: TableCardType) => {
@@ -22,8 +22,8 @@ export const TableCard = ({ heardTableData, onClickActionTable }: TableCardType)
   const packData = useSelector(selectorCardData)
   const userId = useSelector(selectorAuthUserId)
 
-  const onClickAction = (idCard: string, backValue: BackValueType) => {
-    onClickActionTable && onClickActionTable(idCard, backValue)
+  const onClickAction = (idCard: string, question: string, backValue: BackValueType) => {
+    onClickActionTable && onClickActionTable(idCard, question, backValue)
   }
 
   const onSortValue = (sortValue: string) => {

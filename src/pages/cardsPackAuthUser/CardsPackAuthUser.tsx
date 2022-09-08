@@ -1,10 +1,15 @@
 import React from 'react'
-import { MenuUserPack, TitleWithButton } from 'components'
-import { BasicContentCardPage } from 'pages/cardsPack'
-import { EmptyPack } from 'pages/emptyPack/EmptyPack'
-import { TABLET_HEADER_AUTH_USER } from 'pages/cardsPackAuthUser/optionHeaderTableAuthUser/optionTableAuthUser'
-import { BackValueType } from 'types'
+
+import { FormModalCardsPackGrope, MenuUserPack, Modal, TitleWithButton } from 'components'
+import { useModal } from 'components/modal/hooks/useModal'
+import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
+import { BasicContentCardPage } from 'pages/cardsPack/components/basicContentCardPage/BasicContentCardPage'
+import { TABLET_HEADER_AUTH_USER } from 'pages/cardsPackAuthUser/optionHeaderTableAuthUser/optionTableAuthUser'
+import { EmptyPack } from 'pages/emptyPack/EmptyPack'
+import { setDataForFormModal } from 'store'
+import { setDataForFormModalPack } from 'store/slice/modalSlice'
+import { BackValueType } from 'types'
 
 type CardsPackAuthUserType = {
   countCard: number
@@ -15,6 +20,8 @@ type CardsPackAuthUserType = {
 export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAuthUserType) => {
   const dispatch = useAppDispatch()
 
+  const { isOpenModal, onCloseModal, onOpenModal } = useModal()
+
   const onAddCards = () => {}
 
   const deletePack = () => {}
@@ -23,7 +30,23 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
 
   const learnPack = () => {}
 
-  const onClickActionTable = (idCard: string, backValue: BackValueType) => {}
+  const onClickActionTable = (idCard: string, question: string, backValue: BackValueType) => {
+    switch (backValue) {
+      case 'edit':
+      case 'delete':
+        onOpenModal()
+        dispatch(
+          setDataForFormModalPack({
+            namePack: question,
+            id: idCard,
+            action: backValue,
+          })
+        )
+        break
+      case 'learn':
+        break
+    }
+  }
 
   return (
     <>
@@ -36,6 +59,9 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
             tableHeadData={TABLET_HEADER_AUTH_USER}
             onClickActionTable={onClickActionTable}
           />
+          <Modal onClose={onCloseModal} isOpen={isOpenModal}>
+            <FormModalCardsPackGrope onClose={onCloseModal} isOpenModal={isOpenModal} />
+          </Modal>
         </>
       ) : (
         <EmptyPack />

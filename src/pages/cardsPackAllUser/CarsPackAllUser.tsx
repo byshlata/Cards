@@ -1,6 +1,8 @@
 import React from 'react'
+
 import { TitleWithButton } from 'components'
-import { BasicContentCardPage } from 'pages/cardsPack'
+import { BasicContentCardPage } from 'pages/cardsPack/components/basicContentCardPage/BasicContentCardPage'
+
 import { TABLET_HEADER_ALL_USER } from './optionHeaderTableAllUser/optionTableHeaderAllUser'
 
 type CarsPackAllUserType = {

@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-
 import { learnAPI } from 'api/learnAPI'
 import { isSpinAppLoading } from 'store'
 import { LearnRequestType, setLearnData } from 'store/slice/learnSlice'

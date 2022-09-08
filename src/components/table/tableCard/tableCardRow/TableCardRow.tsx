@@ -17,7 +17,7 @@ type TableCardRowType = {
   grade: number
   updated: string
   create: string
-  onClickAction?: (idCard: string, backValue: BackValueType) => void
+  onClickAction?: (idCard: string, questionCard: string, backValue: BackValueType) => void
 }
 
 export const TableCardRow = ({
@@ -31,18 +31,19 @@ export const TableCardRow = ({
   onClickAction,
 }: TableCardRowType) => {
   const onClickActionHandle = (backValue: BackValueType) => {
-    onClickAction && onClickAction(_id, backValue)
+    onClickAction && onClickAction(_id, question, backValue)
   }
 
   const isAuthUserTable = authUser_id === user_id
 
+  const widthCells = isAuthUserTable ? '20' : '25'
+
   return (
     <div className={style.rowWrapper}>
-      <TableCell title={question} />
-      <TableCell title={answer} />
-      <TableCell title={updated} />
-      <TableCell title={updated} />
-      <TableCell>
+      <TableCell title={question} widthCellPercent={widthCells} />
+      <TableCell title={answer} widthCellPercent={widthCells} />
+      <TableCell title={updated} widthCellPercent={widthCells} />
+      <TableCell widthCellPercent={widthCells}>
         <Grade rating={grade} />
       </TableCell>
       {isAuthUserTable && (

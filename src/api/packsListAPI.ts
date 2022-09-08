@@ -32,7 +32,7 @@ export const packsListAPI = {
     return response.data
   },
 
-  editPuckName: async ({ _id, name, privateValue }: EditPackType) => {
+  editPuck: async ({ _id, name, privateValue }: EditPackType) => {
     const response = await API_CONFIG.put<any>(`${PathAPI.Cards}${PathAPI.Pack}`, {
       cardsPack: { _id, name, private: privateValue },
     })
@@ -47,7 +47,7 @@ export const packsListAPI = {
   },
 
   deletePack: async (idPack: string) => {
-    const response = await API_CONFIG.delete(`${PathAPI.Cards}${PathAPI.Pack}`, {
+    const response = await API_CONFIG.delete<any>(`${PathAPI.Cards}${PathAPI.Pack}`, {
       params: {
         id: idPack,
       },

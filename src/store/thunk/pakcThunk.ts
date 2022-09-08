@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { packsListAPI } from 'api'
 import {
   isSpinAppLoading,
-  onCloseModalAfterRequest,
+  onCloseModalPackAfterRequest,
   resetStatePackParams,
   RootStoreType,
   setPackData,
@@ -23,7 +23,7 @@ export const getPackData = createAsyncThunk(
       return setErrorResponse(e, rejectWithValue)
     } finally {
       dispatch(isSpinAppLoading(false))
-      dispatch(onCloseModalAfterRequest(true))
+      dispatch(onCloseModalPackAfterRequest(true))
     }
   }
 )
@@ -33,7 +33,7 @@ export const addNewPack = createAsyncThunk(
   async (payload: AddPackType, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      dispatch(onCloseModalAfterRequest(false))
+      dispatch(onCloseModalPackAfterRequest(false))
       await packsListAPI.createPack(payload)
 
       const state = getState() as RootStoreType
@@ -57,8 +57,8 @@ export const editPack = createAsyncThunk(
   async (payload: EditPackType, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      dispatch(onCloseModalAfterRequest(false))
-      await packsListAPI.editPuckName(payload)
+      dispatch(onCloseModalPackAfterRequest(false))
+      await packsListAPI.editPuck(payload)
 
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
@@ -77,7 +77,7 @@ export const deletePack = createAsyncThunk(
   async (idPack: string, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      dispatch(onCloseModalAfterRequest(false))
+      dispatch(onCloseModalPackAfterRequest(false))
       await packsListAPI.deletePack(idPack)
 
       const state = getState() as RootStoreType

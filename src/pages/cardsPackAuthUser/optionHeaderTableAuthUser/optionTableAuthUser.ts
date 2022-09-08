@@ -20,12 +20,6 @@ export const TABLET_HEADER_AUTH_USER: TableHeadElementType[] = [
     type: 'sort',
   },
   {
-    title: 'Create by',
-    sortParam: 'user_name',
-    stateSortElement: 'off',
-    type: 'sort',
-  },
-  {
     title: 'Grad',
     sortParam: '',
     stateSortElement: '',

@@ -1,6 +1,5 @@
 import { PathAPI } from 'enums'
-
-import { RemovePackType } from '../types'
+import { RemovePackType } from 'types'
 
 import { API_CONFIG } from './config'
 

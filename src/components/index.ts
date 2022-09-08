@@ -82,6 +82,8 @@ export { FormModalPackListGrope } from './formModalPackListGrope/FormModalPackLi
 
 export { FormPackEditAndCreate } from './formPackEditAndCreate/FormPackEditAndCreate'
 
+export { FormModalCardsPackGrope } from './formModalCardsPackGrope/FormModalCardsPackGrope'
+
 export { FormDelete } from './formDelete/FormDelete'
 
 export { Grade } from './grade/Grade'
