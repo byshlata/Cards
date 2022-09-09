@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { PathAPI } from 'enums'
-import { AddPackType, CardParamsType, CardResponseType, CardType, EditCardType } from 'types'
+import { CardParamsType, CardResponseType, CardShortType, CardType, EditCardType } from 'types'
 
 import { API_CONFIG } from './config'
 
@@ -35,16 +35,42 @@ export const cardAPI = {
   },
 
   editCard: async ({ _id, answer, question, comments }: EditCardType) => {
-    const response = await API_CONFIG.put<any>(`${PathAPI.Cards}${PathAPI.Card}`, {
-      card: { _id, answer, question, comments },
-    })
+    const response = await API_CONFIG.put<any, AxiosResponse<any>, { card: EditCardType }>(
+      `${PathAPI.Cards}${PathAPI.Card}`,
+      {
+        card: { _id, answer, question, comments },
+      }
+    )
     return response.data
   },
 
-  createCard: async ({ name, privateValue, deckCover }: AddPackType) => {
-    const response = await API_CONFIG.post<any>(`${PathAPI.Cards}${PathAPI.Card}`, {
-      cardsPack: { name, private: privateValue, deckCover },
-    })
+  createCard: async ({
+    cardsPack_id,
+    question,
+    questionImg,
+    questionVideo,
+    answerVideo,
+    answer,
+    answerImg,
+    shots,
+    grade,
+  }: CardShortType) => {
+    const response = await API_CONFIG.post<any, AxiosResponse<any>, { card: CardShortType }>(
+      `${PathAPI.Cards}${PathAPI.Card}`,
+      {
+        card: {
+          cardsPack_id,
+          question,
+          questionImg,
+          questionVideo,
+          answerVideo,
+          answer,
+          answerImg,
+          shots,
+          grade,
+        },
+      }
+    )
     return response.data
   },
 

@@ -1,8 +1,7 @@
 import React, { SyntheticEvent } from 'react'
 
-import { ButtonUpload } from 'components'
+import { ButtonUpload, Modal } from 'components'
 import { useModal } from 'components/modal/hooks/useModal'
-import { Modal } from 'components/modal/Modal'
 import { useSelector } from 'react-redux'
 import { selectorAvatarUser } from 'store'
 

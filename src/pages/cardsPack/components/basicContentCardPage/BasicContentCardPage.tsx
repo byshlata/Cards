@@ -26,7 +26,12 @@ import style from './BasicContentCardPage.module.sass'
 
 type BasicContentCardPageType = {
   tableHeadData: TableHeadElementType[]
-  onClickActionTable?: (idCard: string, question: string, backValue: BackValueType) => void
+  onClickActionTable?: (
+    idCard: string,
+    question: string,
+    answer: string,
+    action: BackValueType
+  ) => void
 }
 
 export const BasicContentCardPage = ({

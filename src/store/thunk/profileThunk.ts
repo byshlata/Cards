@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { loginAPI, profileAPI } from 'api'
 import { isSpinAppLoading, removeUserData, setInitialized, setUserData, setUserName } from 'store'
+import { ChangeInformationUserType } from 'types'
 import { setErrorResponse } from 'utils'
 
 import { setAuth } from '../slice/appSlice'
@@ -23,12 +24,10 @@ export const fetchProfilePage = createAsyncThunk(
 
 export const changeProfileName = createAsyncThunk(
   'profileSlice/changeProfileName',
-  async (name: string, { rejectWithValue, dispatch }) => {
+  async (payload: ChangeInformationUserType, { rejectWithValue, dispatch }) => {
     try {
       dispatch(isSpinAppLoading(true))
-      const res = await profileAPI.changeInformationUser({
-        name,
-      })
+      const res = await profileAPI.changeInformationUser(payload)
       dispatch(setUserName(res.updatedUser.name))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)

@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 
 import { CustomRadio } from 'components/customRadio/CustomRadio'
 import { useAppDispatch } from 'hooks'
-
-import { getLearnData } from '../../store/thunk/LearnThunk'
+import { getLearnData } from 'store/thunk/learnThunk'
 
 import style from './Learn.module.sass'
 

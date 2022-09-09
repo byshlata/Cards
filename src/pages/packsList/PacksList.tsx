@@ -146,7 +146,7 @@ export const PacksList = () => {
           onClose={onCloseModal}
           isOpenModal={isOpenModal}
           packId={modalPackData.packId}
-          modalAction={modalPackData.action}
+          action={modalPackData.action}
           packName={modalPackData.packName}
         />
       </Modal>

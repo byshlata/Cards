@@ -13,7 +13,12 @@ import { TableCardRow } from './tableCardRow/TableCardRow'
 
 type TableCardType = {
   heardTableData: TableHeadElementType[]
-  onClickActionTable?: (idCard: string, question: string, backValue: BackValueType) => void
+  onClickActionTable?: (
+    idCard: string,
+    question: string,
+    answer: string,
+    action: BackValueType
+  ) => void
 }
 
 export const TableCard = ({ heardTableData, onClickActionTable }: TableCardType) => {
@@ -22,10 +27,6 @@ export const TableCard = ({ heardTableData, onClickActionTable }: TableCardType)
   const packData = useSelector(selectorCardData)
   const userId = useSelector(selectorAuthUserId)
 
-  const onClickAction = (idCard: string, question: string, backValue: BackValueType) => {
-    onClickActionTable && onClickActionTable(idCard, question, backValue)
-  }
-
   const onSortValue = (sortValue: string) => {
     dispatch(setCardParams({ sortCards: sortValue }))
   }
@@ -33,7 +34,7 @@ export const TableCard = ({ heardTableData, onClickActionTable }: TableCardType)
   const mappedPacks = packData.map(
     ({ user_id, _id, question, updated, created, answer, grade }) => (
       <TableCardRow
-        onClickAction={onClickAction}
+        onClickAction={onClickActionTable}
         key={_id}
         create={created}
         updated={formattedDate(updated)}
@@ -42,7 +43,7 @@ export const TableCard = ({ heardTableData, onClickActionTable }: TableCardType)
         _id={_id}
         answer={answer}
         question={question}
-        grade={grade}
+        grade={grade || 0}
       />
     )
   )

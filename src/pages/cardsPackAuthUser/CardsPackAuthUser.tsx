@@ -9,17 +9,26 @@ import {
 } from 'components'
 import { useModal } from 'components/modal/hooks/useModal'
 import { useAppDispatch } from 'hooks'
+import { EmptyPack } from 'pages'
 import { BasicContentCardPage } from 'pages/cardsPack/components/basicContentCardPage/BasicContentCardPage'
-import { TABLET_HEADER_AUTH_USER } from 'pages/cardsPackAuthUser/optionHeaderTableAuthUser/optionTableAuthUser'
-import { EmptyPack } from 'pages/emptyPack/EmptyPack'
 import { useSelector } from 'react-redux'
-import { selectorIsCloseModal, setDataForFormModalCard } from 'store'
+import { selectorIsCloseModal } from 'store'
 import { BackValueType } from 'types'
+
+import { TABLET_HEADER_AUTH_USER } from './optionHeaderTableAuthUser/optionTableAuthUser'
 
 type CardsPackAuthUserType = {
   countCard: number
   titlePack: string
   idPack: string | undefined
+}
+
+type CardDataModalType = {
+  idCard: string
+  idPack?: string
+  question: string
+  answer: string
+  action: BackValueType
 }
 
 export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAuthUserType) => {
@@ -31,6 +40,13 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
   const [isOpenModalCard, onOpenModalCard, onCloseModalCard] = useModal()
 
   const [actionMenu, setActionMenu] = useState<BackValueType>('')
+  const [cardDataModal, setCardDataModal] = useState<CardDataModalType>({
+    idCard: '',
+    idPack: '',
+    question: '',
+    answer: '',
+    action: '',
+  })
 
   useEffect(() => {
     if (isOpenModalPack && isCloseModal) {
@@ -44,30 +60,34 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
     }
   }, [isCloseModal])
 
-  const onAddCards = () => {}
+  const onAddCards = () => {
+    onOpenModalCard()
+    setCardDataModal({ idCard: '', idPack: idPack, question: '', answer: '', action: 'add' })
+  }
 
   const deletePack = () => {
+    onOpenModalPack()
     setActionMenu('delete')
   }
 
   const editPack = () => {
+    onOpenModalPack()
     setActionMenu('edit')
   }
 
   const learnPack = () => {}
 
-  const onClickActionTable = (idCard: string, question: string, backValue: BackValueType) => {
-    switch (backValue) {
+  const onClickActionTable = (
+    idCard: string,
+    question: string,
+    answer: string,
+    action: BackValueType
+  ) => {
+    switch (action) {
       case 'edit':
       case 'delete':
         onOpenModalCard()
-        dispatch(
-          setDataForFormModalCard({
-            questionCard: question,
-            idCard: idCard,
-            action: backValue,
-          })
-        )
+        setCardDataModal({ idCard, idPack, action, question, answer })
         break
       case 'learn':
         break
@@ -85,22 +105,30 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
             tableHeadData={TABLET_HEADER_AUTH_USER}
             onClickActionTable={onClickActionTable}
           />
-          <Modal onClose={onCloseModalCard} isOpen={isOpenModalCard}>
-            <FormModalCardsPackGrope onClose={onCloseModalCard} isOpenModal={isOpenModalCard} />
-          </Modal>
-          <Modal onClose={onCloseModalPack} isOpen={isOpenModalPack}>
-            <FormModalPackListGrope
-              onClose={onCloseModalPack}
-              isOpenModal={isOpenModalPack}
-              packId={idPack || ''}
-              packName={titlePack}
-              modalAction={actionMenu}
-            />
-          </Modal>
         </>
       ) : (
-        <EmptyPack />
+        <EmptyPack onClickAddCard={onAddCards} />
       )}
+      <Modal onClose={onCloseModalCard} isOpen={isOpenModalCard}>
+        <FormModalCardsPackGrope
+          onClose={onCloseModalCard}
+          isOpenModal={isOpenModalCard}
+          idPack={idPack || ''}
+          idCard={cardDataModal.idCard}
+          answer={cardDataModal.answer}
+          question={cardDataModal.question}
+          action={cardDataModal.action}
+        />
+      </Modal>
+      <Modal onClose={onCloseModalPack} isOpen={isOpenModalPack}>
+        <FormModalPackListGrope
+          onClose={onCloseModalPack}
+          isOpenModal={isOpenModalPack}
+          packId={idPack || ''}
+          packName={titlePack}
+          action={actionMenu}
+        />
+      </Modal>
     </>
   )
 }

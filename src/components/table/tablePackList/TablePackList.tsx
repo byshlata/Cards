@@ -22,10 +22,6 @@ export const TablePackList = ({ headData, onClickTableAction }: TabletHeadType) 
   const packData = useSelector(selectorPacksData)
   const userId = useSelector(selectorAuthUserId)
 
-  const onClickHandler = (idPack: string, backValue: BackValueType, namePack: string) => {
-    onClickTableAction(idPack, backValue, namePack)
-  }
-
   const onSortValue = (sortValue: string) => {
     dispatch(setPackParams({ sortPacks: sortValue }))
   }
@@ -33,7 +29,7 @@ export const TablePackList = ({ headData, onClickTableAction }: TabletHeadType) 
   const mappedPacks = packData.map(({ user_id, _id, user_name, updated, cardsCount, name }) => (
     <TablePackListRow
       authUser_id={userId}
-      onClickAction={onClickHandler}
+      onClickAction={onClickTableAction}
       key={_id}
       pack_id={_id}
       name={name}

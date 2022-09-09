@@ -17,7 +17,12 @@ type TableCardRowType = {
   grade: number
   updated: string
   create: string
-  onClickAction?: (idCard: string, questionCard: string, backValue: BackValueType) => void
+  onClickAction?: (
+    idCard: string,
+    questionCard: string,
+    answer: string,
+    action: BackValueType
+  ) => void
 }
 
 export const TableCardRow = ({
@@ -30,8 +35,8 @@ export const TableCardRow = ({
   _id,
   onClickAction,
 }: TableCardRowType) => {
-  const onClickActionHandle = (backValue: BackValueType) => {
-    onClickAction && onClickAction(_id, question, backValue)
+  const onClickActionHandle = (action: BackValueType) => {
+    onClickAction && onClickAction(_id, question, answer, action)
   }
 
   const isAuthUserTable = authUser_id === user_id

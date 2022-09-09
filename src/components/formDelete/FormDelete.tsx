@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { CustomButton } from 'components/button'
-import { TitleModal } from 'components/titleModal/TitleModal'
+import { CustomButton, TitleModal } from 'components'
 
 import style from './FormDelete.module.sass'
 
