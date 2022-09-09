@@ -6,7 +6,7 @@ import { useAppDispatch } from 'hooks'
 import { CarsPackAllUser } from 'pages/cardsPackAllUser/CarsPackAllUser'
 import { CardsPackAuthUser } from 'pages/cardsPackAuthUser/CardsPackAuthUser'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import {useNavigate, useParams } from 'react-router-dom'
 import {
   getCardData,
   mountingComponent,
@@ -33,7 +33,7 @@ export const CardsPack = () => {
   const userId = useSelector(selectorPackUserId)
   const paramsCard = useSelector(selectorParamsCard)
   const isMounting = useSelector(selectorIsMounting)
-
+  const navigate = useNavigate()
   const param = useParams<'id'>()
 
   const idPack = param.id
@@ -63,7 +63,10 @@ export const CardsPack = () => {
 
   const onAddNewCard = () => {}
 
-  const onLearnCard = () => {}
+  const onLearnCard = (idPack: string) => {
+    //navigate(`${Path.Root}${Path.Learn}${Path.Root}${idPack}`)
+    alert('e')
+  }
 
   const onClickActionTable = (idCard: string, backValue: BackValueType) => {}
 
