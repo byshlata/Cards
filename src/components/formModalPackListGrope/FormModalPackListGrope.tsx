@@ -1,7 +1,6 @@
 import { FormDelete, FormPackEditAndCreate } from 'components'
 import { useAppDispatch } from 'hooks'
-import { addNewPack, editPack } from 'store'
-import { deletePack } from 'store/thunk/pakcThunk'
+import { addNewPack, editPack, deletePack } from 'store'
 import { BackValueType } from 'types'
 
 type FormModalPackListGropeType = {
@@ -9,7 +8,7 @@ type FormModalPackListGropeType = {
   isOpenModal: boolean
   packName: string
   packId: string
-  modalAction: BackValueType
+  action: BackValueType
 }
 
 export const FormModalPackListGrope = ({
@@ -17,7 +16,8 @@ export const FormModalPackListGrope = ({
   isOpenModal,
   packName,
   packId,
-  modalAction,
+
+  action,
 }: FormModalPackListGropeType) => {
   const dispatch = useAppDispatch()
 
@@ -33,7 +33,7 @@ export const FormModalPackListGrope = ({
     dispatch(deletePack(packId))
   }
 
-  if (modalAction === 'edit') {
+  if (action === 'edit') {
     return (
       <FormPackEditAndCreate
         title="Edit pack"
@@ -48,7 +48,7 @@ export const FormModalPackListGrope = ({
     )
   }
 
-  if (modalAction === 'add') {
+  if (action === 'add') {
     return (
       <FormPackEditAndCreate
         title="Add new pack"
@@ -63,7 +63,7 @@ export const FormModalPackListGrope = ({
     )
   }
 
-  if (modalAction === 'delete') {
+  if (action === 'delete') {
     return (
       <FormDelete
         packOrCard="pack"

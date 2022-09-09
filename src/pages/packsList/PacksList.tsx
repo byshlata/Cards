@@ -32,7 +32,6 @@ import { BackValueType } from 'types'
 
 import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
-import {Learn} from "../learn/Learn";
 
 type ModalPackDataType = {
   packName: string
@@ -148,7 +147,7 @@ export const PacksList = () => {
           onClose={onCloseModal}
           isOpenModal={isOpenModal}
           packId={modalPackData.packId}
-          modalAction={modalPackData.action}
+          action={modalPackData.action}
           packName={modalPackData.packName}
         />
       </Modal>

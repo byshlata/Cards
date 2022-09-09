@@ -1,6 +1,6 @@
-import { API_CONFIG } from './config'
-
 import { ResponseLearnType } from 'store/slice/learnSlice'
+
+import { API_CONFIG } from './config'
 
 export const learnAPI = {
   sendGrade: (grade: number, card_id: string) =>

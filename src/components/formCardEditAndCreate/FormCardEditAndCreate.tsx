@@ -37,8 +37,10 @@ export const FormCardEditAndCreate = ({
   const [valueSelector, setValueSelector] = useState('')
 
   useEffect(() => {
-    if (!valueQuestion && !valueAnswer) {
+    if (valueQuestion) {
       resetInputQuestion()
+    }
+    if (valueAnswer) {
       resetInputAnswer()
     }
   }, [isOpenModal])
@@ -67,13 +69,13 @@ export const FormCardEditAndCreate = ({
       </Select>
       <CustomInput
         type="simple"
-        value={valueQuestionInput}
+        value={valueQuestion}
         onChange={onChangeQuestion}
         name={labelQuestionInput}
       />
       <CustomInput
         type="simple"
-        value={valueAnswerInput}
+        value={valueAnswer}
         onChange={onChangeAnswer}
         name={labelAnswerInput}
       />

@@ -13,7 +13,7 @@ export const initialStateCardParams: CardParamsInitialType = {
   isFirstOpen: false,
 }
 
-const resetStateCardParams: CardParamsResetInitialType = {
+export const resetStateCardParams: CardParamsResetInitialType = {
   cardAnswer: '',
   cardQuestion: '',
   sortCards: '',

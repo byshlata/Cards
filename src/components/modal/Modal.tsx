@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, useEffect, useRef } from 'react'
 
-import { CustomButton } from 'components/button'
+import { CustomButton } from 'components'
 import { useModalClass } from 'components/modal/hooks/useModalClass'
 
 import style from './Modal.module.sass'

@@ -10,17 +10,21 @@ export {
   resetStatePackParams,
 } from './slice/packParamsSlice'
 export { packSlice } from './slice/packSlice'
-export { cardParamsSlice, initialStateCardParams } from './slice/cardParamsSlice'
+export {
+  cardParamsSlice,
+  initialStateCardParams,
+  resetStateCardParams,
+} from './slice/cardParamsSlice'
 export { cardSlice } from './slice/cardSlice'
-export { modalCardSlice } from './slice/modalCardSlice'
 
 //thunk
 
 export { sendLetterOnEmail, sendNewPassword } from './thunk/forgotThunk'
 export { RegistrationThunk } from './thunk/registrationThunk'
 export { fetchProfilePage, changeProfileName, logoutUser } from './thunk/profileThunk'
-export { getPackData, addNewPack, editPack, deletePack } from './thunk/pakcThunk'
-export { getCardData, deleteCard } from './thunk/cardThunk'
+export { getPackData, addNewPack, editPack, deletePack } from './thunk/packThunk'
+export { getCardData, deleteCard, editCard, addNewCard } from './thunk/cardThunk'
+export { authThunk } from './thunk/loginThunk'
 
 //selector
 
@@ -76,13 +80,6 @@ export {
 
 export { selectorIsRegistration } from './selectors/selectorsRegistration'
 
-export {
-  selectorIsCloseModalCardAfterRequest,
-  selectorModalCardAction,
-  selectorModalCardId,
-  selectorModalCardQuestion,
-} from './selectors/selectorsModalCard'
-
 //other
 
 export type { AppDispatchType, RootStoreType } from './store'
@@ -125,9 +122,3 @@ export {
 } from './slice/cardParamsSlice'
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'
-
-export {
-  setDataForFormModalCard,
-  closeModalCard,
-  onCloseModalCardAfterRequest,
-} from './slice/modalCardSlice'

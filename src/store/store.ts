@@ -4,7 +4,6 @@ import {
   cardParamsSlice,
   cardSlice,
   forgotSlice,
-  modalCardSlice,
   packParamsSlice,
   packSlice,
   profileSlice,
@@ -24,7 +23,6 @@ export const store = configureStore({
     packParams: packParamsSlice.reducer,
     card: cardSlice.reducer,
     cardParams: cardParamsSlice.reducer,
-    modalCard: modalCardSlice.reducer,
     learn: learnSlice.reducer,
   },
 })

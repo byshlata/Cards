@@ -1,6 +1,14 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { AvatarUser, ButtonBack, CustomButton, FormBody, IconLogoutSvg, Title } from 'components'
+import {
+  AvatarUser,
+  ButtonBack,
+  ChangeLogin,
+  CustomButton,
+  FormBody,
+  IconLogoutSvg,
+  Title,
+} from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
@@ -12,8 +20,6 @@ import {
   selectorUserEmail,
   selectorUserName,
 } from 'store'
-
-import pencil from '../../assets/image/pencil.png'
 
 import style from './Profile.module.sass'
 
@@ -33,20 +39,11 @@ export const Profile = () => {
     }
   }, [])
 
-  const [mode, setMode] = useState<boolean>(false)
-
-  const [value, setValue] = useState<string>(userName)
-
-  const NameChanger = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value)
-  }
-
   const logoutHandle = () => {
     dispatch(logoutUser())
   }
-  const asyncChangeName = () => {
-    dispatch(changeProfileName(value))
-    setMode(false)
+  const changeName = (userLogin: string) => {
+    dispatch(changeProfileName({ name: userLogin }))
   }
 
   return (
@@ -57,21 +54,7 @@ export const Profile = () => {
 
         <AvatarUser />
         <div className={style.changeProfileNameWrapper}>
-          {mode ? (
-            <input value={value} onChange={NameChanger} autoFocus onBlur={asyncChangeName} />
-          ) : (
-            <>
-              <h3 className={style.profileName}>{value}</h3>
-
-              <img
-                src={pencil}
-                alt={'change name'}
-                onClick={() => {
-                  setMode(true)
-                }}
-              />
-            </>
-          )}
+          <ChangeLogin userLogin={userName} onChangeName={changeName} />
         </div>
         <div className={style.profileEmail}>
           <h4>{userEmail}</h4>

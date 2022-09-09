@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 
-import { CustomInput } from 'components/index'
+import { CustomInput } from 'components'
 import { useCustomInput } from 'components/input/customInput/hooks'
-import style from 'components/search/Search.module.sass'
 import { useDebounce } from 'hooks'
-import { useSearchParams } from 'react-router-dom'
+
+import style from './Search.module.sass'
 
 type SearchType = {
   error: string

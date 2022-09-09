@@ -45,7 +45,7 @@ export const FilterContainer = () => {
     dispatch(unmountingComponent())
   }
 
-  const errorSearchValue = totalPack ? '' : 'Cards not found'
+  const errorSearchValue = totalPack ? '' : !packName ? '' : 'Cards not found'
 
   return (
     <>

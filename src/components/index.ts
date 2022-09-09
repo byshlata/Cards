@@ -87,3 +87,7 @@ export { FormModalCardsPackGrope } from './formModalCardsPackGrope/FormModalCard
 export { FormDelete } from './formDelete/FormDelete'
 
 export { Grade } from './grade/Grade'
+
+export { ChangeLogin } from './changeLogin/ChangeLogin'
+
+export { FormCardEditAndCreate } from './formCardEditAndCreate/FormCardEditAndCreate'

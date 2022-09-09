@@ -7,6 +7,9 @@ import {
   RootStoreType,
   setPackData,
   unmountingComponent,
+  getCardData,
+  removeCardData,
+  removeCardParams,
 } from 'store'
 import { AddPackType, EditPackType, PackParamsType } from 'types'
 import { isComparisonOfTwoObjects, setErrorResponse } from 'utils'
@@ -29,7 +32,7 @@ export const getPackData = createAsyncThunk(
 )
 
 export const addNewPack = createAsyncThunk(
-  'modalSlice',
+  'packSlice/addNewPack',
   async (payload: AddPackType, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
@@ -53,7 +56,7 @@ export const addNewPack = createAsyncThunk(
 )
 
 export const editPack = createAsyncThunk(
-  'modalSlice',
+  'packSlice/editPack',
   async (payload: EditPackType, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
@@ -62,8 +65,13 @@ export const editPack = createAsyncThunk(
 
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
-
-      dispatch(getPackData(packParamsNow))
+      const cardsParamsNow = state.cardParams
+      const isOpenCardsPage = state.card.cards.length !== 0
+      if (isOpenCardsPage) {
+        dispatch(getCardData(cardsParamsNow))
+      } else {
+        dispatch(getPackData(packParamsNow))
+      }
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
@@ -82,6 +90,11 @@ export const deletePack = createAsyncThunk(
 
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
+      const isOpenCardsPage = state.card.cards.length !== 0
+      if (isOpenCardsPage) {
+        dispatch(removeCardData())
+        dispatch(removeCardParams())
+      }
       dispatch(getPackData(packParamsNow))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
