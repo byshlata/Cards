@@ -10,11 +10,11 @@ import {ButtonBack} from "../../components";
 import {Path} from "../../enums";
 import {
 
-  selectorCardData,
+  selectorCardData, setCardParams,
 
 } from "../../store";
 import {useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 export const Learn = () => {
   const dispatch = useAppDispatch()
@@ -25,11 +25,16 @@ export const Learn = () => {
     setIsShow(true)
   }
   const cardsX = useSelector(selectorCardData)
+  
 
   const param = useParams<'id'>()
+  const packId = param.id
+  //const navigate = useNavigate()
 
   const idPack = param.id
-
+  useEffect(() => {
+    dispatch(setCardParams({ cardsPack_id: idPack }))
+  }, [])
 
   useEffect(()=>{
     //dispatch(getCardData(paramsCard))
