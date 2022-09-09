@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 import { PackParamsInitialType, PackParamsType } from 'types'
 
 export const initialStatePackParams: PackParamsInitialType = {
@@ -13,6 +12,17 @@ export const initialStatePackParams: PackParamsInitialType = {
   isFirstOpen: false,
 }
 
+export const resetStatePackParams: PackParamsInitialType = {
+  user_id: '',
+  max: 110,
+  min: 0,
+  page: 1,
+  pageCount: 8,
+  sortPacks: '',
+  packName: '',
+  isFirstOpen: true,
+}
+
 export const packParamsSlice = createSlice({
   name: 'packParamsSlice',
   initialState: initialStatePackParams,
@@ -21,15 +31,21 @@ export const packParamsSlice = createSlice({
       ...state,
       ...action.payload,
     }),
-    setIsFirstOpenPage: state => {
+    setIsFirstOpenPage: (state) => {
       state.isFirstOpen = true
     },
-    removeIsFirstOpenPage: state => {
+    removeIsFirstOpenPage: (state) => {
       state.isFirstOpen = false
     },
     removePackParams: () => initialStatePackParams,
+    resetPackParams: () => resetStatePackParams,
   },
 })
 
-export const { setPackParams, removePackParams, removeIsFirstOpenPage, setIsFirstOpenPage } =
-  packParamsSlice.actions
+export const {
+  setPackParams,
+  removePackParams,
+  resetPackParams,
+  removeIsFirstOpenPage,
+  setIsFirstOpenPage,
+} = packParamsSlice.actions

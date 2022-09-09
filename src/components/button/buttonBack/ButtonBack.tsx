@@ -1,9 +1,9 @@
 import React, { FC, ReactNode } from 'react'
 
+import { CustomButton, IconArrowSvg } from 'components'
 import { NavLink } from 'react-router-dom'
 
-import { CustomButton } from 'components/button/customButton/CustomButton'
-import { IconArrowSvg } from 'components/iconSVG/iconArrowSVG/IconArrowSVG'
+import style from './ButtonBack.module.sass'
 
 type ButtonBackType = {
   disabled?: boolean
@@ -13,7 +13,7 @@ type ButtonBackType = {
 
 export const ButtonBack: FC<ButtonBackType> = ({ disabled, link, children }) => {
   return (
-    <NavLink to={link}>
+    <NavLink className={style.buttonBackPacksWrapper} to={link}>
       <CustomButton color="link" disabled={disabled}>
         <IconArrowSvg />
         {children}

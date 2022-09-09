@@ -1,11 +1,10 @@
 import React, { memo } from 'react'
 
+import { IconSortElementSvg } from 'components/iconSVG/iconSortElementSVG/IconSortElementSVG'
+import { SortParamElementType, SortParamType } from 'types'
+
 import { useSortElement } from './hooks/useSortElement'
 import style from './SortElement.module.sass'
-
-import { IconSortElementSvg } from 'components/iconSVG/iconSortElementSVG/IconSortElementSVG'
-import { TableHeadElementType } from 'components/table/Table'
-import { SortParamElementType, SortParamType } from 'types'
 
 export type SortElementType = {
   onSort: (

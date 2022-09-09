@@ -8,5 +8,6 @@ export enum PathAPI {
   NewPassword = '/set-new-password',
   Pack = '/pack',
   Cards = '/cards',
-  Grade = '/grade'
+  Card = '/card',
+  Grade = '/grade',
 }

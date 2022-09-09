@@ -4,6 +4,7 @@ export type CustomInputType = {
   name?: string
   type: InputType
   error?: string
+  className?: string
   disabled?: boolean
   value: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void

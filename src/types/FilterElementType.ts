@@ -1,6 +1,6 @@
-import { ReactElement } from 'react'
+import { ReactNode } from 'react'
 
 export type FilterElementType = {
-  title: string
-  element: ReactElement
+  title?: string
+  children?: ReactNode
 }

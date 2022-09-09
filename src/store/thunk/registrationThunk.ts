@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-
 import { registrationAPI } from 'api'
 import { isSpinAppLoading, registrationUser } from 'store'
 import { RegistrationType } from 'types'

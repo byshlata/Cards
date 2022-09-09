@@ -1,41 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { useSelector } from 'react-redux'
-
-import { CustomInput } from 'components'
+import { CustomInput } from 'components/index'
 import { useCustomInput } from 'components/input/customInput/hooks'
 import style from 'components/search/Search.module.sass'
-import { useAppDispatch, useDebounce } from 'hooks'
-import { selectorCardPacksTotalCount, selectorIsLoading, setPackParams } from 'store'
-import { selectorPackName } from 'store/selectors/selectors'
+import { useDebounce } from 'hooks'
+import { useSearchParams } from 'react-router-dom'
 
 type SearchType = {
+  error: string
+  disabled: boolean
   searchValue: string
   onChangeDebounceValue: (debounceValue: string) => void
 }
 
-export const Search = ({ searchValue, onChangeDebounceValue }: SearchType) => {
-  const disabled = useSelector(selectorIsLoading)
-  const countPage = useSelector(selectorCardPacksTotalCount)
+export const Search = ({ searchValue, onChangeDebounceValue, disabled, error }: SearchType) => {
+  const [value, onChange] = useCustomInput(searchValue)
 
-  const [error, setError] = useState('')
-
-  const { value, onChange } = useCustomInput(searchValue)
   const debounceValue = useDebounce(value)
 
   useEffect(() => {
-    if (value === debounceValue) {
+    if (searchValue !== debounceValue) {
       onChangeDebounceValue(debounceValue)
     }
   }, [debounceValue])
-
-  useEffect(() => {
-    if (countPage || value === '') {
-      setError('')
-    } else {
-      setError('Cards not found')
-    }
-  }, [countPage])
 
   return (
     <div className={style.searchWrapper}>

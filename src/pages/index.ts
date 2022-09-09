@@ -10,4 +10,10 @@ export { Registration } from './registration/Registration'
 
 export { Routers } from './Routes'
 
-export { Pack } from './pack/Pack'
+export { PacksList } from './packsList/PacksList'
+
+export { CardsPack } from 'pages/cardsPack/CardsPack'
+
+export { CardsPackAuthUser } from './cardsPackAuthUser/CardsPackAuthUser'
+
+export { CarsPackAllUser } from './cardsPackAllUser/CarsPackAllUser'

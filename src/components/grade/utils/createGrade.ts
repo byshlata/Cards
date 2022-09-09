@@ -13,6 +13,7 @@ export const createGrade = (rating: number, starGrade: StarGradeType) => {
   if (differenceBetweenNumbers > 0) {
     emptyArray.push(starGrade.halfStar)
   }
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   while (emptyArray.length < 5) {
     emptyArray.push(starGrade.emptyStar)
   }

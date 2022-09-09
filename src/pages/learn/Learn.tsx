@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
-import { useSelector } from 'react-redux'
+import { CustomRadio } from 'components/customRadio/CustomRadio'
+import { useAppDispatch } from 'hooks'
 
-import { useAppDispatch } from '../../hooks'
 import { getLearnData } from '../../store/thunk/LearnThunk'
 
 import style from './Learn.module.sass'
+import {ButtonBack} from "../../components";
+import {Path} from "../../enums";
+import {
 
-import { CustomRadio } from 'components/customRadio/CustomRadio'
-import { setCartGrade } from 'store/slice/learnSlice'
+  selectorCardData, setCardParams,
+
+} from "../../store";
+import {useSelector} from "react-redux";
+import {useNavigate, useParams} from "react-router-dom";
 
 export const Learn = () => {
   const dispatch = useAppDispatch()
@@ -18,18 +24,22 @@ export const Learn = () => {
   const answerShower = () => {
     setIsShow(true)
   }
-  //const cards = useSelector=> cards
-type testType = {
-  answer: string
-  question: string
-  cardsPack_id: string
-  grade: number
-  shots: number,
-  user_id: string
-  created: string
-  updated: string
-  _id: string
-}
+  const cardsX = useSelector(selectorCardData)
+  
+
+  const param = useParams<'id'>()
+  const packId = param.id
+  //const navigate = useNavigate()
+
+  const idPack = param.id
+  useEffect(() => {
+    dispatch(setCardParams({ cardsPack_id: idPack }))
+  }, [])
+
+  useEffect(()=>{
+    //dispatch(getCardData(paramsCard))
+  },[])
+
   const testCards = [
     {
       answer: 'no answer',
@@ -40,7 +50,7 @@ type testType = {
       user_id: '142151531535151',
       created: '2020-05-13T11:05:44.867Z',
       updated: '2020-05-13T11:05:44.867Z',
-      _id: '631756f25fc57f2a086f51f5',
+      _id: '631756fd5fc57f2a086f51f7',
     },
     {
       answer: 'answer1',
@@ -51,7 +61,7 @@ type testType = {
       user_id: '142151531535151',
       created: '2020-05-13T11:05:44.867Z',
       updated: '2020-05-13T11:05:44.867Z',
-      _id: '631756fb5fc57f2a086f51f6',
+      _id: '5ebbd48876810f1ad0e7ece4',
     },
     {
       answer: '333',
@@ -62,37 +72,15 @@ type testType = {
       user_id: '142151531535151',
       created: '2020-05-13T11:05:44.867Z',
       updated: '2020-05-13T11:05:44.867Z',
-      _id: '631756fd5fc57f2a086f51f7',
-    },
-    {
-      answer: '1+1',
-      question: '1+1',
-      cardsPack_id: '5eb6a2f72f849402d46c6ac4',
-      grade: 1.987525071790364,
-      shots: 1,
-      user_id: '142151531535151',
-      created: '2020-05-13T11:05:44.867Z',
-      updated: '2020-05-13T11:05:44.867Z',
-      _id: '63199db446b5d30818fd1f1c',
+      _id: '5ebbd48876810f1ad0e7ece5',
     },
   ]
- 
+  const [cards, setCards] = useState(testCards[0])
+const [cardsTwo, setCardsTwo] = useState(cardsX)
+  console.log(cardsTwo)
 
-  const inputValues2 = ['Did not know', 'Forgot', 'A lot of thought', 'Confused', 'Knew the answer']
-
- const cardsRandom = (arr: testType[]):testType =>{
-   let a = []
-   let c:number[] = arr.map((a)=>+(60-a.grade*10).toFixed(1))
-   for(let i=0; i<c.length; i++){
-     for(let j=0; j<c[i]; j++)
-       a.push(arr[i])
-   }
-   let b = a.sort((a,b)=>a.grade-b.grade)
-   return b[Math.floor(Math.random() *b.length)]
- }
-  const [cards, setCards] = useState(cardsRandom(testCards))
   const cardChanger = (id: string) => {
-    setCards(cardsRandom(testCards))
+    setCards(testCards[2])
 
     const convertValueToGrade = (value: string): number => {
       let grade
@@ -121,6 +109,9 @@ type testType = {
   }
 
   return (
+      <>
+        <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
+
     <div className={style.learnWrapper}>
       <div className={style.question}>
         <span>Question:</span>
@@ -161,5 +152,6 @@ type testType = {
         </div>
       )}
     </div>
+      </>
   )
 }

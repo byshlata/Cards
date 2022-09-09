@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from 'react'
 
 import { Slider } from 'antd'
+import { CustomButtonBox } from 'components'
+import { useDebounce } from 'hooks'
 import { useSelector } from 'react-redux'
+import { initialStatePackParams, selectorIsLoading } from 'store'
+import 'antd/dist/antd.css'
+import { maxValue, minValue } from 'utils'
 
 import style from './CustomSlider.module.sass'
 
-import { CustomButtonBox } from 'components'
-import { useAppDispatch, useDebounce } from 'hooks'
-import {
-  initialStatePackParams,
-  selectorIsLoading,
-  selectorMaxCardsOnPack,
-  selectorMinCardsOnPack,
-  setPackParams,
-} from 'store'
-import { maxValue, minValue } from 'utils'
-import 'antd/dist/antd.css'
+type CustomSliderType = {
+  onChange: (max: number, min: number) => void
+  maxCards: number
+  minCards: number
+}
 
-export const CustomSlider = () => {
-  const dispatch = useAppDispatch()
-
+export const CustomSlider = ({ onChange, minCards, maxCards }: CustomSliderType) => {
   const disabled = useSelector(selectorIsLoading)
-  const maxCards = useSelector(selectorMaxCardsOnPack)
-  const minCards = useSelector(selectorMinCardsOnPack)
 
   const [value, setValue] = useState([minCards, maxCards])
 
@@ -38,17 +33,18 @@ export const CustomSlider = () => {
     }
   }
 
-  const OnChangeValueSlider = (value: [number, number]) => {
+  const onChangeValueSlider = (value: [number, number]) => {
     setValue(value)
   }
 
   const debounceValue = useDebounce(value)
 
   useEffect(() => {
-    const max = maxValue(debounceValue)
-    const min = minValue(debounceValue)
-
-    dispatch(setPackParams({ max, min }))
+    if (debounceValue[0] !== minCards || debounceValue[1] !== maxCards) {
+      const max = maxValue(debounceValue)
+      const min = minValue(debounceValue)
+      onChange(max, min)
+    }
   }, [debounceValue])
 
   return (
@@ -73,7 +69,7 @@ export const CustomSlider = () => {
           max={initialStatePackParams.max}
           min={initialStatePackParams.min}
           value={[value[0], value[1]]}
-          onChange={OnChangeValueSlider}
+          onChange={onChangeValueSlider}
         />
       </div>
 

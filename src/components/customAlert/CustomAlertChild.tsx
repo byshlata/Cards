@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 
+import { CustomButton } from 'components'
+import { useAppDispatch } from 'hooks'
+import { removeErrorMessage } from 'store'
+
 import style from './CustomAlertChild.module.sass'
 import { useAlertStyle } from './hooks/useClassAlertElement'
 import { SuccessIcon, ErrorIcon } from './icon'
 import { CustomAlertChildType, IconAlertType } from './types'
-
-import { CustomButton } from 'components'
-import { useAppDispatch } from 'hooks'
-import { removeErrorMessage } from 'store'
 
 const ICON: IconAlertType = {
   success: <SuccessIcon />,
@@ -39,7 +39,7 @@ export const CustomAlertChild = ({ message, severity, onClose, id }: CustomAlert
     <div className={classAlert}>
       <div>{iconElement}</div>
       <div>
-        <h6 className={style.title}>Success</h6>
+        <h6 className={style.title}>{severity}</h6>
         {message}
       </div>
       <div style={{ width: '16px' }}>

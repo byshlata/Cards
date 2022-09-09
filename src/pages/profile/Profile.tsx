@@ -1,26 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
-import { useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-
-import logout from '../../assets/image/logout.png'
-import { EmptyPack } from '../../components/emptyPack/EmptyPack'
-import { Grade } from '../../components/grade/Grade'
-import { TableGrade } from '../../components/table/tableGrade/TableGrade'
-
-import style from './Profile.module.sass'
-import { UserName } from './UserName'
-
-import { AvatarUser, ButtonBack, FormBody, Title } from 'components'
+import { AvatarUser, ButtonBack, CustomButton, FormBody, IconLogoutSvg, Title } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
-import { selectorUserEmail, logoutUser, selectorUserId } from 'store'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import {
+  changeProfileName,
+  logoutUser,
+  selectorAuthUserId,
+  selectorUserEmail,
+  selectorUserName,
+} from 'store'
+
+import pencil from '../../assets/image/pencil.png'
+
+import style from './Profile.module.sass'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-
+  const userName = useSelector(selectorUserName)
   const userEmail = useSelector(selectorUserEmail)
-  const realUserId = useSelector(selectorUserId)
+  const realUserId = useSelector(selectorAuthUserId)
 
   const navigate = useNavigate()
 
@@ -32,36 +33,56 @@ export const Profile = () => {
     }
   }, [])
 
+  const [mode, setMode] = useState<boolean>(false)
+
+  const [value, setValue] = useState<string>(userName)
+
+  const NameChanger = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value)
+  }
+
   const logoutHandle = () => {
     dispatch(logoutUser())
+  }
+  const asyncChangeName = () => {
+    dispatch(changeProfileName(value))
+    setMode(false)
   }
 
   return (
     <>
-      <div className={style.exitArrow}>
-        <div className={style.buttonBackPacksWrapper}>
-          <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
-        </div>
-      </div>
-
+      <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
       <FormBody width={415} height={410}>
         <Title text="Personal Information" />
 
         <AvatarUser />
-        <UserName />
+        <div className={style.changeProfileNameWrapper}>
+          {mode ? (
+            <input value={value} onChange={NameChanger} autoFocus onBlur={asyncChangeName} />
+          ) : (
+            <>
+              <h3 className={style.profileName}>{value}</h3>
+
+              <img
+                src={pencil}
+                alt={'change name'}
+                onClick={() => {
+                  setMode(true)
+                }}
+              />
+            </>
+          )}
+        </div>
         <div className={style.profileEmail}>
           <h4>{userEmail}</h4>
         </div>
         <div className={style.buttonLogout} onClick={logoutHandle}>
-          <img src={logout} alt={'log out'} />
-          Log Out
+          <CustomButton color="secondary">
+            <IconLogoutSvg />
+            Log Out
+          </CustomButton>
         </div>
-        <Grade rating={1.1} />
-        <Grade rating={2.8} />
-        <Grade rating={3.0} />
-        <Grade rating={4.8} />
       </FormBody>
-      <EmptyPack />
     </>
   )
 }

@@ -7,3 +7,5 @@ export { maxValue } from './maxValue'
 export { minValue } from './minValue'
 
 export { formattedDate } from './formattedDate'
+
+export { isComparisonOfTwoObjects } from './isComparisonOfTwoObjects'

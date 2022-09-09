@@ -1,17 +1,16 @@
 import React, { useCallback, memo } from 'react'
 
+import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { Path } from 'enums'
 import { useFormik } from 'formik'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { selectorIsLoading, sendLetterOnEmail } from 'store'
+import { createErrorSchema } from 'utils'
 import * as yup from 'yup'
 
 import style from './ForgotEmail.module.sass'
-
-import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { Path } from 'enums'
-import { useAppDispatch } from 'hooks'
-import { selectorIsLoading, sendLetterOnEmail } from 'store'
-import { createErrorSchema } from 'utils'
 
 const name = 'Aliaksandr'
 
@@ -29,7 +28,7 @@ export const ForgotEmail = memo(() => {
       email: '',
     },
     validationSchema: schema,
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(sendLetterOnEmail({ email: values.email, name }))
       formik.resetForm({
         values: { email: '' },
@@ -66,19 +65,20 @@ export const ForgotEmail = memo(() => {
             Send Instructions
           </CustomButton>
         </div>
+        <div>
+          <div className={style.wrapperForm}>
+            <p className={style.textBlockQuestion}>Did you remember your password?</p>
+            <CustomButton
+              type="button"
+              color="link"
+              onClick={onNavigateToLoginPage}
+              disabled={isLoading}
+            >
+              Try logging in
+            </CustomButton>
+          </div>
+        </div>
       </form>
-
-      <div>
-        <p className={style.textBlockQuestion}>Did you remember your password?</p>
-        <CustomButton
-          type="button"
-          color="link"
-          onClick={onNavigateToLoginPage}
-          disabled={isLoading}
-        >
-          Try logging in
-        </CustomButton>
-      </div>
     </FormBody>
   )
 })

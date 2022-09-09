@@ -1,21 +1,27 @@
 import React from 'react'
 
-import style from 'components/button/buttonResetFilter/ButtomResetFilter.module.sass'
 import { CustomButtonBox, IconFilterSvg } from 'components/index'
-import { useAppDispatch } from 'hooks'
-import { removePackData } from 'store'
 
-export const ButtonResetFilter = () => {
-  const dispatch = useAppDispatch()
+import style from './ButtomResetFilter.module.sass'
 
-  const onResetFilter = () => {
-    // dispatch(removePackData())
-    alert('yo')
+type buttonResetFilterType = {
+  onResetFilter: () => void
+  disabled: boolean
+}
+
+export const ButtonResetFilter = ({ onResetFilter, disabled }: buttonResetFilterType) => {
+  const onResetFilterHandle = () => {
+    onResetFilter()
   }
 
   return (
     <div className={style.buttonWrapper}>
-      <CustomButtonBox color="secondary" borderRadius="2px" onClick={onResetFilter}>
+      <CustomButtonBox
+        color="secondary"
+        borderRadius="2px"
+        onClick={onResetFilterHandle}
+        disabled={disabled}
+      >
         <IconFilterSvg />
       </CustomButtonBox>
     </div>

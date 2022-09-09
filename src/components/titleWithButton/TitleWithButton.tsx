@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react'
 
-import style from './TitleWithButton.module.sass'
+import { CustomButton, Modal, Title } from 'components'
 
-import { CustomButton, Title } from 'components'
+import style from './TitleWithButton.module.sass'
 
 type TitleWithButtonType = {
   titleText: string
-  element?: ReactElement
+  children?: ReactElement
   buttonText: string
   onClick: () => void
 }
@@ -14,14 +14,14 @@ type TitleWithButtonType = {
 export const TitleWithButton = ({
   buttonText,
   titleText,
-  element,
+  children,
   onClick,
 }: TitleWithButtonType) => {
   return (
     <div className={style.titleWithButtonWrapper}>
-      <div>
+      <div className={style.titleMenuWrapper}>
         <Title text={titleText} />
-        {element}
+        {children}
       </div>
       <div className={style.buttonWrapper}>
         <CustomButton color="primary" onClick={onClick}>

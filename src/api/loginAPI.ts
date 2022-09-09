@@ -1,9 +1,8 @@
 import { AxiosResponse } from 'axios'
-
-import { API_CONFIG } from './config'
-
 import { PathAPI } from 'enums'
 import { LoginOutResponseType, LoginType, UserResponseType } from 'types'
+
+import { API_CONFIG } from './config'
 
 export const loginAPI = {
   loginIn: async ({ password, rememberMe, email }: LoginType) => {

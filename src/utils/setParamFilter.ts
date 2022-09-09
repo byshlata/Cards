@@ -1,5 +1,4 @@
-import { TableHeadElementType } from 'components/table/Table'
-import { SortParamElementType, SortParamType } from 'types'
+import { SortParamElementType, SortParamType, TableHeadElementType } from 'types'
 
 export const setParamFilter = (
   headData: TableHeadElementType[],
@@ -12,10 +11,10 @@ export const setParamFilter = (
   for (let i = 0; i < headData.length; i += 1) {
     if (headData[i].sortParam === filterActive) {
       index += 1
-      headDataOff.push(headData[i])
+      headDataOff.push({ ...headData[i] })
       headDataOff[i].stateSortElement = stateSortElement
     } else {
-      headDataOff.push(headData[i])
+      headDataOff.push({ ...headData[i] })
       headDataOff[i].stateSortElement = 'off'
     }
   }

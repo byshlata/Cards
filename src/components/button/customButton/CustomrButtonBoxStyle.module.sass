@@ -3,9 +3,10 @@
 $colorBorder: rgba(217, 217, 217, 1)
 
 .primaryButton, .secondaryButton, .dangerButton, .disabledButton, .linkButton, .disabledButtonLink
+  font-family: Montserrat, serif
   letter-spacing: 1px
   display: flex
-  justify-content: center
+  justify-content: space-around
   align-items: center
   font-size: 1rem
   padding: 5px
@@ -14,6 +15,8 @@ $colorBorder: rgba(217, 217, 217, 1)
   border-radius: 2px
   cursor: pointer
   margin: 0 auto
+  white-space: nowrap
+
   +buttonOption($colorPrimary)
 
 .primaryButton
@@ -50,6 +53,7 @@ $colorBorder: rgba(217, 217, 217, 1)
     cursor: not-allowed
 
 .linkButton
+  font-weight: 600
   background-color: inherit
   border: none
   box-shadow: none

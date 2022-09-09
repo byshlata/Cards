@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-import { useSelector } from 'react-redux'
+import { CustomButtonBox } from 'components'
 
-import style from 'components/button/buttonChoiceGroupe/ButtonChoiceGrope.module.sass'
-import { CustomButtonBox } from 'components/index'
-import { useAppDispatch } from 'hooks'
-import { selectorIsLoading, selectorUserId, selectorUserParam_id, setPackParams } from 'store'
+import style from './ButtonChoiceGrope.module.sass'
 
-export const ButtonChoiceGrope = () => {
-  const dispatch = useAppDispatch()
+type ButtonChoiceGropeType = {
+  onClickButton: (value: string) => void
+  disabled: boolean
+  authUserId: string
+  userIdParam: string
+}
 
-  const disabled = useSelector(selectorIsLoading)
-  const idUser = useSelector(selectorUserId)
-
-  const [isUserCards, setIsUserCards] = useState<boolean>(false)
+export const ButtonChoiceGrope = ({
+  onClickButton,
+  disabled,
+  authUserId,
+  userIdParam,
+}: ButtonChoiceGropeType) => {
+  const [isUserCards, setIsUserCards] = useState<boolean>(!!userIdParam)
 
   const onClickUserButton = () => {
     if (!isUserCards) {
       setIsUserCards(true)
     }
+    onClickButton(authUserId)
   }
 
   const onClickAllButton = () => {
     if (isUserCards) {
       setIsUserCards(false)
     }
+    onClickButton('')
   }
-
-  useEffect(() => {
-    if (isUserCards) {
-      dispatch(setPackParams({ user_id: idUser }))
-    } else {
-      dispatch(setPackParams({ user_id: '' }))
-    }
-  }, [isUserCards])
 
   return (
     <div className={style.buttonWrapper}>

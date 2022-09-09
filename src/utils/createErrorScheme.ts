@@ -1,8 +1,7 @@
+import { OptionValue } from 'enums'
 import * as yup from 'yup'
 import { RequiredStringSchema } from 'yup/lib/string'
 import { AnyObject } from 'yup/lib/types'
-
-import { OptionValue } from 'enums'
 
 type KeySchemeType = keyof SchemaElementType
 
@@ -16,8 +15,8 @@ export const createErrorSchema = (params: KeySchemeType[]) => {
   const schemaElement: SchemaElementType = {
     email: yup
       .string()
-      .email('Please enter a valid email format !')
-      .required('Email is required please !'),
+      .email('Please enter a valid email format!')
+      .required('Email is required please!'),
 
     password: yup
       .string()
@@ -31,7 +30,7 @@ export const createErrorSchema = (params: KeySchemeType[]) => {
 
   const schema: SchemaElementType = {}
 
-  params.forEach(element => {
+  params.forEach((element) => {
     if (element in schemaElement) {
       // @ts-ignore
       schema[element] = schemaElement[element]

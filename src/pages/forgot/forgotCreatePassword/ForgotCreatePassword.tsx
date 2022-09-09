@@ -1,16 +1,17 @@
 import React from 'react'
 
-import { useFormik } from 'formik'
-import { useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-import * as yup from 'yup'
-
 import { CustomButton, CustomInput, FormBody, Title } from 'components'
 import { Path } from 'enums'
+import { useFormik } from 'formik'
 import { useAppDispatch } from 'hooks'
 import style from 'pages/forgot/forgotEmail/ForgotEmail.module.sass'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 import { removeEmail, selectorIsLoading, selectorIsPasswordSend, sendNewPassword } from 'store'
 import { createErrorSchema } from 'utils'
+import * as yup from 'yup'
+
+const schema = yup.object().shape(createErrorSchema(['password']))
 
 export const ForgotCreatePassword = () => {
   const dispatch = useAppDispatch()
@@ -27,14 +28,12 @@ export const ForgotCreatePassword = () => {
 
   const param = useParams<'token'>()
 
-  const schema = yup.object().shape(createErrorSchema(['password']))
-
   const formik = useFormik({
     initialValues: {
       password: '',
     },
     validationSchema: schema,
-    onSubmit: values => {
+    onSubmit: (values) => {
       if (param.token) {
         dispatch(sendNewPassword({ password: values.password, resetPasswordToken: param.token }))
         formik.resetForm({

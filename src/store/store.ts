@@ -1,9 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
-
-import { learnSlice } from './slice/learnSlice'
-import { profileSlice } from './slice/profileSlice'
-
-import { appSlice, forgotSlice, packParamsSlice, packSlice, registrationSlice } from 'store'
+import {
+  appSlice,
+  cardParamsSlice,
+  cardSlice,
+  forgotSlice,
+  modalCardSlice,
+  packParamsSlice,
+  packSlice,
+  profileSlice,
+  registrationSlice,
+} from 'store'
+import { learnSlice } from 'store/slice/learnSlice'
+import { resetSlice } from 'store/slice/resetSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,8 +19,12 @@ export const store = configureStore({
     forgot: forgotSlice.reducer,
     registration: registrationSlice.reducer,
     profile: profileSlice.reducer,
+    reset: resetSlice.reducer,
     pack: packSlice.reducer,
     packParams: packParamsSlice.reducer,
+    card: cardSlice.reducer,
+    cardParams: cardParamsSlice.reducer,
+    modalCard: modalCardSlice.reducer,
     learn: learnSlice.reducer,
   },
 })
@@ -20,6 +32,3 @@ export const store = configureStore({
 export type RootStoreType = ReturnType<typeof store.getState>
 
 export type AppDispatchType = typeof store.dispatch
-
-// @ts-ignore
-window.store = store

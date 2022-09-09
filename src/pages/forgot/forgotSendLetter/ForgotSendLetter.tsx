@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-
-import style from './ForgotSendLetter.module.sass'
-
 import { CustomButton, FormBody, LetterSendIcon, Title } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { selectorIsLoading, selectorEmail, removeEmail } from 'store'
+
+import style from './ForgotSendLetter.module.sass'
 
 const COUNT_VAlUE = 5
 const CONST_DELAY = 1000
@@ -48,7 +47,7 @@ export const ForgotSendLetter = () => {
   }
 
   return (
-    <FormBody width={410} height={410}>
+    <FormBody width={410} height={450}>
       <Title text="Check Email" />
       <div className={style.iconSendWrapper}>
         <LetterSendIcon width={110} />

@@ -1,18 +1,17 @@
 import React from 'react'
 
+import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { Path } from 'enums'
 import { useFormik } from 'formik'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { selectorIsAuth, selectorIsLoading, selectorAuthUserId } from 'store'
+import { authThunk } from 'store/thunk/loginThunk'
+import { createErrorSchema } from 'utils/createErrorScheme'
 import * as yup from 'yup'
 
 import style from './Login.module.sass'
-
-import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { Path } from 'enums'
-import { useAppDispatch } from 'hooks'
-import { selectorIsAuth, selectorIsLoading, selectorUserId } from 'store'
-import { authThunk } from 'store/thunk/loginThunk'
-import { createErrorSchema } from 'utils/createErrorScheme'
 
 const schema = yup.object().shape(createErrorSchema(['email', 'password']))
 
@@ -21,7 +20,7 @@ export const Login = () => {
 
   const isLoading = useSelector(selectorIsLoading)
   const isAuth = useSelector(selectorIsAuth)
-  const userId = useSelector(selectorUserId)
+  const userId = useSelector(selectorAuthUserId)
 
   const navigate = useNavigate()
 
@@ -33,7 +32,7 @@ export const Login = () => {
     },
     validateOnBlur: true,
     validationSchema: schema,
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(authThunk(values))
       formik.resetForm({
         values: { email: '', password: '', rememberMe: false },
