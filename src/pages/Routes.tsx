@@ -43,7 +43,7 @@ export const Routers = () => {
       />
       <Route path={`${Path.Register}`} element={<Registration />} />
       <Route path={`${Path.Login}`} element={isAuth ? PROFILE_PAGE : <Login />} />
-        <Route path={`${Path.Learn}`} element={<Learn />} />
+        <Route path={`${Path.Pack}${Path.Root}${Path.Id}${Path.Root}${Path.Learn}`} element={<Learn />} />
     </Routes>
   )
 }

@@ -11,5 +11,5 @@ export enum Path {
   Other = '*',
   Id = ':id',
   Token = ':token',
-  Learn = '/learn',
+  Learn = 'learn',
 }

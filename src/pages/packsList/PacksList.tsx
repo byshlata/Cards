@@ -109,7 +109,7 @@ export const PacksList = () => {
 
         break
       case 'learn':
-        navigate(`${Path.Learn}`)
+        navigate(`${Path.Pack}${Path.Root}${idPack}${Path.Root}${Path.Learn}`)
         break
       case 'name':
         navigate(`${Path.Pack}${Path.Root}${idPack}`)
