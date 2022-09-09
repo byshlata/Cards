@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
 import { CustomRadio } from 'components/customRadio/CustomRadio'
 import { useAppDispatch } from 'hooks'
 import { getLearnData } from 'store/thunk/learnThunk'
 
 import style from './Learn.module.sass'
+import {ButtonBack} from "../../components";
+import {Path} from "../../enums";
+import {
+
+  selectorCardData, setCardParams,
+
+} from "../../store";
+import {useSelector} from "react-redux";
+import {useNavigate, useParams} from "react-router-dom";
 
 export const Learn = () => {
   const dispatch = useAppDispatch()
@@ -14,7 +23,21 @@ export const Learn = () => {
   const answerShower = () => {
     setIsShow(true)
   }
-  //const cards = useSelector=> cards
+  const cardsX = useSelector(selectorCardData)
+  
+
+  const param = useParams<'id'>()
+  const packId = param.id
+  //const navigate = useNavigate()
+
+  const idPack = param.id
+  useEffect(() => {
+    dispatch(setCardParams({ cardsPack_id: idPack }))
+  }, [])
+
+  useEffect(()=>{
+    //dispatch(getCardData(paramsCard))
+  },[])
 
   const testCards = [
     {
@@ -52,10 +75,8 @@ export const Learn = () => {
     },
   ]
   const [cards, setCards] = useState(testCards[0])
-
-  const inputValues2 = ['Did not know', 'Forgot', 'A lot of thought', 'Confused', 'Knew the answer']
-
-  //const grades = [1,2,3,4,5]
+const [cardsTwo, setCardsTwo] = useState(cardsX)
+  console.log(cardsTwo)
 
   const cardChanger = (id: string) => {
     setCards(testCards[2])
@@ -87,6 +108,9 @@ export const Learn = () => {
   }
 
   return (
+      <>
+        <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
+
     <div className={style.learnWrapper}>
       <div className={style.question}>
         <span>Question:</span>
@@ -127,5 +151,6 @@ export const Learn = () => {
         </div>
       )}
     </div>
+      </>
   )
 }

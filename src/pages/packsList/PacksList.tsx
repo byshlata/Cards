@@ -32,6 +32,7 @@ import { BackValueType } from 'types'
 
 import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
+import {Learn} from "../learn/Learn";
 
 type ModalPackDataType = {
   packName: string
@@ -108,6 +109,7 @@ export const PacksList = () => {
 
         break
       case 'learn':
+        //navigate(`${Path.Learn}${Path.Root}${idPack}`)
         break
       case 'name':
         navigate(`${Path.Pack}${Path.Root}${idPack}`)

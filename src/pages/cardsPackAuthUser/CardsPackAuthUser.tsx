@@ -14,6 +14,8 @@ import { BasicContentCardPage } from 'pages/cardsPack/components/basicContentCar
 import { useSelector } from 'react-redux'
 import { selectorIsCloseModal } from 'store'
 import { BackValueType } from 'types'
+import {useNavigate} from "react-router-dom";
+import {Path} from "../../enums";
 
 import { TABLET_HEADER_AUTH_USER } from './optionHeaderTableAuthUser/optionTableAuthUser'
 
@@ -48,6 +50,8 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
     action: '',
   })
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     if (isOpenModalPack && isCloseModal) {
       onCloseModalPack()
@@ -75,7 +79,9 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
     setActionMenu('edit')
   }
 
-  const learnPack = () => {}
+  const learnPack = () => {
+    navigate(`${Path.Root}${Path.Learn}`)
+  }
 
   const onClickActionTable = (
     idCard: string,
