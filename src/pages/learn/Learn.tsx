@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { CustomRadio } from 'components/customRadio/CustomRadio'
 import { useAppDispatch } from 'hooks'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getLearnData } from 'store/thunk/learnThunk'
 
+import { ButtonBack } from '../../components'
+import { Path } from '../../enums'
+import { selectorCardData, setCardParams } from '../../store'
+
 import style from './Learn.module.sass'
-import {ButtonBack} from "../../components";
-import {Path} from "../../enums";
-import {
-
-  selectorCardData, setCardParams,
-
-} from "../../store";
-import {useSelector} from "react-redux";
-import {useNavigate, useParams} from "react-router-dom";
 
 export const Learn = () => {
   const dispatch = useAppDispatch()
@@ -24,7 +21,6 @@ export const Learn = () => {
     setIsShow(true)
   }
   const cardsX = useSelector(selectorCardData)
-  
 
   const param = useParams<'id'>()
   const packId = param.id
@@ -35,9 +31,9 @@ export const Learn = () => {
     dispatch(setCardParams({ cardsPack_id: idPack }))
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     //dispatch(getCardData(paramsCard))
-  },[])
+  }, [])
 
   const testCards = [
     {
@@ -75,10 +71,11 @@ export const Learn = () => {
     },
   ]
   const [cards, setCards] = useState(testCards[0])
-const [cardsTwo, setCardsTwo] = useState(cardsX)
+  const [cardsTwo, setCardsTwo] = useState(cardsX)
   console.log(cardsTwo)
 
   const cardChanger = (id: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     setCards(testCards[2])
 
     const convertValueToGrade = (value: string): number => {
@@ -87,12 +84,16 @@ const [cardsTwo, setCardsTwo] = useState(cardsX)
       if (value === 'Did not know') {
         grade = 1
       } else if (value === 'Forgot') {
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         grade = 2
       } else if (value === 'A lot of thought') {
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         grade = 3
       } else if (value === 'Confused') {
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         grade = 4
       } else if (value === 'Knew the answer') {
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         grade = 5
       } else {
         grade = 0
@@ -108,49 +109,49 @@ const [cardsTwo, setCardsTwo] = useState(cardsX)
   }
 
   return (
-      <>
-        <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
+    <>
+      <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
 
-    <div className={style.learnWrapper}>
-      <div className={style.question}>
-        <span>Question:</span>
-        {` ${cards.question}`}
-        {/*берём с стейта рандомный впорс*/}
-      </div>
-      <div className={style.shotsWrapper}>
-        {/*берём с редакс кол-во попыток*/}
-        {`Количтесвтво попыток ответа на вопрос : ${cards.shots}`}
-      </div>
-      {isShow ? (
-        <div className={style.answerWrapper}>
-          <div className={style.answer}>
-            <span>Answer:</span> {` ${cards.answer}`}
-            {/*берем ответ из обьекта в стейте*/}
-          </div>
-          <div>Rate yourself:</div>
-          <div className={style.rate}>
-            <CustomRadio
-              name={'radio'}
-              options={inputValues}
-              value={value}
-              onChangeOption={setValue}
-            />
-          </div>
-          <div
-            className={style.next}
-            onClick={() => {
-              cardChanger(cards._id)
-            }}
-          >
-            Next question
-          </div>
+      <div className={style.learnWrapper}>
+        <div className={style.question}>
+          <span>Question:</span>
+          {` ${cards.question}`}
+          {/*берём с стейта рандомный впорс*/}
         </div>
-      ) : (
-        <div className={style.showButton} onClick={answerShower}>
-          Show answer
+        <div className={style.shotsWrapper}>
+          {/*берём с редакс кол-во попыток*/}
+          {`Количтесвтво попыток ответа на вопрос : ${cards.shots}`}
         </div>
-      )}
-    </div>
-      </>
+        {isShow ? (
+          <div className={style.answerWrapper}>
+            <div className={style.answer}>
+              <span>Answer:</span> {` ${cards.answer}`}
+              {/*берем ответ из обьекта в стейте*/}
+            </div>
+            <div>Rate yourself:</div>
+            <div className={style.rate}>
+              <CustomRadio
+                name={'radio'}
+                options={inputValues}
+                value={value}
+                onChangeOption={setValue}
+              />
+            </div>
+            <div
+              className={style.next}
+              onClick={() => {
+                cardChanger(cards._id)
+              }}
+            >
+              Next question
+            </div>
+          </div>
+        ) : (
+          <div className={style.showButton} onClick={answerShower}>
+            Show answer
+          </div>
+        )}
+      </div>
+    </>
   )
 }

@@ -8,14 +8,14 @@ import {
   TitleWithButton,
 } from 'components'
 import { useModal } from 'components/modal/hooks/useModal'
+import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { EmptyPack } from 'pages'
 import { BasicContentCardPage } from 'pages/cardsPack/components/basicContentCardPage/BasicContentCardPage'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { selectorIsCloseModal } from 'store'
 import { BackValueType } from 'types'
-import {useNavigate} from "react-router-dom";
-import {Path} from "../../enums";
 
 import { TABLET_HEADER_AUTH_USER } from './optionHeaderTableAuthUser/optionTableAuthUser'
 

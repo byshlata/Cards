@@ -14,7 +14,8 @@ import { Page404 } from 'pages/page404/Page404'
 import { useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { selectorIsAuth, selectorAuthUserId } from 'store'
-import {Learn} from "./learn/Learn";
+
+import { Learn } from './learn/Learn'
 
 export const Routers = () => {
   const isAuth = useSelector(selectorIsAuth)
@@ -43,7 +44,7 @@ export const Routers = () => {
       />
       <Route path={`${Path.Register}`} element={<Registration />} />
       <Route path={`${Path.Login}`} element={isAuth ? PROFILE_PAGE : <Login />} />
-        <Route path={`${Path.Learn}`} element={<Learn />} />
+      <Route path={`${Path.Learn}`} element={<Learn />} />
     </Routes>
   )
 }

@@ -16,7 +16,6 @@ export {
   resetStateCardParams,
 } from './slice/cardParamsSlice'
 export { cardSlice } from './slice/cardSlice'
-export { modalCardSlice } from './slice/modalCardSlice'
 
 //thunk
 
@@ -81,13 +80,6 @@ export {
 
 export { selectorIsRegistration } from './selectors/selectorsRegistration'
 
-export {
-  selectorIsCloseModalCardAfterRequest,
-  selectorModalCardAction,
-  selectorModalCardId,
-  selectorModalCardQuestion,
-} from './selectors/selectorsModalCard'
-
 //other
 
 export type { AppDispatchType, RootStoreType } from './store'
@@ -130,9 +122,3 @@ export {
 } from './slice/cardParamsSlice'
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'
-
-export {
-  setDataForFormModalCard,
-  closeModalCard,
-  onCloseModalCardAfterRequest,
-} from './slice/modalCardSlice'

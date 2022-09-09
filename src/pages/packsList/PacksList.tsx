@@ -30,9 +30,10 @@ import {
 } from 'store'
 import { BackValueType } from 'types'
 
+import { Learn } from '../learn/Learn'
+
 import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
-import {Learn} from "../learn/Learn";
 
 type ModalPackDataType = {
   packName: string
