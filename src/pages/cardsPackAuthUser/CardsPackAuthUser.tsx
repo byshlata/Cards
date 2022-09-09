@@ -15,6 +15,8 @@ import { EmptyPack } from 'pages/emptyPack/EmptyPack'
 import { useSelector } from 'react-redux'
 import { selectorIsCloseModal, setDataForFormModalCard } from 'store'
 import { BackValueType } from 'types'
+import {useNavigate} from "react-router-dom";
+import {Path} from "../../enums";
 
 type CardsPackAuthUserType = {
   countCard: number
@@ -31,6 +33,8 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
   const [isOpenModalCard, onOpenModalCard, onCloseModalCard] = useModal()
 
   const [actionMenu, setActionMenu] = useState<BackValueType>('')
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (isOpenModalPack && isCloseModal) {
@@ -54,7 +58,9 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
     setActionMenu('edit')
   }
 
-  const learnPack = () => {}
+  const learnPack = () => {
+    //navigate(`${Path.Root}${Path.Learn}`)
+  }
 
   const onClickActionTable = (idCard: string, question: string, backValue: BackValueType) => {
     switch (backValue) {
