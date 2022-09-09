@@ -66,8 +66,8 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
   }
 
   const deletePack = () => {
-    onOpenModalPack()
-    setActionMenu('delete')
+    // onOpenModalPack()
+    // setActionMenu('delete')
   }
 
   const editPack = () => {
