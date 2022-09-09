@@ -59,7 +59,7 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
   }
 
   const learnPack = () => {
-    //navigate(`${Path.Root}${Path.Learn}`)
+    navigate(`${Path.Root}${Path.Learn}`)
   }
 
   const onClickActionTable = (idCard: string, question: string, backValue: BackValueType) => {

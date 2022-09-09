@@ -8,8 +8,13 @@ import { getLearnData } from '../../store/thunk/LearnThunk'
 import style from './Learn.module.sass'
 import {ButtonBack} from "../../components";
 import {Path} from "../../enums";
-import {getCardData, selectorCardData, selectorParamsCard} from "../../store";
+import {
+
+  selectorCardData,
+
+} from "../../store";
 import {useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
 
 export const Learn = () => {
   const dispatch = useAppDispatch()
@@ -20,7 +25,12 @@ export const Learn = () => {
     setIsShow(true)
   }
   const cardsX = useSelector(selectorCardData)
-  const paramsCard = useSelector(selectorParamsCard)
+
+  const param = useParams<'id'>()
+
+  const idPack = param.id
+
+
   useEffect(()=>{
     //dispatch(getCardData(paramsCard))
   },[])
