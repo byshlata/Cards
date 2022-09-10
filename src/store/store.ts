@@ -30,3 +30,6 @@ export const store = configureStore({
 export type RootStoreType = ReturnType<typeof store.getState>
 
 export type AppDispatchType = typeof store.dispatch
+
+// @ts-ignore
+window.store = store
