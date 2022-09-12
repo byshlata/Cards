@@ -15,7 +15,7 @@ export const packParamsSlice = createSlice({
   name: 'packParamsSlice',
   initialState: initialStatePackParams,
   reducers: {
-    setPackParams: (state, action: PayloadAction<PackParamsType>) => ({
+    setPackParams: (state, action: PayloadAction<Partial<PackParamsInitialType>>) => ({
       ...state,
       ...action.payload,
     }),

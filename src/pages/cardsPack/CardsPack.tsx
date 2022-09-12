@@ -46,8 +46,6 @@ export const CardsPack = () => {
 
   useEffect(() => {
     if (paramsCard.cardsPack_id && !isMounting) {
-      // eslint-disable-next-line no-debugger
-      debugger
       dispatch(getCardData(paramsCard))
     }
   }, [paramsCard, isMounting])

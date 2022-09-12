@@ -1,11 +1,13 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
 import { ButtonChoiceGrope, ButtonResetFilter } from 'components/button'
 import { CustomSlider } from 'components/customSlider/CustomSlider'
 import { FilterElementContainer } from 'components/filterElementContainer/FilterElementContainer'
 import { Search } from 'components/search/Search'
 import { useAppDispatch } from 'hooks'
+import { useCustomSearchParams } from 'hooks/useCustomSearchParams'
 import { useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 import {
   removePackData,
   selectorAuthUserId,
@@ -30,16 +32,24 @@ export const FilterContainer = () => {
   const maxCards = useSelector(selectorMaxCardsOnPack)
   const minCards = useSelector(selectorMinCardsOnPack)
 
+  const { searchParams, setParamsHelper } = useCustomSearchParams()
+
+  useEffect(() => {
+    dispatch(setPackParams(Object.fromEntries(searchParams)))
+    console.log(Object.fromEntries(searchParams))
+  }, [searchParams])
+
   const onSearch = (searchValue: string) => {
-    dispatch(setPackParams({ packName: searchValue }))
+    setParamsHelper({ packName: searchValue })
   }
 
   const onClickButtonChoiceGrope = (value: string) => {
-    dispatch(setPackParams({ user_id: value }))
+    setParamsHelper({ user_id: value })
   }
 
   const onChangeValueSlider = (max: number, min: number) => {
-    dispatch(setPackParams({ max, min }))
+    setParamsHelper({ max: max.toString() })
+    setParamsHelper({ min: max.toString() })
   }
 
   const onResetFilter = () => {
@@ -52,7 +62,7 @@ export const FilterContainer = () => {
     <>
       <FilterElementContainer title="Search">
         <Search
-          searchValue={packName}
+          searchValue={searchParams.get('packName') || ''}
           onChangeDebounceValue={onSearch}
           disabled={disabled}
           error={errorSearchValue}

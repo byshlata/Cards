@@ -13,9 +13,10 @@ import { useModal } from 'components/modal/hooks/useModal'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
   getPackData,
+  initialStatePackParams,
   mountingComponent,
   removeCardParams,
   removePackData,
@@ -60,7 +61,6 @@ export const PacksList = () => {
 
   useEffect(() => {
     if (!isMounting) {
-      console.log(params)
       dispatch(getPackData(params))
     }
   }, [params, isMounting])
