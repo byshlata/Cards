@@ -17,15 +17,15 @@ import { useNavigate } from 'react-router-dom'
 import {
   getPackData,
   mountingComponent,
+  removeCardParams,
   removePackData,
-  resetPackParams,
+  removePackParams,
   selectorCurrentPage,
   selectorIsCloseModal,
   selectorIsLoading,
   selectorIsMounting,
   selectorParams,
   selectorTotalCount,
-  setIsFirstOpenPage,
   setPackParams,
 } from 'store'
 import { BackValueType } from 'types'
@@ -59,21 +59,20 @@ export const PacksList = () => {
   const [isOpenModal, onOpenModal, onCloseModal] = useModal()
 
   useEffect(() => {
-    if (params.isFirstOpen) {
+    if (!isMounting) {
+      console.log(params)
       dispatch(getPackData(params))
     }
-  }, [params])
+  }, [params, isMounting])
 
   useEffect(() => {
     if (isMounting) {
-      dispatch(resetPackParams())
+      dispatch(removePackParams())
       dispatch(mountingComponent())
     }
   }, [isMounting])
 
   useEffect(() => {
-    dispatch(setIsFirstOpenPage())
-
     return () => {
       dispatch(removePackData())
     }

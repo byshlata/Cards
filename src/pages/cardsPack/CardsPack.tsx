@@ -11,7 +11,6 @@ import {
   mountingComponent,
   removeCardData,
   removeCardParams,
-  resetCardParams,
   selectorAuthUserId,
   selectorIsMounting,
   selectorPackUserId,
@@ -19,7 +18,6 @@ import {
   selectorTitlePack,
   selectorTotalCountCard,
   setCardParams,
-  setIsFirstOpenCardPage,
 } from 'store'
 import { BackValueType } from 'types'
 
@@ -39,7 +37,6 @@ export const CardsPack = () => {
 
   useEffect(() => {
     dispatch(setCardParams({ cardsPack_id: idPack }))
-    dispatch(setIsFirstOpenCardPage())
 
     return () => {
       dispatch(removeCardParams())
@@ -48,14 +45,16 @@ export const CardsPack = () => {
   }, [])
 
   useEffect(() => {
-    if (paramsCard.isFirstOpen) {
+    if (paramsCard.cardsPack_id && !isMounting) {
+      // eslint-disable-next-line no-debugger
+      debugger
       dispatch(getCardData(paramsCard))
     }
-  }, [paramsCard])
+  }, [paramsCard, isMounting])
 
   useEffect(() => {
     if (isMounting) {
-      dispatch(resetCardParams())
+      dispatch(removeCardParams())
       dispatch(mountingComponent())
     }
   }, [isMounting])

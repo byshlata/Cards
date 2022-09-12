@@ -5,8 +5,6 @@ export const selectorCurrentPage = (state: RootStoreType): number => state.packP
 
 export const selectorParams = (state: RootStoreType): PackParamsInitialType => state.packParams
 
-export const selectorIsFirsOpen = (state: RootStoreType): boolean => state.packParams.isFirstOpen
-
 export const selectorUserParam_id = (state: RootStoreType): string => state.packParams.user_id
 
 export const selectorPackName = (state: RootStoreType): ParamsType<string> =>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import { ButtonChoiceGrope, ButtonResetFilter } from 'components/button'
 import { CustomSlider } from 'components/customSlider/CustomSlider'
@@ -7,6 +7,7 @@ import { Search } from 'components/search/Search'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
+  removePackData,
   selectorAuthUserId,
   selectorIsLoading,
   selectorMaxCardsOnPack,
@@ -29,8 +30,8 @@ export const FilterContainer = () => {
   const maxCards = useSelector(selectorMaxCardsOnPack)
   const minCards = useSelector(selectorMinCardsOnPack)
 
-  const onSearch = (searchValuer: string) => {
-    dispatch(setPackParams({ packName: searchValuer }))
+  const onSearch = (searchValue: string) => {
+    dispatch(setPackParams({ packName: searchValue }))
   }
 
   const onClickButtonChoiceGrope = (value: string) => {

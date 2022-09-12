@@ -8,5 +8,4 @@ export type PackParamsInitialType = {
   page: number
   pageCount: number
   user_id: ParamsType<string>
-  isFirstOpen: boolean
 }

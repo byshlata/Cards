@@ -1,23 +1,16 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { Pagination } from 'antd'
 import { ButtonResetFilter, Search, TableCard } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
-  getCardData,
-  mountingComponent,
-  removeCardData,
-  removeCardParams,
-  resetCardParams,
   selectorCardQuestion,
   selectorCurrentPageCard,
   selectorIsLoading,
   selectorIsMounting,
-  selectorParamsCard,
   selectorTotalCountCard,
   setCardParams,
-  setIsFirstOpenCardPage,
   unmountingComponent,
 } from 'store'
 import { BackValueType, TableHeadElementType } from 'types'

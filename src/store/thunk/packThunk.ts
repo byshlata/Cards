@@ -3,13 +3,13 @@ import { packsListAPI } from 'api'
 import {
   isSpinAppLoading,
   isCloseModal,
-  resetStatePackParams,
   RootStoreType,
   setPackData,
   unmountingComponent,
   getCardData,
   removeCardData,
   removeCardParams,
+  initialStatePackParams,
 } from 'store'
 import { AddPackType, EditPackType, PackParamsType } from 'types'
 import { isComparisonOfTwoObjects, setErrorResponse } from 'utils'
@@ -42,7 +42,7 @@ export const addNewPack = createAsyncThunk(
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
 
-      if (isComparisonOfTwoObjects(resetStatePackParams, packParamsNow)) {
+      if (isComparisonOfTwoObjects(initialStatePackParams, packParamsNow)) {
         dispatch(getPackData(packParamsNow))
       } else {
         dispatch(unmountingComponent())

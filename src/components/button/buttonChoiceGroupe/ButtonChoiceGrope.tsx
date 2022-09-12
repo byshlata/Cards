@@ -17,6 +17,7 @@ export const ButtonChoiceGrope = ({
   authUserId,
   userIdParam,
 }: ButtonChoiceGropeType) => {
+  console.log('ButtonChoice')
   const [isUserCards, setIsUserCards] = useState<boolean>(!!userIdParam)
 
   const onClickUserButton = () => {

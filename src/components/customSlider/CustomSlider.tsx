@@ -17,6 +17,7 @@ type CustomSliderType = {
 }
 
 export const CustomSlider = ({ onChange, minCards, maxCards }: CustomSliderType) => {
+  console.log('CustomSlider')
   const disabled = useSelector(selectorIsLoading)
 
   const [value, setValue] = useState([minCards, maxCards])

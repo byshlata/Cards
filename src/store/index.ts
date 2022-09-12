@@ -4,17 +4,9 @@ export { appSlice } from './slice/appSlice'
 export { forgotSlice } from './slice/forgotSlice'
 export { registrationSlice } from './slice/registrationSlice'
 export { profileSlice } from './slice/profileSlice'
-export {
-  packParamsSlice,
-  initialStatePackParams,
-  resetStatePackParams,
-} from './slice/packParamsSlice'
+export { packParamsSlice, initialStatePackParams } from './slice/packParamsSlice'
 export { packSlice } from './slice/packSlice'
-export {
-  cardParamsSlice,
-  initialStateCardParams,
-  resetStateCardParams,
-} from './slice/cardParamsSlice'
+export { cardParamsSlice, initialStateCardParams } from './slice/cardParamsSlice'
 export { cardSlice } from './slice/cardSlice'
 
 //thunk
@@ -70,7 +62,6 @@ export {
 
 export {
   selectorCurrentPage,
-  selectorIsFirsOpen,
   selectorParams,
   selectorUserParam_id,
   selectorMaxCardsOnPack,
@@ -105,20 +96,8 @@ export { removePackData, setPackData } from './slice/packSlice'
 
 export { removeCardData, setCardData } from './slice/cardSlice'
 
-export {
-  setPackParams,
-  removePackParams,
-  removeIsFirstOpenPage,
-  setIsFirstOpenPage,
-  resetPackParams,
-} from './slice/packParamsSlice'
+export { setPackParams, removePackParams } from './slice/packParamsSlice'
 
-export {
-  setCardParams,
-  removeCardParams,
-  removeIsFirstOpenCardPage,
-  setIsFirstOpenCardPage,
-  resetCardParams,
-} from './slice/cardParamsSlice'
+export { setCardParams, removeCardParams } from './slice/cardParamsSlice'
 
 export { mountingComponent, unmountingComponent } from './slice/resetSlice'

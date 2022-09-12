@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CardParamsInitialType, CardParamsResetInitialType, CardParamsType } from 'types'
+import { CardParamsInitialType, CardParamsType } from 'types'
 
 export const initialStateCardParams: CardParamsInitialType = {
   cardAnswer: '',
@@ -13,17 +13,6 @@ export const initialStateCardParams: CardParamsInitialType = {
   isFirstOpen: false,
 }
 
-export const resetStateCardParams: CardParamsResetInitialType = {
-  cardAnswer: '',
-  cardQuestion: '',
-  sortCards: '',
-  max: 110,
-  min: 0,
-  page: 1,
-  pageCount: 8,
-  isFirstOpen: true,
-}
-
 export const cardParamsSlice = createSlice({
   name: 'packParamsSlice',
   initialState: initialStateCardParams,
@@ -32,24 +21,8 @@ export const cardParamsSlice = createSlice({
       ...state,
       ...action.payload,
     }),
-    setIsFirstOpenCardPage: (state) => {
-      state.isFirstOpen = true
-    },
-    removeIsFirstOpenCardPage: (state) => {
-      state.isFirstOpen = false
-    },
     removeCardParams: () => initialStateCardParams,
-    resetCardParams: (state) => ({
-      ...state,
-      ...resetStateCardParams,
-    }),
   },
 })
 
-export const {
-  setCardParams,
-  removeCardParams,
-  resetCardParams,
-  removeIsFirstOpenCardPage,
-  setIsFirstOpenCardPage,
-} = cardParamsSlice.actions
+export const { setCardParams, removeCardParams } = cardParamsSlice.actions

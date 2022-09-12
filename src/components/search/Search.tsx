@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 
 import { CustomInput } from 'components'
 import { useCustomInput } from 'components/input/customInput/hooks'
@@ -13,26 +13,30 @@ type SearchType = {
   onChangeDebounceValue: (debounceValue: string) => void
 }
 
-export const Search = ({ searchValue, onChangeDebounceValue, disabled, error }: SearchType) => {
-  const [value, onChange] = useCustomInput(searchValue)
+export const Search = memo(
+  ({ searchValue, onChangeDebounceValue, disabled, error }: SearchType) => {
+    console.log('Search', searchValue)
 
-  const debounceValue = useDebounce(value)
+    const [value, onChange] = useCustomInput(searchValue)
 
-  useEffect(() => {
-    if (searchValue !== debounceValue) {
-      onChangeDebounceValue(debounceValue)
-    }
-  }, [debounceValue])
+    const debounceValue = useDebounce(value)
 
-  return (
-    <div className={style.searchWrapper}>
-      <CustomInput
-        type="search"
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-        error={error}
-      />
-    </div>
-  )
-}
+    useEffect(() => {
+      if (searchValue !== debounceValue) {
+        onChangeDebounceValue(debounceValue)
+      }
+    }, [debounceValue])
+
+    return (
+      <div className={style.searchWrapper}>
+        <CustomInput
+          type="search"
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+          error={error}
+        />
+      </div>
+    )
+  }
+)

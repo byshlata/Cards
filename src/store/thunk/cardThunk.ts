@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { cardAPI } from 'api'
 import {
+  initialStateCardParams,
   isCloseModal,
   isSpinAppLoading,
-  resetStateCardParams,
   RootStoreType,
   setCardData,
   unmountingComponent,
@@ -38,7 +38,7 @@ export const addNewCard = createAsyncThunk(
       const state = getState() as RootStoreType
       const cardParamsNow = state.cardParams
 
-      if (isComparisonOfTwoObjects(resetStateCardParams, cardParamsNow)) {
+      if (isComparisonOfTwoObjects(initialStateCardParams, cardParamsNow)) {
         dispatch(getCardData(cardParamsNow))
       } else {
         dispatch(unmountingComponent())
@@ -62,7 +62,7 @@ export const editCard = createAsyncThunk(
       const state = getState() as RootStoreType
       const cardParamsNow = state.cardParams
 
-      if (isComparisonOfTwoObjects(resetStateCardParams, cardParamsNow)) {
+      if (isComparisonOfTwoObjects(initialStateCardParams, cardParamsNow)) {
         dispatch(getCardData(cardParamsNow))
       } else {
         dispatch(unmountingComponent())
