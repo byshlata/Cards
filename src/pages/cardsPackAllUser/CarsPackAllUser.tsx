@@ -4,6 +4,8 @@ import { TitleWithButton } from 'components'
 import { BasicContentCardPage } from 'pages/cardsPack/components/basicContentCardPage/BasicContentCardPage'
 
 import { TABLET_HEADER_ALL_USER } from './optionHeaderTableAllUser/optionTableHeaderAllUser'
+import { useNavigate } from 'react-router-dom'
+import { Path } from 'enums/path'
 
 type CarsPackAllUserType = {
   titlePack: string
@@ -11,7 +13,10 @@ type CarsPackAllUserType = {
 }
 
 export const CarsPackAllUser = ({ titlePack, idPack }: CarsPackAllUserType) => {
-  const onLearn = () => {}
+    const navigate = useNavigate()
+  const onLearn = () => {
+      navigate(`${Path.Pack}${Path.Root}${idPack}${Path.Root}${Path.Learn}`)
+  }
 
   return (
     <>

@@ -10,7 +10,7 @@ import {Path} from "../../enums";
 import {
 
     getCardData,
-    selectorCardData, selectorTotalCountCard, setCardParams,
+    selectorCardData, selectorTotalCountCard, setCardParams, selectorTitlePack
 
 } from "../../store";
 import {useSelector} from "react-redux";
@@ -58,6 +58,7 @@ export const Learn = () => {
     const packId = param.id
     const cardsX = useSelector(selectorCardData)
     const totalCount = useSelector(selectorTotalCountCard)
+    const packName = useSelector(selectorTitlePack)
 
     const answerShower = () => {
         setIsShow(true)
@@ -121,6 +122,7 @@ export const Learn = () => {
     return (
         <>
             <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
+            <div className={style.title}>Learn: {`"${packName}"`} </div>
             <div className={style.learnWrapper}>
                 <div className={style.question}>
                     <span>Question:</span>
