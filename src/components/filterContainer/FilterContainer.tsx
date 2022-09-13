@@ -32,7 +32,7 @@ export const FilterContainer = () => {
   const maxCards = useSelector(selectorMaxCardsOnPack)
   const minCards = useSelector(selectorMinCardsOnPack)
 
-  const { searchParams, setParamsHelper } = useCustomSearchParams()
+  const { searchParams, setURLParams, resetURLParams } = useCustomSearchParams()
 
   useEffect(() => {
     dispatch(setPackParams(Object.fromEntries(searchParams)))
@@ -40,20 +40,20 @@ export const FilterContainer = () => {
   }, [searchParams])
 
   const onSearch = (searchValue: string) => {
-    setParamsHelper({ packName: searchValue })
+    setURLParams({ packName: searchValue })
   }
 
   const onClickButtonChoiceGrope = (value: string) => {
-    setParamsHelper({ user_id: value })
+    setURLParams({ user_id: value })
   }
 
   const onChangeValueSlider = (max: number, min: number) => {
-    setParamsHelper({ max: max.toString() })
-    setParamsHelper({ min: max.toString() })
+    setURLParams({ max: max })
+    setURLParams({ min: min })
   }
 
   const onResetFilter = () => {
-    dispatch(unmountingComponent())
+    resetURLParams()
   }
 
   const errorSearchValue = totalPack ? '' : !packName ? '' : 'Cards not found'
@@ -77,7 +77,11 @@ export const FilterContainer = () => {
         />
       </FilterElementContainer>
       <FilterElementContainer title="Number of cards">
-        <CustomSlider onChange={onChangeValueSlider} maxCards={maxCards} minCards={minCards} />
+        <CustomSlider
+          onChange={onChangeValueSlider}
+          maxCards={+(searchParams.get('max') || '')}
+          minCards={+(searchParams.get('min') || '')}
+        />
       </FilterElementContainer>
       <FilterElementContainer>
         <ButtonResetFilter onResetFilter={onResetFilter} disabled={disabled} />

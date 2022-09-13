@@ -9,3 +9,5 @@ export { minValue } from './minValue'
 export { formattedDate } from './formattedDate'
 
 export { isComparisonOfTwoObjects } from './isComparisonOfTwoObjects'
+
+export { translateObjKeyToString } from './translateObjKeyToString'

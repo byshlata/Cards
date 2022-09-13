@@ -12,6 +12,7 @@ import {
 import { useModal } from 'components/modal/hooks/useModal'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
+import { useCustomSearchParams } from 'hooks/useCustomSearchParams'
 import { useSelector } from 'react-redux'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
@@ -58,6 +59,13 @@ export const PacksList = () => {
   const navigate = useNavigate()
 
   const [isOpenModal, onOpenModal, onCloseModal] = useModal()
+
+  const { searchParams } = useCustomSearchParams()
+
+  useEffect(() => {
+    dispatch(setPackParams(Object.fromEntries(searchParams)))
+    console.log(Object.fromEntries(searchParams))
+  }, [searchParams])
 
   useEffect(() => {
     if (!isMounting) {
