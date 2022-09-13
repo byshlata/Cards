@@ -14,12 +14,10 @@ import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useCustomSearchParams } from 'hooks/useCustomSearchParams'
 import { useSelector } from 'react-redux'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   getPackData,
-  initialStatePackParams,
   mountingComponent,
-  removeCardParams,
   removePackData,
   removePackParams,
   selectorCurrentPage,
@@ -30,10 +28,20 @@ import {
   selectorTotalCount,
   setPackParams,
 } from 'store'
-import { BackValueType } from 'types'
+import { BackValueType, PackParamsInitialType } from 'types'
 
 import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
+
+const initialStateURLPackParams = {
+  user_id: '',
+  max: 110,
+  min: 0,
+  page: 1,
+  pageCount: 10,
+  sortPacks: '',
+  packName: '',
+}
 
 type ModalPackDataType = {
   packName: string
@@ -46,7 +54,6 @@ export const PacksList = () => {
   const isLoading = useSelector(selectorIsLoading)
   const totalPack = useSelector(selectorTotalCount)
   const currentPage = useSelector(selectorCurrentPage)
-  const params = useSelector(selectorParams)
   const isMounting = useSelector(selectorIsMounting)
   const isCloseModalPackAfterRequest = useSelector(selectorIsCloseModal)
 
@@ -60,18 +67,18 @@ export const PacksList = () => {
 
   const [isOpenModal, onOpenModal, onCloseModal] = useModal()
 
-  const { searchParams } = useCustomSearchParams()
+  const { searchParams, setURLParams, resetURLParams } =
+    useCustomSearchParams<PackParamsInitialType>(initialStateURLPackParams)
 
   useEffect(() => {
     dispatch(setPackParams(Object.fromEntries(searchParams)))
-    console.log(Object.fromEntries(searchParams))
   }, [searchParams])
 
   useEffect(() => {
     if (!isMounting) {
-      dispatch(getPackData(params))
+      dispatch(getPackData(Object.fromEntries(searchParams)))
     }
-  }, [params, isMounting])
+  }, [searchParams, isMounting])
 
   useEffect(() => {
     if (isMounting) {
@@ -91,6 +98,22 @@ export const PacksList = () => {
       onCloseModal()
     }
   }, [isCloseModalPackAfterRequest])
+
+  const onSearch = (searchValue: string) => {
+    setURLParams({ packName: searchValue })
+  }
+
+  const onClickButtonChoiceGrope = (value: string) => {
+    setURLParams({ user_id: value })
+  }
+
+  const onChangeValueSlider = (max: number, min: number) => {
+    setURLParams({ max: max, min: min })
+  }
+
+  const onResetFilter = () => {
+    resetURLParams()
+  }
 
   const onChangePagination = (page: number, pageSize: number) => {
     dispatch(setPackParams({ page: page, pageCount: pageSize }))
@@ -134,7 +157,17 @@ export const PacksList = () => {
       {!isMounting ? (
         <>
           <div className={style.filterElementWrapper}>
-            <FilterContainer />
+            <FilterContainer
+              disabled={isLoading}
+              onResetFilter={onResetFilter}
+              onChangeValueSlider={onChangeValueSlider}
+              onClickButtonChoiceGrope={onClickButtonChoiceGrope}
+              onSearchName={onSearch}
+              searchName={searchParams.get('packName') || ''}
+              sliderMax={+(searchParams.get('max') || '')}
+              sliderMin={+(searchParams.get('min') || '')}
+              userId={searchParams.get('user_id') || ''}
+            />
           </div>
           <TablePackList headData={TABLET_HEADER} onClickTableAction={onClickTableAction} />
           <div className={style.paginationWrapper}>

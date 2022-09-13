@@ -1,15 +1,12 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 
 import { ButtonChoiceGrope, ButtonResetFilter } from 'components/button'
 import { CustomSlider } from 'components/customSlider/CustomSlider'
 import { FilterElementContainer } from 'components/filterElementContainer/FilterElementContainer'
 import { Search } from 'components/search/Search'
 import { useAppDispatch } from 'hooks'
-import { useCustomSearchParams } from 'hooks/useCustomSearchParams'
 import { useSelector } from 'react-redux'
-import { useSearchParams } from 'react-router-dom'
 import {
-  removePackData,
   selectorAuthUserId,
   selectorIsLoading,
   selectorMaxCardsOnPack,
@@ -17,44 +14,34 @@ import {
   selectorPackName,
   selectorTotalCount,
   selectorUserParam_id,
-  setPackParams,
-  unmountingComponent,
 } from 'store'
 
-export const FilterContainer = () => {
-  const dispatch = useAppDispatch()
+type FilterContainerType = {
+  disabled: boolean
+  searchName: string
+  sliderMax: number
+  sliderMin: number
+  userId: string
+  onSearchName: (searchValue: string) => void
+  onClickButtonChoiceGrope: (value: string) => void
+  onChangeValueSlider: (max: number, min: number) => void
+  onResetFilter: () => void
+}
 
-  const disabled = useSelector(selectorIsLoading)
+export const FilterContainer = ({
+  onResetFilter,
+  onSearchName,
+  onClickButtonChoiceGrope,
+  onChangeValueSlider,
+  searchName,
+  disabled,
+  userId,
+  sliderMin,
+  sliderMax,
+}: FilterContainerType) => {
   const totalPack = useSelector(selectorTotalCount)
   const packName = useSelector(selectorPackName)
   const authUserId = useSelector(selectorAuthUserId)
-  const userIdParam = useSelector(selectorUserParam_id)
-  const maxCards = useSelector(selectorMaxCardsOnPack)
-  const minCards = useSelector(selectorMinCardsOnPack)
-
-  const { searchParams, setURLParams, resetURLParams } = useCustomSearchParams()
-
-  useEffect(() => {
-    dispatch(setPackParams(Object.fromEntries(searchParams)))
-    console.log(Object.fromEntries(searchParams))
-  }, [searchParams])
-
-  const onSearch = (searchValue: string) => {
-    setURLParams({ packName: searchValue })
-  }
-
-  const onClickButtonChoiceGrope = (value: string) => {
-    setURLParams({ user_id: value })
-  }
-
-  const onChangeValueSlider = (max: number, min: number) => {
-    setURLParams({ max: max })
-    setURLParams({ min: min })
-  }
-
-  const onResetFilter = () => {
-    resetURLParams()
-  }
 
   const errorSearchValue = totalPack ? '' : !packName ? '' : 'Cards not found'
 
@@ -62,8 +49,8 @@ export const FilterContainer = () => {
     <>
       <FilterElementContainer title="Search">
         <Search
-          searchValue={searchParams.get('packName') || ''}
-          onChangeDebounceValue={onSearch}
+          searchValue={searchName}
+          onChangeDebounceValue={onSearchName}
           disabled={disabled}
           error={errorSearchValue}
         />
@@ -73,15 +60,11 @@ export const FilterContainer = () => {
           disabled={disabled}
           authUserId={authUserId}
           onClickButton={onClickButtonChoiceGrope}
-          userIdParam={userIdParam}
+          userIdParam={userId}
         />
       </FilterElementContainer>
       <FilterElementContainer title="Number of cards">
-        <CustomSlider
-          onChange={onChangeValueSlider}
-          maxCards={+(searchParams.get('max') || '')}
-          minCards={+(searchParams.get('min') || '')}
-        />
+        <CustomSlider onChange={onChangeValueSlider} maxCards={sliderMax} minCards={sliderMin} />
       </FilterElementContainer>
       <FilterElementContainer>
         <ButtonResetFilter onResetFilter={onResetFilter} disabled={disabled} />

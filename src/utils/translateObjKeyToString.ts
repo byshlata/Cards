@@ -5,5 +5,6 @@ export const translateObjKeyToString = (obj: any) => {
       objString[key] = objString[key].toString()
     }
   }
+  console.log(objString)
   return objString
 }

@@ -9,5 +9,4 @@ export type CardParamsInitialType = {
   sortCards: ParamsType<string | number>
   page: number
   pageCount: number
-  isFirstOpen: boolean
 }

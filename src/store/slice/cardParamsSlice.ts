@@ -10,7 +10,6 @@ export const initialStateCardParams: CardParamsInitialType = {
   min: 0,
   page: 1,
   pageCount: 8,
-  isFirstOpen: false,
 }
 
 export const cardParamsSlice = createSlice({

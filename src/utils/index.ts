@@ -11,3 +11,5 @@ export { formattedDate } from './formattedDate'
 export { isComparisonOfTwoObjects } from './isComparisonOfTwoObjects'
 
 export { translateObjKeyToString } from './translateObjKeyToString'
+
+export { isEmptyObject } from './isEmptyObject'

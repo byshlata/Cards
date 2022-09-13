@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
-import { translateObjKeyToString } from 'utils'
+import { CardParamsInitialType, PackParamsInitialType } from 'types'
+import { isEmptyObject, translateObjKeyToString } from 'utils'
 
 const initialStateURLPackParams = {
   user_id: '',
@@ -13,26 +14,24 @@ const initialStateURLPackParams = {
   packName: '',
 }
 
-export const useCustomSearchParams = () => {
-  const [params, setParams] =
-    useState<Partial<typeof initialStateURLPackParams>>(initialStateURLPackParams)
+export type URLParamsType<T, K, D> = T extends K ? K : D
 
+export const useCustomSearchParams = <T>(
+  initialParams: URLParamsType<T, PackParamsInitialType, CardParamsInitialType>
+) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
-    setSearchParams(translateObjKeyToString(params))
-  }, [params])
+    if (isEmptyObject(Object.fromEntries(searchParams))) {
+      setSearchParams(translateObjKeyToString(initialStateURLPackParams))
+    }
+  }, [])
 
-  const setURLParams = (value: Partial<typeof initialStateURLPackParams>) => {
-    setParams({ ...params, ...value })
+  const setURLParams = (value: Partial<typeof initialParams>) => {
+    setSearchParams(translateObjKeyToString(value))
   }
 
-  const searchURLParams = Object.fromEntries(searchParams) as Partial<
-    typeof initialStateURLPackParams
-  >
-
   const resetURLParams = () => {
-    setParams({ ...initialStateURLPackParams })
     setSearchParams(JSON.stringify(initialStateURLPackParams))
   }
 

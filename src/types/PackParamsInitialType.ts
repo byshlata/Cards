@@ -4,7 +4,7 @@ export type PackParamsInitialType = {
   packName: ParamsType<string>
   min: number
   max: number
-  sortPacks: ParamsType<number | string>
+  sortPacks: string
   page: number
   pageCount: number
   user_id: ParamsType<string>
