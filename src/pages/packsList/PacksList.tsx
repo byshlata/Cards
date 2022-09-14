@@ -67,27 +67,21 @@ export const PacksList = () => {
 
   const [isOpenModal, onOpenModal, onCloseModal] = useModal()
 
-  const { searchParams, setURLParams, resetURLParams } =
+  const { searchParams, params, setURLParams, resetURLParams } =
     useCustomSearchParams<PackParamsInitialType>(initialStateURLPackParams)
 
   useEffect(() => {
-    dispatch(setPackParams(Object.fromEntries(searchParams)))
+    if (Object.keys(Object.fromEntries(searchParams)).length) {
+      console.log('params', params)
+      // eslint-disable-next-line no-debugger
+      debugger
+      dispatch(getPackData(params))
+    }
   }, [searchParams])
 
   useEffect(() => {
-    if (!isMounting) {
-      dispatch(getPackData(Object.fromEntries(searchParams)))
-    }
-  }, [searchParams, isMounting])
-
-  useEffect(() => {
-    if (isMounting) {
-      dispatch(removePackParams())
-      dispatch(mountingComponent())
-    }
-  }, [isMounting])
-
-  useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    debugger
     return () => {
       dispatch(removePackData())
     }
@@ -163,10 +157,10 @@ export const PacksList = () => {
               onChangeValueSlider={onChangeValueSlider}
               onClickButtonChoiceGrope={onClickButtonChoiceGrope}
               onSearchName={onSearch}
-              searchName={searchParams.get('packName') || ''}
-              sliderMax={+(searchParams.get('max') || '')}
-              sliderMin={+(searchParams.get('min') || '')}
-              userId={searchParams.get('user_id') || ''}
+              searchName={params.packName}
+              sliderMax={params.max}
+              sliderMin={params.min}
+              userId={params.user_id}
             />
           </div>
           <TablePackList headData={TABLET_HEADER} onClickTableAction={onClickTableAction} />

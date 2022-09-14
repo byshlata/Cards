@@ -15,8 +15,6 @@ type SearchType = {
 
 export const Search = memo(
   ({ searchValue, onChangeDebounceValue, disabled, error }: SearchType) => {
-    console.log('Search', searchValue)
-
     const [value, onChange] = useCustomInput(searchValue)
 
     const debounceValue = useDebounce(value)
