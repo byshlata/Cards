@@ -1,8 +1,8 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 import { CardParamsInitialType, PackParamsInitialType } from 'types'
-import { translateObjKeyToString } from 'utils'
+import { isEmptyObject, translateObjKeyToString } from 'utils'
 
 export type URLParamsType<T, K, D> = T extends K ? K : D
 
@@ -15,30 +15,26 @@ export const useCustomSearchParams = <T>(
 ) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
+  const paramsInitFromURL = Object.fromEntries(searchParams.entries()) as Partial<
+    URLSearchParamsType<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>
+  >
+
+  const initStateParams = isEmptyObject(paramsInitFromURL)
+    ? initialURLParams
+    : getInitialParams(paramsInitFromURL, initialURLParams)
+
   const [params, setParams] =
-    useState<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>(initialURLParams)
+    useState<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>(initStateParams)
 
   useEffect(() => {
-    const paramsInitFromURL = Object.fromEntries(searchParams.entries()) as Partial<
-      URLSearchParamsType<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>
-    >
-    // eslint-disable-next-line no-debugger
-    debugger
-    console.log('zxczxczxczx', paramsInitFromURL)
     const paramsURl = getInitialParams(paramsInitFromURL, initialURLParams)
     setParams(paramsURl)
-    console.log('paramsURl', paramsURl)
     setSearchParams(setCustomSearchParams(translateObjKeyToString(paramsURl)))
   }, [searchParams])
 
   const setURLParams = (
     value: Partial<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>
   ) => {
-    // eslint-disable-next-line no-debugger
-    debugger
-    const paramsInitFromURL = Object.fromEntries(searchParams.entries()) as Partial<
-      URLSearchParamsType<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>
-    >
     const paramsURl = getInitialParams({ ...paramsInitFromURL, ...value }, initialURLParams)
     setParams(paramsURl)
     setSearchParams(setCustomSearchParams(translateObjKeyToString(paramsURl)))
@@ -55,9 +51,6 @@ export const getInitialParams = <T>(
   paramsFromURL: Partial<URLSearchParamsType<T>>,
   initialURLParams: T
 ) => {
-  console.log('paramsFromURL', paramsFromURL)
-  console.log('initialURLParams', initialURLParams)
-
   let paramsFromURLOff = { ...paramsFromURL }
   let initialURLParamsOff = { ...initialURLParams }
   for (let key in initialURLParamsOff) {
@@ -71,8 +64,6 @@ export const getInitialParams = <T>(
       }
     }
   }
-
-  console.log('initialURLParamsOff', initialURLParamsOff)
 
   return initialURLParamsOff
 }

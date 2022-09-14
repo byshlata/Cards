@@ -72,16 +72,11 @@ export const PacksList = () => {
 
   useEffect(() => {
     if (Object.keys(Object.fromEntries(searchParams)).length) {
-      console.log('params', params)
-      // eslint-disable-next-line no-debugger
-      debugger
       dispatch(getPackData(params))
     }
   }, [searchParams])
 
   useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    debugger
     return () => {
       dispatch(removePackData())
     }
@@ -110,7 +105,11 @@ export const PacksList = () => {
   }
 
   const onChangePagination = (page: number, pageSize: number) => {
-    dispatch(setPackParams({ page: page, pageCount: pageSize }))
+    setURLParams({ page: page, pageCount: pageSize })
+  }
+
+  const onSortValue = (sortValue: string) => {
+    setURLParams({ sortPacks: sortValue })
   }
 
   const onOpenModalAddPack = () => {
@@ -163,12 +162,18 @@ export const PacksList = () => {
               userId={params.user_id}
             />
           </div>
-          <TablePackList headData={TABLET_HEADER} onClickTableAction={onClickTableAction} />
+          <TablePackList
+            headData={TABLET_HEADER}
+            sortParams={params.sortPacks}
+            onClickTableAction={onClickTableAction}
+            onSortValue={onSortValue}
+          />
           <div className={style.paginationWrapper}>
             <Pagination
               disabled={isLoading}
               showQuickJumper
-              current={currentPage}
+              defaultCurrent={params.pageCount}
+              current={params.page}
               total={totalPack}
               onChange={onChangePagination}
             />

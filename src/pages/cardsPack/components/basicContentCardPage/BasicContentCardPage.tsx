@@ -3,6 +3,7 @@ import React from 'react'
 import { Pagination } from 'antd'
 import { ButtonResetFilter, Search, TableCard } from 'components'
 import { useAppDispatch } from 'hooks'
+import { useCustomSearchParams } from 'hooks/useCustomSearchParams'
 import { useSelector } from 'react-redux'
 import {
   selectorCardQuestion,
@@ -13,7 +14,7 @@ import {
   setCardParams,
   unmountingComponent,
 } from 'store'
-import { BackValueType, TableHeadElementType } from 'types'
+import { BackValueType, PackParamsInitialType, TableHeadElementType } from 'types'
 
 import style from './BasicContentCardPage.module.sass'
 

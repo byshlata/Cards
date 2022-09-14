@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { CustomButtonBox } from 'components'
 
@@ -19,17 +19,15 @@ export const ButtonChoiceGrope = ({
 }: ButtonChoiceGropeType) => {
   const [isUserCards, setIsUserCards] = useState<boolean>(!!userIdParam)
 
+  useEffect(() => {
+    setIsUserCards(!!userIdParam)
+  }, [userIdParam])
+
   const onClickUserButton = () => {
-    if (!isUserCards) {
-      setIsUserCards(true)
-    }
     onClickButton(authUserId)
   }
 
   const onClickAllButton = () => {
-    if (isUserCards) {
-      setIsUserCards(false)
-    }
     onClickButton('')
   }
 

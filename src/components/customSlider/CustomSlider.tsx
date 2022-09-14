@@ -11,18 +11,24 @@ import { maxValue, minValue } from 'utils'
 import style from './CustomSlider.module.sass'
 
 type CustomSliderType = {
+  disabled: boolean
   onChange: (max: number, min: number) => void
   maxCards: number
   minCards: number
 }
 
-export const CustomSlider = ({ onChange, minCards, maxCards }: CustomSliderType) => {
-  const disabled = useSelector(selectorIsLoading)
-
-  console.log(maxCards)
-  console.log(minCards)
+export const CustomSlider = ({ onChange, minCards, maxCards, disabled }: CustomSliderType) => {
+  useEffect(() => {}, [onChange])
 
   const [value, setValue] = useState([minCards, maxCards])
+
+  const debounceValue = useDebounce(value)
+
+  useEffect(() => {
+    if (minCards === initialStatePackParams.min && maxCards === initialStatePackParams.max) {
+      setValue([minCards, maxCards])
+    }
+  }, [minCards, maxCards])
 
   const onClickMinButton = () => {
     if (value[0] !== initialStatePackParams.min) {
@@ -39,8 +45,6 @@ export const CustomSlider = ({ onChange, minCards, maxCards }: CustomSliderType)
   const onChangeValueSlider = (value: [number, number]) => {
     setValue(value)
   }
-
-  const debounceValue = useDebounce(value)
 
   useEffect(() => {
     if (debounceValue[0] !== minCards || debounceValue[1] !== maxCards) {

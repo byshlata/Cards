@@ -64,7 +64,12 @@ export const FilterContainer = ({
         />
       </FilterElementContainer>
       <FilterElementContainer title="Number of cards">
-        <CustomSlider onChange={onChangeValueSlider} maxCards={sliderMax} minCards={sliderMin} />
+        <CustomSlider
+          onChange={onChangeValueSlider}
+          maxCards={sliderMax}
+          minCards={sliderMin}
+          disabled={disabled}
+        />
       </FilterElementContainer>
       <FilterElementContainer>
         <ButtonResetFilter onResetFilter={onResetFilter} disabled={disabled} />

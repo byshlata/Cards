@@ -1,4 +1,4 @@
-import { isComparisonOfTwoObjects } from 'utils'
+import { isComparisonOfTwoObjects } from "utils";
 
 describe('Comparison objects', () => {
   const objOne = {
