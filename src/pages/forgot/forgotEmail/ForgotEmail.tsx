@@ -11,6 +11,7 @@ import { createErrorSchema } from 'utils'
 import * as yup from 'yup'
 
 import style from './ForgotEmail.module.sass'
+import common from './../../../assets/style/container.module.sass'
 
 const name = 'Aliaksandr'
 
@@ -44,7 +45,7 @@ export const ForgotEmail = memo(() => {
   const isDisabledButton = isLoading || !formik.isValid
 
   return (
-    <FormBody width={410} height={460}>
+    <div className={common.container}>
       <Title text="Forgot your password?" />
       <form onSubmit={formik.handleSubmit}>
         <div className={style.inputWrapper}>
@@ -79,6 +80,6 @@ export const ForgotEmail = memo(() => {
           </div>
         </div>
       </form>
-    </FormBody>
+    </div>
   )
 })

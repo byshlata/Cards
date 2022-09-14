@@ -8,7 +8,7 @@ export const FormBody: React.FC<FormBodyType> = (props) => {
 
   return (
     <div
-      style={{ width: `${width}px`, height: `${height}px`, margin: '0 auto' }}
+      // style={{ width: `${width}px`, height: `${height}px`, margin: '0 auto' }}
       className={style.formBody}
     >
       {children}

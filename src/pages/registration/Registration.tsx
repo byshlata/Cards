@@ -1,16 +1,20 @@
 import React, { useCallback } from 'react'
 
-import { CustomButton, CustomInput, FormBody, Title } from 'components'
-import { Path } from 'enums'
 import { useFormik } from 'formik'
-import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { RootStoreType, selectorIsLoading, selectorIsRegistration, RegistrationThunk } from 'store'
-import { createErrorSchema } from 'utils'
 import * as yup from 'yup'
 
 import style from './Registration.module.sass'
+
+import { CustomButton, CustomInput, FormBody, Title } from 'components'
+import { Path } from 'enums'
+import { useAppDispatch } from 'hooks'
+
+import { RootStoreType, selectorIsLoading, selectorIsRegistration, RegistrationThunk } from 'store'
+import { createErrorSchema } from 'utils'
+
+import common from './../../assets/style/container.module.sass'
 
 const schema = yup.object().shape(createErrorSchema(['email', 'password', 'confirmPassword']))
 
@@ -33,7 +37,7 @@ export const Registration = () => {
       confirmPassword: '',
     },
     validationSchema: schema,
-    onSubmit: (values) => {
+    onSubmit: values => {
       dispatch(RegistrationThunk(values))
       formik.resetForm({
         values: { email: '', password: '', confirmPassword: '' },
@@ -52,7 +56,7 @@ export const Registration = () => {
     : undefined
 
   return (
-    <FormBody width={415} height={550}>
+    <div className={common.container}>
       <Title text="Sign Up" />
       <form onSubmit={formik.handleSubmit}>
         <div className={style.inputWrapper}>
@@ -99,6 +103,6 @@ export const Registration = () => {
           Sign In
         </CustomButton>
       </div>
-    </FormBody>
+    </div>
   )
 }

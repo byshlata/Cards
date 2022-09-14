@@ -1,9 +1,10 @@
 @import "src/styles/mixin"
 
 .inputWrapper
-  +wrapperOption(55px, 25px)
+  +alignment(30px)
 
 .wrapperForm
+  +alignment(30px)
   display: flex
   flex-direction: column
   align-items: center
@@ -11,9 +12,15 @@
 
 .textInformationWrapper
   +textStyle((Montserrat, serif), 400,  14px, 24px)
+  display: inline-block
+  padding: 0 20px
 
 .buttonWrapper
-  +wrapperOption(45px, 20px)
+  +alignment(30px)
 
 .textBlockQuestion
   +textStyle((Montserrat, serif), 600,  14px, 24px)
+
+//@media screen and (max-width: 360px)
+//  .inputWrapper
+//    margin: 10px auto

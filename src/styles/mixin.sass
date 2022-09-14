@@ -1,7 +1,7 @@
 @mixin wrapperOption($marginTop, $marginBottom)
   margin-top: $marginTop
   margin-bottom: $marginBottom
-  width: 100%
+  width: 80%
 
 @mixin textStyle($textFamily, $fontWeight,  $fontSize, $line-height)
   font-family: $textFamily
@@ -9,3 +9,7 @@
   font-size: $fontSize
   line-height: $line-height
   margin: 0
+
+@mixin alignment($margin-top)
+  margin: $margin-top auto
+  width: 80%

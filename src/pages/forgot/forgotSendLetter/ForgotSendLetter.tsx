@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { selectorIsLoading, selectorEmail, removeEmail } from 'store'
 
 import style from './ForgotSendLetter.module.sass'
+import common from './../../../assets/style/container.module.sass'
 
 const COUNT_VAlUE = 5
 const CONST_DELAY = 1000
@@ -47,7 +48,7 @@ export const ForgotSendLetter = () => {
   }
 
   return (
-    <FormBody width={410} height={450}>
+    <div className={common.container}>
       <Title text="Check Email" />
       <div className={style.iconSendWrapper}>
         <LetterSendIcon width={110} />
@@ -61,6 +62,6 @@ export const ForgotSendLetter = () => {
           Back to login
         </CustomButton>
       </div>
-    </FormBody>
+    </div>
   )
 }
