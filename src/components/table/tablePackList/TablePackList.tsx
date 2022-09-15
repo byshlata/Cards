@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorAuthUserId, selectorPacksData, setPackParams } from 'store'
+import { selectorAuthUserId, selectorPacksData } from 'store'
 import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
 import { changeTableHeadData } from 'utils/changeTableHeadData'
@@ -13,22 +12,22 @@ import style from './TablePackList.module.sass'
 import { TablePackListRow } from './tablePackListRow/TablePackListRow'
 
 export type TabletHeadType = {
-  headData: TableHeadElementType[]
+  headTableData: TableHeadElementType[]
   sortParams: string
   onClickTableAction: (idPack: string, backValue: BackValueType, namePack: string) => void
-  onSortValue: (sortValue: string) => void
+  onSortColumn: (sortValue: string) => void
 }
 
 export const TablePackList = ({
-  headData,
+  headTableData,
   onClickTableAction,
-  onSortValue,
+  onSortColumn,
   sortParams,
 }: TabletHeadType) => {
   const packData = useSelector(selectorPacksData)
   const userId = useSelector(selectorAuthUserId)
 
-  headData = changeTableHeadData(headData, sortParams)
+  headTableData = changeTableHeadData(headTableData, sortParams)
 
   const mappedPacks = packData.map(({ user_id, _id, user_name, updated, cardsCount, name }) => (
     <TablePackListRow
@@ -46,7 +45,7 @@ export const TablePackList = ({
 
   return (
     <div className={style.tableWrapper}>
-      <TableHeader headData={headData} onSortColumn={onSortValue} />
+      <TableHeader headTableData={headTableData} onSortColumn={onSortColumn} />
       {mappedPacks}
     </div>
   )

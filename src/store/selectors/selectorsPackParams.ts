@@ -3,7 +3,7 @@ import { PackParamsInitialType, ParamsType } from 'types'
 
 export const selectorCurrentPage = (state: RootStoreType): number => state.packParams.page
 
-export const selectorParams = (state: RootStoreType): PackParamsInitialType => state.packParams
+export const selectorPackParams = (state: RootStoreType): PackParamsInitialType => state.packParams
 
 export const selectorUserParam_id = (state: RootStoreType): string => state.packParams.user_id
 

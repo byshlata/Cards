@@ -23,7 +23,7 @@ export const useCustomSearchParams = <T>(
     ? initialURLParams
     : getInitialParams(paramsInitFromURL, initialURLParams)
 
-  const [params, setParams] =
+  const [paramsURL, setParams] =
     useState<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>(initStateParams)
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const useCustomSearchParams = <T>(
     setSearchParams(setCustomSearchParams(translateObjKeyToString(initialURLParams)))
   }
 
-  return { searchParams, params, setURLParams, resetURLParams }
+  return { searchParams, paramsURL, setURLParams, resetURLParams }
 }
 
 export const getInitialParams = <T>(

@@ -6,7 +6,7 @@ export type CardParamsType = {
   cardsPack_id?: string
   min?: number
   max?: number
-  sortCards?: ParamsType<string | number>
+  sortCards?: ParamsType<string>
   page?: number
   pageCount?: number
 }

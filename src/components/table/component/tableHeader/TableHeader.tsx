@@ -17,8 +17,8 @@ type TableHeaderType = TabletHeadDataType & {
   onSortColumn: (sortValue: string) => void
 }
 
-export const TableHeader = ({ headData, onSortColumn }: TableHeaderType) => {
-  const [tableHeadData, setTableHeadData] = useState<TableHeadElementType[]>(headData)
+export const TableHeader = ({ headTableData, onSortColumn }: TableHeaderType) => {
+  const [tableHeadData, setTableHeadData] = useState<TableHeadElementType[]>(headTableData)
 
   const onSortColumnHandler = useCallback(
     (sortValue: string, sortParam: SortParamType, stateSortElement: SortParamElementType) => {

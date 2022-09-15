@@ -17,31 +17,20 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {
   getPackData,
-  mountingComponent,
+  initialStatePackParams,
   removePackData,
-  removePackParams,
-  selectorCurrentPage,
+  selectorCountPagePack,
+  selectorCurrentPagePack,
   selectorIsCloseModal,
   selectorIsLoading,
-  selectorIsMounting,
-  selectorParams,
-  selectorTotalCount,
+  selectorPackParams,
+  selectorTotalCountPagePack,
   setPackParams,
 } from 'store'
 import { BackValueType, PackParamsInitialType } from 'types'
 
 import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
-
-const initialStateURLPackParams = {
-  user_id: '',
-  max: 110,
-  min: 0,
-  page: 1,
-  pageCount: 10,
-  sortPacks: '',
-  packName: '',
-}
 
 type ModalPackDataType = {
   packName: string
@@ -52,9 +41,9 @@ export const PacksList = () => {
   const dispatch = useAppDispatch()
 
   const isLoading = useSelector(selectorIsLoading)
-  const totalPack = useSelector(selectorTotalCount)
-  const currentPage = useSelector(selectorCurrentPage)
-  const isMounting = useSelector(selectorIsMounting)
+  const totalPack = useSelector(selectorTotalCountPagePack)
+  const currentPagePack = useSelector(selectorCurrentPagePack)
+  const countPagePack = useSelector(selectorCountPagePack)
   const isCloseModalPackAfterRequest = useSelector(selectorIsCloseModal)
 
   const [modalPackData, setModalPackData] = useState<ModalPackDataType>({
@@ -67,12 +56,13 @@ export const PacksList = () => {
 
   const [isOpenModal, onOpenModal, onCloseModal] = useModal()
 
-  const { searchParams, params, setURLParams, resetURLParams } =
-    useCustomSearchParams<PackParamsInitialType>(initialStateURLPackParams)
+  const { searchParams, paramsURL, setURLParams, resetURLParams } =
+    useCustomSearchParams<PackParamsInitialType>(initialStatePackParams)
 
   useEffect(() => {
     if (Object.keys(Object.fromEntries(searchParams)).length) {
-      dispatch(getPackData(params))
+      dispatch(setPackParams(paramsURL))
+      dispatch(getPackData(paramsURL))
     }
   }, [searchParams])
 
@@ -96,7 +86,7 @@ export const PacksList = () => {
     setURLParams({ user_id: value })
   }
 
-  const onChangeValueSlider = (max: number, min: number) => {
+  const onChangeSlider = (max: number, min: number) => {
     setURLParams({ max: max, min: min })
   }
 
@@ -108,7 +98,7 @@ export const PacksList = () => {
     setURLParams({ page: page, pageCount: pageSize })
   }
 
-  const onSortValue = (sortValue: string) => {
+  const onSortColumn = (sortValue: string) => {
     setURLParams({ sortPacks: sortValue })
   }
 
@@ -147,39 +137,31 @@ export const PacksList = () => {
         onClick={onOpenModalAddPack}
       />
 
-      {!isMounting ? (
-        <>
-          <div className={style.filterElementWrapper}>
-            <FilterContainer
-              disabled={isLoading}
-              onResetFilter={onResetFilter}
-              onChangeValueSlider={onChangeValueSlider}
-              onClickButtonChoiceGrope={onClickButtonChoiceGrope}
-              onSearchName={onSearch}
-              searchName={params.packName}
-              sliderMax={params.max}
-              sliderMin={params.min}
-              userId={params.user_id}
-            />
-          </div>
-          <TablePackList
-            headData={TABLET_HEADER}
-            sortParams={params.sortPacks}
-            onClickTableAction={onClickTableAction}
-            onSortValue={onSortValue}
-          />
-          <div className={style.paginationWrapper}>
-            <Pagination
-              disabled={isLoading}
-              showQuickJumper
-              defaultCurrent={params.pageCount}
-              current={params.page}
-              total={totalPack}
-              onChange={onChangePagination}
-            />
-          </div>
-        </>
-      ) : null}
+      <div className={style.filterElementWrapper}>
+        <FilterContainer
+          disabled={isLoading}
+          onResetFilter={onResetFilter}
+          onChangeSlider={onChangeSlider}
+          onClickButtonChoiceGrope={onClickButtonChoiceGrope}
+          onSearchName={onSearch}
+        />
+      </div>
+      <TablePackList
+        headTableData={TABLET_HEADER}
+        sortParams={paramsURL.sortPacks}
+        onClickTableAction={onClickTableAction}
+        onSortColumn={onSortColumn}
+      />
+      <div className={style.paginationWrapper}>
+        <Pagination
+          disabled={isLoading}
+          showQuickJumper
+          defaultCurrent={countPagePack}
+          current={currentPagePack}
+          total={totalPack}
+          onChange={onChangePagination}
+        />
+      </div>
 
       <Modal onClose={onCloseModal} isOpen={isOpenModal}>
         <FormModalPackListGrope

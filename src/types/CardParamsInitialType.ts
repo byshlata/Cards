@@ -6,7 +6,7 @@ export type CardParamsInitialType = {
   cardsPack_id: ParamsType<string>
   min: number
   max: number
-  sortCards: ParamsType<string | number>
+  sortCards: ParamsType<string>
   page: number
   pageCount: number
 }

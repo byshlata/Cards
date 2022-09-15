@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PackParamsInitialType, PackParamsType } from 'types'
+import { PackParamsInitialType } from 'types'
 
 export const initialStatePackParams: PackParamsInitialType = {
   user_id: '',
   max: 110,
   min: 0,
   page: 1,
-  pageCount: 8,
+  pageCount: 10,
   sortPacks: '',
   packName: '',
 }

@@ -12,14 +12,17 @@ import style from './CustomSlider.module.sass'
 
 type CustomSliderType = {
   disabled: boolean
-  onChange: (max: number, min: number) => void
+  onChangeSlider: (max: number, min: number) => void
   maxCards: number
   minCards: number
 }
 
-export const CustomSlider = ({ onChange, minCards, maxCards, disabled }: CustomSliderType) => {
-  useEffect(() => {}, [onChange])
-
+export const CustomSlider = ({
+  onChangeSlider,
+  minCards,
+  maxCards,
+  disabled,
+}: CustomSliderType) => {
   const [value, setValue] = useState([minCards, maxCards])
 
   const debounceValue = useDebounce(value)
@@ -50,7 +53,7 @@ export const CustomSlider = ({ onChange, minCards, maxCards, disabled }: CustomS
     if (debounceValue[0] !== minCards || debounceValue[1] !== maxCards) {
       const max = maxValue(debounceValue)
       const min = minValue(debounceValue)
-      onChange(max, min)
+      onChangeSlider(max, min)
     }
   }, [debounceValue])
 

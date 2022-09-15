@@ -4,27 +4,21 @@ import { ButtonChoiceGrope, ButtonResetFilter } from 'components/button'
 import { CustomSlider } from 'components/customSlider/CustomSlider'
 import { FilterElementContainer } from 'components/filterElementContainer/FilterElementContainer'
 import { Search } from 'components/search/Search'
-import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import {
   selectorAuthUserId,
-  selectorIsLoading,
   selectorMaxCardsOnPack,
   selectorMinCardsOnPack,
   selectorPackName,
-  selectorTotalCount,
+  selectorTotalCountPagePack,
   selectorUserParam_id,
 } from 'store'
 
 type FilterContainerType = {
   disabled: boolean
-  searchName: string
-  sliderMax: number
-  sliderMin: number
-  userId: string
   onSearchName: (searchValue: string) => void
   onClickButtonChoiceGrope: (value: string) => void
-  onChangeValueSlider: (max: number, min: number) => void
+  onChangeSlider: (max: number, min: number) => void
   onResetFilter: () => void
 }
 
@@ -32,18 +26,18 @@ export const FilterContainer = ({
   onResetFilter,
   onSearchName,
   onClickButtonChoiceGrope,
-  onChangeValueSlider,
-  searchName,
+  onChangeSlider,
   disabled,
-  userId,
-  sliderMin,
-  sliderMax,
 }: FilterContainerType) => {
-  const totalPack = useSelector(selectorTotalCount)
-  const packName = useSelector(selectorPackName)
-  const authUserId = useSelector(selectorAuthUserId)
+  const totalPack = useSelector(selectorTotalCountPagePack)
 
-  const errorSearchValue = totalPack ? '' : !packName ? '' : 'Cards not found'
+  const authUserId = useSelector(selectorAuthUserId)
+  const searchName = useSelector(selectorPackName)
+  const sliderMax = useSelector(selectorMaxCardsOnPack)
+  const sliderMin = useSelector(selectorMinCardsOnPack)
+  const userId = useSelector(selectorUserParam_id)
+
+  const errorSearchValue = totalPack ? '' : !searchName ? '' : 'Cards not found'
 
   return (
     <>
@@ -65,7 +59,7 @@ export const FilterContainer = ({
       </FilterElementContainer>
       <FilterElementContainer title="Number of cards">
         <CustomSlider
-          onChange={onChangeValueSlider}
+          onChangeSlider={onChangeSlider}
           maxCards={sliderMax}
           minCards={sliderMin}
           disabled={disabled}

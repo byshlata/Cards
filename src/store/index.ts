@@ -22,16 +22,18 @@ export { authThunk } from './thunk/loginThunk'
 
 export {
   selectorCardData,
-  selectorTotalCountCard,
+  selectorCardsTotalCount,
   selectorTitlePack,
   selectorPackUserId,
+  selectorCurrentPageCard,
+  selectorCountPageCard,
 } from './selectors/selectorsCard'
 
 export {
-  selectorCardPacksTotalCount,
-  selectorPageCount,
+  selectorTotalCountPagePack,
+  selectorCountPagePack,
+  selectorCurrentPagePack,
   selectorPacksData,
-  selectorTotalCount,
 } from './selectors/selectorsPack'
 
 export { selectorEmail, selectorIsPasswordSend } from './selectors/selectorsForgot'
@@ -55,19 +57,18 @@ export {
 } from './selectors/selectorsApp'
 
 export {
-  selectorCurrentPageCard,
-  selectorParamsCard,
-  selectorCardQuestion,
-} from './selectors/selectorsCardParams'
-
-export {
   selectorCurrentPage,
-  selectorParams,
+  selectorPackParams,
   selectorUserParam_id,
   selectorMaxCardsOnPack,
   selectorPackName,
   selectorMinCardsOnPack,
 } from './selectors/selectorsPackParams'
+
+export {
+  selectorCardQuestion,
+  selectorSortCards,
+} from './selectors/selectorsCardParams'
 
 export { selectorIsRegistration } from './selectors/selectorsRegistration'
 

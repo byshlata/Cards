@@ -3,7 +3,7 @@ import React from 'react'
 import { CustomButton, MenuHeader } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { selectorIsAuth } from 'store'
 
 import itIncubatorLogo from '../../assets/image/logo-ItIncubator.svg'
@@ -24,9 +24,9 @@ export const Header = () => {
     <header className={style.header}>
       <div className={styleMain.container}>
         <div className={style.headerContainer}>
-          <a href="/Profile">
+          <NavLink to={`${Path.Root}`}>
             <img className={style.logo} src={itIncubatorLogo} alt={'logo'} />
-          </a>
+          </NavLink>
           <div className={style.wrapper}>
             {!isAuth ? (
               <CustomButton color="primary" onClick={onClickRoute}>

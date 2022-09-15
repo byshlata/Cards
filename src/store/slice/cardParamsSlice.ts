@@ -9,7 +9,7 @@ export const initialStateCardParams: CardParamsInitialType = {
   max: 110,
   min: 0,
   page: 1,
-  pageCount: 8,
+  pageCount: 10,
 }
 
 export const cardParamsSlice = createSlice({

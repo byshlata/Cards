@@ -9,23 +9,32 @@ import {
 } from 'components'
 import { useModal } from 'components/modal/hooks/useModal'
 import { Path } from 'enums'
-import { useAppDispatch } from 'hooks'
 import { EmptyPack } from 'pages'
 import { BasicContentCardPage } from 'pages/cardsPack/components/basicContentCardPage/BasicContentCardPage'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectorIsCloseModal } from 'store'
+import {
+  selectorCardsTotalCount,
+  selectorIsCloseModal,
+  selectorIsLoading,
+  selectorSortCards,
+} from 'store'
+import { selectorCardQuestion } from 'store/selectors/selectorsCardParams'
 import { BackValueType } from 'types'
+import { changeTableHeadData } from 'utils/changeTableHeadData'
 
 import { TABLET_HEADER_AUTH_USER } from './optionHeaderTableAuthUser/optionTableAuthUser'
 
 type CardsPackAuthUserType = {
-  countCard: number
   titlePack: string
   idPack: string | undefined
+  onSortColumn: (searchValue: string) => void
+  onChangePagination: (page: number, pageSize: number) => void
+  onSearchByQuestion: (searchValue: string) => void
+  onResetFilter: () => void
 }
 
-type CardDataModalType = {
+type CardDataStateType = {
   idCard: string
   idPack?: string
   question: string
@@ -33,16 +42,25 @@ type CardDataModalType = {
   action: BackValueType
 }
 
-export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAuthUserType) => {
-  const dispatch = useAppDispatch()
-
+export const CardsPackAuthUser = ({
+  idPack,
+  titlePack,
+  onSearchByQuestion,
+  onChangePagination,
+  onResetFilter,
+  onSortColumn,
+}: CardsPackAuthUserType) => {
   const isCloseModal = useSelector(selectorIsCloseModal)
+  const countCardInPack = useSelector(selectorCardsTotalCount)
+  const disabled = useSelector(selectorIsLoading)
+  const searchCardQuestion = useSelector(selectorCardQuestion)
+  const sortParam = useSelector(selectorSortCards)
 
   const [isOpenModalPack, onOpenModalPack, onCloseModalPack] = useModal()
   const [isOpenModalCard, onOpenModalCard, onCloseModalCard] = useModal()
 
   const [actionMenu, setActionMenu] = useState<BackValueType>('')
-  const [cardDataModal, setCardDataModal] = useState<CardDataModalType>({
+  const [cardDataModal, setCardDataModal] = useState<CardDataStateType>({
     idCard: '',
     idPack: '',
     question: '',
@@ -102,14 +120,21 @@ export const CardsPackAuthUser = ({ countCard, titlePack, idPack }: CardsPackAut
 
   return (
     <>
-      {countCard ? (
+      {countCardInPack ? (
         <>
           <TitleWithButton titleText={titlePack} buttonText="Add new card" onClick={onAddCards}>
             <MenuUserPack deletePack={deletePack} editPack={editPack} learnPack={learnPack} />
           </TitleWithButton>
           <BasicContentCardPage
             tableHeadData={TABLET_HEADER_AUTH_USER}
+            disabled={disabled}
+            searchCardQuestion={searchCardQuestion}
+            sortParam={sortParam}
+            onResetFilter={onResetFilter}
+            onChangePagination={onChangePagination}
+            onSearchByQuestion={onSearchByQuestion}
             onClickActionTable={onClickActionTable}
+            onSortColumn={onSortColumn}
           />
         </>
       ) : (

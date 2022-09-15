@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorAuthUserId, selectorCardData, setCardParams } from 'store'
+import { selectorAuthUserId, selectorCardData } from 'store'
 import { BackValueType, TableHeadElementType } from 'types'
 import { formattedDate } from 'utils'
+import { changeTableHeadData } from 'utils/changeTableHeadData'
 
 import { TableHeader } from '../component/tableHeader/TableHeader'
 
@@ -12,24 +12,27 @@ import style from './TableCard.module.sass'
 import { TableCardRow } from './tableCardRow/TableCardRow'
 
 type TableCardType = {
-  heardTableData: TableHeadElementType[]
+  headTableData: TableHeadElementType[]
+  sortParam: string
   onClickActionTable?: (
     idCard: string,
     question: string,
     answer: string,
     action: BackValueType
   ) => void
+  onSortColumn: (sortValue: string) => void
 }
 
-export const TableCard = ({ heardTableData, onClickActionTable }: TableCardType) => {
-  const dispatch = useAppDispatch()
-
+export const TableCard = ({
+  headTableData,
+  onClickActionTable,
+  onSortColumn,
+  sortParam,
+}: TableCardType) => {
   const packData = useSelector(selectorCardData)
   const userId = useSelector(selectorAuthUserId)
 
-  const onSortValue = (sortValue: string) => {
-    dispatch(setCardParams({ sortCards: sortValue }))
-  }
+  headTableData = changeTableHeadData(headTableData, sortParam)
 
   const mappedPacks = packData.map(
     ({ user_id, _id, question, updated, created, answer, grade }) => (
@@ -50,7 +53,7 @@ export const TableCard = ({ heardTableData, onClickActionTable }: TableCardType)
 
   return (
     <div className={style.tableWrapper}>
-      <TableHeader headData={heardTableData} onSortColumn={onSortValue} />
+      <TableHeader headTableData={headTableData} onSortColumn={onSortColumn} />
       {mappedPacks}
     </div>
   )

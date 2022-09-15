@@ -3,76 +3,101 @@ import React, { useEffect } from 'react'
 import { ButtonBack } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
+import { useCustomSearchParams } from 'hooks/useCustomSearchParams'
 import { CardsPackAuthUser, CarsPackAllUser } from 'pages'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import {
   getCardData,
-  mountingComponent,
   removeCardData,
-  removeCardParams,
   selectorAuthUserId,
-  selectorIsMounting,
+  selectorIsLoading,
   selectorPackUserId,
-  selectorParamsCard,
   selectorTitlePack,
-  selectorTotalCountCard,
   setCardParams,
 } from 'store'
-import { BackValueType } from 'types'
+import { CardParamsInitialType } from 'types'
+
+export const initialStateURLCardParams: CardParamsInitialType = {
+  cardAnswer: '',
+  cardQuestion: '',
+  cardsPack_id: '',
+  sortCards: '',
+  max: 5,
+  min: 0,
+  page: 1,
+  pageCount: 8,
+}
 
 export const CardsPack = () => {
   const dispatch = useAppDispatch()
-
+  const isLoading = useSelector(selectorIsLoading)
   const titlePack = useSelector(selectorTitlePack)
-  const countCard = useSelector(selectorTotalCountCard)
   const authUserId = useSelector(selectorAuthUserId)
   const userId = useSelector(selectorPackUserId)
-  const paramsCard = useSelector(selectorParamsCard)
-  const isMounting = useSelector(selectorIsMounting)
 
   const param = useParams<'id'>()
 
   const idPack = param.id
 
+  const { searchParams, paramsURL, setURLParams, resetURLParams } =
+    useCustomSearchParams<CardParamsInitialType>(initialStateURLCardParams)
+
   useEffect(() => {
-    dispatch(setCardParams({ cardsPack_id: idPack }))
+    setURLParams({ cardsPack_id: idPack })
 
     return () => {
-      dispatch(removeCardParams())
       dispatch(removeCardData())
     }
   }, [])
 
   useEffect(() => {
-    if (paramsCard.cardsPack_id && !isMounting) {
-      dispatch(getCardData(paramsCard))
+    if (Object.keys(Object.fromEntries(searchParams)).length) {
+      dispatch(setCardParams(paramsURL))
+      dispatch(getCardData(paramsURL))
     }
-  }, [paramsCard, isMounting])
-
-  useEffect(() => {
-    if (isMounting) {
-      dispatch(removeCardParams())
-      dispatch(mountingComponent())
-    }
-  }, [isMounting])
-
-  const onAddNewCard = () => {}
-
-  const onLearnCard = () => {}
-
-  const onClickActionTable = (idCard: string, backValue: BackValueType) => {}
+  }, [searchParams])
 
   const isAuthUser = authUserId === userId
+
+  const onSortColumn = (sortValue: string) => {
+    setURLParams({ sortCards: sortValue })
+  }
+
+  const onChangePagination = (page: number, pageSize: number) => {
+    setURLParams({ page: page, pageCount: pageSize })
+  }
+
+  const onSearchByQuestion = (searchValue: string) => {
+    setURLParams({ cardQuestion: searchValue })
+  }
+
+  const onResetFilter = () => {
+    resetURLParams()
+  }
 
   if (userId) {
     return (
       <>
         <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
         {isAuthUser ? (
-          <CardsPackAuthUser countCard={countCard} titlePack={titlePack} idPack={idPack} />
+          <CardsPackAuthUser
+            titlePack={titlePack}
+            idPack={idPack}
+            onSearchByQuestion={onSearchByQuestion}
+            onSortColumn={onSortColumn}
+            onChangePagination={onChangePagination}
+            onResetFilter={onResetFilter}
+          />
         ) : (
-          <CarsPackAllUser titlePack={titlePack} idPack={idPack} />
+          <CarsPackAllUser
+            titlePack={titlePack}
+            idPack={idPack}
+            onSearchByQuestion={onSearchByQuestion}
+            onSortColumn={onSortColumn}
+            onChangePagination={onChangePagination}
+            onResetFilter={onResetFilter}
+          />
         )}
       </>
     )
