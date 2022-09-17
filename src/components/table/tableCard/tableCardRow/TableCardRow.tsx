@@ -25,6 +25,9 @@ type TableCardRowType = {
   ) => void
 }
 
+const COUNT_COLUMN_ALL_USER_TABLE = 4
+const COUNT_COLUMN_AUTH_USER_TABLE = 5
+
 export const TableCardRow = ({
   user_id,
   authUser_id,
@@ -41,25 +44,27 @@ export const TableCardRow = ({
 
   const isAuthUserTable = authUser_id === user_id
 
-  const widthCells = isAuthUserTable ? '20' : '25'
+  const widthCells = isAuthUserTable ? COUNT_COLUMN_AUTH_USER_TABLE : COUNT_COLUMN_ALL_USER_TABLE
 
   return (
     <div className={style.rowWrapper}>
-      <TableCell title={question} widthCellPercent={widthCells} />
-      <TableCell title={answer} widthCellPercent={widthCells} />
-      <TableCell title={updated} widthCellPercent={widthCells} />
-      <TableCell widthCellPercent={widthCells}>
+      <TableCell title={question} countCell={widthCells} />
+      <TableCell title={answer} countCell={widthCells} />
+      <TableCell title={updated} countCell={widthCells} />
+      <TableCell countCell={widthCells}>
         <Grade rating={grade} />
       </TableCell>
       {isAuthUserTable && (
-        <TablePackListAction user_id={user_id} authUser_id={authUser_id}>
-          <CustomButtonBox color="link" onClick={() => onClickActionHandle('edit')}>
-            <IconEditSvg />
-          </CustomButtonBox>
-          <CustomButtonBox color="link" onClick={() => onClickActionHandle('delete')}>
-            <IconDeleteSvg />
-          </CustomButtonBox>
-        </TablePackListAction>
+        <TableCell countCell={widthCells}>
+          <TablePackListAction user_id={user_id} authUser_id={authUser_id}>
+            <CustomButtonBox color="link" onClick={() => onClickActionHandle('edit')}>
+              <IconEditSvg />
+            </CustomButtonBox>
+            <CustomButtonBox color="link" onClick={() => onClickActionHandle('delete')}>
+              <IconDeleteSvg />
+            </CustomButtonBox>
+          </TablePackListAction>
+        </TableCell>
       )}
     </div>
   )

@@ -2,6 +2,12 @@ import { TableHeadElementType } from 'types'
 
 export const TABLET_HEADER: TableHeadElementType[] = [
   {
+    title: 'Cover',
+    sortParam: '',
+    stateSortElement: '',
+    type: 'noSort',
+  },
+  {
     title: 'Name',
     sortParam: 'name',
     stateSortElement: 'off',

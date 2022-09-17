@@ -65,10 +65,7 @@ export {
   selectorMinCardsOnPack,
 } from './selectors/selectorsPackParams'
 
-export {
-  selectorCardQuestion,
-  selectorSortCards,
-} from './selectors/selectorsCardParams'
+export { selectorCardQuestion, selectorSortCards } from './selectors/selectorsCardParams'
 
 export { selectorIsRegistration } from './selectors/selectorsRegistration'
 

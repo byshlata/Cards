@@ -18,6 +18,8 @@ type TableSimpleRowType = {
   onClickAction: (idPack: string, backValue: BackValueType, name: string) => void
 }
 
+const COUNT_COLUMN_TABLE = 6
+
 export const TablePackListRow = ({
   authUser_id,
   name,
@@ -38,25 +40,28 @@ export const TablePackListRow = ({
 
   return (
     <div className={style.rowWrapper}>
-      <TableCell>
+      <TableCell countCell={COUNT_COLUMN_TABLE}></TableCell>
+      <TableCell countCell={COUNT_COLUMN_TABLE}>
         <CustomButtonBox color={'link'} onClick={() => onClickActionHandle('name')}>
           {name}
         </CustomButtonBox>
       </TableCell>
-      <TableCell title={cardsCount} />
-      <TableCell title={updated} />
-      <TableCell title={user_name} />
-      <TablePackListAction user_id={user_id} authUser_id={authUser_id}>
-        <CustomButtonBox color="link" onClick={() => onClickActionHandle('learn')}>
-          <IconLearnSVG />
-        </CustomButtonBox>
-        <CustomButtonBox color="link" onClick={() => onClickActionHandle('edit')}>
-          <IconEditSvg />
-        </CustomButtonBox>
-        <CustomButtonBox color="link" onClick={() => onClickActionHandle('delete')}>
-          <IconDeleteSvg />
-        </CustomButtonBox>
-      </TablePackListAction>
+      <TableCell title={cardsCount} countCell={COUNT_COLUMN_TABLE} />
+      <TableCell title={updated} countCell={COUNT_COLUMN_TABLE} />
+      <TableCell title={user_name} countCell={COUNT_COLUMN_TABLE} />
+      <TableCell countCell={COUNT_COLUMN_TABLE}>
+        <TablePackListAction user_id={user_id} authUser_id={authUser_id}>
+          <CustomButtonBox color="link" onClick={() => onClickActionHandle('learn')}>
+            <IconLearnSVG />
+          </CustomButtonBox>
+          <CustomButtonBox color="link" onClick={() => onClickActionHandle('edit')}>
+            <IconEditSvg />
+          </CustomButtonBox>
+          <CustomButtonBox color="link" onClick={() => onClickActionHandle('delete')}>
+            <IconDeleteSvg />
+          </CustomButtonBox>
+        </TablePackListAction>
+      </TableCell>
     </div>
   )
 }
