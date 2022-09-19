@@ -1,11 +1,11 @@
 import React from 'react'
 
+import style from './TablePackListRow.module.sass'
+
 import { CustomButtonBox, IconDeleteSvg, IconEditSvg, IconLearnSVG } from 'components'
 import { TableCell } from 'components/table/component/tableCell/TableCell'
 import { TablePackListAction } from 'components/table/tablePackList/tablePackListAction/TablePackListAction'
 import { BackValueType } from 'types'
-
-import style from './TablePackListRow.module.sass'
 
 type TableSimpleRowType = {
   name: string

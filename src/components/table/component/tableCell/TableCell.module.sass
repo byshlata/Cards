@@ -4,7 +4,8 @@
   display: flex
   justify-content: center
   align-items: center
-  vertical-align: center
+  //vertical-align: center
+
 
 .text
   font-family: Montserrat, sans-serif
@@ -16,3 +17,9 @@
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
+
+@media screen and (min-width: 360px) and (max-width: 768px)
+  .cell:nth-child(n+3):nth-child(-n+4)
+    max-width: 10%
+  .cell:nth-child(n+1):nth-child(-n+1)
+    min-width: 30%

@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react'
 import 'antd/dist/antd.css'
 
 import { Pagination } from 'antd'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
+import style from './РacksList.module.sass'
+
 import {
   FilterContainer,
   FormModalPackListGrope,
@@ -12,8 +18,6 @@ import {
 import { useModal } from 'components/modal/hooks/useModal'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import {
   getPackData,
   mountingComponent,
@@ -29,9 +33,6 @@ import {
   setPackParams,
 } from 'store'
 import { BackValueType } from 'types'
-
-import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
-import style from './РacksList.module.sass'
 
 type ModalPackDataType = {
   packName: string

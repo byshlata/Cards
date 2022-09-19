@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react'
 
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import common from './../../assets/style/container.module.sass'
+import style from './Profile.module.sass'
+
 import {
   AvatarUser,
   ButtonBack,
@@ -11,8 +17,6 @@ import {
 } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
-import { useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
   changeProfileName,
   logoutUser,
@@ -20,8 +24,6 @@ import {
   selectorUserEmail,
   selectorUserName,
 } from 'store'
-
-import style from './Profile.module.sass'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -49,9 +51,10 @@ export const Profile = () => {
   return (
     <>
       <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
-      <FormBody width={415} height={410}>
-        <Title text="Personal Information" />
-
+      <div className={common.container}>
+        <div className={style.titleWrapper}>
+          <Title text="Personal Information" />
+        </div>
         <AvatarUser />
         <div className={style.changeProfileNameWrapper}>
           <ChangeLogin userLogin={userName} onChangeName={changeName} />
@@ -65,7 +68,7 @@ export const Profile = () => {
             Log Out
           </CustomButton>
         </div>
-      </FormBody>
+      </div>
     </>
   )
 }
