@@ -1,18 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { packsListAPI } from 'api'
 import {
-  isSpinAppLoading,
-  isCloseModal,
-  RootStoreType,
-  setPackData,
-  unmountingComponent,
   getCardData,
+  isCloseModal,
+  isSpinAppLoading,
   removeCardData,
   removeCardParams,
-  initialStatePackParams,
+  RootStoreType,
+  setPackData,
 } from 'store'
 import { AddPackType, EditPackType, PackParamsType } from 'types'
-import { isComparisonOfTwoObjects, setErrorResponse } from 'utils'
+import { setErrorResponse } from 'utils'
 
 export const getPackData = createAsyncThunk(
   'packSlice/getPackData',
@@ -41,12 +39,7 @@ export const addNewPack = createAsyncThunk(
 
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
-
-      if (isComparisonOfTwoObjects(initialStatePackParams, packParamsNow)) {
-        dispatch(getPackData(packParamsNow))
-      } else {
-        dispatch(unmountingComponent())
-      }
+      dispatch(getPackData(packParamsNow))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {

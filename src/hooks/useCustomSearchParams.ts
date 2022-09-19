@@ -1,46 +1,60 @@
 import { useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
-import { CardParamsInitialType, PackParamsInitialType } from 'types'
+import { initialStatePackParams } from 'store'
+import { CardParamsInitialType, PackParamsInitialType, UsersParamsInitialType } from 'types'
 import { isEmptyObject, translateObjKeyToString } from 'utils'
 
-export type URLParamsType<T, K, D> = T extends K ? K : D
+export type URLParamsType<T, K, D, H> = T extends K ? K : T extends D ? D : H
 
 export type URLSearchParamsType<T> = {
   [Key in keyof T]: string
 }
 
 export const useCustomSearchParams = <T>(
-  initialURLParams: URLParamsType<T, PackParamsInitialType, CardParamsInitialType>
+  initialURLParams: URLParamsType<
+    T,
+    PackParamsInitialType,
+    CardParamsInitialType,
+    UsersParamsInitialType
+  >
 ) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const paramsInitFromURL = Object.fromEntries(searchParams.entries()) as Partial<
-    URLSearchParamsType<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>
+  type URLSearchUseType = URLSearchParamsType<
+    URLParamsType<T, PackParamsInitialType, CardParamsInitialType, UsersParamsInitialType>
   >
+
+  type URLParamsUseType = URLParamsType<
+    T,
+    PackParamsInitialType,
+    CardParamsInitialType,
+    UsersParamsInitialType
+  >
+
+  const paramsInitFromURL = Object.fromEntries(searchParams.entries()) as Partial<URLSearchUseType>
 
   const initStateParams = isEmptyObject(paramsInitFromURL)
     ? initialURLParams
     : getInitialParams(paramsInitFromURL, initialURLParams)
 
-  const [paramsURL, setParams] =
-    useState<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>(initStateParams)
+  const [paramsURL, setParams] = useState<URLParamsUseType>(initStateParams)
 
   useEffect(() => {
     const paramsURl = getInitialParams(paramsInitFromURL, initialURLParams)
+
     setParams(paramsURl)
     setSearchParams(setCustomSearchParams(translateObjKeyToString(paramsURl)))
   }, [searchParams])
 
-  const setURLParams = (
-    value: Partial<URLParamsType<T, PackParamsInitialType, CardParamsInitialType>>
-  ) => {
+  const setURLParams = (value: Partial<URLParamsUseType>) => {
     const paramsURl = getInitialParams({ ...paramsInitFromURL, ...value }, initialURLParams)
     setParams(paramsURl)
     setSearchParams(setCustomSearchParams(translateObjKeyToString(paramsURl)))
   }
 
   const resetURLParams = () => {
+    setParams(initialURLParams)
     setSearchParams(setCustomSearchParams(translateObjKeyToString(initialURLParams)))
   }
 
@@ -64,7 +78,6 @@ export const getInitialParams = <T>(
       }
     }
   }
-
   return initialURLParamsOff
 }
 

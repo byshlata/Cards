@@ -1,15 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { cardAPI } from 'api'
-import {
-  initialStateCardParams,
-  isCloseModal,
-  isSpinAppLoading,
-  RootStoreType,
-  setCardData,
-  unmountingComponent,
-} from 'store'
+import { isCloseModal, isSpinAppLoading, setCardData } from 'store'
 import { CardParamsType, CardShortType, EditCardType } from 'types'
-import { isComparisonOfTwoObjects, setErrorResponse } from 'utils'
+import { setErrorResponse } from 'utils'
 
 export const getCardData = createAsyncThunk(
   'cardSlice/getCardData',
@@ -29,20 +22,11 @@ export const getCardData = createAsyncThunk(
 
 export const addNewCard = createAsyncThunk(
   'cardSlice/addNewCard',
-  async (payload: CardShortType, { rejectWithValue, dispatch, getState }) => {
+  async (payload: CardShortType, { rejectWithValue, dispatch }) => {
     try {
       dispatch(isSpinAppLoading(true))
       dispatch(isCloseModal(false))
       await cardAPI.createCard(payload)
-
-      const state = getState() as RootStoreType
-      const cardParamsNow = state.cardParams
-
-      if (isComparisonOfTwoObjects(initialStateCardParams, cardParamsNow)) {
-        dispatch(getCardData(cardParamsNow))
-      } else {
-        dispatch(unmountingComponent())
-      }
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
@@ -53,20 +37,11 @@ export const addNewCard = createAsyncThunk(
 
 export const editCard = createAsyncThunk(
   'cardSlice/editCard',
-  async (payload: EditCardType, { rejectWithValue, dispatch, getState }) => {
+  async (payload: EditCardType, { rejectWithValue, dispatch }) => {
     try {
       dispatch(isSpinAppLoading(true))
       dispatch(isCloseModal(false))
       await cardAPI.editCard(payload)
-
-      const state = getState() as RootStoreType
-      const cardParamsNow = state.cardParams
-
-      if (isComparisonOfTwoObjects(initialStateCardParams, cardParamsNow)) {
-        dispatch(getCardData(cardParamsNow))
-      } else {
-        dispatch(unmountingComponent())
-      }
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {
@@ -77,15 +52,11 @@ export const editCard = createAsyncThunk(
 
 export const deleteCard = createAsyncThunk(
   'cardSlice/deleteCard',
-  async (idCard: string, { rejectWithValue, dispatch, getState }) => {
+  async (idCard: string, { rejectWithValue, dispatch }) => {
     try {
       dispatch(isSpinAppLoading(true))
       dispatch(isCloseModal(false))
       await cardAPI.deleteCard(idCard)
-
-      const state = getState() as RootStoreType
-      const cardParamsNow = state.cardParams
-      dispatch(getCardData(cardParamsNow))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {

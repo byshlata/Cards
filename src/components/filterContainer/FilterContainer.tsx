@@ -1,18 +1,14 @@
 import React from 'react'
 
-import { ButtonChoiceGrope, ButtonResetFilter } from 'components/button'
-import { CustomSlider } from 'components/customSlider/CustomSlider'
-import { FilterElementContainer } from 'components/filterElementContainer/FilterElementContainer'
-import { Search } from 'components/search/Search'
-import { useSelector } from 'react-redux'
 import {
-  selectorAuthUserId,
-  selectorMaxCardsOnPack,
-  selectorMinCardsOnPack,
-  selectorPackName,
-  selectorTotalCountPagePack,
-  selectorUserParam_id,
-} from 'store'
+  ButtonChoiceGrope,
+  ButtonResetFilter,
+  CustomSlider,
+  FilterElementContainer,
+  Search,
+} from 'components'
+import { useSelector } from 'react-redux'
+import { selectorAuthUserId, selectorTotalCountPagePack } from 'store'
 
 type FilterContainerType = {
   disabled: boolean
@@ -20,6 +16,10 @@ type FilterContainerType = {
   onClickButtonChoiceGrope: (value: string) => void
   onChangeSlider: (max: number, min: number) => void
   onResetFilter: () => void
+  searchName: string
+  sliderMax: number
+  sliderMin: number
+  userId: string
 }
 
 export const FilterContainer = ({
@@ -28,14 +28,13 @@ export const FilterContainer = ({
   onClickButtonChoiceGrope,
   onChangeSlider,
   disabled,
+  sliderMax,
+  sliderMin,
+  userId,
+  searchName,
 }: FilterContainerType) => {
   const totalPack = useSelector(selectorTotalCountPagePack)
-
   const authUserId = useSelector(selectorAuthUserId)
-  const searchName = useSelector(selectorPackName)
-  const sliderMax = useSelector(selectorMaxCardsOnPack)
-  const sliderMin = useSelector(selectorMinCardsOnPack)
-  const userId = useSelector(selectorUserParam_id)
 
   const errorSearchValue = totalPack ? '' : !searchName ? '' : 'Cards not found'
 

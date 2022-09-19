@@ -23,7 +23,6 @@ import {
   selectorCurrentPagePack,
   selectorIsCloseModal,
   selectorIsLoading,
-  selectorPackParams,
   selectorTotalCountPagePack,
   setPackParams,
 } from 'store'
@@ -144,6 +143,10 @@ export const PacksList = () => {
           onChangeSlider={onChangeSlider}
           onClickButtonChoiceGrope={onClickButtonChoiceGrope}
           onSearchName={onSearch}
+          sliderMax={paramsURL.max}
+          sliderMin={paramsURL.min}
+          searchName={paramsURL.packName}
+          userId={paramsURL.user_id}
         />
       </div>
       <TablePackList

@@ -53,6 +53,7 @@ export const CustomSlider = ({
     if (debounceValue[0] !== minCards || debounceValue[1] !== maxCards) {
       const max = maxValue(debounceValue)
       const min = minValue(debounceValue)
+
       onChangeSlider(max, min)
     }
   }, [debounceValue])

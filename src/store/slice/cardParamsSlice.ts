@@ -13,10 +13,10 @@ export const initialStateCardParams: CardParamsInitialType = {
 }
 
 export const cardParamsSlice = createSlice({
-  name: 'packParamsSlice',
+  name: 'cardParamsSlice',
   initialState: initialStateCardParams,
   reducers: {
-    setCardParams: (state, action: PayloadAction<CardParamsType>) => ({
+    setCardParams: (state, action: PayloadAction<Partial<CardParamsInitialType>>) => ({
       ...state,
       ...action.payload,
     }),

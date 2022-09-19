@@ -77,3 +77,5 @@ export type { DataFormModalCardType } from './DataFormModalCardType'
 export type { EditCardType } from './EditCardType'
 
 export type { CardShortType } from './CardShortType'
+
+export type { UsersParamsInitialType } from './UsersParamsInitialType'

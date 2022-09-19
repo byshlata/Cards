@@ -38,8 +38,6 @@ export {
 
 export { selectorEmail, selectorIsPasswordSend } from './selectors/selectorsForgot'
 
-export { selectorIsMounting } from './selectors/selectorsReset'
-
 export {
   selectorAuthUserId,
   selectorUserName,
@@ -97,5 +95,3 @@ export { removeCardData, setCardData } from './slice/cardSlice'
 export { setPackParams, removePackParams } from './slice/packParamsSlice'
 
 export { setCardParams, removeCardParams } from './slice/cardParamsSlice'
-
-export { mountingComponent, unmountingComponent } from './slice/resetSlice'
