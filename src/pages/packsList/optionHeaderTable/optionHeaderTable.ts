@@ -1,6 +1,6 @@
 import { TableHeadElementType } from 'types'
 
-export const TABLET_HEADER: TableHeadElementType[] = [
+export const TABLET_HEADER_PACK_LIST: TableHeadElementType[] = [
   {
     title: 'Cover',
     sortParam: '',

@@ -8,6 +8,7 @@ export enum Path {
   PacksList = '/packslist',
   Pack = '/pack',
   Page404 = 'page404',
+  Users = '/users',
   Other = '*',
   Id = ':id',
   Token = ':token',

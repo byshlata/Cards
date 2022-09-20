@@ -1,3 +1,4 @@
+import { TABLET_HEADER_PACK_LIST } from 'pages/packsList/optionHeaderTable/optionHeaderTable'
 import { TableHeadElementType } from 'types'
 
 export const changeTableHeadData = (tableHeadData: TableHeadElementType[], initSortParam: string) =>
@@ -5,13 +6,15 @@ export const changeTableHeadData = (tableHeadData: TableHeadElementType[], initS
     const sortParam = initSortParam.slice(1)
     const propertySortParam = initSortParam.substring(0, 1)
 
-    if (sortFilter.sortParam === sortParam) {
+    const sortFilterCopy = { ...sortFilter }
+
+    if (sortFilterCopy.sortParam === sortParam) {
       if (propertySortParam === '1') {
-        sortFilter.stateSortElement = 'up'
-      } else {
-        sortFilter.stateSortElement = 'down'
+        sortFilterCopy.stateSortElement = 'up'
+      } else if (propertySortParam === '0') {
+        sortFilterCopy.stateSortElement = 'down'
       }
-      return sortFilter
+      return sortFilterCopy
     }
-    return sortFilter
+    return sortFilterCopy
   })

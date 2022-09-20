@@ -28,9 +28,7 @@ export const CustomSlider = ({
   const debounceValue = useDebounce(value)
 
   useEffect(() => {
-    if (minCards === initialStatePackParams.min && maxCards === initialStatePackParams.max) {
-      setValue([minCards, maxCards])
-    }
+    setValue([minCards, maxCards])
   }, [minCards, maxCards])
 
   const onClickMinButton = () => {

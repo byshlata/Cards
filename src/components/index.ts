@@ -70,6 +70,8 @@ export { TableCard } from './table/tableCard/TableCard'
 
 export { TablePackList } from 'components/table/tablePackList/TablePackList'
 
+export { TableUsers } from 'components/table/tableUsers/TableUsers'
+
 export { CustomAlert } from './customAlert/CustomAlert'
 
 export { Loader } from './loader/Loader'

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
-import { initialStatePackParams } from 'store'
-import { CardParamsInitialType, PackParamsInitialType, UsersParamsInitialType } from 'types'
+import { CardParamsType, PackParamsType, UsersParamsType } from 'types'
 import { isEmptyObject, translateObjKeyToString } from 'utils'
 
 export type URLParamsType<T, K, D, H> = T extends K ? K : T extends D ? D : H
@@ -12,25 +11,15 @@ export type URLSearchParamsType<T> = {
 }
 
 export const useCustomSearchParams = <T>(
-  initialURLParams: URLParamsType<
-    T,
-    PackParamsInitialType,
-    CardParamsInitialType,
-    UsersParamsInitialType
-  >
+  initialURLParams: URLParamsType<T, PackParamsType, CardParamsType, UsersParamsType>
 ) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   type URLSearchUseType = URLSearchParamsType<
-    URLParamsType<T, PackParamsInitialType, CardParamsInitialType, UsersParamsInitialType>
+    URLParamsType<T, PackParamsType, CardParamsType, UsersParamsType>
   >
 
-  type URLParamsUseType = URLParamsType<
-    T,
-    PackParamsInitialType,
-    CardParamsInitialType,
-    UsersParamsInitialType
-  >
+  type URLParamsUseType = URLParamsType<T, PackParamsType, CardParamsType, UsersParamsType>
 
   const paramsInitFromURL = Object.fromEntries(searchParams.entries()) as Partial<URLSearchUseType>
 
@@ -54,6 +43,7 @@ export const useCustomSearchParams = <T>(
   }
 
   const resetURLParams = () => {
+    console.log('initialURLParams', initialURLParams)
     setParams(initialURLParams)
     setSearchParams(setCustomSearchParams(translateObjKeyToString(initialURLParams)))
   }

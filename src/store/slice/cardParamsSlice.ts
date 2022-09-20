@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CardParamsInitialType, CardParamsType } from 'types'
+import { CardParamsType } from 'types'
 
-export const initialStateCardParams: CardParamsInitialType = {
+export const initialStateCardParams: CardParamsType = {
   cardAnswer: '',
   cardQuestion: '',
   cardsPack_id: '',
@@ -16,7 +16,7 @@ export const cardParamsSlice = createSlice({
   name: 'cardParamsSlice',
   initialState: initialStateCardParams,
   reducers: {
-    setCardParams: (state, action: PayloadAction<Partial<CardParamsInitialType>>) => ({
+    setCardParams: (state, action: PayloadAction<Partial<CardParamsType>>) => ({
       ...state,
       ...action.payload,
     }),

@@ -13,7 +13,7 @@ export const packsListAPI = {
     page,
     pageCount,
     user_id,
-  }: PackParamsType) => {
+  }: Partial<PackParamsType>) => {
     const response = await API_CONFIG.get<
       any,
       AxiosResponse<PackResponseType, PackType>,

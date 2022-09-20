@@ -19,3 +19,5 @@ export { CardsPackAuthUser } from './cardsPackAuthUser/CardsPackAuthUser'
 export { CarsPackAllUser } from './cardsPackAllUser/CarsPackAllUser'
 
 export { EmptyPack } from './emptyPack/EmptyPack'
+
+export { Users } from './users/Users'

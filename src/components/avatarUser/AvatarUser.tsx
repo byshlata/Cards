@@ -31,7 +31,6 @@ export const AvatarUser = () => {
         src={avatar}
         alt="avatarUser"
         onError={onError}
-        onLoad={onError}
         onClick={onOpenModal}
       />
       <div className={style.buttonUploadWrapper}>

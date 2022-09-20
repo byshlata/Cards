@@ -1,9 +1,9 @@
 import { RootStoreType } from 'store/store'
-import { PackParamsInitialType, ParamsType } from 'types'
+import { PackParamsType, ParamsType } from 'types'
 
 export const selectorCurrentPage = (state: RootStoreType): number => state.packParams.page
 
-export const selectorPackParams = (state: RootStoreType): PackParamsInitialType => state.packParams
+export const selectorPackParams = (state: RootStoreType): PackParamsType => state.packParams
 
 export const selectorUserParam_id = (state: RootStoreType): string => state.packParams.user_id
 

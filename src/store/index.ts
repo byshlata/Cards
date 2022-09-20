@@ -8,6 +8,8 @@ export { packParamsSlice, initialStatePackParams } from './slice/packParamsSlice
 export { packSlice } from './slice/packSlice'
 export { cardParamsSlice, initialStateCardParams } from './slice/cardParamsSlice'
 export { cardSlice } from './slice/cardSlice'
+export { usersSlice } from './slice/usersSlice'
+export { usersParamsSlice, initialStateUsersParams } from './slice/usersParamsSlice'
 
 //thunk
 
@@ -17,6 +19,7 @@ export { fetchProfilePage, changeProfileName, logoutUser } from './thunk/profile
 export { getPackData, addNewPack, editPack, deletePack } from './thunk/packThunk'
 export { getCardData, deleteCard, editCard, addNewCard } from './thunk/cardThunk'
 export { authThunk } from './thunk/loginThunk'
+export { getUsers } from './thunk/usersThunk'
 
 //selector
 
@@ -63,6 +66,20 @@ export {
   selectorMinCardsOnPack,
 } from './selectors/selectorsPackParams'
 
+export {
+  selectorCountPageUsers,
+  selectorCurrentPageUsers,
+  selectorTotalCountUsers,
+  selectorUsers,
+} from './selectors/selectorsUsers'
+
+export {
+  selectorMinPacks,
+  selectorSearchUserName,
+  selectorMaxPacks,
+  selectorSortUsers,
+} from './selectors/selectorsUsersParams'
+
 export { selectorCardQuestion, selectorSortCards } from './selectors/selectorsCardParams'
 
 export { selectorIsRegistration } from './selectors/selectorsRegistration'
@@ -95,3 +112,7 @@ export { removeCardData, setCardData } from './slice/cardSlice'
 export { setPackParams, removePackParams } from './slice/packParamsSlice'
 
 export { setCardParams, removeCardParams } from './slice/cardParamsSlice'
+
+export { setUsers, removeUsersData } from './slice/usersSlice'
+
+export { removeUsersParams, setUsersParams } from './slice/usersParamsSlice'

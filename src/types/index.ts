@@ -40,8 +40,6 @@ export type { ParamsType } from 'types/ParamsType'
 
 export type { FilterElementType } from './FilterElementType'
 
-export type { PackParamsInitialType } from './PackParamsInitialType'
-
 export type { SortParamType } from './SortParamType'
 
 export type { SortParamElementType } from './SortParamElementType'
@@ -49,8 +47,6 @@ export type { SortParamElementType } from './SortParamElementType'
 export type { CardsPackType } from './CardsPackType'
 
 export type { EditResponseType } from './EditResponseType'
-
-export type { CardParamsInitialType } from './CardParamsInitialType'
 
 export type { CardParamsType } from './CardParamsType'
 
@@ -78,4 +74,8 @@ export type { EditCardType } from './EditCardType'
 
 export type { CardShortType } from './CardShortType'
 
-export type { UsersParamsInitialType } from './UsersParamsInitialType'
+export type { UsersParamsType } from './UsersParamsType'
+
+export type { UserType } from './UserType'
+
+export type { UsersResponseType } from './UsersResponseType'

@@ -23,13 +23,7 @@ export const AvatarUserSmall = () => {
       <div className={style.info}>
         <div className={style.infoName}>{userName}</div>
         <div className={style.infoAvatar}>
-          <img
-            className={style.imgUserAvatar}
-            src={avatar}
-            alt="avatarUser"
-            onError={onError}
-            onLoad={onError}
-          />
+          <img className={style.imgUserAvatar} src={avatar} alt="avatarUser" onError={onError} />
         </div>
       </div>
     </>

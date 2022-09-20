@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CardParamsType } from 'types'
-import { UsersParamsInitialType } from 'types'
+import { UsersParamsType } from 'types'
 
-export const initialStateUsersParams: UsersParamsInitialType = {
+export const initialStateUsersParams: UsersParamsType = {
   userName: '',
   sortUsers: '',
   max: 110,
@@ -15,7 +15,7 @@ export const usersParamsSlice = createSlice({
   name: 'usersParamsSlice',
   initialState: initialStateUsersParams,
   reducers: {
-    setUsersParams: (state, action: PayloadAction<Partial<UsersParamsInitialType>>) => ({
+    setUsersParams: (state, action: PayloadAction<Partial<UsersParamsType>>) => ({
       ...state,
       ...action.payload,
     }),

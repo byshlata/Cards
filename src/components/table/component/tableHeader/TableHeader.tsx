@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { SortElement } from 'components'
+import { TABLET_HEADER_PACK_LIST } from 'pages/packsList/optionHeaderTable/optionHeaderTable'
 import {
   SortParamElementType,
   SortParamType,
@@ -23,15 +24,13 @@ export const TableHeader = ({ headTableData, onSortColumn }: TableHeaderType) =>
   const onSortColumnHandler = useCallback(
     (sortValue: string, sortParam: SortParamType, stateSortElement: SortParamElementType) => {
       onSortColumn(sortValue)
-
-      const changeParam = setParamFilter(tableHeadData, sortParam, stateSortElement)
-
-      if (changeParam) {
-        setTableHeadData(changeParam)
-      }
     },
     [tableHeadData]
   )
+
+  useEffect(() => {
+    setTableHeadData(headTableData)
+  }, [headTableData])
 
   return (
     <div className={style.headerWrapper}>

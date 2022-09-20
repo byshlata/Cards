@@ -26,9 +26,9 @@ import {
   selectorTotalCountPagePack,
   setPackParams,
 } from 'store'
-import { BackValueType, PackParamsInitialType } from 'types'
+import { BackValueType, PackParamsType } from 'types'
 
-import { TABLET_HEADER } from './optionHeaderTable/optionHeaderTable'
+import { TABLET_HEADER_PACK_LIST } from './optionHeaderTable/optionHeaderTable'
 import style from './РacksList.module.sass'
 
 type ModalPackDataType = {
@@ -36,6 +36,7 @@ type ModalPackDataType = {
   packId: string
   action: BackValueType
 }
+
 export const PacksList = () => {
   const dispatch = useAppDispatch()
 
@@ -44,6 +45,8 @@ export const PacksList = () => {
   const currentPagePack = useSelector(selectorCurrentPagePack)
   const countPagePack = useSelector(selectorCountPagePack)
   const isCloseModalPackAfterRequest = useSelector(selectorIsCloseModal)
+
+  const [tableHeadData, setTableHeadData] = useState(TABLET_HEADER_PACK_LIST)
 
   const [modalPackData, setModalPackData] = useState<ModalPackDataType>({
     packName: '',
@@ -56,7 +59,7 @@ export const PacksList = () => {
   const [isOpenModal, onOpenModal, onCloseModal] = useModal()
 
   const { searchParams, paramsURL, setURLParams, resetURLParams } =
-    useCustomSearchParams<PackParamsInitialType>(initialStatePackParams)
+    useCustomSearchParams<PackParamsType>(initialStatePackParams)
 
   useEffect(() => {
     if (Object.keys(Object.fromEntries(searchParams)).length) {
@@ -90,6 +93,8 @@ export const PacksList = () => {
   }
 
   const onResetFilter = () => {
+    setTableHeadData(TABLET_HEADER_PACK_LIST)
+    console.log('TABLET_HEADER_PACK_LIST', TABLET_HEADER_PACK_LIST)
     resetURLParams()
   }
 
@@ -143,14 +148,10 @@ export const PacksList = () => {
           onChangeSlider={onChangeSlider}
           onClickButtonChoiceGrope={onClickButtonChoiceGrope}
           onSearchName={onSearch}
-          sliderMax={paramsURL.max}
-          sliderMin={paramsURL.min}
-          searchName={paramsURL.packName}
-          userId={paramsURL.user_id}
         />
       </div>
       <TablePackList
-        headTableData={TABLET_HEADER}
+        headTableData={tableHeadData}
         sortParams={paramsURL.sortPacks}
         onClickTableAction={onClickTableAction}
         onSortColumn={onSortColumn}

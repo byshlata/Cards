@@ -16,9 +16,9 @@ import {
   selectorTitlePack,
   setCardParams,
 } from 'store'
-import { CardParamsInitialType } from 'types'
+import { CardParamsType } from 'types'
 
-export const initialStateURLCardParams: CardParamsInitialType = {
+export const initialStateURLCardParams: CardParamsType = {
   cardAnswer: '',
   cardQuestion: '',
   cardsPack_id: '',
@@ -41,7 +41,7 @@ export const CardsPack = () => {
   const idPack = param.id
 
   const { searchParams, paramsURL, setURLParams, resetURLParams } =
-    useCustomSearchParams<CardParamsInitialType>(initialStateURLCardParams)
+    useCustomSearchParams<CardParamsType>(initialStateURLCardParams)
 
   useEffect(() => {
     setURLParams({ cardsPack_id: idPack })
@@ -79,7 +79,7 @@ export const CardsPack = () => {
   if (userId) {
     return (
       <>
-        <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
+        <ButtonBack link={`${Path.PacksList}`}> </ButtonBack>
         {isAuthUser ? (
           <CardsPackAuthUser
             titlePack={titlePack}

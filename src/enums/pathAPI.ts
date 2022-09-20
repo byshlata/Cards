@@ -10,4 +10,6 @@ export enum PathAPI {
   Cards = '/cards',
   Card = '/card',
   Grade = '/grade',
+  Social = '/social',
+  Users = '/users',
 }

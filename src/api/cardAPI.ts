@@ -14,7 +14,7 @@ export const cardAPI = {
     sortCards,
     page,
     pageCount,
-  }: CardParamsType) => {
+  }: Partial<CardParamsType>) => {
     const response = await API_CONFIG.get<
       any,
       AxiosResponse<CardResponseType, CardType>,

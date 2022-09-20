@@ -1,44 +1,32 @@
 import React from 'react'
 
-import {
-  ButtonChoiceGrope,
-  ButtonResetFilter,
-  CustomSlider,
-  FilterElementContainer,
-  Search,
-} from 'components'
+import { ButtonResetFilter, CustomSlider, FilterElementContainer, Search } from 'components'
 import { useSelector } from 'react-redux'
 import {
-  selectorAuthUserId,
-  selectorMaxCardsOnPack,
-  selectorMinCardsOnPack,
-  selectorPackName,
+  selectorMaxPacks,
+  selectorMinPacks,
+  selectorSearchUserName,
   selectorTotalCountPagePack,
-  selectorUserParam_id,
 } from 'store'
 
 type FilterContainerType = {
   disabled: boolean
   onSearchName: (searchValue: string) => void
-  onClickButtonChoiceGrope: (value: string) => void
   onChangeSlider: (max: number, min: number) => void
   onResetFilter: () => void
 }
 
-export const FilterContainer = ({
+export const FilterContainerUsers = ({
   onResetFilter,
   onSearchName,
-  onClickButtonChoiceGrope,
   onChangeSlider,
   disabled,
 }: FilterContainerType) => {
   const totalPack = useSelector(selectorTotalCountPagePack)
-  const authUserId = useSelector(selectorAuthUserId)
 
-  const maxCards = useSelector(selectorMaxCardsOnPack)
-  const minCards = useSelector(selectorMinCardsOnPack)
-  const searchName = useSelector(selectorPackName)
-  const userId = useSelector(selectorUserParam_id)
+  const maxPacks = useSelector(selectorMaxPacks)
+  const minPacks = useSelector(selectorMinPacks)
+  const searchName = useSelector(selectorSearchUserName)
 
   const errorSearchValue = totalPack ? '' : !searchName ? '' : 'Cards not found'
 
@@ -52,19 +40,11 @@ export const FilterContainer = ({
           error={errorSearchValue}
         />
       </FilterElementContainer>
-      <FilterElementContainer title="Show packs cards">
-        <ButtonChoiceGrope
-          disabled={disabled}
-          authUserId={authUserId}
-          onClickButton={onClickButtonChoiceGrope}
-          userIdParam={userId}
-        />
-      </FilterElementContainer>
-      <FilterElementContainer title="Number of cards">
+      <FilterElementContainer title="Number of packs">
         <CustomSlider
           onChangeSlider={onChangeSlider}
-          maxCards={maxCards}
-          minCards={minCards}
+          maxCards={maxPacks}
+          minCards={minPacks}
           disabled={disabled}
         />
       </FilterElementContainer>

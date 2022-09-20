@@ -1,12 +1,6 @@
-export type UserInformationType = {
-  _id: string
-  email: string
+import { UserType } from 'types/UserType'
+
+export type UserInformationType = UserType & {
   rememberMe: boolean
-  isAdmin: boolean
-  name: string
-  verified: boolean
-  publicCardPacksCount: number
-  created: string
-  updated: string
   __v: number
 }

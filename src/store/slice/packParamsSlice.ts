@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PackParamsInitialType } from 'types'
+import { PackParamsType } from 'types'
 
-export const initialStatePackParams: PackParamsInitialType = {
+export const initialStatePackParams: PackParamsType = {
   user_id: '',
   max: 110,
   min: 0,
@@ -15,7 +15,7 @@ export const packParamsSlice = createSlice({
   name: 'packParamsSlice',
   initialState: initialStatePackParams,
   reducers: {
-    setPackParams: (state, action: PayloadAction<Partial<PackParamsInitialType>>) => ({
+    setPackParams: (state, action: PayloadAction<Partial<PackParamsType>>) => ({
       ...state,
       ...action.payload,
     }),

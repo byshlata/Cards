@@ -8,6 +8,8 @@ import {
   packSlice,
   profileSlice,
   registrationSlice,
+  usersParamsSlice,
+  usersSlice,
 } from 'store'
 import { learnSlice } from 'store/slice/learnSlice'
 
@@ -22,6 +24,8 @@ export const store = configureStore({
     card: cardSlice.reducer,
     cardParams: cardParamsSlice.reducer,
     learn: learnSlice.reducer,
+    users: usersSlice.reducer,
+    usersParams: usersParamsSlice.reducer,
   },
 })
 

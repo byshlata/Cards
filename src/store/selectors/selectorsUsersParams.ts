@@ -1,5 +1,10 @@
 import { RootStoreType } from 'store/store'
 
-export const selectorCardQuestion = (state: RootStoreType): string => state.cardParams.cardQuestion
+export const selectorSearchUserName = (state: RootStoreType): string => state.usersParams.userName
 
-export const selectorSortCards = (state: RootStoreType): string => state.cardParams.sortCards
+export const selectorSortUsers = (state: RootStoreType): string => state.usersParams.sortUsers
+
+export const selectorMaxPacks = (state: RootStoreType): number => state.usersParams.max
+
+export const selectorMinPacks = (state: RootStoreType): number => state.usersParams.min
+

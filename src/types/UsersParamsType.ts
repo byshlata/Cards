@@ -1,6 +1,6 @@
 import { ParamsType } from 'types/ParamsType'
 
-export type UsersParamsInitialType = {
+export type UsersParamsType = {
   userName: ParamsType<string>
   min: number
   max: number

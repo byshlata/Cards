@@ -48,7 +48,8 @@ export const Profile = () => {
 
   return (
     <>
-      <ButtonBack link={`${Path.PacksList}`}>Back to Packs List</ButtonBack>
+      <ButtonBack link={`${Path.PacksList}`}>Go to Packs List</ButtonBack>
+      <ButtonBack link={`${Path.Users}`}>Go to Table Users</ButtonBack>
       <FormBody width={415} height={410}>
         <Title text="Personal Information" />
 
