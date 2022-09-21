@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import {
   getCardData,
+  initialStateCardParams,
   removeCardData,
   selectorAuthUserId,
   selectorIsLoading,
@@ -17,17 +18,6 @@ import {
   setCardParams,
 } from 'store'
 import { CardParamsType } from 'types'
-
-export const initialStateURLCardParams: CardParamsType = {
-  cardAnswer: '',
-  cardQuestion: '',
-  cardsPack_id: '',
-  sortCards: '',
-  max: 5,
-  min: 0,
-  page: 1,
-  pageCount: 8,
-}
 
 export const CardsPack = () => {
   const dispatch = useAppDispatch()
@@ -41,7 +31,7 @@ export const CardsPack = () => {
   const idPack = param.id
 
   const { searchParams, paramsURL, setURLParams, resetURLParams } =
-    useCustomSearchParams<CardParamsType>(initialStateURLCardParams)
+    useCustomSearchParams<CardParamsType>(initialStateCardParams)
 
   useEffect(() => {
     setURLParams({ cardsPack_id: idPack })
@@ -79,7 +69,7 @@ export const CardsPack = () => {
   if (userId) {
     return (
       <>
-        <ButtonBack link={`${Path.PacksList}`}> </ButtonBack>
+        <ButtonBack link={`${Path.PacksList}`}>Back to Pack List</ButtonBack>
         {isAuthUser ? (
           <CardsPackAuthUser
             titlePack={titlePack}

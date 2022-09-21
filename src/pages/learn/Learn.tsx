@@ -72,7 +72,6 @@ export const Learn = () => {
   ]
   const [cards, setCards] = useState(testCards[0])
   const [cardsTwo, setCardsTwo] = useState(cardsX)
-  console.log(cardsTwo)
 
   const cardChanger = (id: string) => {
     // eslint-disable-next-line @typescript-eslint/no-magic-numbers
@@ -101,10 +100,7 @@ export const Learn = () => {
 
       return grade
     }
-
-    //dispatch(setCartGrade(grade))
     dispatch(getLearnData({ grade: convertValueToGrade(value), card_id: id }))
-    //console.log(convertValueToGrade(value), value, id)
     setIsShow(false)
   }
 

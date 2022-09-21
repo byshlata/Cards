@@ -7,4 +7,3 @@ export const selectorSortUsers = (state: RootStoreType): string => state.usersPa
 export const selectorMaxPacks = (state: RootStoreType): number => state.usersParams.max
 
 export const selectorMinPacks = (state: RootStoreType): number => state.usersParams.min
-

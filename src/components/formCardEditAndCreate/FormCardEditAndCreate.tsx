@@ -55,7 +55,6 @@ export const FormCardEditAndCreate = ({
 
   const onChangeSelector = (value: string) => {
     setValueSelector(value)
-    console.log(value)
   }
 
   return (

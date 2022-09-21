@@ -79,3 +79,5 @@ export type { UsersParamsType } from './UsersParamsType'
 export type { UserType } from './UserType'
 
 export type { UsersResponseType } from './UsersResponseType'
+
+export type { DeletePackPayloadType } from './DeletePackPayloadType'

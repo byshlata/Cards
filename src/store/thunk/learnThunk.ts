@@ -12,7 +12,6 @@ export const getLearnData = createAsyncThunk(
       const res = await learnAPI.sendGrade(payload.grade, payload.card_id)
 
       dispatch(setLearnData(res.data.updatedGrade))
-      //console.log(res.data.updatedGrade)
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)
     } finally {

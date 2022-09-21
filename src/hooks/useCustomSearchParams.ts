@@ -15,6 +15,8 @@ export const useCustomSearchParams = <T>(
 ) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
+  const [notSearchUTLParams, setNotSearchUTLParams] = useState<boolean>(false)
+
   type URLSearchUseType = URLSearchParamsType<
     URLParamsType<T, PackParamsType, CardParamsType, UsersParamsType>
   >
@@ -34,7 +36,7 @@ export const useCustomSearchParams = <T>(
 
     setParams(paramsURl)
     setSearchParams(setCustomSearchParams(translateObjKeyToString(paramsURl)))
-  }, [searchParams])
+  }, [searchParams, notSearchUTLParams])
 
   const setURLParams = (value: Partial<URLParamsUseType>) => {
     const paramsURl = getInitialParams({ ...paramsInitFromURL, ...value }, initialURLParams)
@@ -43,7 +45,7 @@ export const useCustomSearchParams = <T>(
   }
 
   const resetURLParams = () => {
-    console.log('initialURLParams', initialURLParams)
+    setNotSearchUTLParams(false)
     setParams(initialURLParams)
     setSearchParams(setCustomSearchParams(translateObjKeyToString(initialURLParams)))
   }

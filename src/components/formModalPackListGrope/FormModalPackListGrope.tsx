@@ -9,6 +9,7 @@ type FormModalPackListGropeType = {
   packName: string
   packId: string
   action: BackValueType
+  navigateTo?: () => void
 }
 
 export const FormModalPackListGrope = ({
@@ -16,8 +17,8 @@ export const FormModalPackListGrope = ({
   isOpenModal,
   packName,
   packId,
-
   action,
+  navigateTo,
 }: FormModalPackListGropeType) => {
   const dispatch = useAppDispatch()
 
@@ -30,7 +31,7 @@ export const FormModalPackListGrope = ({
   }
 
   const onDeletePack = () => {
-    dispatch(deletePack(packId))
+    if (navigateTo) dispatch(deletePack({ packId, navigateTo }))
   }
 
   if (action === 'edit') {

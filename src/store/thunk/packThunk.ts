@@ -9,7 +9,7 @@ import {
   RootStoreType,
   setPackData,
 } from 'store'
-import { AddPackType, EditPackType, PackParamsType } from 'types'
+import { AddPackType, EditPackType, PackParamsType, DeletePackPayloadType } from 'types'
 import { setErrorResponse } from 'utils'
 
 export const getPackData = createAsyncThunk(
@@ -75,16 +75,19 @@ export const editPack = createAsyncThunk(
 
 export const deletePack = createAsyncThunk(
   'packSlice/deletePack',
-  async (idPack: string, { rejectWithValue, dispatch, getState }) => {
+  async (payload: DeletePackPayloadType, { rejectWithValue, dispatch, getState }) => {
     try {
       dispatch(isSpinAppLoading(true))
       dispatch(isCloseModal(false))
-      await packsListAPI.deletePack(idPack)
+      await packsListAPI.deletePack(payload.packId)
 
       const state = getState() as RootStoreType
       const packParamsNow = state.packParams
       const isOpenCardsPage = state.card.cards.length !== 0
       if (isOpenCardsPage) {
+        if (payload.navigateTo) {
+          payload.navigateTo()
+        }
         dispatch(removeCardData())
         dispatch(removeCardParams())
       }

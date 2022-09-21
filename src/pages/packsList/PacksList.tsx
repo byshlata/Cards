@@ -94,7 +94,6 @@ export const PacksList = () => {
 
   const onResetFilter = () => {
     setTableHeadData(TABLET_HEADER_PACK_LIST)
-    console.log('TABLET_HEADER_PACK_LIST', TABLET_HEADER_PACK_LIST)
     resetURLParams()
   }
 

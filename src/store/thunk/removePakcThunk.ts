@@ -10,7 +10,6 @@ export const removePackThank = createAsyncThunk(
     try {
       dispatch(isSpinAppLoading(true))
       const res = await removePackAPI.removePackData(payload)
-      console.log(res)
       dispatch(setPackData(res))
     } catch (e) {
       return setErrorResponse(e, rejectWithValue)

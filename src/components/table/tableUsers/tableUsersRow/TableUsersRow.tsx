@@ -28,7 +28,6 @@ export const TableUsersRow = ({
   avatar,
 }: TableSimpleRowUserType) => {
   const [isOpenModal, onOpenModal, onCloseModal] = useModal()
-  console.log(avatar)
   if (!avatar) {
     avatar = defaultAvatar
   }

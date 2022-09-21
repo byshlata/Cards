@@ -18,10 +18,9 @@ import {
   selectorIsCloseModal,
   selectorIsLoading,
   selectorSortCards,
+  selectorCardQuestion,
 } from 'store'
-import { selectorCardQuestion } from 'store/selectors/selectorsCardParams'
 import { BackValueType } from 'types'
-import { changeTableHeadData } from 'utils/changeTableHeadData'
 
 import { TABLET_HEADER_AUTH_USER } from './optionHeaderTableAuthUser/optionTableAuthUser'
 
@@ -88,8 +87,8 @@ export const CardsPackAuthUser = ({
   }
 
   const deletePack = () => {
-    // onOpenModalPack()
-    // setActionMenu('delete')
+    onOpenModalPack()
+    setActionMenu('delete')
   }
 
   const editPack = () => {
@@ -99,6 +98,10 @@ export const CardsPackAuthUser = ({
 
   const learnPack = () => {
     navigate(`${Path.Root}${Path.Learn}`)
+  }
+
+  const navigateTo = () => {
+    navigate(`${Path.PacksList}`)
   }
 
   const onClickActionTable = (
@@ -158,6 +161,7 @@ export const CardsPackAuthUser = ({
           packId={idPack || ''}
           packName={titlePack}
           action={actionMenu}
+          navigateTo={navigateTo}
         />
       </Modal>
     </>
