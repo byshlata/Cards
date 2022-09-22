@@ -1,15 +1,16 @@
 import React from 'react'
 
-import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { selectorAuthUserId, selectorPacksData, setPackParams } from 'store'
-import { BackValueType, TableHeadElementType } from 'types'
-import { formattedDate } from 'utils'
 
 import { TableHeader } from '../component/tableHeader/TableHeader'
 
 import style from './TablePackList.module.sass'
 import { TablePackListRow } from './tablePackListRow/TablePackListRow'
+
+import { useAppDispatch } from 'hooks'
+import { selectorAuthUserId, selectorPacksData, setPackParams } from 'store'
+import { BackValueType, TableHeadElementType } from 'types'
+import { formattedDate } from 'utils'
 
 export type TabletHeadType = {
   headData: TableHeadElementType[]

@@ -10,7 +10,7 @@ type TableCellType = {
 export const TableCell: React.FC<TableCellType> = React.memo(
   ({ title, widthCellPercent, children }) => {
     return (
-      <div className={style.cell} style={{ width: `${widthCellPercent}%` }}>
+      <div className={style.cell}>
         <span className={style.text}>{title}</span>
         {children}
       </div>
